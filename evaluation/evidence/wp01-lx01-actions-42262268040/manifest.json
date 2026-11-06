@@ -1,0 +1,34 @@
+{
+  "experiment": "LX-01",
+  "profile": "single-client-witness",
+  "tenant": "lab",
+  "generation": "witness-v1",
+  "eligible_projections": [
+    "668d44cd8beaafc86300b3cd1f5999dfb1d953700ebbb3b16ca1a1b2bd43c6a4",
+    "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+    "f8d017e1f516b0808f9d78193ccd671f443c37f1791db18027796d1c59f07cac"
+  ],
+  "snapshot_unchanged_at_observed_reads": true,
+  "top_k": 10,
+  "warmup": 3,
+  "repeats": 20,
+  "requests": 120,
+  "complete": 120,
+  "empty": 40,
+  "error_rate": 0.0,
+  "completed_per_second": 20.581042679747913,
+  "retrieval_client_ms": {
+    "p50": 46.15123,
+    "p95": 64.433316,
+    "p99": 89.731123
+  },
+  "engine_client_ms": {
+    "p50": 13.973507,
+    "p95": 22.641776,
+    "p99": 30.153195
+  },
+  "workload_sha256": "4236a073205b0b30574604ad2198a22283d5b1067043a6657b450efb90cffc9e",
+  "code_sha256": "54df170e302807f621cd11df268827cc5b349cc77857032735b17dc644069867",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "python": "3.12.10"
+}
