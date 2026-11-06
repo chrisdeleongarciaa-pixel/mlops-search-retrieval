@@ -55,7 +55,8 @@ def format_inputs(items, role):
     if role == "query":
         return [QUERY_PREFIX + text for text in items]
     if role == "passage":
-        return [f"title: {title or 'none'} | text: {abstract}" for title, abstract in items]
+        documents = [("", item) if isinstance(item, str) else item for item in items]
+        return [f"title: {title or 'none'} | text: {abstract}" for title, abstract in documents]
     raise ValueError("EmbeddingGemma requires an explicit retrieval role")
 
 
@@ -80,7 +81,7 @@ class EmbeddingGemmaEncoder:
     def encode(self, items, *, role):
         if not items:
             return []
-        tokens = self.model.tokenize(format_inputs(items, role))
+        tokens = self.model.preprocess(format_inputs(items, role))
         tokens = {name: tensor.to(self.device) for name, tensor in tokens.items()}
         with self.torch.inference_mode(), self.torch.autocast(self.device.type, enabled=False):
             vectors = self.forward_tokens(tokens)

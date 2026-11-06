@@ -5,7 +5,9 @@ from collections import Counter
 import gzip
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
+import platform
 from statistics import mean, stdev
 
 import numpy as np
@@ -22,6 +24,7 @@ from scifact_embeddings import ROOT, load_split, write_json
 
 PROTOCOL_PATH = ROOT / "config/scifact-stability-v1.json"
 PROTOCOL = json.loads(PROTOCOL_PATH.read_bytes())
+ORIGINAL_E5_AUDIT = ROOT / "evaluation/evidence/scifact-dense-actions-42275419629/audit.json"
 
 
 def ordered_ids(ids, seed):
@@ -49,9 +52,11 @@ def read_test(path, queries, space):
         # The original E5 run recorded its test space and hash in separate artifacts.
         frozen = json.loads((path / "freeze.json").read_bytes())
         manifest = json.loads((path / "manifest.json").read_bytes())
+        audit = json.loads(ORIGINAL_E5_AUDIT.read_bytes())["test"]
         if (space != SPACE.id or frozen["vector_space"] != space
                 or manifest["freeze_sha256"] != digest(path / "freeze.json")
-                or manifest["test_vectors_sha256"] != metadata["vectors_sha256"]):
+                or audit["metadata_sha256"] != digest(path / "test.json")
+                or audit["vectors_sha256"] != metadata["vectors_sha256"]):
             raise ValueError("Original E5 test vectors have incompatible provenance")
     return read_vectors(path, "test", queries)[1]
 
@@ -111,6 +116,14 @@ def run(args):
         "generation": generation, "corpus_vectors_sha256": digest(args.embeddings / "corpus.npy"),
         "train_vectors_sha256": digest(args.embeddings / "train.npy"),
         "embedding_environment_sha256": digest(args.embeddings / "environment.json"),
+        "encoding_profile": {
+            "device": env["device"], "device_name": env["device_name"],
+            "torch": env["packages"]["torch"], "transformers": env["packages"]["transformers"],
+        },
+        "engine_host": {
+            "identity_sha256": sha256(platform.node().encode()).hexdigest(),
+            "machine": platform.machine(), "logical_cpus": os.cpu_count(),
+        },
         "schema_sha256": digest(ROOT / "infra/vespa/app/schemas/fragment.sd"),
         "vespa_compose_sha256": digest(ROOT / "infra/vespa/compose.witness.yaml"),
         "explore_additional_hits": explore, "train_queries": len(train), "train_recall_ann_at_10": mean(train_recall),
@@ -149,6 +162,7 @@ def run(args):
         print(f"{env['model']} seed={args.seed} cohort={cut} completed {len(rows)} comparisons", flush=True)
     summary = {
         **frozen, "freeze_sha256": digest(args.output / "freeze.json"), "queries_per_cohort": len(queries),
+        "query_ids_sha256": sha256("\n".join(queries).encode()).hexdigest(),
         "test_vectors_sha256": digest(args.test_vectors / "test.npy"), "exact_parity_passed": exact_parity,
         "metrics": metrics, "groups": groups, "observations": len(queries) * len(eligible),
     }
@@ -171,10 +185,14 @@ def aggregate(manifests):
         for field in ("space", "test_vectors_sha256", "corpus_vectors_sha256", "train_vectors_sha256"):
             if len({row[field] for row in items}) != 1:
                 raise ValueError(f"Incompatible runs within one model: {field}")
+        if any(row["engine_host"] != items[0]["engine_host"] or row["encoding_profile"] != items[0]["encoding_profile"]
+               for row in items):
+            raise ValueError("All builds for one encoder require the same recorded host and encoding profile")
     first = manifests[0]
     for row in manifests:
         if (row["protocol_sha256"] != digest(PROTOCOL_PATH) or row["cohorts"] != first["cohorts"]
                 or row["schema_sha256"] != first["schema_sha256"] or row["vespa_compose_sha256"] != first["vespa_compose_sha256"]
+                or row["query_ids_sha256"] != first["query_ids_sha256"]
                 or row["queries_per_cohort"] != 300 or row["observations"] != 1200):
             raise ValueError("Comparison requires the same queries, cohorts, engine and protocol")
     for seed in expected_seeds:
@@ -199,7 +217,8 @@ def aggregate(manifests):
                     "recall_at_10": variation([row["ann_recall_at_10"] for row in rows]),
                     "overlap_at_100": variation([row["ann_overlap_at_100"] for row in rows]),
                     "p95_ms": variation([row["engine_client_ms"]["p95"] for row in rows]),
-                    "RET-01_passed": None if not name.endswith("/hnsw") or total < 100 or per_seed < 4 else
+                    "RET-01_passed": None if not name.endswith("/hnsw") or per_seed < len(expected_seeds)
+                    or min(row["queries"] for row in rows) < 100 else
                     all(row["ann_recall_at_10"] >= PROTOCOL["ann_recall_at_10_min"]
                         and row["engine_client_ms"]["p95"] < PROTOCOL["vespa_p95_ms_limit"] for row in rows),
                 }
@@ -215,7 +234,28 @@ def aggregate(manifests):
                 for ranker in items[0]["metrics"]
             },
         }
-    return {"protocol_sha256": digest(PROTOCOL_PATH), "paired_models": len(by_model) == 2, "models": report}
+    comparison = {}
+    matched_engine = matched_encoding = False
+    if len(by_model) == 2:
+        control, candidate = (sorted(by_model[model], key=lambda row: row["seed"]) for model in PROTOCOL["models"])
+        matched_engine = control[0]["engine_host"] == candidate[0]["engine_host"]
+        matched_encoding = control[0]["encoding_profile"] == candidate[0]["encoding_profile"]
+        for cut in map(str, PROTOCOL["cohorts_percent"]):
+            common = set.intersection(*(set(row["groups"][cut]) for row in [*control, *candidate]))
+            for name in sorted(common):
+                pairs = [(a["groups"][cut][name], b["groups"][cut][name])
+                         for a, b in zip(control, candidate, strict=True)]
+                if not all(a["queries"] == b["queries"] == 300 for a, b in pairs):
+                    continue
+                comparison[name] = {
+                    "gemma_minus_e5_p95_ms": variation([b["engine_client_ms"]["p95"] - a["engine_client_ms"]["p95"]
+                                                         for a, b in pairs]) if matched_engine else None,
+                    "gemma_minus_e5_ann_recall_at_10": variation([b["ann_recall_at_10"] - a["ann_recall_at_10"]
+                                                                   for a, b in pairs]),
+                }
+    return {"protocol_sha256": digest(PROTOCOL_PATH), "paired_models": len(by_model) == 2,
+            "matched_engine_host": matched_engine, "matched_encoding_profile": matched_encoding,
+            "models": report, "paired_deltas_by_algorithm": comparison}
 
 
 def variation(samples):

@@ -65,14 +65,14 @@ class E5Encoder:
             truncation=True, return_tensors="pt",
         ).to(self.device)
         with self.torch.inference_mode(), self.torch.autocast(self.model.device.type, enabled=False):
-            outputs = self.model(**inputs).last_hidden_state.float()
-            mask = inputs["attention_mask"].bool().unsqueeze(-1)
-            pooled = outputs.masked_fill(~mask, 0).sum(1) / mask.sum(1)
-            norms = self.torch.linalg.vector_norm(pooled, dim=1, keepdim=True)
-            if (
-                pooled.shape != (len(items), 768)
-                or not self.torch.isfinite(norms).all()
-                or (norms == 0).any()
-            ):
+            vectors = self.forward_tokens(inputs)
+            if (vectors.shape != (len(items), 768) or not self.torch.isfinite(vectors).all()
+                    or not ((vectors.norm(dim=1) - 1).abs() <= 1e-5).all()):
                 raise ValueError("Encoder produced an incompatible vector")
-            return (pooled / norms).cpu().tolist()
+            return vectors.cpu().tolist()
+
+    def forward_tokens(self, inputs):
+        outputs = self.model(**inputs).last_hidden_state.float()
+        mask = inputs["attention_mask"].bool().unsqueeze(-1)
+        pooled = outputs.masked_fill(~mask, 0).sum(1) / mask.sum(1)
+        return pooled / self.torch.linalg.vector_norm(pooled, dim=1, keepdim=True)

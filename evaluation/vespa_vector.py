@@ -66,10 +66,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for field in ("model", "workload", "output"):
         parser.add_argument(field, type=Path)
+    parser.add_argument("--device", default="cpu", help="Device for E5 passage and query inference")
     args = parser.parse_args()
     workload = json.loads(args.workload.read_text(encoding="utf-8"))
     authority = PostgresPublication(os.environ["INGESTION_DSN"], include_fragments=True)
-    adapter = encoder(args.model, "cpu", 2)
+    adapter = encoder(args.model, args.device, 2)
     index = VespaWitness(os.environ["WITNESS_VESPA_URL"], encoder=adapter)
     originals = FileObjectStore(Path(os.environ["INGESTION_OBJECTS"]))
     worker = PublicationWorker(authority, originals, index, vector_space=SPACE.id)
@@ -86,7 +87,7 @@ def main():
         manifest.update({
             "samples_sha256": digest(path), "workload_sha256": digest(args.workload),
             "model_space_id": SPACE.id, "model_state": "warm", "inference_precision": "FP32",
-            "device": "cpu", "torch": adapter.torch.__version__, "platform": platform.platform(),
+            "device": str(adapter.model.device), "torch": adapter.torch.__version__, "platform": platform.platform(),
         })
         write_json(args.output / f"{mode}-manifest.json", manifest)
         print(json.dumps(manifest), flush=True)
