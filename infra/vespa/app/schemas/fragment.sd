@@ -30,6 +30,11 @@ schema fragment {
             match: exact
             rank: filter
         }
+        field study_bucket type int {
+            indexing: attribute
+            attribute: fast-search
+            rank: filter
+        }
         field embedding type tensor<float>(x[768]) {
             indexing: attribute | index | summary
             attribute {

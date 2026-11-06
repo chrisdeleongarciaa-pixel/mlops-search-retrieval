@@ -15,12 +15,17 @@ on:
         description: Run the full SciFact experiment after the dense witness
         type: boolean
         default: true
+      stability:
+        description: Measure four fresh E5 HNSW graphs using the recorded SciFact vectors
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 jobs:
   witness:
+    if: "!inputs.stability"
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ inputs.dense && 120 || 20 }}
     env:
@@ -199,4 +204,80 @@ jobs:
         with:
           name: wp01-witness
           path: ${{ runner.temp }}/wp01
+          retention-days: 7
+  stability:
+    if: inputs.stability
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      actions: read
+      contents: read
+    env:
+      COMPOSE_FILE: infra/vespa/compose.witness.yaml
+      RETRIEVAL_LAB_VESPA_PORT: "18080"
+      RETRIEVAL_LAB_CONFIG_PORT: "19071"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12.10"
+      - name: Verify locked tools and retrieve recorded inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+          python -m pip install --require-hashes --only-binary=:all: \
+            --extra-index-url https://download.pytorch.org/whl/cpu -r config/requirements-dense-linux-amd64.lock
+          python -B -m unittest discover -s tests/unit -v
+          python -B -m unittest discover -s tests/contract -v
+          python -B -m unittest discover -s evaluation -p 'test_scifact*.py' -v
+          mkdir -p "$RUNNER_TEMP/stability" "$RUNNER_TEMP/assets"
+          gh run download 42275419629 --repo "$GITHUB_REPOSITORY" -n wp01-witness --dir "$RUNNER_TEMP/assets"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/scifact.zip" https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/beir.zip" https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
+      - name: Build and measure four isolated graphs sequentially
+        run: |
+          assets="$RUNNER_TEMP/assets"
+          evidence="$RUNNER_TEMP/stability"
+          if [[ "$RUNNER_ENVIRONMENT" == github-hosted ]]; then
+            sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet
+          fi
+          docker compose pull
+          docker info --format 'CPUs={{.NCPU}} RAM_bytes={{.MemTotal}}' > "$evidence/docker-host.txt"
+          docker_root=$(docker info --format '{{.DockerRootDir}}')
+          disk_used=$(sudo df -P "$docker_root" | awk 'NR == 2 { sub(/%$/, "", $5); print $5 }')
+          if ((disk_used > 75)); then
+            echo "Vespa test runner requires no more than 75% disk use before starting." >&2
+            exit 1
+          fi
+          config=http://127.0.0.1:19071
+          search=http://127.0.0.1:18080
+          cleanup() { docker compose down --volumes; }
+          trap cleanup EXIT
+          for seed in $(jq -r '.insertion_order_seeds[]' config/scifact-stability-v1.json); do
+            export COMPOSE_PROJECT_NAME="stability-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$seed"
+            docker compose up -d --pull never
+            curl -fsS --max-time 5 --retry 30 --retry-all-errors --retry-delay 3 --retry-max-time 150 "$config/application/v2/tenant" >/dev/null
+            python -B infra/vespa/deploy.py "$config" > "$evidence/deploy-$seed.json"
+            deadline=$((SECONDS + 90))
+            until curl -fsS --max-time 4 -G --data-urlencode 'yql=select projection_id from fragment where true' --data-urlencode 'hits=0' "$search/search/" \
+              | jq -e '.root.coverage.full == true and .root.fields.totalCount == 0' >/dev/null; do
+              if ((SECONDS >= deadline)); then exit 1; fi
+              sleep 2
+            done
+            python -u -B evaluation/scifact_stability.py run "$assets/scifact.zip" "$assets/embeddings" \
+              "$assets/scifact" "$assets/beir.zip" "$evidence/seed-$seed" --vespa "$search" --seed "$seed"
+            cleanup
+          done
+          python -B evaluation/scifact_stability.py aggregate "$evidence/aggregate.json" "$evidence"/seed-*/manifest.json
+      - name: Upload stability evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: scifact-stability
+          path: ${{ runner.temp }}/stability
           retention-days: 7

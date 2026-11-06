@@ -117,20 +117,23 @@ def read_vectors(directory, split, expected):
     return manifest["ids"], vectors
 
 
-def publish(index, snapshot, corpus, ids, vectors):
+def publish(index, snapshot, corpus, ids, vectors, *, space=SPACE.id, buckets=None):
     for doc, vector in zip(ids, vectors, strict=True):
-        index.feed(f"{snapshot.generation}-{doc}", {
+        fields = {
             "tenant": TENANT, "generation": snapshot.generation, "projection_id": doc,
-            "fragment_id": doc, "body": corpus[doc], "vector_space": SPACE.id,
+            "fragment_id": doc, "body": corpus[doc], "vector_space": space,
             "digest": sha256(corpus[doc].encode()).hexdigest(),
             "embedding": {"values": vector.tolist()},
-        })
+        }
+        if buckets is not None:
+            fields["study_bucket"] = buckets[doc]
+        index.feed(f"{snapshot.generation}-{doc}", fields)
 
     filters = index._filter(TENANT, snapshot.generation)
     deadline = monotonic() + 60
     while monotonic() < deadline:
         response = index._search_response(
-            f"select projection_id from fragment where {filters} and vector_space contains {_literal(SPACE.id)}",
+            f"select projection_id from fragment where {filters} and vector_space contains {_literal(space)}",
             0, 5, ranking="unranked",
         )
         if response["root"]["fields"]["totalCount"] == len(ids):
@@ -139,9 +142,11 @@ def publish(index, snapshot, corpus, ids, vectors):
     raise SearchUnavailable("Incomplete SciFact generation")
 
 
-def run_query(index, snapshot, vector, *, approximate, explore, trace=False, whole=False):
-    response = index.dense_response(snapshot, vector, SPACE.id, 5, approximate=approximate,
-                                    explore=explore, trace=trace, whole_generation=whole, include_body=False)
+def run_query(index, snapshot, vector, *, approximate, explore, trace=False, whole=False,
+              space=SPACE.id, bucket=None):
+    response = index.dense_response(snapshot, vector, space, 5, approximate=approximate,
+                                    explore=explore, trace=trace, whole_generation=whole,
+                                    include_body=False, study_bucket_lt=bucket)
     root = response["root"]
     candidates = [(row["fields"]["projection_id"], float(row["relevance"])) for row in root.get("children", [])]
     ranking = dict(sorted(candidates, key=lambda item: (-item[1], item[0])))
@@ -184,27 +189,28 @@ def evaluate_rankings(rankings, qrels, archive):
         return metrics, per_query
 
 
-def measure_cohort(index, snapshot, docs, queries, query_vectors, explore, cohort, scores=None):
+def measure_cohort(index, snapshot, docs, queries, query_vectors, explore, cohort, scores=None, *,
+                   space=SPACE.id, bucket=None):
     qids = list(queries)
     ids = sorted(snapshot.projections)
     if scores is None:
         scores = cosine_matrix(ids, docs, query_vectors)
-    whole = cohort == "all"
+    scope = {"whole": cohort == "all" or bucket is not None, "space": space, "bucket": bucket}
     rows, exact, approximate = [], {}, {}
     vectors = query_vectors.tolist()
     for vector in vectors[:10]:
-        run_query(index, snapshot, vector, approximate=True, explore=explore, whole=whole)
+        run_query(index, snapshot, vector, approximate=True, explore=explore, **scope)
     measured = []
     for vector in vectors:
         start = perf_counter_ns()
-        ann, _, measured_count = run_query(index, snapshot, vector, approximate=True, explore=explore, whole=whole)
+        ann, _, measured_count = run_query(index, snapshot, vector, approximate=True, explore=explore, **scope)
         measured.append((ann, measured_count, (perf_counter_ns() - start) / 1_000_000))
     for qid, vector, score_row, (ann, measured_count, duration) in zip(qids, vectors, scores, measured, strict=True):
-        vespa_exact, exact_trace, exact_count = run_query(index, snapshot, vector, approximate=False, explore=0, trace=True, whole=whole)
+        vespa_exact, exact_trace, exact_count = run_query(index, snapshot, vector, approximate=False, explore=0, trace=True, **scope)
         score_map = dict(zip(ids, map(float, score_row), strict=True))
         expected = top_exact(score_map)
         comparisons = parity(expected, vespa_exact, len(ids), score_map)
-        traced, trace, matches = run_query(index, snapshot, vector, approximate=True, explore=explore, trace=True, whole=whole)
+        traced, trace, matches = run_query(index, snapshot, vector, approximate=True, explore=explore, trace=True, **scope)
         paired = traced == ann and measured_count == matches
         algorithm = trace_plan(trace, True) if paired else "indeterminate"
         rows.append({

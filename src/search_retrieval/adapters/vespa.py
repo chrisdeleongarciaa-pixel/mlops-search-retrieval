@@ -115,16 +115,21 @@ class VespaWitness:
     def dense_response(
         self, eligibility: Eligibility, vector: list[float], space: str, timeout: float, *,
         approximate: bool, explore: int = 0, k: int = 100, trace: bool = False,
-        whole_generation: bool = False, include_body: bool = True,
+        whole_generation: bool = False, include_body: bool = True, study_bucket_lt: int | None = None,
     ) -> dict:
         """Search a verified vector snapshot. Whole-generation mode is for immutable benchmarks."""
         _validate_vector(vector)
         if not 1 <= k <= 100 or explore < 0 or not space:
             raise ValueError("Invalid vector search configuration")
+        if study_bucket_lt is not None and (not whole_generation or type(study_bucket_lt) is not int
+                                           or not 1 <= study_bucket_lt <= 100):
+            raise ValueError("The bucket filter requires a validated immutable study generation")
         if not eligibility.projections:
             return {"root": {"children": []}}
         filters = (self._filter(eligibility.tenant, eligibility.generation)
                    if whole_generation else self._allowed(eligibility))
+        if study_bucket_lt is not None:
+            filters += f" and study_bucket < {study_bucket_lt}"
         fields = "projection_id, fragment_id, body" if include_body else "projection_id, fragment_id"
         yql = (
             f"select {fields} from fragment where "

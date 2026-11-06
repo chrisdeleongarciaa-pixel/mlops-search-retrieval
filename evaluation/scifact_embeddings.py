@@ -47,12 +47,13 @@ def materialize(model, dataset):
     download(DATASET_URL, dataset, DATASET_SHA256)
 
 
-def load_split(dataset, split):
+def load_split(dataset, split, *, structured=False):
     if digest(dataset) != DATASET_SHA256:
         raise ValueError("SciFact archive checksum mismatch")
     with ZipFile(dataset) as source:
         corpus = {
-            doc["_id"]: doc.get("title", "") + " " + doc["text"]
+            doc["_id"]: ((doc.get("title", ""), doc["text"]) if structured
+                         else doc.get("title", "") + " " + doc["text"])
             for doc in map(json.loads, source.read("scifact/corpus.jsonl").splitlines())
         }
         queries = {
@@ -129,14 +130,15 @@ def conformance(adapter, model):
     }
 
 
-def encode_items(adapter, items, role, batch_size, destination):
+def encode_items(adapter, items, role, batch_size, destination, *, format_texts=None):
     import numpy as np
 
     ids = sorted(items)
     lengths = {}
     for start in range(0, len(ids), 128):
         batch = ids[start:start + 128]
-        texts = [f"{role}: {items[item]}" for item in batch]
+        values = [items[item] for item in batch]
+        texts = format_texts(values, role) if format_texts else [f"{role}: {text}" for text in values]
         raw = adapter.tokenizer(texts, verbose=False)["input_ids"]
         truncated = adapter.tokenizer(texts, max_length=512, truncation=True)["input_ids"]
         lengths.update((item, (len(before), len(after)))

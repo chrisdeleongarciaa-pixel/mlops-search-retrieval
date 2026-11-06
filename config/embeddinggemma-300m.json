@@ -1,0 +1,26 @@
+{
+  "repo": "google/embeddinggemma-300m",
+  "revision": "57c266a740f537b4dc058e1b0cda161fd15afa75",
+  "source": "https://huggingface.co/api/models/google/embeddinggemma-300m?blobs=true",
+  "access": "gated",
+  "git_blobs": {
+    "1_Pooling/config.json": "70ac42bce1699d89f19c011133cf97dfada83127",
+    "2_Dense/config.json": "be375637bcca11d03dbf71bf83914fd48e8c55ee",
+    "3_Dense/config.json": "732de4b90bee82e9050fd5467c4aa5e9d088d004",
+    "added_tokens.json": "e17bde03d42feda32d1abfca6d3b598b9a020df7",
+    "config.json": "aca32ef8dacddfbe15dc12c0427a9153d5c2b0f4",
+    "config_sentence_transformers.json": "3552ab1b79dc8571d0ecf200db12e5208eda5bdd",
+    "generation_config.json": "562150c0903db92148e95aeed8292bbfbf3c93d9",
+    "modules.json": "bb668a9a3aacb3090f2f8e73f870f556569f9066",
+    "sentence_bert_config.json": "b37b06424c6e0c0e880b24f3e313ebd85b601dcc",
+    "special_tokens_map.json": "1a6193244714d3d78be48666cb02cdbfac62ad86",
+    "tokenizer_config.json": "33786d29ae85b05bc37772cd10876d66afbe905e"
+  },
+  "lfs_sha256": {
+    "2_Dense/model.safetensors": "c327f2acb00149676ade24a75e11eb6ebbd367f9ee050267ba56829d2979f702",
+    "3_Dense/model.safetensors": "ffb6cc5162e11e2ce6bc2367e121ee3bbbc4e82e1ee26826bd7573d4948d81b8",
+    "model.safetensors": "cbf5a78393b6a033e0b8a63a57549964f7ed5c6fbeb4ba0694214f36123f2fd2",
+    "tokenizer.json": "6852f8d561078cc0cebe70ca03c5bfdd0d60a45f9d2e0e1e4cc05b68e9ec329e",
+    "tokenizer.model": "1299c11d7cf632ef3b4e11937501358ada021bbdf7c47638d13c0ee982f2e79c"
+  }
+}
