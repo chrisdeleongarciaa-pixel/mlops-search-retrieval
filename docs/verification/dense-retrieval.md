@@ -11,11 +11,18 @@
 
 Ejecutar el workflow **WP-01 and LX-01 witness** con la opción `dense`. La corrida instala los locks Linux, aplica migraciones, despliega la aplicación Vespa fijada y exporta la evidencia en el artefacto `wp01-witness`. El test léxico conserva su carga original. El test SciFact congela la exploración antes de leer los qrels de test.
 
+El parámetro opcional `vectors_commit` identifica un commit del mismo repositorio privado con un archivo `scifact-e5-vectors.tar.gz`. Contiene matrices `float32` de corpus y train, sus IDs y hashes y la conformidad del encoder. El arnés verifica ambas matrices antes de alimentar Vespa. Registra por separado el entorno de los vectores de entrada y el que codifica las consultas de test después de congelar los parámetros.
+
+Con `dense=true` y `scifact=false` se ejecuta únicamente el testigo, incluida su medición de recuperación.
+
 La latencia de cada tramo se agrega desde sus observaciones directas. La corrida de SciFact mide el motor con un cliente y vectores ya calculados. La corrida mutable incorpora codificación, cobertura y ambas lecturas de elegibilidad. Las métricas de calidad se calculan con BEIR fijado y `pytrec_eval` sobre listas independientes. Si una configuración congelada incumple el umbral, se conserva el resultado.
 
 ## Resultados observados
 
 - La conformidad local de E5 en Windows y CPU pasó en FP32 con PyTorch 2.14.0+cpu y Transformers 5.20.2. Coincidieron los IDs y las máscaras en las cuatro entradas. El pasaje largo pasó de 704 a 512 tokens. El error absoluto máximo fue 0 y el coseno mínimo observado fue 0,99999988. [Resultados](../../evaluation/evidence/e5-conformance-win64/conformance.json) · [Entorno](../../evaluation/evidence/e5-conformance-win64/environment.json)
 - Pasaron 7 pruebas unitarias y 18 de contrato, incluidas las de cobertura, generación y reintento vectorial.
+- El oráculo testigo reprodujo recall ANN@2 de 0,5 y recall de relevancia@2 de 1,0. Las tres pruebas adicionales del comparador cubren coseno, intercambios de corte y lectura de trazas.
+- El primer despliegue rechazó el bloque `matching` en el esquema de Vespa 8.781.11. Se corrigió declarando los umbrales directamente en el perfil denso. [Primera corrida](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42271751880)
+- La corrida corregida pasó WP-01, LX-01 y las historias de retiro densa e híbrida con PostgreSQL y Vespa reales. También completó el ensayo mutable de latencia con E5. [Corrida corregida](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42275419629)
 
 [Contrato denso e híbrido](../contracts/dense-retrieval.md) · [Ficha oficial de E5](https://huggingface.co/intfloat/multilingual-e5-base#usage) · [HNSW y filtros en Vespa](https://docs.vespa.ai/en/querying/approximate-nn-hnsw.html)

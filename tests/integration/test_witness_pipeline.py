@@ -222,7 +222,7 @@ class WitnessPipeline(unittest.TestCase):
         generation = "test-" + uuid4().hex
         with psycopg.connect(self.dsn) as conn:
             conn.execute("UPDATE retrieval_generation SET active = %s", (generation,))
-        ledger = PostgresPublication(self.dsn)
+        ledger = PostgresPublication(self.dsn, include_fragments=bool(mode))
         vector_space = index.encoder.space.id if mode else None
         publication = PublicationWorker(ledger, self.objects, index, vector_space=vector_space)
         search = VectorSearch(ledger, index, index.encoder, generation) if mode else EligibleSearch(ledger, index)

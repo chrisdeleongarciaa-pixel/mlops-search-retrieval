@@ -139,12 +139,15 @@ class VespaWitness:
 
     def verify_vector_coverage(self, eligibility: Eligibility, space: str, timeout: float) -> int:
         # The mutable witness is intentionally bounded. An index miss must not look like a valid empty list.
-        yql = f"select projection_id, vector_space, embedding from fragment where {self._allowed(eligibility)}"
+        yql = f"select projection_id, fragment_id, vector_space, embedding from fragment where {self._allowed(eligibility)}"
         response = self._search_response(yql, 400, timeout, ranking="unranked")
         root = response["root"]
         rows = [row["fields"] for row in root.get("children", [])]
+        fragment_ids = {row.get("fragment_id") for row in rows}
         if (root.get("fields", {}).get("totalCount") != len(rows)
                 or {row.get("projection_id") for row in rows} != eligibility.projections
+                or len(fragment_ids) != len(rows)
+                or (eligibility.fragments is not None and fragment_ids != eligibility.fragments)
                 or any(row.get("vector_space") != space or not row.get("embedding") for row in rows)):
             raise SearchUnavailable("Missing or incompatible vector in the eligible snapshot")
         return len(rows)

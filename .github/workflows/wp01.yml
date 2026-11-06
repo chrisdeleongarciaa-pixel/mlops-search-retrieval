@@ -7,6 +7,14 @@ on:
         description: Run E5, SciFact and the vector witness
         type: boolean
         default: false
+      vectors_commit:
+        description: Optional commit containing a precomputed E5 train and corpus bundle
+        type: string
+        required: false
+      scifact:
+        description: Run the full SciFact experiment after the dense witness
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -127,6 +135,18 @@ jobs:
           curl --fail --location --retry 3 \
             -o "$RUNNER_TEMP/scifact/beir.zip" \
             https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
+      - name: Validate the optional embedding bundle reference
+        if: inputs.dense && inputs.vectors_commit != ''
+        env:
+          VECTORS_COMMIT: ${{ inputs.vectors_commit }}
+        run: '[[ "$VECTORS_COMMIT" =~ ^[a-f0-9]{40}$ ]]'
+      - name: Fetch precomputed embeddings from the private repository
+        if: inputs.dense && inputs.vectors_commit != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.vectors_commit }}
+          path: scifact-vector-input
       - name: Measure vector and hybrid service with warm E5 and cold query inputs
         if: inputs.dense
         run: |
@@ -144,15 +164,25 @@ jobs:
           HF_HUB_OFFLINE=1 python -B evaluation/vespa_vector.py "$RUNNER_TEMP/scifact/model" \
             evaluation/fixtures/lexical-probes.json "$evidence/vector-service"
       - name: Encode SciFact and run the frozen five-ranking comparison
-        if: inputs.dense
+        if: inputs.dense && inputs.scifact
         env:
           HF_HUB_OFFLINE: "1"
           TOKENIZERS_PARALLELISM: "false"
           OPENBLAS_NUM_THREADS: "1"
+          VECTORS_COMMIT: ${{ inputs.vectors_commit }}
         run: |
           assets="$RUNNER_TEMP/scifact"
           evidence="$RUNNER_TEMP/wp01"
-          python -u -B evaluation/scifact_embeddings.py "$assets/model" "$assets/scifact.zip" "$evidence/embeddings" --threads 2
+          if [[ -n "$VECTORS_COMMIT" ]]; then
+            mkdir "$evidence/embeddings"
+            archive="scifact-vector-input/scifact-e5-vectors.tar.gz"
+            sha256sum "$archive" > "$evidence/vector-bundle-sha256.txt"
+            tar -xzf "$archive" -C "$evidence/embeddings" --no-same-owner --no-same-permissions \
+              conformance.json environment.json corpus.json corpus.npy train.json train.npy
+            echo "$VECTORS_COMMIT" > "$evidence/vector-bundle-commit.txt"
+          else
+            python -u -B evaluation/scifact_embeddings.py "$assets/model" "$assets/scifact.zip" "$evidence/embeddings" --threads 2
+          fi
           python -u -B evaluation/scifact_dense.py "$assets/model" "$assets/scifact.zip" \
             "$evidence/embeddings" "$assets/beir.zip" "$evidence/scifact" --threads 2
       - name: Collect service logs and remove the lab

@@ -2,10 +2,12 @@
 
 import argparse
 from hashlib import sha256
+from importlib.metadata import version
 import json
 from math import isfinite
 import os
 from pathlib import Path
+import platform
 import re
 import sys
 from tempfile import TemporaryDirectory
@@ -182,10 +184,11 @@ def evaluate_rankings(rankings, qrels, archive):
         return metrics, per_query
 
 
-def measure_cohort(index, snapshot, docs, queries, query_vectors, explore, cohort):
+def measure_cohort(index, snapshot, docs, queries, query_vectors, explore, cohort, scores=None):
     qids = list(queries)
     ids = sorted(snapshot.projections)
-    scores = cosine_matrix(ids, docs, query_vectors)
+    if scores is None:
+        scores = cosine_matrix(ids, docs, query_vectors)
     whole = cohort == "all"
     rows, exact, approximate = [], {}, {}
     vectors = query_vectors.tolist()
@@ -236,6 +239,16 @@ def summarize(rows):
     }
 
 
+def hybrid_rankings(lexical, dense):
+    return {
+        qid: {hit.id: hit.score for hit in fuse(
+            [Ranked(doc, score) for doc, score in lexical[qid].items()],
+            [Ranked(doc, score) for doc, score in dense[qid].items()],
+        ).fused[:DEPTH]}
+        for qid in lexical
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("model", "dataset", "embeddings", "evaluator", "output"):
@@ -278,6 +291,10 @@ def main():
         "rank_profile": "dense", "schema_sha256": digest(ROOT / "infra/vespa/app/schemas/fragment.sd"),
         "vespa_compose_sha256": digest(ROOT / "infra/vespa/compose.witness.yaml"),
         "vector_space": SPACE.id, "dataset_sha256": env["dataset_sha256"],
+        "embedding_environment_sha256": digest(args.embeddings / "environment.json"),
+        "corpus_vectors_sha256": digest(args.embeddings / "corpus.npy"),
+        "train_vectors_sha256": digest(args.embeddings / "train.npy"),
+        "tuning_code_sha256": digest(Path(__file__)),
     }
     write_json(args.output / "freeze.json", freeze)
 
@@ -286,7 +303,13 @@ def main():
     test_info = encode_items(adapter, test, "query", args.batch_size, args.output / "test.npy")
     write_json(args.output / "test.json", test_info)
     vectors = np.load(args.output / "test.npy", allow_pickle=False)
-    rows, exact, ann = measure_cohort(index, snapshot, documents, test, vectors, explore, "all")
+    scores = cosine_matrix(ids, documents, vectors)
+    exact = {qid: top_exact(dict(zip(ids, map(float, row), strict=True)))
+             for qid, row in zip(test, scores, strict=True)}
+    lexical = bm25(corpus, test)
+    references = {"bm25": lexical, "exact": exact, "rrf_exact": hybrid_rankings(lexical, exact)}
+    write_json(args.output / "reference-rankings.json", references)
+    rows, _, ann = measure_cohort(index, snapshot, documents, test, vectors, explore, "all", scores)
     # Stable subsamples of the same vector generation isolate prefilter selectivity.
     bucket = [int(sha256(doc.encode()).hexdigest(), 16) % 100 for doc in ids]
     for threshold in (10, 1):
@@ -295,16 +318,7 @@ def main():
         subset = dict(list(test.items())[:30])
         samples, _, _ = measure_cohort(index, filtered, documents[selected], subset, vectors[:len(subset)], explore, f"hash_lt_{threshold}")
         rows.extend(samples)
-    lexical = bm25(corpus, test)
-    rankings = {"bm25": lexical, "exact": exact, "hnsw_requested": ann}
-    for name, branch in (("rrf_exact", exact), ("rrf_hnsw_requested", ann)):
-        rankings[name] = {
-            qid: {hit.id: hit.score for hit in fuse(
-                [Ranked(doc, score) for doc, score in lexical[qid].items()],
-                [Ranked(doc, score) for doc, score in branch[qid].items()],
-            ).fused[:DEPTH]}
-            for qid in test
-        }
+    rankings = {**references, "hnsw_requested": ann, "rrf_hnsw_requested": hybrid_rankings(lexical, ann)}
     metrics, per_query = evaluate_rankings(rankings, qrels, args.evaluator)
     groups = summarize(rows)
     hnsw = groups.get("all/hnsw")
@@ -321,6 +335,14 @@ def main():
         },
         "RET-02": {name: values["NDCG@10"] >= .75 for name, values in metrics.items()},
         "evaluator_revision": EVALUATOR_REVISION, "evaluator_sha256": EVALUATOR_SHA256,
+        "reference_rankings_sha256": digest(args.output / "reference-rankings.json"),
+        "evaluator_archive_sha256": digest(args.evaluator),
+        "test_vectors_sha256": test_info["vectors_sha256"],
+        "test_encoder": {
+            "device": str(adapter.model.device), "precision": "FP32", "stored_dtype": "float32",
+            "platform": platform.platform(), "python": platform.python_version(), "threads": args.threads,
+            "packages": {name: version(name) for name in ("torch", "transformers", "numpy", "pytrec_eval_terrier")},
+        },
     }
     for name, value in (("samples", rows), ("rankings", rankings), ("per-query", per_query)):
         path = args.output / f"{name}.json"

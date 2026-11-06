@@ -7,7 +7,7 @@
 | Recuperar candidatos | Identidad de tenant, consulta, presupuesto y generación compatibles | Se rankea dentro de la elegibilidad. Una segunda lectura confirma el snapshot antes de devolver resultados. Tras un cambio se permite un reintento dentro del plazo. Un snapshot vacío compatible produce un vacío válido. Una cobertura parcial, un vector ausente o una generación incompatible producen un error explícito. |
 | Fusionar | Dos ramas completas para el mismo snapshot | RRF usa hasta 100 candidatos por rama, pesos iguales y constante 60, con desempate por ID. Antes de reutilizar el resultado en contexto se vuelve a consultar la autoridad. |
 
-La prueba mutable admite hasta 400 fragmentos elegibles por solicitud para verificar presencia y espacio en Vespa. La medición registra ese coste por separado. El corpus SciFact usa una generación inmutable y se valida al completar la carga. Sus filtros selectivos enumeran las identidades del subconjunto antes de buscar vecinos.
+La prueba mutable admite hasta 400 fragmentos elegibles por solicitud. La autoridad proporciona las identidades de fragmentos de los manifiestos de publicación y Vespa confirma la presencia del conjunto y su espacio vectorial. La medición registra ese coste por separado. El corpus SciFact usa una generación inmutable y se valida al completar la carga. Sus filtros selectivos enumeran las identidades del subconjunto antes de buscar vecinos.
 
 El retiro es una propiedad del protocolo de publicación y consulta. Un trabajador puede escribir una proyección física después del retiro. La actualización condicional de PostgreSQL impide que esa proyección se haga elegible y la revalidación excluye evidencia retirada de un resultado previo.
 

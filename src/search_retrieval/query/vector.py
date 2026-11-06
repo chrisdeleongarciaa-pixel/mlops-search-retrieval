@@ -39,12 +39,12 @@ class VectorSearch(EligibleSearch):
                 approximate=approximate, explore=self.explore, k=branch_depth,
             )
             if (len(dense) != min(branch_depth, eligible_count)
-                    or any(hit.projection_id not in snapshot.projections for hit in dense)):
+                    or any(not snapshot.permits(hit) for hit in dense)):
                 raise SearchUnavailable("Incomplete or ineligible dense branch")
             if mode == "dense":
                 return dense
             lexical = timed(sample, "vespa_lexical_ms", self.index.lexical, snapshot, text, 100, budget())
-            if any(hit.projection_id not in snapshot.projections for hit in lexical):
+            if any(not snapshot.permits(hit) for hit in lexical):
                 raise SearchUnavailable("Ineligible lexical branch")
             by_id = {hit.fragment_id: hit for hit in (*lexical, *dense)}
             run = fuse([Ranked(hit.fragment_id, hit.score) for hit in lexical],

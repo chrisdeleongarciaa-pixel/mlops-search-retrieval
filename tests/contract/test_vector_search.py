@@ -55,6 +55,9 @@ class VectorContract(unittest.TestCase):
             for index, error in ((FixtureIndex(vector=False), "Missing"), (FixtureIndex(full=False), "incomplete")):
                 with self.subTest(mode=mode, error=error), self.assertRaisesRegex(SearchUnavailable, error):
                     VectorSearch(Authority(self.snapshot), index, Encoder(), "g").search("lab", "query", mode=mode)
+        missing_fragment = Eligibility("lab", "g", frozenset({"p"}), frozenset({"f", "missing"}))
+        with self.assertRaisesRegex(SearchUnavailable, "Missing"):
+            VectorSearch(Authority(missing_fragment), FixtureIndex(), Encoder(), "g").search("lab", "query")
 
     def test_retraction_during_hybrid_ranking_retries_on_the_empty_snapshot(self):
         authority = Authority(self.snapshot, self.empty, self.empty, self.empty)

@@ -11,12 +11,13 @@ from search_retrieval.query.eligible import Eligibility, SearchUnavailable
 
 
 class PostgresPublication:
-    def __init__(self, dsn: str, *, lease_seconds: int = 60, max_eligible: int = 1_000):
+    def __init__(self, dsn: str, *, lease_seconds: int = 60, max_eligible: int = 1_000, include_fragments: bool = False):
         if lease_seconds <= 0 or max_eligible <= 0:
             raise ValueError("Lease and eligibility limits must be positive")
         self.dsn = dsn
         self.lease_seconds = lease_seconds
         self.max_eligible = max_eligible
+        self.include_fragments = include_fragments
 
     def claim(self) -> Work | None:
         with psycopg.connect(self.dsn) as conn:
@@ -113,11 +114,15 @@ class PostgresPublication:
             return outcome
 
     def eligibility(self, tenant: str, principal: str | None = None) -> Eligibility:
+        fragments_column = (
+            "(SELECT manifest->'fragments' FROM retrieval_payloads WHERE projection_id = p.projection_id)"
+            if self.include_fragments else "NULL"
+        )
         try:
             with psycopg.connect(self.dsn, autocommit=True) as conn:
                 rows = conn.execute(
-                    """
-                    SELECT g.active, p.projection_id
+                    f"""
+                    SELECT g.active, p.projection_id, {fragments_column}
                     FROM retrieval_generation g
                     LEFT JOIN (
                         retrieval_publications p
@@ -146,4 +151,11 @@ class PostgresPublication:
             raise SearchUnavailable("Eligibility authority unavailable") from error
         if not rows or len(rows) > self.max_eligible:
             raise SearchUnavailable("Missing generation or eligibility scope exceeds laboratory limit")
-        return Eligibility(tenant, rows[0][0], frozenset(row[1] for row in rows if row[1]))
+        projections = frozenset(row[1] for row in rows if row[1])
+        fragments = None
+        if self.include_fragments:
+            published = [row[2] for row in rows if row[1]]
+            if any(not isinstance(items, list) or not items for items in published):
+                raise SearchUnavailable("Eligible projection has no fragment manifest")
+            fragments = frozenset(item["id"] for items in published for item in items)
+        return Eligibility(tenant, rows[0][0], projections, fragments)

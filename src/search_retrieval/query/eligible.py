@@ -14,6 +14,10 @@ class Eligibility:
     tenant: str
     generation: str
     projections: frozenset[str]
+    fragments: frozenset[str] | None = None
+
+    def permits(self, hit: "Hit") -> bool:
+        return hit.projection_id in self.projections and (self.fragments is None or hit.fragment_id in self.fragments)
 
 
 @dataclass(frozen=True, slots=True)
@@ -81,7 +85,7 @@ class EligibleSearch:
             if remaining <= 0:
                 break
             hits = rank(before, query, k, remaining, sample) if before.projections else ()
-            if any(hit.projection_id not in before.projections for hit in hits):
+            if any(not before.permits(hit) for hit in hits):
                 raise SearchUnavailable("Index returned a projection outside its filter")
             after = timed(sample, "revalidation_ms", self.authority.eligibility, tenant)
             if sample is not None:
@@ -95,4 +99,4 @@ class EligibleSearch:
         current = self.authority.eligibility(tenant)
         if (tenant, current.generation) != (result.eligibility.tenant, result.eligibility.generation):
             return ()
-        return tuple(hit for hit in result.hits if hit.projection_id in current.projections)
+        return tuple(hit for hit in result.hits if current.permits(hit))

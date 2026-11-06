@@ -68,7 +68,7 @@ def main():
         parser.add_argument(field, type=Path)
     args = parser.parse_args()
     workload = json.loads(args.workload.read_text(encoding="utf-8"))
-    authority = PostgresPublication(os.environ["INGESTION_DSN"])
+    authority = PostgresPublication(os.environ["INGESTION_DSN"], include_fragments=True)
     adapter = encoder(args.model, "cpu", 2)
     index = VespaWitness(os.environ["WITNESS_VESPA_URL"], encoder=adapter)
     originals = FileObjectStore(Path(os.environ["INGESTION_OBJECTS"]))
