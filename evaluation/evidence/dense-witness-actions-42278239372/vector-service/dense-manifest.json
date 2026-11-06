@@ -1,0 +1,61 @@
+{
+  "mode": "dense",
+  "generation": "witness-e5-42278239372-1",
+  "eligible_projections": [
+    "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3",
+    "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746",
+    "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159"
+  ],
+  "clients": 1,
+  "requests": 120,
+  "complete": 120,
+  "depth": 100,
+  "warmup": 3,
+  "repeats": 20,
+  "query_cache": false,
+  "result_cache": false,
+  "retrieval_client_ms": {
+    "p50": 117.594929,
+    "p95": 147.015648,
+    "p99": 192.429707
+  },
+  "stage_ms": {
+    "eligibility_ms": {
+      "p50": 8.953703,
+      "p95": 12.819571,
+      "p99": 13.931159
+    },
+    "encode_query_ms": {
+      "p50": 78.191046,
+      "p95": 104.836532,
+      "p99": 151.406054
+    },
+    "revalidation_ms": {
+      "p50": 9.487751,
+      "p95": 15.079884,
+      "p99": 17.600004
+    },
+    "vector_coverage_ms": {
+      "p50": 7.27788,
+      "p95": 10.049437,
+      "p99": 11.686927
+    },
+    "vespa_dense_ms": {
+      "p50": 10.059422,
+      "p95": 14.407476,
+      "p99": 18.383386
+    }
+  },
+  "SRV-01": {
+    "scope": "single-client retrieval component",
+    "passed": false
+  },
+  "samples_sha256": "d4c8dc449ba0b4c1a159575b06f9ea23326eb7dbdfdce95460e74894ac3b3209",
+  "workload_sha256": "4236a073205b0b30574604ad2198a22283d5b1067043a6657b450efb90cffc9e",
+  "model_space_id": "f8ddb8c12a6cfa93db040afa5191ab0c0580f9fd0eeedf2ab15a076ee999118d",
+  "model_state": "warm",
+  "inference_precision": "FP32",
+  "device": "cpu",
+  "torch": "2.14.0+cpu",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39"
+}

@@ -1,0 +1,4322 @@
+[
+  {
+    "request_id": "hybrid/1/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.074009,
+        "vector_coverage_ms": 5.934416,
+        "encode_query_ms": 75.926687,
+        "vespa_dense_ms": 8.240658,
+        "vespa_lexical_ms": 7.618125,
+        "revalidation_ms": 14.464056,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 122.635433,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/1/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.815847,
+        "vector_coverage_ms": 6.969924,
+        "encode_query_ms": 85.730622,
+        "vespa_dense_ms": 7.999983,
+        "vespa_lexical_ms": 4.519844,
+        "revalidation_ms": 9.075727,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 125.429569,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/1/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.445903,
+        "vector_coverage_ms": 5.840529,
+        "encode_query_ms": 71.524221,
+        "vespa_dense_ms": 7.604565,
+        "vespa_lexical_ms": 4.148271,
+        "revalidation_ms": 9.167381,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.919366,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/1/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.409378,
+        "vector_coverage_ms": 5.267936,
+        "encode_query_ms": 110.378114,
+        "vespa_dense_ms": 17.246364,
+        "vespa_lexical_ms": 4.758595,
+        "revalidation_ms": 14.174118,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 161.632828,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/1/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.896578,
+        "vector_coverage_ms": 8.446359,
+        "encode_query_ms": 109.579249,
+        "vespa_dense_ms": 7.78644,
+        "vespa_lexical_ms": 3.718531,
+        "revalidation_ms": 9.402868,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 152.246655,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/1/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.847524,
+        "vector_coverage_ms": 10.616125,
+        "encode_query_ms": 130.905255,
+        "vespa_dense_ms": 7.948535,
+        "vespa_lexical_ms": 3.558649,
+        "revalidation_ms": 8.785799,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 175.058486,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.975061,
+        "vector_coverage_ms": 5.230084,
+        "encode_query_ms": 70.561173,
+        "vespa_dense_ms": 8.507502,
+        "vespa_lexical_ms": 5.57754,
+        "revalidation_ms": 9.159714,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 108.203786,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.670203,
+        "vector_coverage_ms": 5.357517,
+        "encode_query_ms": 77.275765,
+        "vespa_dense_ms": 9.138437,
+        "vespa_lexical_ms": 4.600461,
+        "revalidation_ms": 9.213301,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 114.440415,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.300818,
+        "vector_coverage_ms": 5.731944,
+        "encode_query_ms": 73.050377,
+        "vespa_dense_ms": 8.411366,
+        "vespa_lexical_ms": 3.84359,
+        "revalidation_ms": 9.086588,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 109.608833,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.214878,
+        "vector_coverage_ms": 6.477358,
+        "encode_query_ms": 71.926685,
+        "vespa_dense_ms": 8.883852,
+        "vespa_lexical_ms": 3.848297,
+        "revalidation_ms": 10.294663,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 110.844675,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.227412,
+        "vector_coverage_ms": 7.566647,
+        "encode_query_ms": 94.638461,
+        "vespa_dense_ms": 8.266988,
+        "vespa_lexical_ms": 3.921418,
+        "revalidation_ms": 9.184607,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 133.027138,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/2/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.490516,
+        "vector_coverage_ms": 7.868315,
+        "encode_query_ms": 82.519115,
+        "vespa_dense_ms": 9.718405,
+        "vespa_lexical_ms": 3.723829,
+        "revalidation_ms": 8.878514,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 122.7521,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.67141,
+        "vector_coverage_ms": 7.428318,
+        "encode_query_ms": 71.666061,
+        "vespa_dense_ms": 8.711932,
+        "vespa_lexical_ms": 3.928643,
+        "revalidation_ms": 9.08422,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 110.700301,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.690008,
+        "vector_coverage_ms": 5.412971,
+        "encode_query_ms": 75.081508,
+        "vespa_dense_ms": 7.77331,
+        "vespa_lexical_ms": 4.452062,
+        "revalidation_ms": 8.970748,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 110.61711,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.527261,
+        "vector_coverage_ms": 5.333291,
+        "encode_query_ms": 69.814968,
+        "vespa_dense_ms": 8.168188,
+        "vespa_lexical_ms": 4.805947,
+        "revalidation_ms": 10.141937,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.988801,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.719798,
+        "vector_coverage_ms": 7.932681,
+        "encode_query_ms": 177.334163,
+        "vespa_dense_ms": 10.492373,
+        "vespa_lexical_ms": 3.488122,
+        "revalidation_ms": 9.752001,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 218.950918,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.830176,
+        "vector_coverage_ms": 6.482806,
+        "encode_query_ms": 120.254693,
+        "vespa_dense_ms": 9.266531,
+        "vespa_lexical_ms": 3.766653,
+        "revalidation_ms": 9.189685,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 157.989526,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/3/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.560226,
+        "vector_coverage_ms": 5.862837,
+        "encode_query_ms": 84.053643,
+        "vespa_dense_ms": 9.307278,
+        "vespa_lexical_ms": 2.967754,
+        "revalidation_ms": 9.058676,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 120.990768,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.047314,
+        "vector_coverage_ms": 6.388228,
+        "encode_query_ms": 73.245327,
+        "vespa_dense_ms": 11.574851,
+        "vespa_lexical_ms": 5.496963,
+        "revalidation_ms": 11.598773,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 117.59097,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.968325,
+        "vector_coverage_ms": 5.751383,
+        "encode_query_ms": 75.625782,
+        "vespa_dense_ms": 9.794555,
+        "vespa_lexical_ms": 3.930862,
+        "revalidation_ms": 8.861643,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.122899,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.234453,
+        "vector_coverage_ms": 6.842311,
+        "encode_query_ms": 74.195546,
+        "vespa_dense_ms": 10.894496,
+        "vespa_lexical_ms": 6.743551,
+        "revalidation_ms": 10.921106,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 119.045558,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.547723,
+        "vector_coverage_ms": 5.792641,
+        "encode_query_ms": 83.909144,
+        "vespa_dense_ms": 9.004765,
+        "vespa_lexical_ms": 3.116178,
+        "revalidation_ms": 9.129279,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 119.754616,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.220452,
+        "vector_coverage_ms": 5.308778,
+        "encode_query_ms": 87.066174,
+        "vespa_dense_ms": 8.174929,
+        "vespa_lexical_ms": 5.69301,
+        "revalidation_ms": 9.460385,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 125.129429,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/4/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.171151,
+        "vector_coverage_ms": 8.405327,
+        "encode_query_ms": 96.831882,
+        "vespa_dense_ms": 14.01748,
+        "vespa_lexical_ms": 4.554697,
+        "revalidation_ms": 11.109142,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 145.23616,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.260006,
+        "vector_coverage_ms": 6.063341,
+        "encode_query_ms": 72.241857,
+        "vespa_dense_ms": 7.682924,
+        "vespa_lexical_ms": 4.69566,
+        "revalidation_ms": 8.85615,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 109.007418,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.77037,
+        "vector_coverage_ms": 6.118374,
+        "encode_query_ms": 76.837056,
+        "vespa_dense_ms": 8.46005,
+        "vespa_lexical_ms": 4.370578,
+        "revalidation_ms": 8.864773,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.606973,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.490516,
+        "vector_coverage_ms": 5.920004,
+        "encode_query_ms": 70.986016,
+        "vespa_dense_ms": 13.333669,
+        "vespa_lexical_ms": 4.670171,
+        "revalidation_ms": 8.877332,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 112.533337,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.12389,
+        "vector_coverage_ms": 8.18907,
+        "encode_query_ms": 75.622557,
+        "vespa_dense_ms": 8.76402,
+        "vespa_lexical_ms": 4.528687,
+        "revalidation_ms": 8.847703,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.317703,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.025005,
+        "vector_coverage_ms": 6.081158,
+        "encode_query_ms": 88.019513,
+        "vespa_dense_ms": 8.641976,
+        "vespa_lexical_ms": 4.61669,
+        "revalidation_ms": 8.855153,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 125.429053,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/5/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.075797,
+        "vector_coverage_ms": 5.807634,
+        "encode_query_ms": 140.090238,
+        "vespa_dense_ms": 8.22577,
+        "vespa_lexical_ms": 5.558617,
+        "revalidation_ms": 28.254162,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 197.251811,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 18.146458,
+        "vector_coverage_ms": 6.487583,
+        "encode_query_ms": 71.251739,
+        "vespa_dense_ms": 7.268521,
+        "vespa_lexical_ms": 4.703797,
+        "revalidation_ms": 8.937913,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 116.981912,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.601439,
+        "vector_coverage_ms": 6.536032,
+        "encode_query_ms": 75.933698,
+        "vespa_dense_ms": 7.965751,
+        "vespa_lexical_ms": 3.829293,
+        "revalidation_ms": 9.453755,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.624038,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.709353,
+        "vector_coverage_ms": 6.124604,
+        "encode_query_ms": 86.34649,
+        "vespa_dense_ms": 8.591634,
+        "vespa_lexical_ms": 3.882213,
+        "revalidation_ms": 10.977021,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 124.829986,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.107991,
+        "vector_coverage_ms": 6.119997,
+        "encode_query_ms": 70.9817,
+        "vespa_dense_ms": 7.201184,
+        "vespa_lexical_ms": 3.558453,
+        "revalidation_ms": 9.000238,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.167593,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.748576,
+        "vector_coverage_ms": 5.436868,
+        "encode_query_ms": 105.312754,
+        "vespa_dense_ms": 8.289882,
+        "vespa_lexical_ms": 3.773499,
+        "revalidation_ms": 9.224327,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 141.0365,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/6/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.130385,
+        "vector_coverage_ms": 6.041619,
+        "encode_query_ms": 75.960438,
+        "vespa_dense_ms": 11.514936,
+        "vespa_lexical_ms": 4.122422,
+        "revalidation_ms": 9.930141,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 116.981417,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.987634,
+        "vector_coverage_ms": 10.150701,
+        "encode_query_ms": 104.128856,
+        "vespa_dense_ms": 11.466592,
+        "vespa_lexical_ms": 4.67582,
+        "revalidation_ms": 13.091943,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 152.709271,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 17.822992,
+        "vector_coverage_ms": 6.814669,
+        "encode_query_ms": 75.605877,
+        "vespa_dense_ms": 8.210291,
+        "vespa_lexical_ms": 5.197941,
+        "revalidation_ms": 9.253026,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 123.096066,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.88226,
+        "vector_coverage_ms": 8.32132,
+        "encode_query_ms": 116.605708,
+        "vespa_dense_ms": 10.042176,
+        "vespa_lexical_ms": 4.326196,
+        "revalidation_ms": 9.290272,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 157.679582,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.409728,
+        "vector_coverage_ms": 5.844514,
+        "encode_query_ms": 69.624785,
+        "vespa_dense_ms": 8.908759,
+        "vespa_lexical_ms": 2.955521,
+        "revalidation_ms": 9.252605,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.241905,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.197682,
+        "vector_coverage_ms": 5.366946,
+        "encode_query_ms": 87.423906,
+        "vespa_dense_ms": 10.249169,
+        "vespa_lexical_ms": 4.559684,
+        "revalidation_ms": 8.900537,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 125.990749,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/7/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.897833,
+        "vector_coverage_ms": 5.04518,
+        "encode_query_ms": 76.705086,
+        "vespa_dense_ms": 10.414835,
+        "vespa_lexical_ms": 3.835823,
+        "revalidation_ms": 8.880973,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 114.356017,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.070164,
+        "vector_coverage_ms": 5.449576,
+        "encode_query_ms": 74.513988,
+        "vespa_dense_ms": 9.906089,
+        "vespa_lexical_ms": 3.634203,
+        "revalidation_ms": 9.198147,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.994646,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.769199,
+        "vector_coverage_ms": 6.167884,
+        "encode_query_ms": 77.475232,
+        "vespa_dense_ms": 7.800742,
+        "vespa_lexical_ms": 5.590665,
+        "revalidation_ms": 9.344469,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.382195,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.240442,
+        "vector_coverage_ms": 6.392309,
+        "encode_query_ms": 73.411238,
+        "vespa_dense_ms": 8.061111,
+        "vespa_lexical_ms": 3.504041,
+        "revalidation_ms": 9.624202,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 110.423733,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.68442,
+        "vector_coverage_ms": 5.676746,
+        "encode_query_ms": 66.443438,
+        "vespa_dense_ms": 7.473156,
+        "vespa_lexical_ms": 6.051358,
+        "revalidation_ms": 9.094111,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 103.632093,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.807556,
+        "vector_coverage_ms": 5.498611,
+        "encode_query_ms": 87.562431,
+        "vespa_dense_ms": 7.813496,
+        "vespa_lexical_ms": 4.171857,
+        "revalidation_ms": 10.287567,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 124.374963,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/8/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.170595,
+        "vector_coverage_ms": 6.691482,
+        "encode_query_ms": 82.700103,
+        "vespa_dense_ms": 8.970402,
+        "vespa_lexical_ms": 4.436938,
+        "revalidation_ms": 9.215003,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 122.378389,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.342412,
+        "vector_coverage_ms": 5.429436,
+        "encode_query_ms": 68.836366,
+        "vespa_dense_ms": 8.437647,
+        "vespa_lexical_ms": 5.263169,
+        "revalidation_ms": 14.28815,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.935282,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.801114,
+        "vector_coverage_ms": 8.765162,
+        "encode_query_ms": 100.873286,
+        "vespa_dense_ms": 8.05072,
+        "vespa_lexical_ms": 3.868939,
+        "revalidation_ms": 9.598264,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 144.166991,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.918664,
+        "vector_coverage_ms": 5.541666,
+        "encode_query_ms": 71.741379,
+        "vespa_dense_ms": 7.930949,
+        "vespa_lexical_ms": 3.547492,
+        "revalidation_ms": 10.202568,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 108.088981,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.421856,
+        "vector_coverage_ms": 5.443292,
+        "encode_query_ms": 69.955801,
+        "vespa_dense_ms": 10.006597,
+        "vespa_lexical_ms": 3.854376,
+        "revalidation_ms": 11.820704,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.853977,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.584352,
+        "vector_coverage_ms": 6.272608,
+        "encode_query_ms": 92.692182,
+        "vespa_dense_ms": 13.266213,
+        "vespa_lexical_ms": 5.807534,
+        "revalidation_ms": 16.467195,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 144.288653,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/9/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 15.009688,
+        "vector_coverage_ms": 6.586413,
+        "encode_query_ms": 77.476764,
+        "vespa_dense_ms": 8.831542,
+        "vespa_lexical_ms": 4.914661,
+        "revalidation_ms": 9.813039,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 122.831439,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.516269,
+        "vector_coverage_ms": 5.845041,
+        "encode_query_ms": 78.344703,
+        "vespa_dense_ms": 10.913765,
+        "vespa_lexical_ms": 5.620361,
+        "revalidation_ms": 15.033403,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 125.588207,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.902851,
+        "vector_coverage_ms": 7.544393,
+        "encode_query_ms": 104.527298,
+        "vespa_dense_ms": 7.516361,
+        "vespa_lexical_ms": 4.912268,
+        "revalidation_ms": 13.038407,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 151.651468,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.495644,
+        "vector_coverage_ms": 6.037607,
+        "encode_query_ms": 73.430467,
+        "vespa_dense_ms": 7.271971,
+        "vespa_lexical_ms": 4.776538,
+        "revalidation_ms": 8.771326,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.016005,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.934719,
+        "vector_coverage_ms": 5.274767,
+        "encode_query_ms": 75.484727,
+        "vespa_dense_ms": 9.854026,
+        "vespa_lexical_ms": 3.102698,
+        "revalidation_ms": 9.115247,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.993638,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.133455,
+        "vector_coverage_ms": 4.942644,
+        "encode_query_ms": 88.720829,
+        "vespa_dense_ms": 10.264873,
+        "vespa_lexical_ms": 5.983815,
+        "revalidation_ms": 10.215117,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 129.462019,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/10/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.972526,
+        "vector_coverage_ms": 5.662199,
+        "encode_query_ms": 77.764295,
+        "vespa_dense_ms": 8.926246,
+        "vespa_lexical_ms": 4.212018,
+        "revalidation_ms": 9.709391,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.481239,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.180957,
+        "vector_coverage_ms": 8.214634,
+        "encode_query_ms": 69.182635,
+        "vespa_dense_ms": 8.077771,
+        "vespa_lexical_ms": 3.613992,
+        "revalidation_ms": 8.884618,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.571177,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.943407,
+        "vector_coverage_ms": 7.748342,
+        "encode_query_ms": 89.595799,
+        "vespa_dense_ms": 7.808904,
+        "vespa_lexical_ms": 3.904292,
+        "revalidation_ms": 9.134206,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 127.364588,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.199429,
+        "vector_coverage_ms": 5.826698,
+        "encode_query_ms": 73.030276,
+        "vespa_dense_ms": 7.603833,
+        "vespa_lexical_ms": 4.233711,
+        "revalidation_ms": 9.063023,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 109.157284,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.207276,
+        "vector_coverage_ms": 7.618195,
+        "encode_query_ms": 67.822841,
+        "vespa_dense_ms": 10.337192,
+        "vespa_lexical_ms": 2.899811,
+        "revalidation_ms": 8.956487,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.047834,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.073129,
+        "vector_coverage_ms": 6.75955,
+        "encode_query_ms": 94.500711,
+        "vespa_dense_ms": 10.019972,
+        "vespa_lexical_ms": 5.330862,
+        "revalidation_ms": 12.48875,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 138.37518,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/11/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.368518,
+        "vector_coverage_ms": 7.062724,
+        "encode_query_ms": 90.149252,
+        "vespa_dense_ms": 7.034131,
+        "vespa_lexical_ms": 3.22289,
+        "revalidation_ms": 9.157351,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 129.2679,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.831606,
+        "vector_coverage_ms": 5.300381,
+        "encode_query_ms": 71.523975,
+        "vespa_dense_ms": 8.295241,
+        "vespa_lexical_ms": 4.998564,
+        "revalidation_ms": 9.023779,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 109.243274,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.893061,
+        "vector_coverage_ms": 5.196313,
+        "encode_query_ms": 82.840045,
+        "vespa_dense_ms": 8.376829,
+        "vespa_lexical_ms": 3.937256,
+        "revalidation_ms": 8.817036,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 118.241614,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.874187,
+        "vector_coverage_ms": 7.984269,
+        "encode_query_ms": 76.462037,
+        "vespa_dense_ms": 8.029478,
+        "vespa_lexical_ms": 6.840528,
+        "revalidation_ms": 9.814751,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 118.307429,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.71155,
+        "vector_coverage_ms": 5.584617,
+        "encode_query_ms": 66.465731,
+        "vespa_dense_ms": 9.821111,
+        "vespa_lexical_ms": 4.249804,
+        "revalidation_ms": 12.433732,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 108.115796,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.086248,
+        "vector_coverage_ms": 6.241957,
+        "encode_query_ms": 87.398652,
+        "vespa_dense_ms": 10.389481,
+        "vespa_lexical_ms": 7.494778,
+        "revalidation_ms": 18.478239,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 139.545637,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/12/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.889192,
+        "vector_coverage_ms": 7.295687,
+        "encode_query_ms": 176.711253,
+        "vespa_dense_ms": 8.774987,
+        "vespa_lexical_ms": 3.152654,
+        "revalidation_ms": 9.081686,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 217.133058,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.030944,
+        "vector_coverage_ms": 7.66773,
+        "encode_query_ms": 77.005625,
+        "vespa_dense_ms": 8.689413,
+        "vespa_lexical_ms": 3.808466,
+        "revalidation_ms": 9.141507,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.564291,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.066828,
+        "vector_coverage_ms": 6.707827,
+        "encode_query_ms": 82.464581,
+        "vespa_dense_ms": 7.95783,
+        "vespa_lexical_ms": 3.483134,
+        "revalidation_ms": 8.998044,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 119.032015,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.609346,
+        "vector_coverage_ms": 5.100087,
+        "encode_query_ms": 72.102691,
+        "vespa_dense_ms": 7.98127,
+        "vespa_lexical_ms": 3.799237,
+        "revalidation_ms": 9.664464,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.52382,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.709102,
+        "vector_coverage_ms": 5.063311,
+        "encode_query_ms": 73.76886,
+        "vespa_dense_ms": 10.09777,
+        "vespa_lexical_ms": 4.291548,
+        "revalidation_ms": 14.721186,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 116.920193,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.808159,
+        "vector_coverage_ms": 8.362763,
+        "encode_query_ms": 85.223874,
+        "vespa_dense_ms": 8.484417,
+        "vespa_lexical_ms": 4.369817,
+        "revalidation_ms": 9.640127,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 128.133457,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/13/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.827246,
+        "vector_coverage_ms": 5.29697,
+        "encode_query_ms": 76.866499,
+        "vespa_dense_ms": 15.474396,
+        "vespa_lexical_ms": 4.494425,
+        "revalidation_ms": 11.990431,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 123.16912,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.273883,
+        "vector_coverage_ms": 7.524734,
+        "encode_query_ms": 73.093426,
+        "vespa_dense_ms": 14.023134,
+        "vespa_lexical_ms": 4.995194,
+        "revalidation_ms": 11.710832,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 120.848517,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.068486,
+        "vector_coverage_ms": 5.548677,
+        "encode_query_ms": 108.886714,
+        "vespa_dense_ms": 20.263142,
+        "vespa_lexical_ms": 19.218865,
+        "revalidation_ms": 17.651157,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 180.858928,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 15.038597,
+        "vector_coverage_ms": 8.263102,
+        "encode_query_ms": 190.791968,
+        "vespa_dense_ms": 8.825849,
+        "vespa_lexical_ms": 3.256746,
+        "revalidation_ms": 8.85584,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 235.252044,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.192089,
+        "vector_coverage_ms": 5.309259,
+        "encode_query_ms": 74.158179,
+        "vespa_dense_ms": 7.216798,
+        "vespa_lexical_ms": 4.043834,
+        "revalidation_ms": 14.210913,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 114.328008,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.52604,
+        "vector_coverage_ms": 5.744468,
+        "encode_query_ms": 88.946556,
+        "vespa_dense_ms": 7.821884,
+        "vespa_lexical_ms": 5.654432,
+        "revalidation_ms": 9.591048,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 126.475827,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/14/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.955886,
+        "vector_coverage_ms": 5.687567,
+        "encode_query_ms": 75.16258,
+        "vespa_dense_ms": 10.030288,
+        "vespa_lexical_ms": 3.557266,
+        "revalidation_ms": 12.126121,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 115.792271,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.829138,
+        "vector_coverage_ms": 5.359925,
+        "encode_query_ms": 78.735159,
+        "vespa_dense_ms": 7.217328,
+        "vespa_lexical_ms": 3.165523,
+        "revalidation_ms": 9.686017,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.245183,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.89929,
+        "vector_coverage_ms": 4.878226,
+        "encode_query_ms": 77.380583,
+        "vespa_dense_ms": 7.779149,
+        "vespa_lexical_ms": 4.916394,
+        "revalidation_ms": 9.262109,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.364619,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.291985,
+        "vector_coverage_ms": 5.996335,
+        "encode_query_ms": 85.01294,
+        "vespa_dense_ms": 7.159531,
+        "vespa_lexical_ms": 3.803629,
+        "revalidation_ms": 9.950277,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 121.407698,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.018536,
+        "vector_coverage_ms": 5.21749,
+        "encode_query_ms": 67.347977,
+        "vespa_dense_ms": 11.129858,
+        "vespa_lexical_ms": 3.647839,
+        "revalidation_ms": 10.416212,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.970413,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.901042,
+        "vector_coverage_ms": 7.403931,
+        "encode_query_ms": 112.916581,
+        "vespa_dense_ms": 14.24223,
+        "vespa_lexical_ms": 3.611404,
+        "revalidation_ms": 9.184302,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 156.473424,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/15/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.570452,
+        "vector_coverage_ms": 5.03531,
+        "encode_query_ms": 74.744221,
+        "vespa_dense_ms": 7.261315,
+        "vespa_lexical_ms": 3.53351,
+        "revalidation_ms": 9.199725,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 108.526158,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.830221,
+        "vector_coverage_ms": 7.542936,
+        "encode_query_ms": 72.832932,
+        "vespa_dense_ms": 11.174956,
+        "vespa_lexical_ms": 4.049501,
+        "revalidation_ms": 9.143355,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 113.772632,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.389822,
+        "vector_coverage_ms": 5.572087,
+        "encode_query_ms": 76.314795,
+        "vespa_dense_ms": 10.234517,
+        "vespa_lexical_ms": 7.07318,
+        "revalidation_ms": 13.012092,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 121.816277,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.608079,
+        "vector_coverage_ms": 6.393922,
+        "encode_query_ms": 146.867584,
+        "vespa_dense_ms": 8.358316,
+        "vespa_lexical_ms": 8.640814,
+        "revalidation_ms": 13.665262,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 194.614171,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.276748,
+        "vector_coverage_ms": 6.932517,
+        "encode_query_ms": 182.349835,
+        "vespa_dense_ms": 7.472755,
+        "vespa_lexical_ms": 3.727289,
+        "revalidation_ms": 8.890847,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 223.843584,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.948264,
+        "vector_coverage_ms": 5.991187,
+        "encode_query_ms": 97.307201,
+        "vespa_dense_ms": 7.301336,
+        "vespa_lexical_ms": 3.791856,
+        "revalidation_ms": 9.033959,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 133.584391,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/16/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.913231,
+        "vector_coverage_ms": 6.111043,
+        "encode_query_ms": 76.86026,
+        "vespa_dense_ms": 7.875235,
+        "vespa_lexical_ms": 3.554447,
+        "revalidation_ms": 8.912845,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 112.432673,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.371019,
+        "vector_coverage_ms": 5.569764,
+        "encode_query_ms": 71.152342,
+        "vespa_dense_ms": 8.396935,
+        "vespa_lexical_ms": 3.15662,
+        "revalidation_ms": 9.00155,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.918218,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.911587,
+        "vector_coverage_ms": 5.931336,
+        "encode_query_ms": 78.636009,
+        "vespa_dense_ms": 8.726599,
+        "vespa_lexical_ms": 3.207667,
+        "revalidation_ms": 9.042968,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 116.647456,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.590488,
+        "vector_coverage_ms": 5.611893,
+        "encode_query_ms": 71.371374,
+        "vespa_dense_ms": 8.196707,
+        "vespa_lexical_ms": 4.142613,
+        "revalidation_ms": 9.140766,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.251959,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.339832,
+        "vector_coverage_ms": 5.999108,
+        "encode_query_ms": 68.457206,
+        "vespa_dense_ms": 8.207242,
+        "vespa_lexical_ms": 2.952481,
+        "revalidation_ms": 9.366673,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 104.546112,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.515836,
+        "vector_coverage_ms": 21.87978,
+        "encode_query_ms": 87.199776,
+        "vespa_dense_ms": 11.135822,
+        "vespa_lexical_ms": 4.73508,
+        "revalidation_ms": 10.966686,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 148.637849,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/17/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.02196,
+        "vector_coverage_ms": 5.459242,
+        "encode_query_ms": 81.272752,
+        "vespa_dense_ms": 10.360438,
+        "vespa_lexical_ms": 4.060819,
+        "revalidation_ms": 10.868261,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 121.410688,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.909856,
+        "vector_coverage_ms": 5.751409,
+        "encode_query_ms": 123.249783,
+        "vespa_dense_ms": 10.35519,
+        "vespa_lexical_ms": 4.718655,
+        "revalidation_ms": 16.855127,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 170.057658,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.872537,
+        "vector_coverage_ms": 6.62386,
+        "encode_query_ms": 77.832873,
+        "vespa_dense_ms": 7.880873,
+        "vespa_lexical_ms": 4.505843,
+        "revalidation_ms": 9.205504,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 118.099559,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.475328,
+        "vector_coverage_ms": 4.967391,
+        "encode_query_ms": 71.3855,
+        "vespa_dense_ms": 7.407632,
+        "vespa_lexical_ms": 3.544167,
+        "revalidation_ms": 9.090249,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.07041,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.792783,
+        "vector_coverage_ms": 7.450882,
+        "encode_query_ms": 69.072143,
+        "vespa_dense_ms": 7.910188,
+        "vespa_lexical_ms": 4.03855,
+        "revalidation_ms": 9.404965,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 106.875684,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.612656,
+        "vector_coverage_ms": 7.15596,
+        "encode_query_ms": 86.764667,
+        "vespa_dense_ms": 10.234592,
+        "vespa_lexical_ms": 4.8572,
+        "revalidation_ms": 9.000148,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 126.819888,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/18/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.905735,
+        "vector_coverage_ms": 5.449367,
+        "encode_query_ms": 77.835332,
+        "vespa_dense_ms": 9.958019,
+        "vespa_lexical_ms": 2.953673,
+        "revalidation_ms": 8.894478,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 114.186719,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.438552,
+        "vector_coverage_ms": 6.199297,
+        "encode_query_ms": 77.833734,
+        "vespa_dense_ms": 7.992842,
+        "vespa_lexical_ms": 3.629736,
+        "revalidation_ms": 9.477401,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 114.776362,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.03142,
+        "vector_coverage_ms": 5.47482,
+        "encode_query_ms": 76.084936,
+        "vespa_dense_ms": 8.39358,
+        "vespa_lexical_ms": 3.73149,
+        "revalidation_ms": 8.80982,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.783986,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.025286,
+        "vector_coverage_ms": 5.705559,
+        "encode_query_ms": 70.249671,
+        "vespa_dense_ms": 9.632906,
+        "vespa_lexical_ms": 4.661848,
+        "revalidation_ms": 12.301091,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 111.91212,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.056587,
+        "vector_coverage_ms": 7.437942,
+        "encode_query_ms": 98.077507,
+        "vespa_dense_ms": 7.756189,
+        "vespa_lexical_ms": 3.653773,
+        "revalidation_ms": 9.504261,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 136.738823,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.003087,
+        "vector_coverage_ms": 5.319615,
+        "encode_query_ms": 87.773815,
+        "vespa_dense_ms": 14.056625,
+        "vespa_lexical_ms": 8.297664,
+        "revalidation_ms": 13.306018,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 137.960442,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/19/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.332995,
+        "vector_coverage_ms": 7.429339,
+        "encode_query_ms": 133.985938,
+        "vespa_dense_ms": 8.203372,
+        "vespa_lexical_ms": 2.979471,
+        "revalidation_ms": 9.11703,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 174.280667,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/term",
+    "query_id": "term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.950378,
+        "vector_coverage_ms": 7.158589,
+        "encode_query_ms": 70.784109,
+        "vespa_dense_ms": 9.379021,
+        "vespa_lexical_ms": 4.551076,
+        "revalidation_ms": 9.669446,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 110.743029,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/phrase",
+    "query_id": "phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.275935,
+        "vector_coverage_ms": 5.780924,
+        "encode_query_ms": 83.817976,
+        "vespa_dense_ms": 7.861134,
+        "vespa_lexical_ms": 3.847345,
+        "revalidation_ms": 9.17961,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 119.991019,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/acronym",
+    "query_id": "acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.012351,
+        "vector_coverage_ms": 5.298778,
+        "encode_query_ms": 71.229829,
+        "vespa_dense_ms": 9.01131,
+        "vespa_lexical_ms": 3.093279,
+        "revalidation_ms": 9.412172,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.274688,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.032266458495966696
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/identifier",
+    "query_id": "identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.514287,
+        "vector_coverage_ms": 5.51454,
+        "encode_query_ms": 70.725136,
+        "vespa_dense_ms": 8.17543,
+        "vespa_lexical_ms": 4.295815,
+        "revalidation_ms": 8.996978,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 107.469778,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/retention-en",
+    "query_id": "retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.27537,
+        "vector_coverage_ms": 5.679039,
+        "encode_query_ms": 89.016442,
+        "vespa_dense_ms": 7.824638,
+        "vespa_lexical_ms": 5.859252,
+        "revalidation_ms": 9.142774,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 127.142687,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.03278688524590164
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  },
+  {
+    "request_id": "hybrid/20/expected-empty",
+    "query_id": "expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.4728,
+        "vector_coverage_ms": 5.45168,
+        "encode_query_ms": 76.287854,
+        "vespa_dense_ms": 7.59474,
+        "vespa_lexical_ms": 3.35878,
+        "revalidation_ms": 11.318674,
+        "snapshot_stable": true
+      }
+    ],
+    "retrieval_ms": 112.853195,
+    "status": "complete",
+    "candidates": [
+      {
+        "id": "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159-0",
+        "score": 0.01639344262295082
+      },
+      {
+        "id": "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746-0",
+        "score": 0.016129032258064516
+      },
+      {
+        "id": "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3-0",
+        "score": 0.015873015873015872
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    }
+  }
+]

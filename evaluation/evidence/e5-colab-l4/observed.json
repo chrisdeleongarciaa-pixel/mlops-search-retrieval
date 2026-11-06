@@ -1,0 +1,20 @@
+{
+  "scope": "Observed in the Colab terminal during E5 materialization and independent token count verification",
+  "device": "NVIDIA L4",
+  "inference_precision": "FP32",
+  "stored_dtype": "float32",
+  "model_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+  "encoder_source_commit": "b98319b",
+  "conformance_passed": true,
+  "max_absolute_component_error": 0.0,
+  "corpus": {
+    "encoded": 5183,
+    "truncated": 731
+  },
+  "train": {
+    "encoded": 809,
+    "truncated": 0
+  },
+  "bundle_name": "scifact-e5-vectors.tar.gz",
+  "bundle_sha256": "e48b53428d550b558e695a96b5ed17c4894ce308136ef764db6f386ca5a2c3f1"
+}
