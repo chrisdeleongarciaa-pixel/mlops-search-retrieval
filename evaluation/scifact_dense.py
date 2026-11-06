@@ -1,7 +1,6 @@
 """Freeze HNSW on SciFact train, then compare five test rankings on a pinned snapshot."""
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 from hashlib import sha256
 import json
 from math import isfinite
@@ -33,9 +32,13 @@ ALGORITHMS = {
 }
 
 
+def trace_text(trace):
+    return json.dumps(trace).replace('\\"', '"')
+
+
 def trace_plan(trace, approximate):
     """Read the NN blueprint recorded by Vespa 8.781.11, or report unknown."""
-    raw = json.dumps(trace).replace('\\"', '"')
+    raw = trace_text(trace)
     found = re.findall(
         r'\balgorithm["\s]*[:=]\s*"?(index top k using filter|index top k|exact fallback|exact)\b', raw,
     )
@@ -48,7 +51,12 @@ def trace_plan(trace, approximate):
     return algorithm
 
 
-def exact_runs(ids, documents, queries):
+def traced_candidates(trace):
+    counts = {int(value) for value in re.findall(r'\btop_k_hits["\s]*[:=]\s*(\d+)', trace_text(trace))}
+    return counts.pop() if len(counts) == 1 else None
+
+
+def cosine_matrix(ids, documents, queries):
     """Independent FP64 cosine on the stored FP32 inputs, sorting ties by ID."""
     vectors = np.asarray(documents, dtype=np.float64)
     q = np.asarray(queries, dtype=np.float64)
@@ -58,11 +66,11 @@ def exact_runs(ids, documents, queries):
             or np.any(~np.isfinite(norms)) or np.any(norms == 0)
             or np.any(~np.isfinite(q_norms)) or np.any(q_norms == 0)):
         raise ValueError("Invalid or missing oracle vectors")
-    if not ids:
-        return [{} for _ in q]
-    scores = (q / q_norms[:, None]) @ (vectors / norms[:, None]).T
-    return [dict(sorted(zip(ids, map(float, row), strict=True), key=lambda hit: (-hit[1], hit[0]))[:DEPTH])
-            for row in scores]
+    return (q / q_norms[:, None]) @ (vectors / norms[:, None]).T
+
+
+def top_exact(scores):
+    return dict(sorted(scores.items(), key=lambda hit: (-hit[1], hit[0]))[:DEPTH])
 
 
 def overlap(reference, actual, k):
@@ -108,8 +116,7 @@ def read_vectors(directory, split, expected):
 
 
 def publish(index, snapshot, corpus, ids, vectors):
-    def put(row):
-        doc, vector = row
+    for doc, vector in zip(ids, vectors, strict=True):
         index.feed(f"{snapshot.generation}-{doc}", {
             "tenant": TENANT, "generation": snapshot.generation, "projection_id": doc,
             "fragment_id": doc, "body": corpus[doc], "vector_space": SPACE.id,
@@ -117,9 +124,6 @@ def publish(index, snapshot, corpus, ids, vectors):
             "embedding": {"values": vector.tolist()},
         })
 
-    with ThreadPoolExecutor(max_workers=8) as workers:
-        for _ in workers.map(put, zip(ids, vectors, strict=True)):
-            pass
     filters = index._filter(TENANT, snapshot.generation)
     deadline = monotonic() + 60
     while monotonic() < deadline:
@@ -140,7 +144,8 @@ def run_query(index, snapshot, vector, *, approximate, explore, trace=False, who
     candidates = [(row["fields"]["projection_id"], float(row["relevance"])) for row in root.get("children", [])]
     ranking = dict(sorted(candidates, key=lambda item: (-item[1], item[0])))
     if (len(ranking) != len(candidates) or not ranking.keys() <= snapshot.projections
-            or len(ranking) != min(DEPTH, len(snapshot.projections))
+            or len(ranking) > min(DEPTH, len(snapshot.projections))
+            or (not approximate and len(ranking) != min(DEPTH, len(snapshot.projections)))
             or any(not isfinite(score) for score in ranking.values())):
         raise SearchUnavailable("Unexpected vector ranking coverage or eligibility")
     return ranking, response.get("trace"), root.get("fields", {}).get("totalCount")
@@ -177,32 +182,36 @@ def evaluate_rankings(rankings, qrels, archive):
         return metrics, per_query
 
 
-def matrix_scores(ids, documents, vector):
-    a = np.asarray(documents, dtype=np.float64)
-    q = np.asarray(vector, dtype=np.float64)
-    return dict(zip(ids, map(float, (a @ q) / (np.linalg.norm(a, axis=1) * np.linalg.norm(q))), strict=True))
-
-
 def measure_cohort(index, snapshot, docs, queries, query_vectors, explore, cohort):
     qids = list(queries)
     ids = sorted(snapshot.projections)
-    oracle = exact_runs(ids, docs, query_vectors)
+    scores = cosine_matrix(ids, docs, query_vectors)
     whole = cohort == "all"
     rows, exact, approximate = [], {}, {}
-    for qid, vector, expected in zip(qids, query_vectors.tolist(), oracle, strict=True):
-        vespa_exact, exact_trace, exact_count = run_query(index, snapshot, vector, approximate=False, explore=0, trace=True, whole=whole)
-        score_map = matrix_scores(ids, docs, vector)
-        comparisons = parity(expected, vespa_exact, len(ids), score_map)
+    vectors = query_vectors.tolist()
+    for vector in vectors[:10]:
+        run_query(index, snapshot, vector, approximate=True, explore=explore, whole=whole)
+    measured = []
+    for vector in vectors:
         start = perf_counter_ns()
-        ann, _, _ = run_query(index, snapshot, vector, approximate=True, explore=explore, whole=whole)
-        duration = (perf_counter_ns() - start) / 1_000_000
+        ann, _, measured_count = run_query(index, snapshot, vector, approximate=True, explore=explore, whole=whole)
+        measured.append((ann, measured_count, (perf_counter_ns() - start) / 1_000_000))
+    for qid, vector, score_row, (ann, measured_count, duration) in zip(qids, vectors, scores, measured, strict=True):
+        vespa_exact, exact_trace, exact_count = run_query(index, snapshot, vector, approximate=False, explore=0, trace=True, whole=whole)
+        score_map = dict(zip(ids, map(float, score_row), strict=True))
+        expected = top_exact(score_map)
+        comparisons = parity(expected, vespa_exact, len(ids), score_map)
         traced, trace, matches = run_query(index, snapshot, vector, approximate=True, explore=explore, trace=True, whole=whole)
-        algorithm = trace_plan(trace, True) if traced == ann else "indeterminate"
+        paired = traced == ann and measured_count == matches
+        algorithm = trace_plan(trace, True) if paired else "indeterminate"
         rows.append({
             "query_id": qid, "snapshot": snapshot.generation, "cohort": cohort, "eligible": len(ids),
+            "eligible_ids_sha256": sha256("\n".join(ids).encode()).hexdigest(),
+            "query_vector_sha256": sha256(np.asarray(vector, dtype="<f4").tobytes()).hexdigest(),
             "explore_additional_hits": explore, "total_target_hits": DEPTH, "hits_requested": DEPTH,
-            "returned_depth": len(ann), "vespa_total_count": matches,
-            "exact_vespa_total_count": exact_count, "trace_ranking_matches": traced == ann,
+            "returned_depth": len(ann), "vespa_total_count": measured_count,
+            "traced_hnsw_candidates": traced_candidates(trace) if algorithm == "hnsw" else None,
+            "exact_vespa_total_count": exact_count, "trace_ranking_matches": paired,
             "engine_client_ms": duration, "algorithm": algorithm, "trace": trace,
             "exact_algorithm": trace_plan(exact_trace, False), "exact_trace": exact_trace,
             "exact_vespa_ranking": vespa_exact, "exact_parity": comparisons,
@@ -247,7 +256,10 @@ def main():
     snapshot = Eligibility(TENANT, generation, frozenset(ids))
     index = VespaWitness(args.vespa)
     publish(index, snapshot, corpus, ids, documents)
-    train_exact = exact_runs(ids, documents, train_vectors)
+    train_exact = [
+        top_exact(dict(zip(ids, map(float, row), strict=True)))
+        for row in cosine_matrix(ids, documents, train_vectors)
+    ]
     tuning = {}
     for explore in EXPLORE:
         samples = []
@@ -262,6 +274,7 @@ def main():
         "explore_additional_hits": explore, "total_target_hits": DEPTH, "hits": DEPTH,
         "selection_rule": "first ascending exploration with train recall >= 0.95, else greatest train recall",
         "workload": "single client sequential; no tracing on measured call; precomputed query vectors",
+        "warmup_per_cohort": 10, "feed_order": "ascending document ID, one outstanding write",
         "rank_profile": "dense", "schema_sha256": digest(ROOT / "infra/vespa/app/schemas/fragment.sd"),
         "vespa_compose_sha256": digest(ROOT / "infra/vespa/compose.witness.yaml"),
         "vector_space": SPACE.id, "dataset_sha256": env["dataset_sha256"],
@@ -299,6 +312,8 @@ def main():
         "freeze_sha256": digest(args.output / "freeze.json"), "test_queries": len(test),
         "original_split": "SciFact dev", "groups": groups, "metrics": metrics,
         "exact_parity_passed": all(cut["passed"] for row in rows for cut in row["exact_parity"].values()),
+        "exact_plans": {algorithm: sum(row["exact_algorithm"] == algorithm for row in rows)
+                        for algorithm in ("exact_requested", "indeterminate")},
         "RET-01": {
             "scope": "unfiltered HNSW pilot, 300 queries, one sequential client",
             "passed": None if hnsw is None or hnsw["queries"] != len(test) else

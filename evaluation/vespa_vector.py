@@ -54,7 +54,10 @@ def measure(search, workload, mode, *, warmup=3, repeats=20, depth=100):
             stage: percentiles([attempt[stage] for row in complete for attempt in row["attempts"] if stage in attempt])
             for stage in stages
         },
-        "SRV-01": len(complete) == len(rows) and retrieval["p95"] < 50,
+        "SRV-01": {
+            "scope": "single-client retrieval component",
+            "passed": bool(complete) and len(complete) == len(rows) and retrieval["p95"] < 50,
+        },
     }
     return manifest, rows
 

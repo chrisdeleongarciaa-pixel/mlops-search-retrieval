@@ -117,7 +117,7 @@ def conformance(adapter, model):
         hidden = hidden.masked_fill(~mask[..., None].bool(), 0.0)
         expected = torch.nn.functional.normalize(hidden.sum(dim=1) / mask.sum(dim=1)[..., None], p=2, dim=1).cpu()
     errors = (vectors - expected).abs().amax(dim=1).tolist()
-    cosines = torch.nn.functional.cosine_similarity(vectors, expected).tolist()
+    cosines = torch.nn.functional.cosine_similarity(vectors.double(), expected.double()).clamp(-1, 1).tolist()
     original = [len(ids) for ids in tokenizer(texts, verbose=False)["input_ids"]]
     effective = inputs["attention_mask"].sum(dim=1).tolist()
     return {
@@ -136,22 +136,25 @@ def encode_items(adapter, items, role, batch_size, destination):
     lengths = {}
     for start in range(0, len(ids), 128):
         batch = ids[start:start + 128]
-        raw = adapter.tokenizer([f"{role}: {items[item]}" for item in batch], verbose=False)["input_ids"]
-        lengths.update((item, len(tokens)) for item, tokens in zip(batch, raw, strict=True))
+        texts = [f"{role}: {items[item]}" for item in batch]
+        raw = adapter.tokenizer(texts, verbose=False)["input_ids"]
+        truncated = adapter.tokenizer(texts, max_length=512, truncation=True)["input_ids"]
+        lengths.update((item, (len(before), len(after)))
+                       for item, before, after in zip(batch, raw, truncated, strict=True))
     # Group similar lengths for padding efficiency, storing rows in ID order.
-    order = sorted(range(len(ids)), key=lambda idx: min(512, lengths[ids[idx]]))
+    order = sorted(range(len(ids)), key=lambda idx: lengths[ids[idx]][1])
     vectors = np.empty((len(ids), 768), dtype="float32")
     for start in range(0, len(ids), batch_size):
         batch = order[start:start + batch_size]
         vectors[batch] = adapter.encode([items[ids[idx]] for idx in batch], role=role)
-        if start % (batch_size * 32) == 0:
+        if start % (batch_size * 8) == 0 or start + len(batch) == len(ids):
             print(f"{role}: {start + len(batch)}/{len(ids)}", flush=True)
     np.save(destination, vectors, allow_pickle=False)
     return {
         "ids": ids, "vectors_sha256": digest(destination), "tokens": {
-            item: {"before": n, "after": min(512, n)} for item, n in sorted(lengths.items())
+            item: {"before": before, "after": after} for item, (before, after) in sorted(lengths.items())
         },
-        "truncated_ids": sorted(item for item, n in lengths.items() if n > 512),
+        "truncated_ids": sorted(item for item, (before, after) in lengths.items() if before > after),
     }
 
 

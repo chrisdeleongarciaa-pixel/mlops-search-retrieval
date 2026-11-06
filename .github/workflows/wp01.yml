@@ -121,6 +121,7 @@ jobs:
             --extra-index-url https://download.pytorch.org/whl/cpu \
             -r config/requirements-dense-linux-amd64.lock
           python -m pip check
+          python -B -m unittest discover -s evaluation -p test_scifact_dense.py -v
           mkdir -p "$RUNNER_TEMP/scifact"
           python -B -c 'import sys; from pathlib import Path; sys.path.insert(0,"evaluation"); from scifact_embeddings import materialize; root=Path(sys.argv[1]); materialize(root/"model",root/"scifact.zip")' "$RUNNER_TEMP/scifact"
           curl --fail --location --retry 3 \

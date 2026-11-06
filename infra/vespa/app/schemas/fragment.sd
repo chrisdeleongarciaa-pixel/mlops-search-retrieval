@@ -49,9 +49,8 @@ schema fragment {
         inputs {
             query(q) tensor<float>(x[768])
         }
-        matching {
-            post-filter-threshold: 1.0
-        }
+        post-filter-threshold: 1.0
+        approximate-threshold: 0.02
         first-phase {
             expression: 1 - distance(field, embedding)
         }
