@@ -1,0 +1,157 @@
+{
+  "protocol_sha256": "60d59b76fc7db045af092f351f7c9d11fffbb2d4aa48284a5aa9b84f2b9f43cf",
+  "paired_models": false,
+  "matched_engine_host": false,
+  "matched_encoding_profile": false,
+  "models": {
+    "intfloat/multilingual-e5-base": {
+      "unique_test_queries": 300,
+      "observations_per_cohort": 1200,
+      "observations": 4800,
+      "exact_parity_passed": true,
+      "estimates": {
+        "all/hnsw": {
+          "observations": 1200,
+          "seeds": 4,
+          "recall_at_10": {
+            "mean": 0.9915833333333334,
+            "sample_stddev": 0.001287403358472902
+          },
+          "overlap_at_100": {
+            "mean": 0.9371583333333333,
+            "sample_stddev": 0.001804392787985338
+          },
+          "p95_ms": {
+            "mean": 12.421783,
+            "sample_stddev": 0.3431321865083485
+          },
+          "RET-01_passed": true
+        },
+        "lt_50/hnsw": {
+          "observations": 1200,
+          "seeds": 4,
+          "recall_at_10": {
+            "mean": 0.9965833333333334,
+            "sample_stddev": 0.0011013459778665407
+          },
+          "overlap_at_100": {
+            "mean": 0.9690833333333333,
+            "sample_stddev": 0.0011302244942521238
+          },
+          "p95_ms": {
+            "mean": 13.300129,
+            "sample_stddev": 3.242500292356604
+          },
+          "RET-01_passed": true
+        },
+        "lt_10/hnsw": {
+          "observations": 1200,
+          "seeds": 4,
+          "recall_at_10": {
+            "mean": 0.9999166666666667,
+            "sample_stddev": 0.00016666666666670382
+          },
+          "overlap_at_100": {
+            "mean": 0.99925,
+            "sample_stddev": 0.00020816659994659034
+          },
+          "p95_ms": {
+            "mean": 10.2995935,
+            "sample_stddev": 1.0141233663079001
+          },
+          "RET-01_passed": true
+        },
+        "lt_1/indeterminate": {
+          "observations": 1200,
+          "seeds": 4,
+          "recall_at_10": {
+            "mean": 1.0,
+            "sample_stddev": 0.0
+          },
+          "overlap_at_100": {
+            "mean": 1.0,
+            "sample_stddev": 0.0
+          },
+          "p95_ms": {
+            "mean": 6.44298025,
+            "sample_stddev": 0.14446649247576412
+          },
+          "RET-01_passed": null
+        }
+      },
+      "quality": {
+        "bm25": {
+          "NDCG@10": {
+            "mean": 0.66168,
+            "sample_stddev": 0.0
+          },
+          "Recall@10": {
+            "mean": 0.79094,
+            "sample_stddev": 0.0
+          },
+          "Recall@100": {
+            "mean": 0.88589,
+            "sample_stddev": 0.0
+          }
+        },
+        "exact": {
+          "NDCG@10": {
+            "mean": 0.6939,
+            "sample_stddev": 0.0
+          },
+          "Recall@10": {
+            "mean": 0.80722,
+            "sample_stddev": 0.0
+          },
+          "Recall@100": {
+            "mean": 0.93933,
+            "sample_stddev": 0.0
+          }
+        },
+        "ann": {
+          "NDCG@10": {
+            "mean": 0.6919025,
+            "sample_stddev": 0.0020889929790850912
+          },
+          "Recall@10": {
+            "mean": 0.8063899999999999,
+            "sample_stddev": 0.0031925851593966764
+          },
+          "Recall@100": {
+            "mean": 0.9468325,
+            "sample_stddev": 0.0016650000000000276
+          }
+        },
+        "rrf_exact": {
+          "NDCG@10": {
+            "mean": 0.70202,
+            "sample_stddev": 0.0
+          },
+          "Recall@10": {
+            "mean": 0.82722,
+            "sample_stddev": 0.0
+          },
+          "Recall@100": {
+            "mean": 0.95767,
+            "sample_stddev": 0.0
+          }
+        },
+        "rrf_ann": {
+          "NDCG@10": {
+            "mean": 0.7016125,
+            "sample_stddev": 0.0006003540621999441
+          },
+          "Recall@10": {
+            "mean": 0.82722,
+            "sample_stddev": 0.0
+          },
+          "Recall@100": {
+            "mean": 0.95933,
+            "sample_stddev": 0.0
+          }
+        }
+      }
+    }
+  },
+  "paired_deltas_by_algorithm": {}
+}

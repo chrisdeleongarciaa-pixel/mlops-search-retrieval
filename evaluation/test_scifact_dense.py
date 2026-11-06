@@ -32,6 +32,13 @@ class DenseEvaluationTests(unittest.TestCase):
         self.assertEqual(trace_plan({"algorithm": "exact"}, False), "exact_requested")
         self.assertEqual(trace_plan({"algorithm": "exact"}, True), "indeterminate")
         self.assertEqual(trace_plan(None, True), "indeterminate")
+        estimate = {"children": [
+            {"decision": "Skip", "parameters": {"estimated_hit_ratio": .0096, "lower_limit": .02, "upper_limit": 1.0}},
+            {"optimized": {"algorithm": "exact", "wanted_approximate": True, "has_index": True}},
+        ]}
+        self.assertEqual(trace_plan(estimate, True), "exact_by_selectivity")
+        estimate["children"][0]["parameters"]["estimated_hit_ratio"] = .05
+        self.assertEqual(trace_plan(estimate, True), "indeterminate")
 
 
 if __name__ == "__main__":

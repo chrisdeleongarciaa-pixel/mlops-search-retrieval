@@ -37,4 +37,19 @@ python evaluation/query_encoder_cuda.py gemma "$gemma_snapshot" "$dataset" "$gem
 
 Para medir el recorrido de servicio completo con E5 eager en GPU, ejecuta el testigo con PostgreSQL, Vespa y la ingesta preparada, y pasa `--device cuda` a `evaluation/vespa_vector.py`.
 
+## Corrida E5 observada
+
+La corrida `42290872584` reutilizó los vectores auditados y ejecutó 4.800 comparaciones en cuatro índices Vespa 8.781.11 independientes. Pasó la paridad exacta en todos los cortes. Los valores de la tabla son media ± desviación estándar muestral de cuatro métricas calculadas por construcción. Cada cohorte contiene 1.200 observaciones de 300 consultas únicas.
+
+| Cohorte | Algoritmo efectivo | Recall ANN@10 | Solapamiento@100 | p95 del motor |
+| --- | --- | ---: | ---: | ---: |
+| Completa | HNSW | 0,99158 ± 0,00129 | 0,93716 ± 0,00180 | 12,42 ± 0,34 ms |
+| ≈ 50 % | HNSW | 0,99658 ± 0,00110 | 0,96908 ± 0,00113 | 13,30 ± 3,24 ms |
+| ≈ 10 % | HNSW | 0,99992 ± 0,00017 | 0,99925 ± 0,00021 | 10,30 ± 1,01 ms |
+| ≈ 1 % | Exacta por selectividad estimada | 1,00000 ± 0,00000 | 1,00000 ± 0,00000 | 6,44 ± 0,14 ms |
+
+Las tres cohortes HNSW cumplieron RET‑01 en las cuatro construcciones. El mayor NDCG@10 fue 0,70202, de RRF con exacta, por debajo del umbral 0,75. El agregado original marcó el 1 % como indeterminado. La reproducción verificó los hashes de las muestras y reconoció el plan exacto junto a la decisión `Skip` del filtro global. Vespa registra esa decisión cuando su estimación queda por debajo del límite inferior. La reclasificación conserva las latencias medidas y el agregado original. [Corrida E5](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42290872584) · [Decisión de filtro en Vespa 8.781.11](https://github.com/vespa-engine/vespa/blob/v8.781.11/searchcore/src/vespa/searchcore/proton/matching/query.cpp) · [Agregado de la reproducción](../../evaluation/evidence/scifact-stability-e5-42290872584/aggregate.json)
+
+Pasaron 32 pruebas locales entre unitarias, de contrato y de evaluación. E5 repitió la conformidad FP32 con sus pesos fijados tras extraer el forward compartido, con error máximo por componente de 0. La conformidad del checkpoint Gemma y los resultados CUDA quedan pendientes de ejecución con los pesos autorizados y el entorno CUDA correspondiente.
+
 [Contrato de comparación](../decisions/0005-encoder-comparison.md) · [Solicitud de acceso al checkpoint](https://huggingface.co/google/embeddinggemma-300m)

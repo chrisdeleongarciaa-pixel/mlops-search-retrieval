@@ -42,6 +42,14 @@ class StabilityTests(unittest.TestCase):
         self.assertAlmostEqual(report["p95_ms"]["sample_stddev"], 5.7735026919)
         with self.assertRaisesRegex(ValueError, "independent"):
             aggregate(runs[:3])
+        gemma_runs = [dict(item, model=PROTOCOL["models"][1], space="gemma",
+                           engine_host={"identity_sha256": "another host"}) for item in runs]
+        paired = aggregate([*runs, *gemma_runs])
+        self.assertTrue(paired["paired_models"])
+        self.assertFalse(paired["matched_engine_host"])
+        delta = paired["paired_deltas_by_algorithm"]["lt_10/hnsw"]
+        self.assertIsNone(delta["gemma_minus_e5_p95_ms"])
+        self.assertEqual(delta["gemma_minus_e5_ann_recall_at_10"]["mean"], 0)
 
     def test_embeddinggemma_uses_published_prompt_forms_and_validates_files(self):
         self.assertEqual(format_inputs(["DNA"], "query"), ["task: search result | query: DNA"])

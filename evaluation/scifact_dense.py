@@ -38,6 +38,16 @@ def trace_text(trace):
     return json.dumps(trace).replace('\\"', '"')
 
 
+def trace_objects(value):
+    if isinstance(value, dict):
+        yield value
+        for item in value.values():
+            yield from trace_objects(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from trace_objects(item)
+
+
 def trace_plan(trace, approximate):
     """Read the NN blueprint recorded by Vespa 8.781.11, or report unknown."""
     raw = trace_text(trace)
@@ -48,6 +58,17 @@ def trace_plan(trace, approximate):
     if len(effective) != 1:
         return "indeterminate"
     algorithm = effective.pop()
+    if approximate and algorithm == "exact_requested":
+        # Vespa 8.781.11 may skip building the global filter on a low estimated ratio.
+        # The optimized nearest-neighbor blueprint keeps its initial exact algorithm in that path.
+        objects = tuple(trace_objects(trace))
+        exact = any(item.get("algorithm") == "exact" and item.get("wanted_approximate") is True
+                    and item.get("has_index") is True for item in objects)
+        for item in objects:
+            params = item.get("parameters")
+            if (exact and item.get("decision") == "Skip" and isinstance(params, dict)
+                    and params.get("estimated_hit_ratio", 1) < params.get("lower_limit", 0)):
+                return "exact_by_selectivity"
     if (algorithm == "exact_requested") == approximate:
         return "indeterminate"
     return algorithm

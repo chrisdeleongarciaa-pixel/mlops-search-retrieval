@@ -17,7 +17,7 @@ from search_retrieval.query.eligible import Eligibility
 from scifact_bm25 import bm25, digest
 from scifact_dense import (
     DEPTH, SPACE, TENANT, cosine_matrix, evaluate_rankings, hybrid_rankings,
-    measure_cohort, overlap, publish, read_vectors, run_query, summarize, top_exact,
+    measure_cohort, overlap, publish, read_vectors, run_query, summarize, top_exact, trace_plan,
 )
 from scifact_embeddings import ROOT, load_split, write_json
 
@@ -262,6 +262,21 @@ def variation(samples):
     return {"mean": mean(samples), "sample_stddev": stdev(samples) if len(samples) > 1 else None}
 
 
+def replay_traces(path):
+    manifest = json.loads(path.read_bytes())
+    groups = {}
+    for cut in map(str, PROTOCOL["cohorts_percent"]):
+        samples = path.parent / f"samples-{cut}.jsonl.gz"
+        if digest(samples) != manifest["files_sha256"][samples.name]:
+            raise ValueError("Recorded sample file checksum mismatch")
+        with gzip.open(samples, "rt", encoding="utf-8") as source:
+            rows = [json.loads(line) for line in source]
+        for row in rows:
+            row["algorithm"] = trace_plan(row["trace"], True) if row["trace_ranking_matches"] else "indeterminate"
+        groups[cut] = summarize(rows)
+    return {**manifest, "groups": groups}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_subparsers(dest="mode", required=True)
@@ -273,11 +288,18 @@ def main():
     report = modes.add_parser("aggregate")
     report.add_argument("output", type=Path)
     report.add_argument("manifests", nargs="+", type=Path)
+    report.add_argument("--replay-traces", action="store_true")
     args = parser.parse_args()
     if args.mode == "run":
         run(args)
     else:
-        data = aggregate([json.loads(path.read_bytes()) for path in args.manifests])
+        loader = replay_traces if args.replay_traces else lambda path: json.loads(path.read_bytes())
+        data = aggregate([loader(path) for path in args.manifests])
+        if args.replay_traces:
+            data["trace_replay"] = {
+                "source_manifests_sha256": {path.parent.name: digest(path) for path in args.manifests},
+                "classifier_sha256": digest(Path(__file__).with_name("scifact_dense.py")),
+            }
         write_json(args.output, data)
         print(json.dumps(data), flush=True)
 
