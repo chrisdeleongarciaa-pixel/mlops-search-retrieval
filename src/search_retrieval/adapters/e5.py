@@ -46,25 +46,31 @@ class E5Encoder:
         self.device = device
         self.tokenizer = AutoTokenizer.from_pretrained(root, local_files_only=True, trust_remote_code=False)
         self.model = AutoModel.from_pretrained(
-            root, local_files_only=True, trust_remote_code=False, use_safetensors=True
-        ).to(device).eval()
+            root, local_files_only=True, trust_remote_code=False, use_safetensors=True,
+            dtype=torch.float32,
+        ).to(device=device, dtype=torch.float32).eval()
 
     def encode(self, texts: list[str], *, role: str) -> list[list[float]]:
         if role not in {"query", "passage"}:
             raise ValueError("E5 requires an explicit retrieval role")
-        if not texts:
+        return self.encode_batch([(role, text) for text in texts])
+
+    def encode_batch(self, items: list[tuple[str, str]]) -> list[list[float]]:
+        if any(role not in {"query", "passage"} for role, _ in items):
+            raise ValueError("E5 requires an explicit retrieval role")
+        if not items:
             return []
         inputs = self.tokenizer(
-            [f"{role}: {text}" for text in texts], max_length=512, padding=True,
+            [f"{role}: {text}" for role, text in items], max_length=512, padding=True,
             truncation=True, return_tensors="pt",
         ).to(self.device)
-        with self.torch.inference_mode():
+        with self.torch.inference_mode(), self.torch.autocast(self.model.device.type, enabled=False):
             outputs = self.model(**inputs).last_hidden_state.float()
             mask = inputs["attention_mask"].bool().unsqueeze(-1)
             pooled = outputs.masked_fill(~mask, 0).sum(1) / mask.sum(1)
             norms = self.torch.linalg.vector_norm(pooled, dim=1, keepdim=True)
             if (
-                pooled.shape != (len(texts), 768)
+                pooled.shape != (len(items), 768)
                 or not self.torch.isfinite(norms).all()
                 or (norms == 0).any()
             ):

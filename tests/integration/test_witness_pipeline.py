@@ -25,6 +25,7 @@ from search_retrieval.adapters.postgres_acceptance import PostgresAcceptanceLedg
 from search_retrieval.adapters.postgres_events import PostgresEventLedger
 from search_retrieval.adapters.postgres_publication import PostgresPublication
 from search_retrieval.adapters.vespa import VespaWitness
+from search_retrieval.query.vector import VectorSearch
 from search_retrieval.ingestion.accept_revision import AuthorizedSource, Failure, Receipt, RevisionAcceptance
 from search_retrieval.ingestion.publication import PublicationWorker, project
 from search_retrieval.ingestion.submit_event import EventSubmission
@@ -171,6 +172,25 @@ class WitnessPipeline(unittest.TestCase):
     def test_wp01_continuity_obsolete_top_k_withdrawal_and_cached_context(self):
         self.verify_publication(VespaWitness(os.environ["WITNESS_VESPA_URL"]))
 
+    @unittest.skipUnless(os.environ.get("WITNESS_VESPA_URL"), "Set WITNESS_VESPA_URL for real Vespa")
+    def test_vector_dense_withdrawal_and_cached_context(self):
+        self.verify_vector_publication("dense")
+
+    @unittest.skipUnless(os.environ.get("WITNESS_VESPA_URL"), "Set WITNESS_VESPA_URL for real Vespa")
+    def test_vector_hybrid_withdrawal_and_cached_context(self):
+        self.verify_vector_publication("hybrid")
+
+    def verify_vector_publication(self, mode):
+        from types import SimpleNamespace
+
+        class WitnessEncoder:
+            space = SimpleNamespace(id="synthetic-768-unit-v1")
+
+            def encode(self, texts, *, role):
+                return [[1.0] + [0.0] * 767 for _ in texts]
+
+        self.verify_publication(VespaWitness(os.environ["WITNESS_VESPA_URL"], encoder=WitnessEncoder()), mode)
+
     def test_wp02_postgres_cas_and_acl_with_controlled_index(self):
         class WitnessIndex:
             def __init__(self):
@@ -197,30 +217,32 @@ class WitnessPipeline(unittest.TestCase):
             conn.execute("DELETE FROM retrieval_acl WHERE document_key = %s", (doc,))
         self.assertFalse(ledger.eligibility("lab", "researcher").projections)
 
-    def verify_publication(self, index):
+    def verify_publication(self, index, mode=None):
         self.migrate()
         generation = "test-" + uuid4().hex
         with psycopg.connect(self.dsn) as conn:
             conn.execute("UPDATE retrieval_generation SET active = %s", (generation,))
         ledger = PostgresPublication(self.dsn)
-        publication = PublicationWorker(ledger, self.objects, index)
-        search = EligibleSearch(ledger, index)
+        vector_space = index.encoder.space.id if mode else None
+        publication = PublicationWorker(ledger, self.objects, index, vector_space=vector_space)
+        search = VectorSearch(ledger, index, index.encoder, generation) if mode else EligibleSearch(ledger, index)
+        options = {"mode": mode} if mode else {}
         query = json.loads((FIXTURES / "witness.json").read_bytes())["queries"]["retencion-es"]["text"]
 
         self.assertIsInstance(submit(self.service, "first", 1), Receipt)
         self.assertEqual(publication.run_one(), "published")
-        cached = search.search("lab", query, k=1)
+        cached = search.search("lab", query, k=1, **options)
         self.assertEqual(cached.hits[0].text, BODY.decode())
         for position in range(2, 5):
             self.assertIsInstance(submit(self.service, f"update-{position}", position), Receipt)
-            self.assertEqual(search.search("lab", query, k=1).hits[0].text, BODY.decode())
+            self.assertEqual(search.search("lab", query, k=1, **options).hits[0].text, BODY.decode())
             self.assertEqual(publication.run_one(), "published")
-        current = search.search("lab", query, k=1)
+        current = search.search("lab", query, k=1, **options)
         self.assertEqual(len(current.hits), 1)
         self.assertNotEqual(cached.hits[0].projection_id, current.hits[0].projection_id)
         self.assertIsInstance(submit(self.service, "late", 5), Receipt)
         late = ledger.claim()
-        projection, fragments, digest, manifest = project(late, BODY)
+        projection, fragments, digest, manifest = project(late, BODY, vector_space=vector_space)
         self.assertIsInstance(submit(self.service, "withdraw", 6, content=None), Receipt)
         self.assertEqual(search.context("lab", current), ())
         ledger.reserve(projection, digest, manifest)
@@ -231,12 +253,12 @@ class WitnessPipeline(unittest.TestCase):
         index.ensure_visible(late, projection, fragments)
         self.assertEqual(ledger.finish(late, "published", projection), "obsolete")
         self.assertEqual(publication.run_one(), "withdrawn")
-        self.assertEqual(search.search("lab", query).hits, ())
+        self.assertEqual(search.search("lab", query, **options).hits, ())
         self.assertEqual(search.context("lab", current), ())
         self.assertIsInstance(submit(self.service, "restore", 7), Receipt)
-        self.assertEqual(search.search("lab", query).hits, ())
+        self.assertEqual(search.search("lab", query, **options).hits, ())
         self.assertEqual(publication.run_one(), "published")
-        self.assertEqual(len(search.search("lab", query).hits), 1)
+        self.assertEqual(len(search.search("lab", query, **options).hits), 1)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,11 @@ name: WP-01 and LX-01 witness
 
 on:
   workflow_dispatch:
+    inputs:
+      dense:
+        description: Run E5, SciFact and the vector witness
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -9,7 +14,7 @@ permissions:
 jobs:
   witness:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: ${{ inputs.dense && 120 || 20 }}
     env:
       COMPOSE_PROJECT_NAME: wp01
       COMPOSE_FILE: infra/postgres/compose.cpu.yaml:infra/vespa/compose.witness.yaml
@@ -100,6 +105,55 @@ jobs:
             | tee "$evidence/replay.log"
           python -B -m search_retrieval.lab publish | tee "$evidence/publish.log"
           python -B evaluation/vespa_lexical.py evaluation/fixtures/lexical-probes.json "$evidence/lx01"
+      - name: Verify dense and hybrid withdrawal in the real witness
+        if: inputs.dense
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_vector -v \
+            2>&1 | tee "$evidence/vector-withdrawal.log"
+          grep -q '^Ran 2 tests in ' "$evidence/vector-withdrawal.log"
+          grep -qx 'OK' "$evidence/vector-withdrawal.log"
+      - name: Install pinned evaluation dependencies and materialize E5
+        if: inputs.dense
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: \
+            --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r config/requirements-dense-linux-amd64.lock
+          python -m pip check
+          mkdir -p "$RUNNER_TEMP/scifact"
+          python -B -c 'import sys; from pathlib import Path; sys.path.insert(0,"evaluation"); from scifact_embeddings import materialize; root=Path(sys.argv[1]); materialize(root/"model",root/"scifact.zip")' "$RUNNER_TEMP/scifact"
+          curl --fail --location --retry 3 \
+            -o "$RUNNER_TEMP/scifact/beir.zip" \
+            https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
+      - name: Measure vector and hybrid service with warm E5 and cold query inputs
+        if: inputs.dense
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          docker compose exec -T postgres createdb -U postgres retrieval_vector
+          for migration in infra/postgres/migrations/*.sql; do
+            docker compose exec -T postgres psql -X -v ON_ERROR_STOP=1 -U postgres -d retrieval_vector < "$migration"
+          done
+          docker compose exec -T postgres psql -X -v ON_ERROR_STOP=1 -U postgres -d retrieval_vector \
+            -c "UPDATE retrieval_generation SET active = 'witness-e5-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}'"
+          export INGESTION_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_vector"
+          export INGESTION_OBJECTS
+          INGESTION_OBJECTS=$(mktemp -d "$RUNNER_TEMP/vector-objects.XXXXXX")
+          python -B -m search_retrieval.lab replay evaluation/fixtures/witness-feed.json evaluation/fixtures/witness.json
+          HF_HUB_OFFLINE=1 python -B evaluation/vespa_vector.py "$RUNNER_TEMP/scifact/model" \
+            evaluation/fixtures/lexical-probes.json "$evidence/vector-service"
+      - name: Encode SciFact and run the frozen five-ranking comparison
+        if: inputs.dense
+        env:
+          HF_HUB_OFFLINE: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          OPENBLAS_NUM_THREADS: "1"
+        run: |
+          assets="$RUNNER_TEMP/scifact"
+          evidence="$RUNNER_TEMP/wp01"
+          python -u -B evaluation/scifact_embeddings.py "$assets/model" "$assets/scifact.zip" "$evidence/embeddings" --threads 2
+          python -u -B evaluation/scifact_dense.py "$assets/model" "$assets/scifact.zip" \
+            "$evidence/embeddings" "$assets/beir.zip" "$evidence/scifact" --threads 2
       - name: Collect service logs and remove the lab
         if: always()
         run: |

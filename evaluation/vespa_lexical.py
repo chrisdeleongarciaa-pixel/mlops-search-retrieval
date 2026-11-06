@@ -9,7 +9,6 @@ from pathlib import Path
 import platform
 from time import perf_counter_ns
 
-from search_retrieval.adapters.postgres_publication import PostgresPublication
 from search_retrieval.adapters.vespa import VespaWitness
 from search_retrieval.query.eligible import EligibleSearch, SearchUnavailable
 
@@ -60,9 +59,10 @@ def measure(authority, index, workload, *, warmup: int, repeats: int, k: int):
         for query in queries:
             index.calls_ms.clear()
             hits = ()
+            attempts = []
             start = perf_counter_ns()
             try:
-                result = search.search(tenant, query["text"], k=k)
+                result = search.search(tenant, query["text"], k=k, attempts=attempts)
                 hits = result.hits
                 status = "complete" if hits else "complete_empty"
                 consistent = consistent and result.eligibility == before
@@ -71,6 +71,8 @@ def measure(authority, index, workload, *, warmup: int, repeats: int, k: int):
             elapsed = (perf_counter_ns() - start) / 1_000_000
             rows.append({
                 "query_id": query["id"], "kind": query["kind"], "repeat": repetition,
+                "request_id": f"lx01/{repetition}/{query['id']}", "attempts": attempts,
+                "cache": {"query": "disabled", "results": "disabled"},
                 "status": status, "retrieval_ms": elapsed, "engine_calls_ms": list(index.calls_ms),
                 "candidates": [
                     {"projection_id": h.projection_id, "fragment_id": h.fragment_id, "score": h.score}
@@ -95,11 +97,17 @@ def measure(authority, index, workload, *, warmup: int, repeats: int, k: int):
         "engine_client_ms": percentiles([
             duration for row in complete for duration in row["engine_calls_ms"]
         ]),
+        "stage_ms": {
+            stage: percentiles([attempt[stage] for row in complete for attempt in row["attempts"] if stage in attempt])
+            for stage in ("eligibility_ms", "vespa_lexical_ms", "revalidation_ms")
+        },
     }
     return manifest, rows
 
 
 def main() -> int:
+    from search_retrieval.adapters.postgres_publication import PostgresPublication
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("workload", type=Path)
     parser.add_argument("output", type=Path)

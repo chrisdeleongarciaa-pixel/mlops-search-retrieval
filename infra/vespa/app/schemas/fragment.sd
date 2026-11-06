@@ -25,6 +25,17 @@ schema fragment {
             indexing: index | summary
             index: enable-bm25
         }
+        field vector_space type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field embedding type tensor<float>(x[768]) {
+            indexing: attribute | index | summary
+            attribute {
+                distance-metric: prenormalized-angular
+            }
+        }
     }
     fieldset default {
         fields: body
@@ -32,6 +43,17 @@ schema fragment {
     rank-profile lexical {
         first-phase {
             expression: bm25(body)
+        }
+    }
+    rank-profile dense {
+        inputs {
+            query(q) tensor<float>(x[768])
+        }
+        matching {
+            post-filter-threshold: 1.0
+        }
+        first-phase {
+            expression: 1 - distance(field, embedding)
         }
     }
 }
