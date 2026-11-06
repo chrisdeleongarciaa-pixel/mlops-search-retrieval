@@ -1,0 +1,22 @@
+{
+  "generation": "scifact-38cf3c5b24e38b2862c69e04ab1ab1ce510805c854b2b53551a0d4cf4c42cc6d",
+  "train_queries": 809,
+  "train_recall_ann_at_10": {
+    "0": 0.9889987639060569,
+    "50": 0.9960444993819529,
+    "100": 0.9990111248454883,
+    "200": 0.999876390605686
+  },
+  "explore_additional_hits": 0,
+  "total_target_hits": 100,
+  "hits": 100,
+  "selection_rule": "first ascending exploration with train recall >= 0.95, else greatest train recall",
+  "workload": "single client sequential; no tracing on measured call; precomputed query vectors",
+  "warmup_per_cohort": 10,
+  "feed_order": "ascending document ID, one outstanding write",
+  "rank_profile": "dense",
+  "schema_sha256": "9cb58bd0d9637e875bd22c9f3a5a5faf83e7f844333449d8fdaa2aa6d9c5d903",
+  "vespa_compose_sha256": "4026e2008dfa2002c6ac6c0c181ca6836a7e07365fc043b57205bf7b92f65e4e",
+  "vector_space": "f8ddb8c12a6cfa93db040afa5191ab0c0580f9fd0eeedf2ab15a076ee999118d",
+  "dataset_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165"
+}

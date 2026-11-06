@@ -1,0 +1,35 @@
+{
+  "dataset_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "model": "intfloat/multilingual-e5-base",
+  "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+  "files": {
+    "config.json": "9dab198f24c8c0879e481cf7822005d5ecbceedbacb390ffafa594e28d31bac4",
+    "model.safetensors": "a18a44fad1d0b46ded15928144138cff1135d5cc8233bdd90be5f18822de09a7",
+    "tokenizer.json": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+    "tokenizer_config.json": "efb5c0d09722e5fe59a462cd2a9976ee216d55b037597d997cd3fe833216da15",
+    "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "special_tokens_map.json": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f"
+  },
+  "space_id": "f8ddb8c12a6cfa93db040afa5191ab0c0580f9fd0eeedf2ab15a076ee999118d",
+  "inference_precision": "FP32",
+  "stored_dtype": "float32",
+  "device": "cpu",
+  "device_name": "x86_64",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "python": "3.12.10",
+  "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.20.2",
+    "tokenizers": "0.23.3",
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0"
+  },
+  "threads": 2,
+  "batch_size": 16,
+  "document_transform": "title (empty if missing) + U+0020 + abstract",
+  "max_tokens": 512,
+  "code_sha256": {
+    "scifact_embeddings.py": "06fdc2aed2f19370244a9b7f136f8244425eccd6c71d99b128fe9938aa974767",
+    "e5.py": "2203bb4c0de956d468a7ec06b492ab8f669535796cf64c02fb3a6d60ea0ca919"
+  }
+}

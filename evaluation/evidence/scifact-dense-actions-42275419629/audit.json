@@ -1,0 +1,41 @@
+{
+  "corpus": {
+    "items": 5183,
+    "truncated": 731,
+    "vectors_sha256": "38cf3c5b24e38b2862c69e04ab1ab1ce510805c854b2b53551a0d4cf4c42cc6d",
+    "metadata_sha256": "101f86b285b6f0f3a5047e92e673242eca642d9dd028b28683fab079bb902a1d"
+  },
+  "train": {
+    "items": 809,
+    "truncated": 0,
+    "vectors_sha256": "9f106889ae1e04bbcbbd7695b5e77f5ba9d688a0aaaa2e301e798e4cb244d372",
+    "metadata_sha256": "0f2f4011d1a5b5e7e1b7d3b53e4f70aa75a914279c5a077e9548217d4c5bdf00"
+  },
+  "test": {
+    "items": 300,
+    "truncated": 0,
+    "vectors_sha256": "3b5738448f4e012fd010abc94fc05b64456f679e05ff2223dea853fc0f054c57",
+    "metadata_sha256": "25763b518508894557b65697d6d1e4f7fafb013fa61a409d0736861def609b7d"
+  },
+  "reusable_vector_bundle": {
+    "name": "scifact-e5-vectors-actions-42275419629.tar.gz",
+    "bytes": 17145507,
+    "sha256": "e2831e2856b873a75d1bb464a7e40379662e1c450b3876f5a1a0180fd6a8ec3a"
+  },
+  "exact_cuts": {
+    "10": {
+      "queries": 360,
+      "min_strict_overlap": 1.0,
+      "tie_exchanges": 0,
+      "max_score_error": 2.83024860991965e-07,
+      "outside_tolerance": 0
+    },
+    "100": {
+      "queries": 360,
+      "min_strict_overlap": 1.0,
+      "tie_exchanges": 0,
+      "max_score_error": 2.83024860991965e-07,
+      "outside_tolerance": 0
+    }
+  }
+}

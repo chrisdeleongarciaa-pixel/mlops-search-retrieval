@@ -1,0 +1,97 @@
+{
+  "freeze_sha256": "3512b60a22dbca5794a6bc270e21fe37ead4393664eb9ed808680fa2ce726b6f",
+  "test_queries": 300,
+  "original_split": "SciFact dev",
+  "groups": {
+    "all/hnsw": {
+      "queries": 300,
+      "ann_recall_at_10": 0.9896666666666666,
+      "ann_overlap_at_100": 0.937,
+      "depth_range": [
+        100,
+        100
+      ],
+      "engine_client_ms": {
+        "p50": 5.484095,
+        "p95": 8.779825,
+        "p99": 10.869109
+      }
+    },
+    "hash_lt_10/hnsw": {
+      "queries": 30,
+      "ann_recall_at_10": 1.0,
+      "ann_overlap_at_100": 0.9976666666666667,
+      "depth_range": [
+        100,
+        100
+      ],
+      "engine_client_ms": {
+        "p50": 29.960773,
+        "p95": 38.037815,
+        "p99": 50.803726
+      }
+    },
+    "hash_lt_1/exact_by_selectivity": {
+      "queries": 30,
+      "ann_recall_at_10": 1.0,
+      "ann_overlap_at_100": 1.0,
+      "depth_range": [
+        50,
+        50
+      ],
+      "engine_client_ms": {
+        "p50": 5.78442,
+        "p95": 6.477591,
+        "p99": 7.929539
+      }
+    }
+  },
+  "metrics": {
+    "bm25": {
+      "NDCG@10": 0.66168,
+      "Recall@10": 0.79094,
+      "Recall@100": 0.88589
+    },
+    "exact": {
+      "NDCG@10": 0.6939,
+      "Recall@10": 0.80722,
+      "Recall@100": 0.93933
+    },
+    "hnsw_requested": {
+      "NDCG@10": 0.69163,
+      "Recall@10": 0.80722,
+      "Recall@100": 0.946
+    },
+    "rrf_exact": {
+      "NDCG@10": 0.70202,
+      "Recall@10": 0.82722,
+      "Recall@100": 0.95767
+    },
+    "rrf_hnsw_requested": {
+      "NDCG@10": 0.70136,
+      "Recall@10": 0.82722,
+      "Recall@100": 0.95933
+    }
+  },
+  "exact_parity_passed": true,
+  "exact_plans": {
+    "exact_requested": 360,
+    "indeterminate": 0
+  },
+  "RET-01": {
+    "scope": "unfiltered HNSW pilot, 300 queries, one sequential client",
+    "passed": true
+  },
+  "RET-02": {
+    "bm25": false,
+    "exact": false,
+    "hnsw_requested": false,
+    "rrf_exact": false,
+    "rrf_hnsw_requested": false
+  },
+  "evaluator_revision": "ef83d29307061c65d04b035b4f4e7c18bd8374af",
+  "evaluator_sha256": "f346bd20f258e552895e438257e3cc91308b65e0b1ee6c09422e987084bc3bd0",
+  "samples_sha256": "cc51a2546b2e064cd73fa08f0b8843f27dc4a8a67bcbdb29ab93657c1a0737cf",
+  "rankings_sha256": "5ee6dc508c896c7b77b2b94df68ea57b1891eb15e87e1114c5d01fe6c4775c6e",
+  "per-query_sha256": "569433be15617a8814c7a68c5e8f72d0654d469ae18885573e8584a4979b54e7"
+}

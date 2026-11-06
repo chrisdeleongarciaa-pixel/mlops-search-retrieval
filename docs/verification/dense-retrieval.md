@@ -40,4 +40,30 @@ Los percentiles de elegibilidad, cobertura y revalidación se calculan a partir 
 
 [Corrida del testigo](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42278239372) · [Manifiesto léxico](../../evaluation/evidence/dense-witness-actions-42278239372/lx01/manifest.json) · [Manifiesto denso](../../evaluation/evidence/dense-witness-actions-42278239372/vector-service/dense-manifest.json) · [Manifiesto híbrido](../../evaluation/evidence/dense-witness-actions-42278239372/vector-service/hybrid-manifest.json)
 
+### SciFact BEIR
+
+La corrida `42275419629` ejecutó el benchmark del commit `9084b46` con E5 en CPU, precisión FP32 y almacenamiento `float32`. Materializó 5.183 documentos y 809 consultas de train. Se truncaron 731 documentos y ninguna consulta. La exploración congelada fue 0 porque la primera configuración alcanzó 0,98900 de recall ANN@10 en train. Se usaron `totalTargetHits=100` y `hits=100` durante el piloto de un cliente secuencial.
+
+La paridad de `approximate:false` con el coseno independiente pasó en los cortes 10 y 100 de las 360 comparaciones. El solapamiento estricto fue 1 en ambos cortes, sin intercambios, y el error máximo de score fue de 2,83 × 10⁻⁷. Se identificó el plan exacto solicitado en las 360 trazas. Las mediciones ANN se tomaron sin trazado y se emparejaron con las trazas de la misma consulta y configuración.
+
+| Cohorte | Algoritmo observado | Consultas | Recall ANN@10 | Solapamiento@100 | Profundidad devuelta | p95 Vespa |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Generación completa | HNSW | 300 | 0,98967 | 0,93700 | 100 | 8,78 ms |
+| Filtro cercano al 10 % | HNSW | 30 | 1,00000 | 0,99767 | 100 | 38,04 ms |
+| Filtro cercano al 1 % | Exacta por selectividad | 30 | 1,00000 | 1,00000 | 50 | 6,48 ms |
+
+RET-01 se cumple en el piloto de generación completa. El filtro cercano al 10 % supera el límite de 25 ms. Los casos de búsqueda exacta por selectividad forman su propia cohorte.
+
+| Ranking sobre las 300 consultas de test | NDCG@10 | Recall@10 | Recall@100 |
+| --- | ---: | ---: | ---: |
+| BM25 | 0,66168 | 0,79094 | 0,88589 |
+| Densa exacta | 0,69390 | 0,80722 | 0,93933 |
+| HNSW | 0,69163 | 0,80722 | 0,94600 |
+| RRF con densa exacta | 0,70202 | 0,82722 | 0,95767 |
+| RRF con HNSW | 0,70136 | 0,82722 | 0,95933 |
+
+RET-02 queda incumplido en esta corrida congelada. Los archivos comprimidos conservan las listas independientes, ambas fusiones, las métricas por consulta y las trazas. Los hashes del manifiesto se aplican al JSON descomprimido.
+
+[Corrida completa](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42275419629) · [Manifiesto](../../evaluation/evidence/scifact-dense-actions-42275419629/manifest.json) · [Parámetros congelados](../../evaluation/evidence/scifact-dense-actions-42275419629/freeze.json) · [Auditoría de hashes, métricas y cortes](../../evaluation/evidence/scifact-dense-actions-42275419629/audit.json)
+
 [Contrato denso e híbrido](../contracts/dense-retrieval.md) · [Ficha oficial de E5](https://huggingface.co/intfloat/multilingual-e5-base#usage) · [HNSW y filtros en Vespa](https://docs.vespa.ai/en/querying/approximate-nn-hnsw.html)
