@@ -84,8 +84,8 @@ jobs:
           test "$settings" = "170011|on|on|on"
           python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_wp01 -v \
             2>&1 | tee "$evidence/wp01.log"
-          rg -q '^Ran 1 test in ' "$evidence/wp01.log"
-          rg -q '^OK$' "$evidence/wp01.log"
+          grep -q '^Ran 1 test in ' "$evidence/wp01.log"
+          grep -qx 'OK' "$evidence/wp01.log"
       - name: Record the LX-01 lexical baseline
         run: |
           evidence="$RUNNER_TEMP/wp01"
