@@ -40,7 +40,19 @@ jobs:
           export RETRIEVAL_LAB_PASSWORD="$password"
           docker info --format 'CPUs={{.NCPU}} RAM_bytes={{.MemTotal}}' | tee "$evidence/docker-host.txt"
           docker compose config --images | tee "$evidence/images.txt"
-          docker compose up --detach --wait --wait-timeout 90
+          docker_root=$(docker info --format '{{.DockerRootDir}}')
+          sudo df -h "$docker_root" | tee "$evidence/disk-before.txt"
+          if [[ "$RUNNER_ENVIRONMENT" == github-hosted ]]; then
+            sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet
+          fi
+          docker compose pull
+          sudo df -h "$docker_root" | tee "$evidence/disk-after-pull.txt"
+          disk_used=$(sudo df -P "$docker_root" | awk 'NR == 2 { sub(/%$/, "", $5); print $5 }')
+          if ((disk_used > 75)); then
+            echo "Docker disk use is ${disk_used}% after pulling images. The witness requires at most 75% before startup." >&2
+            exit 1
+          fi
+          docker compose up --detach --wait --wait-timeout 90 --pull never
           config_url="http://127.0.0.1:$RETRIEVAL_LAB_CONFIG_PORT"
           curl --fail --silent --show-error --max-time 5 --retry 30 --retry-all-errors \
             --retry-delay 3 --retry-max-time 150 --output "$evidence/tenants.json" "$config_url/application/v2/tenant"
