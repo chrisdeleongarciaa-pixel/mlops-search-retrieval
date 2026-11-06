@@ -1,0 +1,105 @@
+name: WP-01 and LX-01 witness
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  witness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      COMPOSE_PROJECT_NAME: wp01
+      COMPOSE_FILE: infra/postgres/compose.cpu.yaml:infra/vespa/compose.witness.yaml
+      RETRIEVAL_LAB_PG_PORT: "15432"
+      RETRIEVAL_LAB_VESPA_PORT: "18080"
+      RETRIEVAL_LAB_CONFIG_PORT: "19071"
+      WITNESS_VESPA_URL: http://127.0.0.1:18080
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12.10"
+      - name: Install and test the Python package
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+          python -B -m unittest discover -s tests/unit -v
+          python -B -m unittest discover -s tests/contract -v
+      - name: Start the pinned services and check feed and search
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          mkdir -p "$evidence"
+          password=$(openssl rand -hex 24)
+          echo "::add-mask::$password"
+          echo "RETRIEVAL_LAB_PASSWORD=$password" >> "$GITHUB_ENV"
+          export RETRIEVAL_LAB_PASSWORD="$password"
+          docker info --format 'CPUs={{.NCPU}} RAM_bytes={{.MemTotal}}' | tee "$evidence/docker-host.txt"
+          docker compose config --images | tee "$evidence/images.txt"
+          docker compose up --detach --wait --wait-timeout 90
+          config_url="http://127.0.0.1:$RETRIEVAL_LAB_CONFIG_PORT"
+          curl --fail --silent --show-error --max-time 5 --retry 30 --retry-all-errors \
+            --retry-delay 3 --retry-max-time 150 --output "$evidence/tenants.json" "$config_url/application/v2/tenant"
+          python -B infra/vespa/deploy.py "$config_url" | tee "$evidence/deploy.json"
+          jq -e '.activated == true' "$evidence/deploy.json" > /dev/null
+          curl --fail-with-body --silent --show-error --max-time 8 --retry 30 --retry-all-errors \
+            --retry-delay 3 --retry-max-time 150 --header 'Content-Type: application/json' \
+            --data-binary '{"fields":{"tenant":"wp01-probe","generation":"wp01-probe","projection_id":"wp01-probe","fragment_id":"wp01-probe","digest":"wp01-probe","body":"WP-01 readiness probe"}}' \
+            --output "$evidence/feed-probe.json" "$WITNESS_VESPA_URL/document/v1/lab/fragment/docid/wp01-probe"
+          deadline=$((SECONDS + 75))
+          while ! curl --fail --silent --max-time 4 --get "$WITNESS_VESPA_URL/search/" \
+              --data-urlencode 'yql=select fragment_id from fragment where tenant contains "wp01-probe"' \
+              --data-urlencode 'hits=1' > "$evidence/search-probe.json" ||
+            ! jq -e '.root.coverage.full == true and any(.root.children[]?; .fields.fragment_id == "wp01-probe")' \
+              "$evidence/search-probe.json" > /dev/null; do
+            if ((SECONDS >= deadline)); then
+              echo "The readiness document did not appear with full coverage" >&2
+              exit 1
+            fi
+            sleep 2
+          done
+      - name: Run WP-01 against PostgreSQL and Vespa
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
+          settings=$(docker compose exec -T postgres psql -XAt -U postgres -d retrieval_lab \
+            -c "SELECT current_setting('server_version_num'), current_setting('fsync'), current_setting('synchronous_commit'), current_setting('full_page_writes')")
+          echo "$settings" | tee "$evidence/postgres-settings.txt"
+          test "$settings" = "170011|on|on|on"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_wp01 -v \
+            2>&1 | tee "$evidence/wp01.log"
+          rg -q '^Ran 1 test in ' "$evidence/wp01.log"
+          rg -q '^OK$' "$evidence/wp01.log"
+      - name: Record the LX-01 lexical baseline
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          docker compose exec -T postgres createdb -U postgres retrieval_lexical
+          for migration in infra/postgres/migrations/*.sql; do
+            docker compose exec -T postgres psql -X -v ON_ERROR_STOP=1 -U postgres -d retrieval_lexical < "$migration"
+          done
+          export INGESTION_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lexical"
+          export INGESTION_OBJECTS
+          INGESTION_OBJECTS=$(mktemp -d "$RUNNER_TEMP/wp01-objects.XXXXXX")
+          python -B -m search_retrieval.lab replay evaluation/fixtures/witness-feed.json evaluation/fixtures/witness.json \
+            | tee "$evidence/replay.log"
+          python -B -m search_retrieval.lab publish | tee "$evidence/publish.log"
+          python -B evaluation/vespa_lexical.py evaluation/fixtures/lexical-probes.json "$evidence/lx01"
+      - name: Collect service logs and remove the lab
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/wp01"
+          if [[ -n "${RETRIEVAL_LAB_PASSWORD:-}" ]]; then
+            timeout 30s docker compose logs --no-color > "$RUNNER_TEMP/wp01/services.log" 2>&1 || true
+            timeout 45s docker compose down --volumes
+          fi
+      - name: Upload witness evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: wp01-witness
+          path: ${{ runner.temp }}/wp01
+          retention-days: 7

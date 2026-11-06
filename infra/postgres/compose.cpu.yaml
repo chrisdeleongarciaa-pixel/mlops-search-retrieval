@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres@sha256:996e9dc583ba9f0265a2c75547a9c95fb22c251e394749cab205a0a00e1856a1
+    platform: linux/amd64
+    command: ["postgres", "-c", "fsync=on", "-c", "synchronous_commit=on", "-c", "full_page_writes=on"]
+    environment:
+      POSTGRES_DB: retrieval_lab
+      POSTGRES_PASSWORD: "${RETRIEVAL_LAB_PASSWORD:?Configure una contraseña local}"
+    ports:
+      - "127.0.0.1:${RETRIEVAL_LAB_PG_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d retrieval_lab"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres_data:

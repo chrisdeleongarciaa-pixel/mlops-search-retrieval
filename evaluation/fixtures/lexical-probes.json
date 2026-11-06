@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "tenant": "lab",
+  "queries": [
+    {"id": "term", "kind": "term", "text": "retains"},
+    {"id": "phrase", "kind": "phrase", "text": "\"retains the log\""},
+    {"id": "acronym", "kind": "acronym", "text": "LIMA"},
+    {"id": "identifier", "kind": "identifier", "text": "en-protocol"},
+    {"id": "retention-en", "kind": "factual", "text": "How long does LIMA retain the log?"},
+    {"id": "expected-empty", "kind": "out-of-corpus", "text": "zyzzyvaquasar"}
+  ]
+}

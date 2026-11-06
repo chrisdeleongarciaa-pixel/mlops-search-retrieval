@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=70.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlops-search-retrieval"
+version = "0.1.0"
+description = "Base para búsqueda documental e inferencia con procedencia"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]==3.3.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["search_retrieval", "search_retrieval.*"]
+namespaces = false

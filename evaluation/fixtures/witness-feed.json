@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "corpus_sha256": "d3ce098414ce0a2ff80079faca998dfb0d02a70e50ed60b46f54fd334b34fb05",
+  "events": [
+    {
+      "cursor": 1,
+      "tenant_id": "lab",
+      "source_id": "witness",
+      "source_event_id": "es-protocolo:1",
+      "schema_version": 2,
+      "document_id": "es-protocolo",
+      "operation": "UPSERT",
+      "source_position": 1,
+      "source_revision": "1",
+      "original_ref": "witness:d3ce098414ce0a2ff80079faca998dfb0d02a70e50ed60b46f54fd334b34fb05/es-protocolo",
+      "original_version": "cc07b170d8e152908bf895180a3beb82ca57ae168823c117a3ae31bb35b30ad1",
+      "original_size": 59,
+      "original_sha256": "cc07b170d8e152908bf895180a3beb82ca57ae168823c117a3ae31bb35b30ad1"
+    },
+    {
+      "cursor": 2,
+      "tenant_id": "lab",
+      "source_id": "witness",
+      "source_event_id": "es-distractor:1",
+      "schema_version": 2,
+      "document_id": "es-distractor",
+      "operation": "UPSERT",
+      "source_position": 1,
+      "source_revision": "1",
+      "original_ref": "witness:d3ce098414ce0a2ff80079faca998dfb0d02a70e50ed60b46f54fd334b34fb05/es-distractor",
+      "original_version": "39ee7b61f031a0d55ed531d31aaf3d33cf5068dd25b0db87b7722ebd72be43bf",
+      "original_size": 40,
+      "original_sha256": "39ee7b61f031a0d55ed531d31aaf3d33cf5068dd25b0db87b7722ebd72be43bf"
+    },
+    {
+      "cursor": 3,
+      "tenant_id": "lab",
+      "source_id": "witness",
+      "source_event_id": "en-protocol:1",
+      "schema_version": 2,
+      "document_id": "en-protocol",
+      "operation": "UPSERT",
+      "source_position": 1,
+      "source_revision": "1",
+      "original_ref": "witness:d3ce098414ce0a2ff80079faca998dfb0d02a70e50ed60b46f54fd334b34fb05/en-protocol",
+      "original_version": "8d56c1b01c00825d8a7770ced60250733bd4e892332d869ceb9083987aa37489",
+      "original_size": 49,
+      "original_sha256": "8d56c1b01c00825d8a7770ced60250733bd4e892332d869ceb9083987aa37489"
+    },
+    {
+      "cursor": 4,
+      "tenant_id": "other",
+      "source_id": "witness",
+      "source_event_id": "other-tenant:1",
+      "schema_version": 2,
+      "document_id": "other-tenant",
+      "operation": "UPSERT",
+      "source_position": 1,
+      "source_revision": "1",
+      "original_ref": "witness:d3ce098414ce0a2ff80079faca998dfb0d02a70e50ed60b46f54fd334b34fb05/other-tenant",
+      "original_version": "cc07b170d8e152908bf895180a3beb82ca57ae168823c117a3ae31bb35b30ad1",
+      "original_size": 59,
+      "original_sha256": "cc07b170d8e152908bf895180a3beb82ca57ae168823c117a3ae31bb35b30ad1"
+    }
+  ]
+}

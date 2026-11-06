@@ -1,0 +1,32 @@
+{
+  "dataset": "BEIR/SciFact",
+  "split": "test",
+  "dataset_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "dataset_url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+  "license_source": "https://github.com/allenai/scifact/blob/master/LICENSE.md",
+  "input_hashes": {
+    "corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+    "queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+    "qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c"
+  },
+  "evaluator_revision": "ef83d29307061c65d04b035b4f4e7c18bd8374af",
+  "evaluator_sha256": "f346bd20f258e552895e438257e3cc91308b65e0b1ee6c09422e987084bc3bd0",
+  "evaluator_archive_sha256": "90cd84030cffdcdcf27187fd2954a4cfd6014d8747a2da8c3cb509038bc04ed4",
+  "dependency_lock_sha256": "bcb3973434688ad53cae5b4857e86b217acd4d212fafbd30ccb7039aa6089361",
+  "code_sha256": "a0d04f130e917491397d1072cdada3aa25d9d92244d503525fed14091fcb153a",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "ranker": "reference-bm25-unicode-casefold",
+  "k1": 1.2,
+  "b": 0.75,
+  "depth": 100,
+  "ignore_identical_ids": true,
+  "corpus_documents": 5183,
+  "expected_queries": 300,
+  "scored_queries": 300,
+  "empty_queries": 0,
+  "metrics": {
+    "NDCG@10": 0.66168,
+    "Recall@100": 0.88589
+  }
+}
