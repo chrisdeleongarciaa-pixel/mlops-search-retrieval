@@ -48,7 +48,7 @@ jobs:
           python-version: "3.12.10"
       - name: Install and test the Python package
         run: |
-          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock -r config/requirements-pdf.lock
           python -m pip install --no-deps --no-build-isolation -e .
           python -B -m unittest discover -s tests/unit -v
           python -B -m unittest discover -s tests/contract -v
@@ -232,7 +232,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock -r config/requirements-pdf.lock
           python -m pip install --no-deps --no-build-isolation -e .
           python -m pip install --require-hashes --only-binary=:all: \
             --extra-index-url https://download.pytorch.org/whl/cpu -r config/requirements-dense-linux-amd64.lock

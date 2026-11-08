@@ -1,0 +1,4 @@
+# CPython 3.12.10 Windows amd64. Parsing and collection preparation.
+defusedxml==0.7.1 --hash=sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61
+pyarrow==23.0.0 --hash=sha256:52265266201ec25b6839bf6bd4ea918ca6d50f31d13e1cf200b4261cd11dc25c
+pypdf==6.7.0 --hash=sha256:62e85036d50839cbdf45b8067c2c1a1b925517514d7cba4cbe8755a6c2829bc9

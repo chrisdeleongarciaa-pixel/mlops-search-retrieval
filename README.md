@@ -1,6 +1,18 @@
-# Search, Retrieval e Inferencia
+# Recuperación de literatura científica e inferencia con citas
 
-Sistema de ingesta documental, recuperación híbrida e inferencia con citas en construcción. El primer incremento implementa la aceptación durable de revisiones con PostgreSQL y un almacén de archivos persistente.
+Plataforma experimental para buscar literatura de ML/NLP en inglés. PostgreSQL conserva la revisión autorizada y su estado de publicación. Vespa sirve proyecciones reconstruibles para búsqueda léxica y vectorial. Los fragmentos conservan la identidad de su revisión y su transformación para resolver la evidencia que recibe el modelo.
+
+## Configuración registrada
+
+El checkpoint `checkpoint/2026-11-08` reúne el laboratorio de ingesta, publicación y búsqueda, los ensayos de recuperación en SciFact y el incremento de PDF científico. El registro identifica los componentes verificados, las condiciones de ensayo y los criterios pendientes para ampliar su alcance. [Registro de configuración](docs/checkpoints/2026-11-08.md)
+
+| Capacidad | Alcance demostrado |
+| --- | --- |
+| Aceptación y publicación | Ingesta idempotente con outbox transaccional. Continuidad de búsqueda y exclusión tras retiro bajo carreras ensayadas con PostgreSQL y Vespa. [Verificación](docs/verification/witness-increments.md) |
+| Recuperación | BM25, búsqueda exacta, HNSW y RRF. Comparaciones sobre 300 consultas oficiales de SciFact y cuatro construcciones HNSW con E5. [Estabilidad HNSW](docs/verification/scifact-stability.md) |
+| Transformación PDF | GROBID, TEI y fragmentos con secciones, páginas, coordenadas y hashes. El ensayo de ocho páginas produjo 94 fragmentos verificables con presupuesto E5. [Verificación PDF](docs/verification/scientific-pdf.md) |
+| Corpus bibliográfico | LitSearch materializado con 64.183 artículos y 300 consultas de evaluación congeladas. Los resultados de ranking y reescritura quedan pendientes. [Contrato bibliográfico](docs/contracts/bibliographic-profile.md) |
+| Contexto e inferencia | Contratos de autorización, presupuesto de contexto y validación de citas en el testigo. Piloto aislado con Qwen2.5-7B-Instruct y vLLM en L4. [Verificación de entrega e inferencia](docs/verification/witness-increments.md) |
 
 ## Estructura
 
@@ -22,17 +34,16 @@ Requiere Python 3.12 o posterior. Desde esta carpeta, ejecuta lo siguiente en Po
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pip install -e ".[pdf]"
 .\.venv\Scripts\python.exe -m unittest discover -s tests/unit -v
 .\.venv\Scripts\python.exe -m unittest discover -s tests/contract -v
 ```
 
 En macOS o Linux, el ejecutable del entorno virtual es `.venv/bin/python`. La instalación puede requerir descargar el backend de empaquetado. Las pruebas unitarias se ejecutan sin motores externos ni GPU.
 
-## Alcance actual
+## Documentación de ingeniería
 
-El módulo de ingesta valida el original, registra una revisión y su evento de outbox, y recupera el mismo recibo en reintentos equivalentes. La [guía de ingesta](src/search_retrieval/ingestion/README.md) describe el uso desde Python y la preparación de PostgreSQL. La [guía de integración](tests/integration/README.md) explica cómo reproducir los ensayos de recuperación.
-
-El perfil sintético añade reentrega desde un manifiesto, checkpoint, proyecciones Vespa y búsqueda con elegibilidad. Consulta el [contrato de incrementos](docs/contracts/witness-increments.md), la [matriz con evidencia](docs/verification/witness-increments.md) y los [comandos del laboratorio](docs/operations/witness-lab.md).
-
-Consulta la [arquitectura](docs/architecture.md), las [decisiones pendientes](docs/decisions/README.md) y la [guía de contribución](CONTRIBUTING.md).
+- Autoridad de estado, interfaces y evolución de versiones. [Descripción del sistema](docs/architecture.md) · [Decisiones](docs/decisions/README.md)
+- Requisitos, cobertura y condiciones para aceptar cada capacidad. [Estado frente al diseño](docs/estado-frente-al-diseno.md) · [Objetivos de aceptación](docs/operations/service-objectives.md)
+- Configuración y reproducción de ensayos. [Laboratorio de publicación y búsqueda](docs/operations/witness-lab.md) · [Procedimiento bibliográfico y PDF](docs/operations/scientific-pdf.md) · [Suite de integración](tests/integration/README.md)
+- Resultados por experimento y línea de investigación. [Registro experimental](docs/registro-tecnico-experimental.md) · [Programa de recuperación aprendida](docs/programa-learned-retrieval.md)

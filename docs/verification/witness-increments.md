@@ -74,4 +74,4 @@ La caché KV reportó 44.240 tokens. De 564 muestras de GPU tomadas cada 500 ms,
 
 Los logs, el entorno resuelto, el perfil ejecutado y los resultados por solicitud se empaquetaron en `/content/retrieval-l4-evidence.zip` (112.025 bytes). La descarga desde el navegador agotó el plazo. El ZIP quedó en el runtime y este resumen quedó guardado en el repositorio. [Notebook de Colab](https://colab.research.google.com/drive/1vkfT1kZGJ2WLb86iAyvSrJwhI93yMjs0)
 
-La comparación densa y ANN con E5, los demás benchmarks, la calidad representativa en español y la inferencia con carga en la A100 requieren sus respectivos artefactos y ensayos.
+La comparación densa y ANN con E5, los demás benchmarks y la inferencia con carga requieren sus respectivos artefactos y ensayos. El perfil bibliográfico adoptado el 8 de noviembre de 2026 es inglés; español queda fuera de alcance. La A100 se difiere hasta justificarla por la carga. Los fixtures históricos conservan sus bytes para regresión.

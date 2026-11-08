@@ -9,19 +9,19 @@ El repositorio distribuye un paquete Python. Ingesta y consulta son módulos con
 - `adapters` traduce entre las interfaces internas y los protocolos externos. Los casos de uso se mantienen independientes de esos clientes.
 - `evaluation` consume conjuntos de datos, manifiestos y salidas observables. Sus oráculos se definen de forma independiente de los algoritmos evaluados.
 
-## Estado y flujos
+## Autoridad e interfaces
 
-| Componente | Responsabilidad |
-| --- | --- |
-| PostgreSQL | Orden interno de revisiones, estado de publicación, retiros y outbox. |
-| Almacén de objetos | Originales y artefactos inmutables con checksum y procedencia. |
-| Vespa | Proyecciones léxicas y densas reconstruibles. |
-| Gateway | Identidad autenticada, presupuestos y política de entrega. |
-| vLLM | Inferencia con un modelo, tokenizer y plantilla identificados. |
+| Componente | Entrada y salida en el límite | Estado que controla |
+| --- | --- | --- |
+| Aceptación · PostgreSQL y almacén de objetos | Evento con identidad de fuente y checksum → recibo durable | Orden de revisiones, bytes originales y evento de outbox. |
+| Transformación · GROBID y tokenizer | Original aceptado y receta fijada → TEI, texto canónico y manifiesto | Identidad de transformación y localizadores de fragmentos. |
+| Publicación · PostgreSQL y Vespa | Proyección candidata consultable → activación condicionada | PostgreSQL decide elegibilidad. Vespa sirve proyecciones reconstruibles. |
+| Recuperación · Vespa y autoridad de acceso | Consulta, identidad y presupuesto → candidatos elegibles | Generación y espacio vectorial de la consulta. La autoridad de acceso aporta la decisión vigente. |
+| Contexto y entrega · casos de uso y adaptador vLLM | Candidatos revalidados → contexto acotado → respuesta con citas comprobadas | Selección efectiva de fragmentos y decisión de entrega. |
 
-En ingesta, el [contrato de aceptación durable](contracts/accept-revision.md) fija el punto de confirmación, los reintentos y el orden por documento. El worker procesa una revisión identificada y verifica que su proyección se puede consultar antes de solicitar su activación. La [decisión de publicación](decisions/0001-publicacion.md) define el contrato que debe preservar la continuidad durante ese cambio.
+La aceptación registra revisión y outbox en una transacción. El worker de publicación verifica que la proyección candidata es consultable antes de solicitar su activación. La revisión previamente publicada conserva continuidad durante una actualización ordinaria. El retiro cambia la elegibilidad en la autoridad y la activación posterior queda condicionada al estado vigente. Estas propiedades se ensayaron con proyecciones testigo. La conexión de la receta PDF con el worker de publicación tiene su propio criterio de aceptación. [Aceptación](contracts/accept-revision.md) · [Publicación](decisions/0001-publicacion.md) · [Transformación PDF](contracts/scientific-pdf.md)
 
-En consulta, la identidad autenticada acota la recuperación. La elegibilidad de revisiones y permisos debe aplicarse conforme a los contratos antes de seleccionar evidencia. El contexto identifica cada fragmento por revisión y transformación. La respuesta se entrega según la política de autorización y citas adoptada.
+La elegibilidad se aplica antes del límite de candidatos. El contexto identifica cada fragmento por revisión y transformación. El testigo verifica revalidación y citas contra el contexto efectivo. La integración de estas operaciones con un transporte autenticado y vLLM queda registrada como trabajo pendiente del servicio. [Contrato de consulta y entrega](contracts/witness-increments.md) · [Registro de configuración](checkpoints/2026-11-08.md)
 
 ## Identidad y evolución
 
