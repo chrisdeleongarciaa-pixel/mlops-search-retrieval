@@ -82,7 +82,8 @@ class EmbeddingGemmaEncoder:
         if not items:
             return []
         tokens = self.model.preprocess(format_inputs(items, role))
-        tokens = {name: tensor.to(self.device) for name, tensor in tokens.items()}
+        tokens = {name: value.to(self.device) if self.torch.is_tensor(value) else value
+                  for name, value in tokens.items()}
         with self.torch.inference_mode(), self.torch.autocast(self.device.type, enabled=False):
             vectors = self.forward_tokens(tokens)
         if (vectors.shape != (len(items), DIMENSIONS) or not self.torch.isfinite(vectors).all()

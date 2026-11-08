@@ -41,9 +41,11 @@ def padded_query(adapter, text, model, fixed_size=None):
     padding = size - length
     side = adapter.tokenizer.padding_side
     sides = (padding, 0) if side == "left" else (0, padding)
-    for name in tokens.keys():
+    for name, value in tokens.items():
+        if not adapter.torch.is_tensor(value):
+            continue
         pad_id = adapter.tokenizer.pad_token_id if name == "input_ids" else 0
-        tokens[name] = adapter.torch.nn.functional.pad(tokens[name], sides, value=pad_id)
+        tokens[name] = adapter.torch.nn.functional.pad(value, sides, value=pad_id)
     return dict(tokens), length, size
 
 
@@ -54,7 +56,8 @@ class GraphReplay:
         self.graphs = {}
         stream = torch.cuda.Stream()
         for size, tokens in examples.items():
-            static = {name: value.clone() for name, value in tokens.items()}
+            tensor_names = {name for name, value in tokens.items() if torch.is_tensor(value)}
+            static = {name: value.clone() if name in tensor_names else value for name, value in tokens.items()}
             stream.wait_stream(torch.cuda.current_stream())
             with torch.cuda.stream(stream):
                 for _ in range(3):
@@ -63,18 +66,20 @@ class GraphReplay:
             graph = torch.cuda.CUDAGraph()
             with torch.cuda.graph(graph, stream=stream):
                 output = forward(static)
-            self.graphs[size] = (graph, static, output)
+            self.graphs[size] = (graph, static, output, tensor_names)
 
     def __call__(self, tokens, size):
-        graph, static, result = self.graphs[size]
-        for name, tensor in tokens.items():
-            static[name].copy_(tensor)
+        graph, static, result, tensor_names = self.graphs[size]
+        if tokens.keys() != static.keys() or any(tokens[name] != static[name] for name in static.keys() - tensor_names):
+            raise ValueError("Query metadata differs from the captured CUDA graph")
+        for name in tensor_names:
+            static[name].copy_(tokens[name])
         graph.replay()
         return result
 
 
-def device_inputs(tokens, device):
-    return {name: value.to(device) for name, value in tokens.items()}
+def device_inputs(tokens, device, torch):
+    return {name: value.to(device) if torch.is_tensor(value) else value for name, value in tokens.items()}
 
 
 def measure(adapter, queries, model, mode, sample, destination):
@@ -88,7 +93,7 @@ def measure(adapter, queries, model, mode, sample, destination):
     examples = {}
     for size in BUCKETS:
         tokens, _, _ = padded_query(adapter, sample, model, fixed_size=size)
-        examples[size] = device_inputs(tokens, device)
+        examples[size] = device_inputs(tokens, device, torch)
     with torch.inference_mode(), torch.autocast("cuda", enabled=False):
         for example in examples.values():
             forward(example)
@@ -106,7 +111,7 @@ def measure(adapter, queries, model, mode, sample, destination):
             tokens, length, size = padded_query(adapter, text, model)
             tokenize_ms = elapsed(request)
             transfer = perf_counter_ns()
-            inputs = device_inputs(tokens, device)
+            inputs = device_inputs(tokens, device, torch)
             result = graph(inputs, size) if graph else forward(inputs)
             vector = result.cpu().numpy().copy()
             gpu_transfer_ms = elapsed(transfer)

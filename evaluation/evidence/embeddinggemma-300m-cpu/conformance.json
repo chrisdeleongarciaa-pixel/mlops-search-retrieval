@@ -1,0 +1,38 @@
+{
+  "reference": "SentenceTransformer.encode_query / encode_document",
+  "passed": true,
+  "checks": {
+    "query": {
+      "matching_tokens": {
+        "input_ids": true,
+        "attention_mask": true
+      },
+      "before": [
+        11,
+        20
+      ],
+      "after": [
+        11,
+        20
+      ],
+      "max_absolute_error": 0.0,
+      "min_cosine": 1.0
+    },
+    "passage": {
+      "matching_tokens": {
+        "input_ids": true,
+        "attention_mask": true
+      },
+      "before": [
+        14,
+        1210
+      ],
+      "after": [
+        14,
+        512
+      ],
+      "max_absolute_error": 9.499490261077881e-08,
+      "min_cosine": 0.9999999999996811
+    }
+  }
+}

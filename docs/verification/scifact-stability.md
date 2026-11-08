@@ -10,6 +10,8 @@
 
 El workflow **WP-01 and LX-01 witness** con `stability=true` ejecuta las cuatro construcciones de E5 usando el artefacto del ensayo original. Se despliega Vespa de nuevo antes de cada orden. El agregado acepta el conjunto completo de cuatro semillas de un modelo y declara si se completó la comparación de ambos.
 
+Con `gemma_vectors_commit`, el mismo job toma un archivo `scifact-gemma-vectors.tar.gz` del commit indicado. El archivo contiene matrices y manifiestos de SciFact para train y test. El job alterna el orden de E5 y Gemma entre semillas y usa el mismo host para los ocho índices.
+
 La revisión oficial de Gemma está sujeta a la licencia de Google. Con un snapshot local autorizado de la revisión fijada, instala el complemento de Sentence Transformers sobre el entorno denso y ejecuta estos comandos. Los directorios de salida deben ser nuevos.
 
 ```bash
@@ -50,6 +52,8 @@ La corrida `42290872584` reutilizó los vectores auditados y ejecutó 4.800 comp
 
 Las tres cohortes HNSW cumplieron RET‑01 en las cuatro construcciones. El mayor NDCG@10 fue 0,70202, de RRF con exacta, por debajo del umbral 0,75. El agregado original marcó el 1 % como indeterminado. La reproducción verificó los hashes de las muestras y reconoció el plan exacto junto a la decisión `Skip` del filtro global. Vespa registra esa decisión cuando su estimación queda por debajo del límite inferior. La reclasificación conserva las latencias medidas y el agregado original. [Corrida E5](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42290872584) · [Decisión de filtro en Vespa 8.781.11](https://github.com/vespa-engine/vespa/blob/v8.781.11/searchcore/src/vespa/searchcore/proton/matching/query.cpp) · [Agregado de la reproducción](../../evaluation/evidence/scifact-stability-e5-42290872584/aggregate.json)
 
-Pasaron 32 pruebas locales entre unitarias, de contrato y de evaluación. E5 repitió la conformidad FP32 con sus pesos fijados tras extraer el forward compartido, con error máximo por componente de 0. La conformidad del checkpoint Gemma y los resultados CUDA quedan pendientes de ejecución con los pesos autorizados y el entorno CUDA correspondiente.
+Pasaron 32 pruebas locales entre unitarias, de contrato y de evaluación. E5 repitió la conformidad FP32 con sus pesos fijados tras extraer el forward compartido, con error máximo por componente de 0.
+
+La revisión oficial de EmbeddingGemma‑300M pasó la conformidad FP32 en CPU con Sentence Transformers 6.2.0. Coincidieron IDs de tokens y máscaras, el pasaje largo se truncó de 1.210 a 512 tokens y el error máximo por componente fue 9,50 × 10⁻⁸. La ejecución detectó que `preprocess` incluye la modalidad como texto. El adaptador conserva esa modalidad al mover tensores al dispositivo y el arnés CUDA exige que siga siendo igual a la del grafo capturado. Las mediciones CUDA requieren un entorno GPU. [Conformidad Gemma](../../evaluation/evidence/embeddinggemma-300m-cpu/conformance.json) · [Entorno](../../evaluation/evidence/embeddinggemma-300m-cpu/environment.json) · [Hashes del snapshot](../../evaluation/evidence/embeddinggemma-300m-cpu/snapshot-sha256.json)
 
 [Contrato de comparación](../decisions/0005-encoder-comparison.md) · [Solicitud de acceso al checkpoint](https://huggingface.co/google/embeddinggemma-300m)

@@ -19,6 +19,10 @@ on:
         description: Measure four fresh E5 HNSW graphs using the recorded SciFact vectors
         type: boolean
         default: false
+      gemma_vectors_commit:
+        description: Optional commit containing the Gemma SciFact vectors for a paired stability run
+        type: string
+        required: false
 
 permissions:
   contents: read
@@ -208,7 +212,7 @@ jobs:
   stability:
     if: inputs.stability
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: ${{ inputs.gemma_vectors_commit != '' && 65 || 35 }}
     permissions:
       actions: read
       contents: read
@@ -239,7 +243,41 @@ jobs:
           gh run download 42275419629 --repo "$GITHUB_REPOSITORY" -n wp01-witness --dir "$RUNNER_TEMP/assets"
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/scifact.zip" https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/beir.zip" https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
-      - name: Build and measure four isolated graphs sequentially
+      - name: Validate the optional Gemma vectors commit
+        if: inputs.gemma_vectors_commit != ''
+        env:
+          GEMMA_COMMIT: ${{ inputs.gemma_vectors_commit }}
+        run: '[[ "$GEMMA_COMMIT" =~ ^[a-f0-9]{40}$ ]]'
+      - name: Fetch the optional Gemma vectors from the private repository
+        if: inputs.gemma_vectors_commit != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.gemma_vectors_commit }}
+          path: scifact-gemma-vector-input
+      - name: Verify and unpack the Gemma vectors
+        if: inputs.gemma_vectors_commit != ''
+        run: |
+          archive="scifact-gemma-vector-input/scifact-gemma-vectors.tar.gz"
+          sha256sum "$archive" > "$RUNNER_TEMP/stability/gemma-bundle-sha256.txt"
+          python -B - "$archive" "$RUNNER_TEMP/assets/gemma" <<'PY'
+          import sys
+          import tarfile
+
+          expected = {
+              "train/environment.json", "train/conformance.json",
+              "train/corpus.json", "train/corpus.npy", "train/train.json", "train/train.npy",
+              "test/test.json", "test/test.npy",
+          }
+          with tarfile.open(sys.argv[1]) as source:
+              entries = source.getmembers()
+              if {entry.name for entry in entries} != expected or len(entries) != len(expected):
+                  raise ValueError("Unexpected Gemma vector bundle layout")
+              if not all(entry.isfile() for entry in entries):
+                  raise ValueError("Gemma bundle entries must be regular files")
+              source.extractall(sys.argv[2], filter="data")
+          PY
+      - name: Build and measure four isolated graphs per encoder
         run: |
           assets="$RUNNER_TEMP/assets"
           evidence="$RUNNER_TEMP/stability"
@@ -258,22 +296,39 @@ jobs:
           search=http://127.0.0.1:18080
           cleanup() { docker compose down --volumes; }
           trap cleanup EXIT
+          models=(e5)
+          if [[ -d "$assets/gemma" ]]; then models+=(gemma); fi
+          seed_index=0
           for seed in $(jq -r '.insertion_order_seeds[]' config/scifact-stability-v1.json); do
-            export COMPOSE_PROJECT_NAME="stability-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$seed"
-            docker compose up -d --pull never
-            curl -fsS --max-time 5 --retry 30 --retry-all-errors --retry-delay 3 --retry-max-time 150 "$config/application/v2/tenant" >/dev/null
-            python -B infra/vespa/deploy.py "$config" > "$evidence/deploy-$seed.json"
-            deadline=$((SECONDS + 90))
-            until curl -fsS --max-time 4 -G --data-urlencode 'yql=select projection_id from fragment where true' --data-urlencode 'hits=0' "$search/search/" \
-              | jq -e '.root.coverage.full == true and .root.fields.totalCount == 0' >/dev/null; do
-              if ((SECONDS >= deadline)); then exit 1; fi
-              sleep 2
+            order=("${models[@]}")
+            if [[ ${#models[@]} == 2 && $((seed_index % 2)) == 1 ]]; then order=(gemma e5); fi
+            seed_index=$((seed_index + 1))
+            for model in "${order[@]}"; do
+              if [[ "$model" == e5 ]]; then
+                train="$assets/embeddings"
+                test="$assets/scifact"
+                prefix=""
+              else
+                train="$assets/gemma/train"
+                test="$assets/gemma/test"
+                prefix="gemma-"
+              fi
+              export COMPOSE_PROJECT_NAME="stability-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$model-$seed"
+              docker compose up -d --pull never
+              curl -fsS --max-time 5 --retry 30 --retry-all-errors --retry-delay 3 --retry-max-time 150 "$config/application/v2/tenant" >/dev/null
+              python -B infra/vespa/deploy.py "$config" > "$evidence/${prefix}deploy-$seed.json"
+              deadline=$((SECONDS + 90))
+              until curl -fsS --max-time 4 -G --data-urlencode 'yql=select projection_id from fragment where true' --data-urlencode 'hits=0' "$search/search/" \
+                | jq -e '.root.coverage.full == true and .root.fields.totalCount == 0' >/dev/null; do
+                if ((SECONDS >= deadline)); then exit 1; fi
+                sleep 2
+              done
+              python -u -B evaluation/scifact_stability.py run "$assets/scifact.zip" "$train" \
+                "$test" "$assets/beir.zip" "$evidence/${prefix}seed-$seed" --vespa "$search" --seed "$seed"
+              cleanup
             done
-            python -u -B evaluation/scifact_stability.py run "$assets/scifact.zip" "$assets/embeddings" \
-              "$assets/scifact" "$assets/beir.zip" "$evidence/seed-$seed" --vespa "$search" --seed "$seed"
-            cleanup
           done
-          python -B evaluation/scifact_stability.py aggregate "$evidence/aggregate.json" "$evidence"/seed-*/manifest.json
+          python -B evaluation/scifact_stability.py aggregate "$evidence/aggregate.json" "$evidence"/*seed-*/manifest.json
       - name: Upload stability evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
