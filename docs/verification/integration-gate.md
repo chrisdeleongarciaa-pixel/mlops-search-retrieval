@@ -13,6 +13,8 @@ La puerta CPU y la corrida real identifican su commit y conservan los logs por e
 
 La prueba usa el caso de uso de entrega privado y una identidad de investigador fijada por el arnés. Acepta un original UTF-8 sintético, publica la proyección en Vespa, marca el documento privado y consulta con un principal autorizado. El contador HTTP usa la misma plantilla que el servidor de inferencia. La API compatible con OpenAI sirve Qwen2.5-1.5B-Instruct Q4_K_M en llama.cpp b12211, con dos hilos, contexto de 1.024 y una solicitud en paralelo. Se fijan revisión y SHA-256 del GGUF y del binario Linux. [Prueba](../../tests/integration/test_witness_pipeline.py) · [API del runtime fijado](https://github.com/ggml-org/llama.cpp/blob/b12211/tools/server/README.md)
 
+La primera corrida con generación libre llegó a la validación y fue rechazada porque el modelo devolvió una salida que el parser no pudo decodificar como JSON. El perfil del testigo pasó a solicitar JSON Schema con el identificador elegible como único valor de cita. La aplicación conserva la validación independiente de citas y el oráculo comprueba que el texto contenga el dato del original. [Corrida con generación libre](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42539627794)
+
 | Condición | Resultado requerido |
 | --- | --- |
 | Principal autorizado | El modelo recupera el valor del original y devuelve una cita de los fragmentos efectivos. Se resuelve el identificador mediante el manifiesto publicado y se verifica el rango en bytes del original por SHA-256. |

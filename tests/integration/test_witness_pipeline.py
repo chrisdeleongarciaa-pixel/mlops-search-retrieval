@@ -285,7 +285,17 @@ class WitnessPipeline(unittest.TestCase):
                 if self.after_completion:
                     self.after_completion()
 
-        backend = ObservedBackend(model_url, model)
+        backend = ObservedBackend(model_url, model, response_schema={
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "citations": {
+                    "type": "array", "items": {"enum": [hit.fragment_id]},
+                    "minItems": 1, "maxItems": 1,
+                },
+            },
+            "required": ["text", "citations"], "additionalProperties": False,
+        })
         tokenizer = SimpleNamespace(count=count)
         delivery = Delivery(tokenizer, backend, context_limit=1024, output_reserve=192)
         with self.assertRaisesRegex(DeliveryRejected, "No eligible evidence"):

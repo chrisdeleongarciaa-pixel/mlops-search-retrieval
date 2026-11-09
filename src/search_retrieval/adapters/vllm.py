@@ -20,10 +20,11 @@ class ChatTemplate:
 
 
 class VllmBackend:
-    def __init__(self, url: str, model: str, *, api_key: str | None = None):
+    def __init__(self, url: str, model: str, *, api_key: str | None = None, response_schema: dict | None = None):
         self.url = url.rstrip("/")
         self.model = model
         self.api_key = api_key
+        self.response_schema = response_schema
 
     def stream(
         self, messages: list[dict[str, str]], max_tokens: int, deadline: float
@@ -34,13 +35,16 @@ class VllmBackend:
         headers = {"Content-Type": "application/json"}
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
-        request = Request(
-            self.url + "/v1/chat/completions",
-            json.dumps({
-                "model": self.model, "messages": messages, "max_tokens": max_tokens,
-                "temperature": 0, "stream": True,
-            }).encode(), headers, method="POST",
-        )
+        payload = {
+            "model": self.model, "messages": messages, "max_tokens": max_tokens,
+            "temperature": 0, "stream": True,
+        }
+        if self.response_schema is not None:
+            payload["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {"name": "answer", "strict": True, "schema": self.response_schema},
+            }
+        request = Request(self.url + "/v1/chat/completions", json.dumps(payload).encode(), headers, method="POST")
         finish = None
         try:
             with urlopen(request, timeout=remaining) as response:
