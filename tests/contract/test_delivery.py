@@ -77,6 +77,18 @@ class DeliveryTests(unittest.TestCase):
         with self.assertRaisesRegex(DeliveryRejected, "Citation absent"):
             delivery.private_reply("¿Cuánto?", result, lambda: self.current, deadline=self.deadline)
 
+    def test_fragment_scope_is_enforced_at_context_and_final_delivery(self):
+        excluded = Eligibility("lab", "generation", frozenset({"projection"}), frozenset())
+        backend = Backend()
+        delivery = Delivery(Tokenizer(), backend)
+        with self.assertRaisesRegex(DeliveryRejected, "No eligible evidence"):
+            delivery.private_reply("¿Cuánto?", self.result, lambda: excluded, deadline=self.deadline)
+        self.assertEqual(backend.calls, 0)
+        reads = iter((self.allowed, excluded))
+        with self.assertRaisesRegex(DeliveryRejected, "revoked before delivery"):
+            delivery.private_reply("¿Cuánto?", self.result, lambda: next(reads), deadline=self.deadline)
+        self.assertEqual(backend.calls, 1)
+
     def test_dl05_disconnect_closes_generator_and_records_terminal(self):
         backend = Backend()
         status = []

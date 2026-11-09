@@ -154,6 +154,10 @@ jobs:
             -k test_real_model_private_delivery -v 2>&1 | tee "$evidence/real-inference.log"
           grep -q '^Ran 1 test in ' "$evidence/real-inference.log"
           grep -qx 'OK' "$evidence/real-inference.log"
+          cd examples/mcp-client
+          node --version
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run --silent verify | tee "$evidence/mcp-witness.json"
       - name: Record the LX-01 lexical baseline
         run: |
           evidence="$RUNNER_TEMP/wp01"
