@@ -4,10 +4,12 @@
 | --- | --- | --- |
 | `42262268040` | `324f937`, despacho WP-01/LX-01 | Publicación y recuperación léxica en el testigo con PostgreSQL y Vespa. [Run](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42262268040) |
 | `42465181926` | `c1fd4fd`, despacho de estabilidad | Ensayo de estabilidad en la rama experimental. La auditoría de sus resultados pareados se registra por separado. [Run](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42465181926) |
+| `42540084995` | Combinación del PR #1 con `main`, rama `d9c15ec` | Puerta CPU exitosa con aceptación, testigo y LX-01. [Run](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42540084995) |
+| `42540081953` | `d9c15ec`, despacho de modelo real | RI-01 y MCP-01 completados en el mismo runner. [Run](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42540081953) · [Evidencia archivada](../../evaluation/evidence/real-inference-42540081953/record.json) |
 | CPU integration gate | Push a una rama o pull request hacia `main` | Suites unitarias y de contrato, 12 ensayos de aceptación en PostgreSQL, 7 ensayos del testigo, incluyendo retiro léxico, denso e híbrido con Vespa y vectores sintéticos, y LX-01. |
 | Real inference witness | Despacho con `real_inference=true` | Recorrido privado desde el original aceptado hasta la entrega con modelo real. Conserva evidencia, rechazo por ACL y fallo de backend. |
 
-La puerta CPU y la corrida real identifican su commit y conservan los logs por ejecución. El workflow exige el conteo y estado terminal de las suites de integración. La selección CPU omite el ensayo de modelo real por nombre de prueba. [Workflow](../../.github/workflows/wp01.yml)
+La puerta CPU y la corrida real identifican su commit y conservan los logs por ejecución. El workflow exige el conteo y estado terminal de las suites de integración. La selección CPU omite el ensayo de modelo real por nombre de prueba. La regla activa de `main` exige PR actualizado con el check de GitHub Actions y carece de actores con bypass. [Workflow](../../.github/workflows/wp01.yml) · [Regla de integración](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/rules/26820619)
 
 ## RI-01 · Entrega privada con modelo real
 
@@ -27,3 +29,5 @@ gh workflow run wp01.yml --ref main -f real_inference=true -f dense=false -f sci
 ```
 
 El ensayo acredita una ruta privada, léxica y sintética en el laboratorio. El servicio de destino requiere integrar un transporte autenticado y medir el comportamiento bajo carga. La publicación de PDF, el perfil de inferencia vLLM y la reescritura bibliográfica conservan sus criterios de verificación propios. [Objetivos](../operations/service-objectives.md)
+
+RI-01 obtuvo la respuesta esperada y verificó el rango `[0, 54)` del original. El tramo de entrega medido fue 4,313 s para una solicitud. MCP-01 recuperó la retención de 17 días y verificó tres rechazos de permisos. La primera evidencia de Actions registró Node 22.23.4. El procedimiento fija Node 25.9.0, usado en la prueba local y compatible con el mínimo de las dependencias. [Registro del ensayo](../../evaluation/evidence/real-inference-42540081953/record.json) · [Procedimiento MCP](../../examples/mcp-client/README.md)

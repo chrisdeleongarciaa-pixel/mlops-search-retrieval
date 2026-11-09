@@ -10,6 +10,8 @@ Construí el arnés de evaluación para distinguir calidad de ranking, aproximac
 
 **Tecnologías.** Python, PostgreSQL, Vespa, Docker Compose, GROBID, TEI, BEIR, PyTorch, Transformers, Sentence Transformers, vLLM y GitHub Actions. E5 y EmbeddingGemma-300M se evaluaron como encoders. Qwen2.5-7B-Instruct se ensayó como backend generativo con vLLM en una L4. [Registro experimental](registro-tecnico-experimental.md)
 
+En la prueba integral de laboratorio, un Qwen de 1,5B en CPU devolvió una respuesta cuya cita se resolvió a los bytes del original. La prueba revocó el permiso al terminar la generación y verificó el rechazo antes de entregar. Un ejemplo separado conectó el mismo modelo por API al servidor MCP oficial de archivos con una herramienta de lectura permitida. [Evidencia de inferencia y MCP](verification/integration-gate.md)
+
 ## CV
 
 **Recuperación de literatura científica con procedencia** · Python, PostgreSQL, Vespa, GROBID, Docker, BEIR

@@ -12,11 +12,11 @@ El checkpoint `checkpoint/2026-11-08` reúne el laboratorio de ingesta, publicac
 | Recuperación | BM25, búsqueda exacta, HNSW y RRF. En SciFact, EmbeddingGemma exacta alcanzó 0,78871 NDCG@10 frente a 0,66168 de BM25. [Resultados por consulta](evaluation/evidence/scifact-gemma-exact-cpu/) |
 | Transformación PDF | GROBID, TEI y fragmentos con secciones, páginas, coordenadas y hashes. El ensayo de ocho páginas produjo 94 fragmentos verificables con presupuesto E5. [Verificación PDF](docs/verification/scientific-pdf.md) |
 | Corpus bibliográfico | LitSearch materializado con 64.183 artículos y 300 consultas de evaluación congeladas. Los resultados de ranking y reescritura quedan pendientes. [Contrato bibliográfico](docs/contracts/bibliographic-profile.md) |
-| Contexto e inferencia | Contratos de autorización, presupuesto de contexto y validación de citas en el testigo. El ensayo de entrega privada con Qwen en CPU tiene ejecución separada. [Verificación de entrega e inferencia](docs/verification/integration-gate.md) |
+| Contexto e inferencia | El ensayo privado con Qwen real en CPU enlazó la consulta con una respuesta cuya cita resolvió al original. Verificó el rechazo tras revocación y ante fallo del backend. [Verificación de entrega e inferencia](docs/verification/integration-gate.md) |
 
 Sobre las 300 consultas oficiales de SciFact, E5 exacta obtuvo 0,69390 NDCG@10. RRF con EmbeddingGemma elevó Recall@100 de 0,975 a 0,980 y redujo NDCG@10 a 0,74246. En un ensayo distinto, HNSW con E5 y un cliente secuencial registró recall ANN@10 de 0,99158 y p95 de motor de 12,42 ms en la cohorte completa, como medias de cuatro construcciones. Las medidas de motor y de servicio tienen presupuestos distintos. La cohorte de ≈1 % utilizó búsqueda exacta por selectividad estimada. [Comparación exacta](evaluation/evidence/scifact-gemma-exact-cpu/manifest.json) · [Protocolo y resultados HNSW](docs/verification/scifact-stability.md)
 
-La publicación de generaciones PDF, el rendimiento bajo carga representativa y la calidad de reescritura sobre LitSearch tienen criterios pendientes en el registro de configuración. [Estado frente al diseño](docs/estado-frente-al-diseno.md)
+La prueba integral usa un documento UTF-8 sintético e identidad suministrada por el arnés. Quedan pendientes el transporte autenticado, la publicación de generaciones PDF, el rendimiento bajo carga representativa y la calidad de reescritura sobre LitSearch. [Estado frente al diseño](docs/estado-frente-al-diseno.md)
 
 ## Estructura
 

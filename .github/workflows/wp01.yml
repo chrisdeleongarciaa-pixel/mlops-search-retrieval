@@ -122,7 +122,13 @@ jobs:
             2>&1 | tee "$evidence/wp01.log"
           grep -q '^Ran 7 tests in ' "$evidence/wp01.log"
           grep -qx 'OK' "$evidence/wp01.log"
-      - name: Verify private delivery with real Qwen inference
+      - name: Install the pinned Node runtime for MCP
+        if: github.event_name == 'workflow_dispatch' && inputs.real_inference
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "25.9.0"
+          package-manager-cache: false
+      - name: Run the real-model and MCP witnesses
         if: github.event_name == 'workflow_dispatch' && inputs.real_inference
         run: |
           set -euo pipefail

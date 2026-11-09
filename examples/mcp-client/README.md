@@ -9,7 +9,14 @@ El cliente usa el servidor upstream `@modelcontextprotocol/server-filesystem` po
 | Servidor | Arranca con un directorio temporal permitido. Una llamada de control a un archivo sintético hermano verifica el rechazo fuera de esa raíz. |
 | Transporte | El proceso local usa stdio y el modelo escucha en loopback. Las solicitudes HTTP tienen plazo. El cierre del cliente termina el transporte. |
 
-Con Node.js y el modelo CPU del [ensayo de inferencia](../../docs/verification/integration-gate.md) escuchando como `qwen-witness` en el puerto `18090`, ejecutar desde esta carpeta.
+Usar Node.js 24 o posterior y el GGUF Qwen fijado por hash en el [ensayo de inferencia](../../docs/verification/integration-gate.md). Con el binario llama.cpp b12211, iniciar el servidor en loopback.
+
+```sh
+llama-server --model /path/to/qwen.gguf --alias qwen-witness --host 127.0.0.1 \
+  --port 18090 --threads 2 --ctx-size 1024 --parallel 1 --jinja
+```
+
+Ejecutar desde esta carpeta después de que el endpoint `/health` devuelva estado `ok`.
 
 ```sh
 npm ci --ignore-scripts
