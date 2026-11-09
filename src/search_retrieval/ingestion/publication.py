@@ -50,9 +50,11 @@ class ProjectionIndex(Protocol):
     ) -> None: ...
 
 
-def project(work: Work, raw: bytes) -> tuple[str, tuple[Fragment, ...], str, dict]:
+def project(work: Work, raw: bytes, *, vector_space: str | None = None) -> tuple[str, tuple[Fragment, ...], str, dict]:
     """Use original UTF-8 byte offsets and stable, line-based fragments."""
     identity = [work.document_key, work.sequence, work.generation, "utf8-lines-v1"]
+    if vector_space is not None:
+        identity.append(vector_space)
     projection = sha256(json.dumps(identity).encode("ascii")).hexdigest()
     fragments = []
     exclusions = []
@@ -88,6 +90,7 @@ class PublicationWorker:
     def __init__(
         self, ledger: PublicationLedger, originals: Originals, index: ProjectionIndex, *,
         max_original_bytes: int = 1_048_576,
+        vector_space: str | None = None,
     ) -> None:
         if max_original_bytes <= 0:
             raise ValueError("Invalid publication byte limit")
@@ -95,6 +98,7 @@ class PublicationWorker:
         self.originals = originals
         self.index = index
         self.max_original_bytes = max_original_bytes
+        self.vector_space = vector_space
 
     def run_one(self) -> str | None:
         """Persist a terminal outcome only after verification or a permanent rejection."""
@@ -109,7 +113,7 @@ class PublicationWorker:
             if work.size > self.max_original_bytes:
                 raise ValueError("Original exceeds witness transformation limit")
             raw = self.originals.read_verified(work.reference, work.size, work.digest)
-            projection, fragments, digest, manifest = project(work, raw)
+            projection, fragments, digest, manifest = project(work, raw, vector_space=self.vector_space)
         except (ValueError, IntegrityError):
             return self.ledger.finish(work, "quarantined")
         self.ledger.reserve(projection, digest, manifest)

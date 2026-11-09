@@ -1,0 +1,3482 @@
+[
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 1,
+    "request_id": "lx01/1/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.118963,
+        "vespa_lexical_ms": 8.683769,
+        "revalidation_ms": 14.811702,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 32.648025,
+    "engine_calls_ms": [
+      8.680534
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 1,
+    "request_id": "lx01/1/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 27.758767,
+        "vespa_lexical_ms": 25.651571,
+        "revalidation_ms": 17.01245,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 70.458231,
+    "engine_calls_ms": [
+      25.646623
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 1,
+    "request_id": "lx01/1/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.879501,
+        "vespa_lexical_ms": 22.169103,
+        "revalidation_ms": 8.241785,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 45.338441,
+    "engine_calls_ms": [
+      22.164916
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 1,
+    "request_id": "lx01/1/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.240707,
+        "vespa_lexical_ms": 7.385543,
+        "revalidation_ms": 8.326758,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.977596,
+    "engine_calls_ms": [
+      7.382319
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 1,
+    "request_id": "lx01/1/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.795363,
+        "vespa_lexical_ms": 10.158261,
+        "revalidation_ms": 8.774542,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 27.758411,
+    "engine_calls_ms": [
+      10.154826
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 1,
+    "request_id": "lx01/1/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.456424,
+        "vespa_lexical_ms": 11.330326,
+        "revalidation_ms": 12.434874,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 33.244658,
+    "engine_calls_ms": [
+      11.327341
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 2,
+    "request_id": "lx01/2/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.617738,
+        "vespa_lexical_ms": 8.726153,
+        "revalidation_ms": 7.983328,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.35436,
+    "engine_calls_ms": [
+      8.722688
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 2,
+    "request_id": "lx01/2/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.62569,
+        "vespa_lexical_ms": 12.585637,
+        "revalidation_ms": 8.883161,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.12249,
+    "engine_calls_ms": [
+      12.582532
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 2,
+    "request_id": "lx01/2/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.556836,
+        "vespa_lexical_ms": 12.623093,
+        "revalidation_ms": 8.444591,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.668777,
+    "engine_calls_ms": [
+      12.619909
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 2,
+    "request_id": "lx01/2/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.607083,
+        "vespa_lexical_ms": 6.78902,
+        "revalidation_ms": 7.77328,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 23.193629,
+    "engine_calls_ms": [
+      6.785444
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 2,
+    "request_id": "lx01/2/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.56889,
+        "vespa_lexical_ms": 10.75825,
+        "revalidation_ms": 8.130576,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 27.498918,
+    "engine_calls_ms": [
+      10.755435
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 2,
+    "request_id": "lx01/2/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.914588,
+        "vespa_lexical_ms": 7.84248,
+        "revalidation_ms": 8.195039,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.978367,
+    "engine_calls_ms": [
+      7.839746
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 3,
+    "request_id": "lx01/3/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.792964,
+        "vespa_lexical_ms": 10.406286,
+        "revalidation_ms": 8.802118,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 28.026387,
+    "engine_calls_ms": [
+      10.403182
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 3,
+    "request_id": "lx01/3/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.854432,
+        "vespa_lexical_ms": 10.386818,
+        "revalidation_ms": 10.934377,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.222948,
+    "engine_calls_ms": [
+      10.383943
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 3,
+    "request_id": "lx01/3/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.307636,
+        "vespa_lexical_ms": 11.353411,
+        "revalidation_ms": 8.273111,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.961851,
+    "engine_calls_ms": [
+      11.350556
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 3,
+    "request_id": "lx01/3/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.363564,
+        "vespa_lexical_ms": 10.208828,
+        "revalidation_ms": 12.968146,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 32.593878,
+    "engine_calls_ms": [
+      10.204932
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 3,
+    "request_id": "lx01/3/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.174739,
+        "vespa_lexical_ms": 17.38268,
+        "revalidation_ms": 11.448245,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 42.100087,
+    "engine_calls_ms": [
+      17.379476
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 3,
+    "request_id": "lx01/3/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.708298,
+        "vespa_lexical_ms": 9.687008,
+        "revalidation_ms": 12.001212,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 33.423178,
+    "engine_calls_ms": [
+      9.683332
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 4,
+    "request_id": "lx01/4/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.024846,
+        "vespa_lexical_ms": 11.492952,
+        "revalidation_ms": 12.940304,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 38.566236,
+    "engine_calls_ms": [
+      11.489727
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 4,
+    "request_id": "lx01/4/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.218549,
+        "vespa_lexical_ms": 14.400365,
+        "revalidation_ms": 10.874415,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 39.526941,
+    "engine_calls_ms": [
+      14.396298
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 4,
+    "request_id": "lx01/4/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.503568,
+        "vespa_lexical_ms": 12.090668,
+        "revalidation_ms": 12.800247,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 36.428394,
+    "engine_calls_ms": [
+      12.086551
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 4,
+    "request_id": "lx01/4/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.622832,
+        "vespa_lexical_ms": 11.052375,
+        "revalidation_ms": 11.380712,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 36.084763,
+    "engine_calls_ms": [
+      11.04898
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 4,
+    "request_id": "lx01/4/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.422796,
+        "vespa_lexical_ms": 10.616456,
+        "revalidation_ms": 10.496664,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 32.563827,
+    "engine_calls_ms": [
+      10.613661
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 4,
+    "request_id": "lx01/4/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.244413,
+        "vespa_lexical_ms": 8.112564,
+        "revalidation_ms": 9.284959,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 25.667966,
+    "engine_calls_ms": [
+      8.10982
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 5,
+    "request_id": "lx01/5/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.287533,
+        "vespa_lexical_ms": 8.310188,
+        "revalidation_ms": 8.349598,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 25.988091,
+    "engine_calls_ms": [
+      8.307244
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 5,
+    "request_id": "lx01/5/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.809449,
+        "vespa_lexical_ms": 8.554117,
+        "revalidation_ms": 9.299681,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.689758,
+    "engine_calls_ms": [
+      8.551504
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 5,
+    "request_id": "lx01/5/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.836113,
+        "vespa_lexical_ms": 8.994049,
+        "revalidation_ms": 12.040401,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.898035,
+    "engine_calls_ms": [
+      8.991435
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 5,
+    "request_id": "lx01/5/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.1503,
+        "vespa_lexical_ms": 9.666677,
+        "revalidation_ms": 10.380152,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 29.221817,
+    "engine_calls_ms": [
+      9.663152
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 5,
+    "request_id": "lx01/5/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.769473,
+        "vespa_lexical_ms": 8.318646,
+        "revalidation_ms": 12.056526,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.169612,
+    "engine_calls_ms": [
+      8.316513
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 5,
+    "request_id": "lx01/5/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.810881,
+        "vespa_lexical_ms": 7.072349,
+        "revalidation_ms": 7.694847,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 23.601883,
+    "engine_calls_ms": [
+      7.069745
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 6,
+    "request_id": "lx01/6/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.473375,
+        "vespa_lexical_ms": 8.262531,
+        "revalidation_ms": 8.309357,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 25.070201,
+    "engine_calls_ms": [
+      8.259687
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 6,
+    "request_id": "lx01/6/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.544613,
+        "vespa_lexical_ms": 8.831623,
+        "revalidation_ms": 14.296707,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.700845,
+    "engine_calls_ms": [
+      8.828288
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 6,
+    "request_id": "lx01/6/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.419113,
+        "vespa_lexical_ms": 8.695366,
+        "revalidation_ms": 10.076478,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 28.216606,
+    "engine_calls_ms": [
+      8.692202
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 6,
+    "request_id": "lx01/6/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.472899,
+        "vespa_lexical_ms": 6.863693,
+        "revalidation_ms": 10.645404,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 27.005711,
+    "engine_calls_ms": [
+      6.860778
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 6,
+    "request_id": "lx01/6/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.378637,
+        "vespa_lexical_ms": 9.884206,
+        "revalidation_ms": 9.033303,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 27.325141,
+    "engine_calls_ms": [
+      9.881523
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 6,
+    "request_id": "lx01/6/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.754591,
+        "vespa_lexical_ms": 6.565717,
+        "revalidation_ms": 8.703704,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.052385,
+    "engine_calls_ms": [
+      6.562952
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 7,
+    "request_id": "lx01/7/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.322342,
+        "vespa_lexical_ms": 7.493397,
+        "revalidation_ms": 7.993614,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 23.834299,
+    "engine_calls_ms": [
+      7.490832
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 7,
+    "request_id": "lx01/7/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.393384,
+        "vespa_lexical_ms": 12.286695,
+        "revalidation_ms": 10.212789,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.92111,
+    "engine_calls_ms": [
+      12.282097
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 7,
+    "request_id": "lx01/7/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.864663,
+        "vespa_lexical_ms": 9.016192,
+        "revalidation_ms": 13.799666,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.708763,
+    "engine_calls_ms": [
+      9.013428
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 7,
+    "request_id": "lx01/7/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.650948,
+        "vespa_lexical_ms": 8.630378,
+        "revalidation_ms": 8.594263,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.917483,
+    "engine_calls_ms": [
+      8.627133
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 7,
+    "request_id": "lx01/7/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.053647,
+        "vespa_lexical_ms": 8.693443,
+        "revalidation_ms": 10.166635,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.991713,
+    "engine_calls_ms": [
+      8.690349
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 7,
+    "request_id": "lx01/7/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.923602,
+        "vespa_lexical_ms": 6.613103,
+        "revalidation_ms": 7.758778,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 23.322554,
+    "engine_calls_ms": [
+      6.610449
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 8,
+    "request_id": "lx01/8/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.349133,
+        "vespa_lexical_ms": 8.427956,
+        "revalidation_ms": 13.400156,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.203514,
+    "engine_calls_ms": [
+      8.425142
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 8,
+    "request_id": "lx01/8/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.282709,
+        "vespa_lexical_ms": 10.380789,
+        "revalidation_ms": 12.597385,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 35.289004,
+    "engine_calls_ms": [
+      10.377774
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 8,
+    "request_id": "lx01/8/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.954308,
+        "vespa_lexical_ms": 12.709014,
+        "revalidation_ms": 10.297793,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 32.989828,
+    "engine_calls_ms": [
+      12.706009
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 8,
+    "request_id": "lx01/8/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.231592,
+        "vespa_lexical_ms": 8.852935,
+        "revalidation_ms": 12.887904,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 32.001726,
+    "engine_calls_ms": [
+      8.84952
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 8,
+    "request_id": "lx01/8/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.027241,
+        "vespa_lexical_ms": 13.488424,
+        "revalidation_ms": 12.238622,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 38.784152,
+    "engine_calls_ms": [
+      13.484779
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 8,
+    "request_id": "lx01/8/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 18.680801,
+        "vespa_lexical_ms": 8.497712,
+        "revalidation_ms": 8.251535,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 35.466873,
+    "engine_calls_ms": [
+      8.493596
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 9,
+    "request_id": "lx01/9/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.119319,
+        "vespa_lexical_ms": 15.13381,
+        "revalidation_ms": 10.67234,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 34.969446,
+    "engine_calls_ms": [
+      15.130696
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 9,
+    "request_id": "lx01/9/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 17.550545,
+        "vespa_lexical_ms": 16.534567,
+        "revalidation_ms": 10.461481,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 44.575175,
+    "engine_calls_ms": [
+      16.53072
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 9,
+    "request_id": "lx01/9/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.701806,
+        "vespa_lexical_ms": 9.399998,
+        "revalidation_ms": 8.249947,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.379654,
+    "engine_calls_ms": [
+      9.397555
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 9,
+    "request_id": "lx01/9/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.894538,
+        "vespa_lexical_ms": 11.320917,
+        "revalidation_ms": 12.97711,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 33.218544,
+    "engine_calls_ms": [
+      11.317772
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 9,
+    "request_id": "lx01/9/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.549887,
+        "vespa_lexical_ms": 13.401923,
+        "revalidation_ms": 12.156056,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 39.134797,
+    "engine_calls_ms": [
+      13.398778
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 9,
+    "request_id": "lx01/9/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.351171,
+        "vespa_lexical_ms": 8.261409,
+        "revalidation_ms": 10.930135,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 33.570647,
+    "engine_calls_ms": [
+      8.258154
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 10,
+    "request_id": "lx01/10/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.994123,
+        "vespa_lexical_ms": 7.713049,
+        "revalidation_ms": 7.959302,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.691831,
+    "engine_calls_ms": [
+      7.7071
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 10,
+    "request_id": "lx01/10/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.862279,
+        "vespa_lexical_ms": 11.268838,
+        "revalidation_ms": 11.407603,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.579593,
+    "engine_calls_ms": [
+      11.265343
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 10,
+    "request_id": "lx01/10/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.10055,
+        "vespa_lexical_ms": 10.493579,
+        "revalidation_ms": 8.160767,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 27.782438,
+    "engine_calls_ms": [
+      10.490355
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 10,
+    "request_id": "lx01/10/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.754646,
+        "vespa_lexical_ms": 7.99784,
+        "revalidation_ms": 8.799644,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 25.579341,
+    "engine_calls_ms": [
+      7.994936
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 10,
+    "request_id": "lx01/10/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.562996,
+        "vespa_lexical_ms": 8.782689,
+        "revalidation_ms": 11.216374,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 28.587156,
+    "engine_calls_ms": [
+      8.779304
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 10,
+    "request_id": "lx01/10/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.488332,
+        "vespa_lexical_ms": 9.748711,
+        "revalidation_ms": 13.274991,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 32.642191,
+    "engine_calls_ms": [
+      9.744765
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 11,
+    "request_id": "lx01/11/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.148669,
+        "vespa_lexical_ms": 10.63946,
+        "revalidation_ms": 13.243764,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 37.058483,
+    "engine_calls_ms": [
+      10.636195
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 11,
+    "request_id": "lx01/11/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.272026,
+        "vespa_lexical_ms": 9.809613,
+        "revalidation_ms": 12.108635,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 35.219549,
+    "engine_calls_ms": [
+      9.80678
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 11,
+    "request_id": "lx01/11/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.812432,
+        "vespa_lexical_ms": 9.00179,
+        "revalidation_ms": 10.918793,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.760126,
+    "engine_calls_ms": [
+      8.999266
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 11,
+    "request_id": "lx01/11/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.47786,
+        "vespa_lexical_ms": 10.847706,
+        "revalidation_ms": 12.868585,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 35.22078,
+    "engine_calls_ms": [
+      10.84412
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 11,
+    "request_id": "lx01/11/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.999608,
+        "vespa_lexical_ms": 14.035773,
+        "revalidation_ms": 9.902384,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 37.967279,
+    "engine_calls_ms": [
+      14.032658
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 11,
+    "request_id": "lx01/11/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.108663,
+        "vespa_lexical_ms": 7.925841,
+        "revalidation_ms": 7.642002,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.701403,
+    "engine_calls_ms": [
+      7.922526
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 12,
+    "request_id": "lx01/12/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.322141,
+        "vespa_lexical_ms": 11.783502,
+        "revalidation_ms": 8.180076,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 28.313713,
+    "engine_calls_ms": [
+      11.780788
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 12,
+    "request_id": "lx01/12/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.832359,
+        "vespa_lexical_ms": 10.212824,
+        "revalidation_ms": 11.41871,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.492777,
+    "engine_calls_ms": [
+      10.209519
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 12,
+    "request_id": "lx01/12/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.468569,
+        "vespa_lexical_ms": 8.808918,
+        "revalidation_ms": 11.948683,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 33.251689,
+    "engine_calls_ms": [
+      8.806014
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 12,
+    "request_id": "lx01/12/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.119684,
+        "vespa_lexical_ms": 9.518918,
+        "revalidation_ms": 7.96515,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.630753,
+    "engine_calls_ms": [
+      9.516315
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 12,
+    "request_id": "lx01/12/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.689422,
+        "vespa_lexical_ms": 10.635013,
+        "revalidation_ms": 10.525678,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.875202,
+    "engine_calls_ms": [
+      10.631898
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 12,
+    "request_id": "lx01/12/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.423808,
+        "vespa_lexical_ms": 10.719551,
+        "revalidation_ms": 9.875733,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 32.043681,
+    "engine_calls_ms": [
+      10.716497
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 13,
+    "request_id": "lx01/13/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.887767,
+        "vespa_lexical_ms": 8.590667,
+        "revalidation_ms": 8.627378,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.133607,
+    "engine_calls_ms": [
+      8.587663
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 13,
+    "request_id": "lx01/13/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.313336,
+        "vespa_lexical_ms": 9.254713,
+        "revalidation_ms": 11.569303,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.163753,
+    "engine_calls_ms": [
+      9.25203
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 13,
+    "request_id": "lx01/13/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.895964,
+        "vespa_lexical_ms": 10.945213,
+        "revalidation_ms": 11.893194,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 33.761001,
+    "engine_calls_ms": [
+      10.941627
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 13,
+    "request_id": "lx01/13/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.71421,
+        "vespa_lexical_ms": 8.521874,
+        "revalidation_ms": 11.724803,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 28.98872,
+    "engine_calls_ms": [
+      8.518799
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 13,
+    "request_id": "lx01/13/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 13.388953,
+        "vespa_lexical_ms": 11.008539,
+        "revalidation_ms": 12.806707,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 37.232431,
+    "engine_calls_ms": [
+      11.005835
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 13,
+    "request_id": "lx01/13/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 20.14304,
+        "vespa_lexical_ms": 8.366268,
+        "revalidation_ms": 13.827898,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 42.367002,
+    "engine_calls_ms": [
+      8.362822
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 14,
+    "request_id": "lx01/14/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.486085,
+        "vespa_lexical_ms": 9.895634,
+        "revalidation_ms": 11.276911,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 35.688945,
+    "engine_calls_ms": [
+      9.892118
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 14,
+    "request_id": "lx01/14/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.091676,
+        "vespa_lexical_ms": 9.032317,
+        "revalidation_ms": 9.898028,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 28.049743,
+    "engine_calls_ms": [
+      9.029091
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 14,
+    "request_id": "lx01/14/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.11095,
+        "vespa_lexical_ms": 8.826255,
+        "revalidation_ms": 11.437328,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.416948,
+    "engine_calls_ms": [
+      8.82326
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 14,
+    "request_id": "lx01/14/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 12.794002,
+        "vespa_lexical_ms": 11.10806,
+        "revalidation_ms": 10.746332,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 34.674774,
+    "engine_calls_ms": [
+      11.104704
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 14,
+    "request_id": "lx01/14/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.547601,
+        "vespa_lexical_ms": 8.94538,
+        "revalidation_ms": 8.73384,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.25366,
+    "engine_calls_ms": [
+      8.942435
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 14,
+    "request_id": "lx01/14/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.829434,
+        "vespa_lexical_ms": 6.942006,
+        "revalidation_ms": 11.069396,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.866296,
+    "engine_calls_ms": [
+      6.939143
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 15,
+    "request_id": "lx01/15/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.428086,
+        "vespa_lexical_ms": 9.464792,
+        "revalidation_ms": 11.56411,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.483268,
+    "engine_calls_ms": [
+      9.461857
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 15,
+    "request_id": "lx01/15/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 14.183317,
+        "vespa_lexical_ms": 10.017879,
+        "revalidation_ms": 8.447385,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 32.682383,
+    "engine_calls_ms": [
+      10.015094
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 15,
+    "request_id": "lx01/15/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.97883,
+        "vespa_lexical_ms": 8.586111,
+        "revalidation_ms": 14.645441,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 32.238566,
+    "engine_calls_ms": [
+      8.583307
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 15,
+    "request_id": "lx01/15/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.1281,
+        "vespa_lexical_ms": 9.227151,
+        "revalidation_ms": 8.528764,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 28.915183,
+    "engine_calls_ms": [
+      9.223376
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 15,
+    "request_id": "lx01/15/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.558474,
+        "vespa_lexical_ms": 8.923942,
+        "revalidation_ms": 8.585295,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.096185,
+    "engine_calls_ms": [
+      8.921038
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 15,
+    "request_id": "lx01/15/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.279156,
+        "vespa_lexical_ms": 6.679775,
+        "revalidation_ms": 7.771017,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 23.753933,
+    "engine_calls_ms": [
+      6.6765
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 16,
+    "request_id": "lx01/16/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.045112,
+        "vespa_lexical_ms": 8.344405,
+        "revalidation_ms": 9.254719,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 25.672348,
+    "engine_calls_ms": [
+      8.34148
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 16,
+    "request_id": "lx01/16/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.399584,
+        "vespa_lexical_ms": 8.700685,
+        "revalidation_ms": 9.056853,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.212576,
+    "engine_calls_ms": [
+      8.69786
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 16,
+    "request_id": "lx01/16/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.027538,
+        "vespa_lexical_ms": 7.253133,
+        "revalidation_ms": 8.547708,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.854058,
+    "engine_calls_ms": [
+      7.250259
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 16,
+    "request_id": "lx01/16/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.52226,
+        "vespa_lexical_ms": 6.388839,
+        "revalidation_ms": 7.869691,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 22.804896,
+    "engine_calls_ms": [
+      6.385844
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 16,
+    "request_id": "lx01/16/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.114816,
+        "vespa_lexical_ms": 7.077036,
+        "revalidation_ms": 10.183089,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.598269,
+    "engine_calls_ms": [
+      7.074222
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 16,
+    "request_id": "lx01/16/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.300133,
+        "vespa_lexical_ms": 5.944591,
+        "revalidation_ms": 8.244959,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 22.518958,
+    "engine_calls_ms": [
+      5.941567
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 17,
+    "request_id": "lx01/17/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.748978,
+        "vespa_lexical_ms": 8.774727,
+        "revalidation_ms": 9.195599,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.748567,
+    "engine_calls_ms": [
+      8.771732
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 17,
+    "request_id": "lx01/17/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.118993,
+        "vespa_lexical_ms": 9.632736,
+        "revalidation_ms": 11.288679,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 30.142812,
+    "engine_calls_ms": [
+      9.629111
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 17,
+    "request_id": "lx01/17/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.411486,
+        "vespa_lexical_ms": 8.690138,
+        "revalidation_ms": 8.294945,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.601695,
+    "engine_calls_ms": [
+      8.686734
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 17,
+    "request_id": "lx01/17/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.83154,
+        "vespa_lexical_ms": 7.834093,
+        "revalidation_ms": 8.210547,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.901719,
+    "engine_calls_ms": [
+      7.831228
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 17,
+    "request_id": "lx01/17/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 9.285129,
+        "vespa_lexical_ms": 7.092699,
+        "revalidation_ms": 13.58517,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.98997,
+    "engine_calls_ms": [
+      7.089254
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 17,
+    "request_id": "lx01/17/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 11.394704,
+        "vespa_lexical_ms": 12.529071,
+        "revalidation_ms": 19.1719,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 43.12566,
+    "engine_calls_ms": [
+      12.525496
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 18,
+    "request_id": "lx01/18/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 42.450277,
+        "vespa_lexical_ms": 11.734959,
+        "revalidation_ms": 13.841509,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 68.061428,
+    "engine_calls_ms": [
+      11.731323
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 18,
+    "request_id": "lx01/18/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 15.834857,
+        "vespa_lexical_ms": 11.658834,
+        "revalidation_ms": 11.37901,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 38.90534,
+    "engine_calls_ms": [
+      11.654797
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 18,
+    "request_id": "lx01/18/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.617739,
+        "vespa_lexical_ms": 9.981063,
+        "revalidation_ms": 7.998587,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 26.628325,
+    "engine_calls_ms": [
+      9.978018
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 18,
+    "request_id": "lx01/18/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.85921,
+        "vespa_lexical_ms": 8.758858,
+        "revalidation_ms": 11.816643,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 29.488061,
+    "engine_calls_ms": [
+      8.755974
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 18,
+    "request_id": "lx01/18/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 15.851472,
+        "vespa_lexical_ms": 9.097525,
+        "revalidation_ms": 10.372616,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 35.38532,
+    "engine_calls_ms": [
+      9.094741
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 18,
+    "request_id": "lx01/18/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.332902,
+        "vespa_lexical_ms": 5.544736,
+        "revalidation_ms": 8.018687,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 21.968424,
+    "engine_calls_ms": [
+      5.542202
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 19,
+    "request_id": "lx01/19/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.481507,
+        "vespa_lexical_ms": 7.255967,
+        "revalidation_ms": 7.778824,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 23.550139,
+    "engine_calls_ms": [
+      7.252892
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 19,
+    "request_id": "lx01/19/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.643492,
+        "vespa_lexical_ms": 7.551594,
+        "revalidation_ms": 8.370009,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 24.594221,
+    "engine_calls_ms": [
+      7.548721
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 19,
+    "request_id": "lx01/19/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.845769,
+        "vespa_lexical_ms": 6.740826,
+        "revalidation_ms": 7.964499,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 23.577947,
+    "engine_calls_ms": [
+      6.738323
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 19,
+    "request_id": "lx01/19/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.561824,
+        "vespa_lexical_ms": 6.020871,
+        "revalidation_ms": 9.921433,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.536067,
+    "engine_calls_ms": [
+      6.017817
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 19,
+    "request_id": "lx01/19/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.350815,
+        "vespa_lexical_ms": 10.270061,
+        "revalidation_ms": 10.36174,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.008655,
+    "engine_calls_ms": [
+      10.267417
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 19,
+    "request_id": "lx01/19/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.739793,
+        "vespa_lexical_ms": 7.35425,
+        "revalidation_ms": 8.829074,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 24.954555,
+    "engine_calls_ms": [
+      7.350806
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 20,
+    "request_id": "lx01/20/term",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.762223,
+        "vespa_lexical_ms": 7.2384,
+        "revalidation_ms": 8.313017,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 24.358518,
+    "engine_calls_ms": [
+      7.235716
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 20,
+    "request_id": "lx01/20/phrase",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.885069,
+        "vespa_lexical_ms": 6.233148,
+        "revalidation_ms": 14.234114,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.39846,
+    "engine_calls_ms": [
+      6.228561
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 20,
+    "request_id": "lx01/20/acronym",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.66233,
+        "vespa_lexical_ms": 7.732338,
+        "revalidation_ms": 11.440423,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 29.860369,
+    "engine_calls_ms": [
+      7.729003
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 20,
+    "request_id": "lx01/20/identifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 10.187301,
+        "vespa_lexical_ms": 7.019299,
+        "revalidation_ms": 8.788777,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.022057,
+    "engine_calls_ms": [
+      7.016404
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 20,
+    "request_id": "lx01/20/retention-en",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.344435,
+        "vespa_lexical_ms": 10.418886,
+        "revalidation_ms": 12.834975,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete",
+    "retrieval_ms": 31.630184,
+    "engine_calls_ms": [
+      10.415861
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 20,
+    "request_id": "lx01/20/expected-empty",
+    "attempts": [
+      {
+        "attempt": 1,
+        "eligibility_ms": 8.365537,
+        "vespa_lexical_ms": 6.238201,
+        "revalidation_ms": 12.29708,
+        "snapshot_stable": true
+      }
+    ],
+    "cache": {
+      "query": "disabled",
+      "results": "disabled"
+    },
+    "status": "complete_empty",
+    "retrieval_ms": 26.929281,
+    "engine_calls_ms": [
+      6.234665
+    ],
+    "candidates": []
+  }
+]

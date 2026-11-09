@@ -1,0 +1,10 @@
+{
+  "status": "complete",
+  "queries": 300,
+  "metrics": {
+    "NDCG@10": 0.66168,
+    "Recall@10": 0.79094,
+    "Recall@100": 0.88589
+  },
+  "per_query_sha256": "deb9a1b2766effe51c7e3999e78a0e0e1e4ce2437a2751254fa61824a0ee71b4"
+}

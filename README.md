@@ -1,6 +1,22 @@
-# Search, Retrieval e Inferencia
+# Recuperación de literatura científica e inferencia con citas
 
-Sistema de ingesta documental, recuperación híbrida e inferencia con citas en construcción. El primer incremento implementa la aceptación durable de revisiones con PostgreSQL y un almacén de archivos persistente.
+Plataforma experimental para buscar literatura de ML/NLP en inglés. PostgreSQL conserva la revisión autorizada y su estado de publicación. Vespa sirve proyecciones reconstruibles para búsqueda léxica y vectorial. Los fragmentos conservan la identidad de su revisión y su transformación para resolver la evidencia que recibe el modelo.
+
+## Configuración registrada
+
+El checkpoint `checkpoint/2026-11-08` reúne el laboratorio de ingesta, publicación y búsqueda, los ensayos de recuperación en SciFact y el incremento de PDF científico. El registro identifica los componentes verificados, las condiciones de ensayo y los criterios pendientes para ampliar su alcance. [Registro de configuración](docs/checkpoints/2026-11-08.md)
+
+| Capacidad | Alcance demostrado |
+| --- | --- |
+| Aceptación y publicación | Ingesta idempotente con outbox transaccional. Continuidad de búsqueda y exclusión tras retiro bajo carreras ensayadas con PostgreSQL y Vespa. [Verificación](docs/verification/witness-increments.md) |
+| Recuperación | BM25, búsqueda exacta, HNSW y RRF. En SciFact, EmbeddingGemma exacta alcanzó 0,78871 NDCG@10 frente a 0,66168 de BM25. [Resultados por consulta](evaluation/evidence/scifact-gemma-exact-cpu/) |
+| Transformación PDF | GROBID, TEI y fragmentos con secciones, páginas, coordenadas y hashes. El ensayo de ocho páginas produjo 94 fragmentos verificables con presupuesto E5. [Verificación PDF](docs/verification/scientific-pdf.md) |
+| Corpus bibliográfico | LitSearch materializado con 64.183 artículos y 300 consultas de evaluación congeladas. Los resultados de ranking y reescritura quedan pendientes. [Contrato bibliográfico](docs/contracts/bibliographic-profile.md) |
+| Contexto e inferencia | El ensayo privado con Qwen real en CPU enlazó la consulta con una respuesta cuya cita resolvió al original. Verificó el rechazo tras revocación y ante fallo del backend. [Verificación de entrega e inferencia](docs/verification/integration-gate.md) |
+
+Sobre las 300 consultas oficiales de SciFact, E5 exacta obtuvo 0,69390 NDCG@10. RRF con EmbeddingGemma elevó Recall@100 de 0,975 a 0,980 y redujo NDCG@10 a 0,74246. En un ensayo distinto, HNSW con E5 y un cliente secuencial registró recall ANN@10 de 0,99158 y p95 de motor de 12,42 ms en la cohorte completa, como medias de cuatro construcciones. Las medidas de motor y de servicio tienen presupuestos distintos. La cohorte de ≈1 % utilizó búsqueda exacta por selectividad estimada. [Comparación exacta](evaluation/evidence/scifact-gemma-exact-cpu/manifest.json) · [Protocolo y resultados HNSW](docs/verification/scifact-stability.md)
+
+La prueba integral usa un documento UTF-8 sintético e identidad suministrada por el arnés. Quedan pendientes el transporte autenticado, la publicación de generaciones PDF, el rendimiento bajo carga representativa y la calidad de reescritura sobre LitSearch. [Estado frente al diseño](docs/estado-frente-al-diseno.md)
 
 ## Estructura
 
@@ -22,17 +38,18 @@ Requiere Python 3.12 o posterior. Desde esta carpeta, ejecuta lo siguiente en Po
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pip install -e ".[pdf]"
 .\.venv\Scripts\python.exe -m unittest discover -s tests/unit -v
 .\.venv\Scripts\python.exe -m unittest discover -s tests/contract -v
 ```
 
 En macOS o Linux, el ejecutable del entorno virtual es `.venv/bin/python`. La instalación puede requerir descargar el backend de empaquetado. Las pruebas unitarias se ejecutan sin motores externos ni GPU.
 
-## Alcance actual
+## Documentación de ingeniería
 
-El módulo de ingesta valida el original, registra una revisión y su evento de outbox, y recupera el mismo recibo en reintentos equivalentes. La [guía de ingesta](src/search_retrieval/ingestion/README.md) describe el uso desde Python y la preparación de PostgreSQL. La [guía de integración](tests/integration/README.md) explica cómo reproducir los ensayos de recuperación.
-
-El perfil sintético añade reentrega desde un manifiesto, checkpoint, proyecciones Vespa y búsqueda con elegibilidad. Consulta el [contrato de incrementos](docs/contracts/witness-increments.md), la [matriz con evidencia](docs/verification/witness-increments.md) y los [comandos del laboratorio](docs/operations/witness-lab.md).
-
-Consulta la [arquitectura](docs/architecture.md), las [decisiones pendientes](docs/decisions/README.md) y la [guía de contribución](CONTRIBUTING.md).
+- Autoridad de estado, interfaces y evolución de versiones. [Descripción del sistema](docs/architecture.md) · [Decisiones](docs/decisions/README.md)
+- Requisitos, cobertura y condiciones para aceptar cada capacidad. [Estado frente al diseño](docs/estado-frente-al-diseno.md) · [Objetivos de aceptación](docs/operations/service-objectives.md)
+- Configuración y reproducción de ensayos. [Laboratorio de publicación y búsqueda](docs/operations/witness-lab.md) · [Procedimiento bibliográfico y PDF](docs/operations/scientific-pdf.md) · [Suite de integración](tests/integration/README.md)
+- Comprobación automática en GitHub Actions y ensayo con modelo real. [Cobertura por ejecución](docs/verification/integration-gate.md) · [Cliente MCP y permisos](examples/mcp-client/)
+- Resultados por experimento y línea de investigación. [Registro experimental](docs/registro-tecnico-experimental.md) · [Programa de recuperación aprendida](docs/programa-learned-retrieval.md)
+- Presentación del proyecto. [Portafolio, CV y LinkedIn](docs/project-profile.md)

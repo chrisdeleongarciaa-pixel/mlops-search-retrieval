@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "base_commit": "c1fd4fd",
+  "working_tree_changes": true,
+  "tests_observed": {
+    "unit": {
+      "passed": 7
+    },
+    "contract": {
+      "passed": 26
+    },
+    "pdf_contract_optimized": {
+      "passed": 6
+    },
+    "litsearch": {
+      "passed": 3
+    },
+    "pdf_postgres_grobid_integration": {
+      "passed": 1,
+      "prior_failed_attempts": 3
+    }
+  },
+  "file_sha256": {
+    "failed-busy.json": "5b95bbc712cd77260c5a55f1a828319c8b4d4c074f2370a216f760666ad76daf",
+    "failed-timeout.json": "d26a41ca28c28820c212854523d1ae9ac39b20656183da911462c9d2418da05a",
+    "failed-version.json": "8c0860451a1c862f625d58f26aef4ddd1e36c03cc9bd7c2d3dffb5cbe261eb70",
+    "litsearch-collection.json": "342088e18f3d9c4d44bf35329993698faa41ccb1c2617b8e23a79190b06accef",
+    "pdf-acceptance-verification.json": "2197260f957db59e3e7d77c2db236ff3f5d71071ce27c9bda14ade4c6fbe5dc7",
+    "pdf-access-outcomes.log": "fe44dc2a7f962205319662fd8cff8e5de129c57e9a931099712396ffe27feda0",
+    "pdf-container-effective.txt": "ae740fb0a9ddf20537ff848d4c966007573c0f99041fe3a948bee92cde09a30f",
+    "pdf-independent-token-check.json": "5e11cd71df3e160823d966ffeb11b71e7139d59d6994f3dd22f48398881c6297",
+    "pdf-independent-token-check.py": "1b7c5cc98ce369f230b71b4f3c750c34eafed77f73f135360cf26a41d03920b2",
+    "pdf-inputs.json": "8b88e71749f73eef57b397f82c91e1781162c82d75942e4fe0ea2a74cbbf20f5",
+    "pdf-manifest.json": "6f3ede7c9e40d304549a1ab4f52313539a402df51a514bc825df087c62633fac",
+    "pdf-result.json": "cf85bdda44d575ed88399304874fcd81104b5766ba267d8f0998007965baa94b",
+    "pdf-source.json": "1009ad4f21b306ef3247b648a87d5afad6dc543114cfa90e3a5ec238277fa66b",
+    "scifact-recalculation-inputs.json": "32e9311e8c0d48b78fc1a3369d92e9a5f5d74c905072d365a361050e0d72ce65",
+    "scifact-recalculation-result.json": "c5d900e101e3b456cdf9759146934a8f52d27852ce0be9c9fc55db1014b4d1f7",
+    "scifact-regeneration-manifest.json": "733b2e2cea9a4323ee5e8df1774be2b1a4d7eda47f717961307c1de0da5dd575"
+  },
+  "code_and_config_sha256": {
+    "src/search_retrieval/ingestion/transformation.py": "01ee1c0bffd5257c167c534dfa19511f79ba2c3bd1602660623e4732f56da6b0",
+    "src/search_retrieval/adapters/grobid.py": "8a947563b06bf561575712ad2a4d1e8306ac11c3bf91033df09b876da84ab696",
+    "src/search_retrieval/query/rewrite.py": "e3651dc53f08371805397210b68f6398430d45fca6c880847d9f17e247426ede",
+    "evaluation/pdf_transform.py": "c139ffbaf26b8a1ceec8f2b1c3272e7c7a14efab016a703043ce813c8ed91764",
+    "evaluation/verify_transformation.py": "23cd0559fd72f7761f5c399130003ccf1c7d2bd6532847fcae26b533039966ec",
+    "evaluation/prepare_litsearch.py": "9b937243d0f14b7209ae281fa3b9dce0a21677cbfc45e06180b67c0f195a777d",
+    "evaluation/reproduce_scifact.py": "7cb06c4f9f508f4aaafbd197c95d9c17d924ca44d178aeee9cc473fbae07c540",
+    "tests/integration/test_scientific_pdf.py": "ff1d50e55d556a6979c887ba1e524a7ca00c56fe0b59c873c0ff5f03d23c5ede",
+    "tests/contract/test_pdf_transformation.py": "31cf8a70762f01cd704f2eab9089eff77caafbe575c37bd1ae73c4ce2e3432bf",
+    "tests/contract/test_rewrite.py": "6035f78a822fbb8241bcab5ad983b82c7a51ec2a9437ce86ed6e57b6f0eac15f",
+    "evaluation/test_litsearch.py": "c08465bb6940d08b1580946a9ea7e02275b035a85697655c8826bc2438b5f9ae",
+    "infra/grobid/compose.yaml": "fa7da45342299f3a85160f230c206f080bcd99b4c0288a7875df8ed52b909268",
+    "infra/grobid/grobid.yaml": "b13b6df0115a2105e59ea13ab8ae649df843676df4ece79bdf4e4e2b4c51eb3b",
+    "config/requirements-architecture-win64.lock": "188abf23a245973961e04d5b5ddc3a4493b4c09880e4a543b8f1504089b1ea32",
+    "config/requirements-eval-win64.lock": "0f4bdc4d3a984e92114f0f5e89d6493f7a026a14a5468e303bfb53c099f727f0",
+    "config/requirements-pdf.lock": "38b00653bc20605bff809863e3a9288dd12b7bb9249d46ea2aa1e6d2d7737794",
+    "config/rewrite-experiment.json": "df39636ce1d2f78df9de23e86d9216f69a297c5885f572bd4d2c29ad42b13ce9",
+    "config/workload-profile.json": "c7a2cded9b4c3c9ca8eb35a87e2bd0012f3f035b08297f7ecf88f14937ab5ede",
+    "config/litsearch-source.json": "670382a66a078d591cc907b59c1603feead07b6a74d6f2f3288a4a056c74e2db"
+  },
+  "limits": [
+    "PDF validation uses one scientific paper plus synthetic adversarial fixtures",
+    "GROBID continues work after HTTP client timeout; resource-release gate remains open",
+    "Qwen/Gemma rewriting and LitSearch retrieval metrics not executed",
+    "Linux CI workflow updated but not run for this working tree",
+    "No claim of ISO certification or full normative audit"
+  ]
+}

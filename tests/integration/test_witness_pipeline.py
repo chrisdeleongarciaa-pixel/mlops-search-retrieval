@@ -25,6 +25,7 @@ from search_retrieval.adapters.postgres_acceptance import PostgresAcceptanceLedg
 from search_retrieval.adapters.postgres_events import PostgresEventLedger
 from search_retrieval.adapters.postgres_publication import PostgresPublication
 from search_retrieval.adapters.vespa import VespaWitness
+from search_retrieval.query.vector import VectorSearch
 from search_retrieval.ingestion.accept_revision import AuthorizedSource, Failure, Receipt, RevisionAcceptance
 from search_retrieval.ingestion.publication import PublicationWorker, project
 from search_retrieval.ingestion.submit_event import EventSubmission
@@ -171,6 +172,25 @@ class WitnessPipeline(unittest.TestCase):
     def test_wp01_continuity_obsolete_top_k_withdrawal_and_cached_context(self):
         self.verify_publication(VespaWitness(os.environ["WITNESS_VESPA_URL"]))
 
+    @unittest.skipUnless(os.environ.get("WITNESS_VESPA_URL"), "Set WITNESS_VESPA_URL for real Vespa")
+    def test_vector_dense_withdrawal_and_cached_context(self):
+        self.verify_vector_publication("dense")
+
+    @unittest.skipUnless(os.environ.get("WITNESS_VESPA_URL"), "Set WITNESS_VESPA_URL for real Vespa")
+    def test_vector_hybrid_withdrawal_and_cached_context(self):
+        self.verify_vector_publication("hybrid")
+
+    def verify_vector_publication(self, mode):
+        from types import SimpleNamespace
+
+        class WitnessEncoder:
+            space = SimpleNamespace(id="synthetic-768-unit-v1")
+
+            def encode(self, texts, *, role):
+                return [[1.0] + [0.0] * 767 for _ in texts]
+
+        self.verify_publication(VespaWitness(os.environ["WITNESS_VESPA_URL"], encoder=WitnessEncoder()), mode)
+
     def test_wp02_postgres_cas_and_acl_with_controlled_index(self):
         class WitnessIndex:
             def __init__(self):
@@ -197,30 +217,152 @@ class WitnessPipeline(unittest.TestCase):
             conn.execute("DELETE FROM retrieval_acl WHERE document_key = %s", (doc,))
         self.assertFalse(ledger.eligibility("lab", "researcher").projections)
 
-    def verify_publication(self, index):
+    @unittest.skipUnless(
+        os.environ.get("WITNESS_VESPA_URL") and os.environ.get("WITNESS_MODEL_URL"),
+        "Set endpoints for real Vespa and llama.cpp inference",
+    )
+    def test_real_model_private_delivery(self):
+        from socket import socket
+        from types import SimpleNamespace
+        from urllib.request import Request, urlopen
+
+        from search_retrieval.adapters.vllm import VllmBackend
+        from search_retrieval.query.delivery import Delivery, DeliveryRejected
+
+        self.migrate()
+        model_url = os.environ["WITNESS_MODEL_URL"].rstrip("/")
+        model = os.environ["WITNESS_MODEL_ID"]
+        generation = "model-" + uuid4().hex
+        original = b"The official color of the Meridian protocol is cobalt."
+        question = "What is the official color of the Meridian protocol? Cite the exact evidence ID."
+        with psycopg.connect(self.dsn) as conn:
+            conn.execute("UPDATE retrieval_generation SET active = %s", (generation,))
+        receipt = submit(self.service, "model-witness", 1, doc="meridian", content=original)
+        self.assertIsInstance(receipt, Receipt)
+        document_key, = self.query("SELECT id FROM ingestion_documents")[0]
+        with psycopg.connect(self.dsn) as conn:
+            conn.execute("INSERT INTO retrieval_private_documents VALUES (%s)", (document_key,))
+            conn.execute("INSERT INTO retrieval_acl VALUES (%s, 'researcher')", (document_key,))
+        ledger = PostgresPublication(self.dsn, include_fragments=True)
+        index = VespaWitness(os.environ["WITNESS_VESPA_URL"])
+        self.assertEqual(PublicationWorker(ledger, self.objects, index).run_one(), "published")
+
+        def reader(principal):
+            return lambda tenant: ledger.eligibility(tenant, principal)
+
+        allowed = reader("researcher")
+        denied = reader("other")
+        query = "Meridian"
+        result = EligibleSearch(SimpleNamespace(eligibility=allowed), index).search("lab", query, k=1)
+        self.assertEqual(len(result.hits), 1)
+        hit = result.hits[0]
+        denied_result = EligibleSearch(SimpleNamespace(eligibility=denied), index).search("lab", query, k=1)
+        self.assertEqual(denied_result.hits, ())
+
+        def count(messages):
+            request = Request(
+                model_url + "/v1/chat/completions/input_tokens",
+                json.dumps({"model": model, "messages": messages}).encode(),
+                {"Content-Type": "application/json"},
+            )
+            with urlopen(request, timeout=10) as response:
+                tokens = json.load(response)["input_tokens"]
+            self.assertIs(type(tokens), int)
+            self.assertGreater(tokens, 0)
+            return tokens
+
+        def revoke():
+            with psycopg.connect(self.dsn) as conn:
+                conn.execute("DELETE FROM retrieval_acl WHERE document_key = %s", (document_key,))
+
+        class ObservedBackend(VllmBackend):
+            completions = 0
+            after_completion = None
+
+            def stream(self, messages, max_tokens, deadline):
+                yield from super().stream(messages, max_tokens, deadline)
+                self.completions += 1
+                if self.after_completion:
+                    self.after_completion()
+
+        backend = ObservedBackend(model_url, model, response_schema={
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "citations": {
+                    "type": "array", "items": {"enum": [hit.fragment_id]},
+                    "minItems": 1, "maxItems": 1,
+                },
+            },
+            "required": ["text", "citations"], "additionalProperties": False,
+        })
+        tokenizer = SimpleNamespace(count=count)
+        delivery = Delivery(tokenizer, backend, context_limit=1024, output_reserve=192)
+        with self.assertRaisesRegex(DeliveryRejected, "No eligible evidence"):
+            delivery.private_reply(question, denied_result, lambda: denied("lab"), deadline=monotonic() + 30)
+        self.assertEqual(backend.completions, 0)
+        start = monotonic()
+        answer = delivery.private_reply(question, result, lambda: allowed("lab"), deadline=start + 90)
+        elapsed = monotonic() - start
+        self.assertIn("cobalt", answer.text.casefold())
+        self.assertEqual(answer.citations, (hit.fragment_id,))
+        manifest, reference, size, digest, sequence = self.query(
+            """SELECT payload.manifest, r.original_ref, r.original_size, r.original_sha256, r.sequence
+               FROM retrieval_payloads payload
+               JOIN retrieval_publications p USING (projection_id)
+               JOIN ingestion_revisions r USING (document_key, sequence)
+               WHERE p.projection_id = %s""", (hit.projection_id,),
+        )[0]
+        original_bytes = self.objects.read_verified(reference, size, digest)
+        fragment = next(f for f in manifest["fragments"] if f["id"] == answer.citations[0])
+        cited_bytes = original_bytes[fragment["start"]:fragment["end"]]
+        self.assertEqual(cited_bytes, original)
+        self.assertEqual(sha256(cited_bytes).hexdigest(), fragment["sha256"])
+
+        with socket() as unavailable:
+            unavailable.bind(("127.0.0.1", 0))
+            endpoint = f"http://127.0.0.1:{unavailable.getsockname()[1]}"
+            offline = Delivery(tokenizer, VllmBackend(endpoint, model))
+            with self.assertRaisesRegex(DeliveryRejected, "stream failed"):
+                offline.private_reply(question, result, lambda: allowed("lab"), deadline=monotonic() + 15)
+        backend.after_completion = revoke
+        with self.assertRaisesRegex(DeliveryRejected, "revoked before delivery"):
+            delivery.private_reply(question, result, lambda: allowed("lab"), deadline=monotonic() + 90)
+        self.assertEqual(backend.completions, 2)
+        self.assertFalse(allowed("lab").projections)
+        print(json.dumps({
+            "model": model, "generation": generation, "sequence": sequence,
+            "private_answer": asdict(answer), "citation": fragment, "original_sha256": digest,
+            "delivery_seconds": round(elapsed, 3), "unauthorized_principal": "denied",
+            "unreachable_backend": "rejected", "revocation_after_generation": "rejected",
+        }), flush=True)
+
+    def verify_publication(self, index, mode=None):
         self.migrate()
         generation = "test-" + uuid4().hex
         with psycopg.connect(self.dsn) as conn:
             conn.execute("UPDATE retrieval_generation SET active = %s", (generation,))
-        ledger = PostgresPublication(self.dsn)
-        publication = PublicationWorker(ledger, self.objects, index)
-        search = EligibleSearch(ledger, index)
+        ledger = PostgresPublication(self.dsn, include_fragments=bool(mode))
+        vector_space = index.encoder.space.id if mode else None
+        publication = PublicationWorker(ledger, self.objects, index, vector_space=vector_space)
+        search = VectorSearch(ledger, index, index.encoder, generation) if mode else EligibleSearch(ledger, index)
+        options = {"mode": mode} if mode else {}
         query = json.loads((FIXTURES / "witness.json").read_bytes())["queries"]["retencion-es"]["text"]
 
         self.assertIsInstance(submit(self.service, "first", 1), Receipt)
         self.assertEqual(publication.run_one(), "published")
-        cached = search.search("lab", query, k=1)
+        cached = search.search("lab", query, k=1, **options)
         self.assertEqual(cached.hits[0].text, BODY.decode())
         for position in range(2, 5):
             self.assertIsInstance(submit(self.service, f"update-{position}", position), Receipt)
-            self.assertEqual(search.search("lab", query, k=1).hits[0].text, BODY.decode())
+            self.assertEqual(search.search("lab", query, k=1, **options).hits[0].text, BODY.decode())
             self.assertEqual(publication.run_one(), "published")
-        current = search.search("lab", query, k=1)
+        current = search.search("lab", query, k=1, **options)
         self.assertEqual(len(current.hits), 1)
         self.assertNotEqual(cached.hits[0].projection_id, current.hits[0].projection_id)
         self.assertIsInstance(submit(self.service, "late", 5), Receipt)
         late = ledger.claim()
-        projection, fragments, digest, manifest = project(late, BODY)
+        projection, fragments, digest, manifest = project(late, BODY, vector_space=vector_space)
         self.assertIsInstance(submit(self.service, "withdraw", 6, content=None), Receipt)
         self.assertEqual(search.context("lab", current), ())
         ledger.reserve(projection, digest, manifest)
@@ -231,12 +373,12 @@ class WitnessPipeline(unittest.TestCase):
         index.ensure_visible(late, projection, fragments)
         self.assertEqual(ledger.finish(late, "published", projection), "obsolete")
         self.assertEqual(publication.run_one(), "withdrawn")
-        self.assertEqual(search.search("lab", query).hits, ())
+        self.assertEqual(search.search("lab", query, **options).hits, ())
         self.assertEqual(search.context("lab", current), ())
         self.assertIsInstance(submit(self.service, "restore", 7), Receipt)
-        self.assertEqual(search.search("lab", query).hits, ())
+        self.assertEqual(search.search("lab", query, **options).hits, ())
         self.assertEqual(publication.run_one(), "published")
-        self.assertEqual(len(search.search("lab", query).hits), 1)
+        self.assertEqual(len(search.search("lab", query, **options).hits), 1)
 
 
 if __name__ == "__main__":

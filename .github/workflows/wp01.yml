@@ -1,15 +1,46 @@
 name: WP-01 and LX-01 witness
 
 on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      real_inference:
+        description: Run the private delivery witness with Qwen 1.5B on CPU
+        type: boolean
+        default: false
+      dense:
+        description: Run E5, SciFact and the vector witness
+        type: boolean
+        default: false
+      vectors_commit:
+        description: Optional commit containing a precomputed E5 train and corpus bundle
+        type: string
+        required: false
+      scifact:
+        description: Run the full SciFact experiment after the dense witness
+        type: boolean
+        default: true
+      stability:
+        description: Measure four fresh E5 HNSW graphs using the recorded SciFact vectors
+        type: boolean
+        default: false
+      gemma_vectors_commit:
+        description: Optional commit containing the Gemma SciFact vectors for a paired stability run
+        type: string
+        required: false
 
 permissions:
   contents: read
 
 jobs:
   witness:
+    name: ${{ inputs.real_inference && 'Real inference witness' || 'CPU integration gate' }}
+    if: "!inputs.stability"
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: ${{ inputs.dense && 120 || 20 }}
     env:
       COMPOSE_PROJECT_NAME: wp01
       COMPOSE_FILE: infra/postgres/compose.cpu.yaml:infra/vespa/compose.witness.yaml
@@ -26,7 +57,7 @@ jobs:
           python-version: "3.12.10"
       - name: Install and test the Python package
         run: |
-          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock -r config/requirements-pdf.lock
           python -m pip install --no-deps --no-build-isolation -e .
           python -B -m unittest discover -s tests/unit -v
           python -B -m unittest discover -s tests/contract -v
@@ -74,7 +105,7 @@ jobs:
             fi
             sleep 2
           done
-      - name: Run WP-01 against PostgreSQL and Vespa
+      - name: Verify acceptance, publication, ACL and retrieval against PostgreSQL and Vespa
         run: |
           evidence="$RUNNER_TEMP/wp01"
           export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
@@ -82,10 +113,57 @@ jobs:
             -c "SELECT current_setting('server_version_num'), current_setting('fsync'), current_setting('synchronous_commit'), current_setting('full_page_writes')")
           echo "$settings" | tee "$evidence/postgres-settings.txt"
           test "$settings" = "170011|on|on|on"
-          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_wp01 -v \
+          python -B -m unittest discover -s tests/integration -p test_accept_revision_postgres.py -v \
+            2>&1 | tee "$evidence/acceptance.log"
+          grep -q '^Ran 12 tests in ' "$evidence/acceptance.log"
+          grep -qx 'OK' "$evidence/acceptance.log"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py \
+            -k test_se -k test_wp -k test_vector -v \
             2>&1 | tee "$evidence/wp01.log"
-          grep -q '^Ran 1 test in ' "$evidence/wp01.log"
+          grep -q '^Ran 7 tests in ' "$evidence/wp01.log"
           grep -qx 'OK' "$evidence/wp01.log"
+      - name: Install the pinned Node runtime for MCP
+        if: github.event_name == 'workflow_dispatch' && inputs.real_inference
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "25.9.0"
+          package-manager-cache: false
+      - name: Run the real-model and MCP witnesses
+        if: github.event_name == 'workflow_dispatch' && inputs.real_inference
+        run: |
+          set -euo pipefail
+          assets="$RUNNER_TEMP/inference"
+          evidence="$RUNNER_TEMP/wp01"
+          mkdir -p "$assets/runtime"
+          curl -fLsS --retry 3 --max-time 180 \
+            https://github.com/ggml-org/llama.cpp/releases/download/b12211/llama-b12211-bin-ubuntu-x64.tar.gz \
+            -o "$assets/llama.tar.gz"
+          echo "962924b5431bc1237a9e5d26ba072d37b6fe05f79b495206e7ff6134887624c5  $assets/llama.tar.gz" | sha256sum -c -
+          tar -xzf "$assets/llama.tar.gz" -C "$assets/runtime" --no-same-owner
+          curl -fLsS --retry 3 --max-time 360 \
+            'https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/91cad51170dc346986eccefdc2dd33a9da36ead9/qwen2.5-1.5b-instruct-q4_k_m.gguf?download=true' \
+            -o "$assets/qwen.gguf"
+          echo "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e  $assets/qwen.gguf" | sha256sum -c -
+          server=$(find "$assets/runtime" -type f -name llama-server -print -quit)
+          test -x "$server"
+          export LD_LIBRARY_PATH="$(dirname "$server")${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          export WITNESS_MODEL_ID=qwen-witness
+          export WITNESS_MODEL_URL=http://127.0.0.1:18090
+          export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
+          "$server" --model "$assets/qwen.gguf" --alias "$WITNESS_MODEL_ID" --host 127.0.0.1 \
+            --port 18090 --threads 2 --ctx-size 1024 --parallel 1 --jinja > "$evidence/llama-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" || true' EXIT
+          curl -fsS --retry 30 --retry-all-errors --retry-delay 2 --retry-max-time 90 \
+            --max-time 3 "$WITNESS_MODEL_URL/health"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py \
+            -k test_real_model_private_delivery -v 2>&1 | tee "$evidence/real-inference.log"
+          grep -q '^Ran 1 test in ' "$evidence/real-inference.log"
+          grep -qx 'OK' "$evidence/real-inference.log"
+          cd examples/mcp-client
+          node --version
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run --silent verify | tee "$evidence/mcp-witness.json"
       - name: Record the LX-01 lexical baseline
         run: |
           evidence="$RUNNER_TEMP/wp01"
@@ -100,6 +178,69 @@ jobs:
             | tee "$evidence/replay.log"
           python -B -m search_retrieval.lab publish | tee "$evidence/publish.log"
           python -B evaluation/vespa_lexical.py evaluation/fixtures/lexical-probes.json "$evidence/lx01"
+      - name: Install pinned evaluation dependencies and materialize E5
+        if: inputs.dense
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: \
+            --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r config/requirements-dense-linux-amd64.lock
+          python -m pip check
+          python -B -m unittest discover -s evaluation -p test_scifact_dense.py -v
+          mkdir -p "$RUNNER_TEMP/scifact"
+          python -B -c 'import sys; from pathlib import Path; sys.path.insert(0,"evaluation"); from scifact_embeddings import materialize; root=Path(sys.argv[1]); materialize(root/"model",root/"scifact.zip")' "$RUNNER_TEMP/scifact"
+          curl --fail --location --retry 3 \
+            -o "$RUNNER_TEMP/scifact/beir.zip" \
+            https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
+      - name: Validate the optional embedding bundle reference
+        if: inputs.dense && inputs.vectors_commit != ''
+        env:
+          VECTORS_COMMIT: ${{ inputs.vectors_commit }}
+        run: '[[ "$VECTORS_COMMIT" =~ ^[a-f0-9]{40}$ ]]'
+      - name: Fetch precomputed embeddings from the private repository
+        if: inputs.dense && inputs.vectors_commit != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.vectors_commit }}
+          path: scifact-vector-input
+      - name: Measure vector and hybrid service with warm E5 and cold query inputs
+        if: inputs.dense
+        run: |
+          evidence="$RUNNER_TEMP/wp01"
+          docker compose exec -T postgres createdb -U postgres retrieval_vector
+          for migration in infra/postgres/migrations/*.sql; do
+            docker compose exec -T postgres psql -X -v ON_ERROR_STOP=1 -U postgres -d retrieval_vector < "$migration"
+          done
+          docker compose exec -T postgres psql -X -v ON_ERROR_STOP=1 -U postgres -d retrieval_vector \
+            -c "UPDATE retrieval_generation SET active = 'witness-e5-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}'"
+          export INGESTION_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_vector"
+          export INGESTION_OBJECTS
+          INGESTION_OBJECTS=$(mktemp -d "$RUNNER_TEMP/vector-objects.XXXXXX")
+          python -B -m search_retrieval.lab replay evaluation/fixtures/witness-feed.json evaluation/fixtures/witness.json
+          HF_HUB_OFFLINE=1 python -B evaluation/vespa_vector.py "$RUNNER_TEMP/scifact/model" \
+            evaluation/fixtures/lexical-probes.json "$evidence/vector-service"
+      - name: Encode SciFact and run the frozen five-ranking comparison
+        if: inputs.dense && inputs.scifact
+        env:
+          HF_HUB_OFFLINE: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          OPENBLAS_NUM_THREADS: "1"
+          VECTORS_COMMIT: ${{ inputs.vectors_commit }}
+        run: |
+          assets="$RUNNER_TEMP/scifact"
+          evidence="$RUNNER_TEMP/wp01"
+          if [[ -n "$VECTORS_COMMIT" ]]; then
+            mkdir "$evidence/embeddings"
+            archive="scifact-vector-input/scifact-e5-vectors.tar.gz"
+            sha256sum "$archive" > "$evidence/vector-bundle-sha256.txt"
+            tar -xzf "$archive" -C "$evidence/embeddings" --no-same-owner --no-same-permissions \
+              conformance.json environment.json corpus.json corpus.npy train.json train.npy
+            echo "$VECTORS_COMMIT" > "$evidence/vector-bundle-commit.txt"
+          else
+            python -u -B evaluation/scifact_embeddings.py "$assets/model" "$assets/scifact.zip" "$evidence/embeddings" --threads 2
+          fi
+          python -u -B evaluation/scifact_dense.py "$assets/model" "$assets/scifact.zip" \
+            "$evidence/embeddings" "$assets/beir.zip" "$evidence/scifact" --threads 2
       - name: Collect service logs and remove the lab
         if: always()
         run: |
@@ -114,4 +255,131 @@ jobs:
         with:
           name: wp01-witness
           path: ${{ runner.temp }}/wp01
+          retention-days: 7
+  stability:
+    if: inputs.stability
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ inputs.gemma_vectors_commit != '' && 65 || 35 }}
+    permissions:
+      actions: read
+      contents: read
+    env:
+      COMPOSE_FILE: infra/vespa/compose.witness.yaml
+      RETRIEVAL_LAB_VESPA_PORT: "18080"
+      RETRIEVAL_LAB_CONFIG_PORT: "19071"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12.10"
+      - name: Verify locked tools and retrieve recorded inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r config/requirements-cpu-linux-amd64.lock -r config/requirements-pdf.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+          python -m pip install --require-hashes --only-binary=:all: \
+            --extra-index-url https://download.pytorch.org/whl/cpu -r config/requirements-dense-linux-amd64.lock
+          python -B -m unittest discover -s tests/unit -v
+          python -B -m unittest discover -s tests/contract -v
+          python -B -m unittest discover -s evaluation -p 'test_scifact*.py' -v
+          mkdir -p "$RUNNER_TEMP/stability" "$RUNNER_TEMP/assets"
+          gh run download 42275419629 --repo "$GITHUB_REPOSITORY" -n wp01-witness --dir "$RUNNER_TEMP/assets"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/scifact.zip" https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/assets/beir.zip" https://codeload.github.com/beir-cellar/beir/zip/ef83d29307061c65d04b035b4f4e7c18bd8374af
+      - name: Validate the optional Gemma vectors commit
+        if: inputs.gemma_vectors_commit != ''
+        env:
+          GEMMA_COMMIT: ${{ inputs.gemma_vectors_commit }}
+        run: '[[ "$GEMMA_COMMIT" =~ ^[a-f0-9]{40}$ ]]'
+      - name: Fetch the optional Gemma vectors from the private repository
+        if: inputs.gemma_vectors_commit != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.gemma_vectors_commit }}
+          path: scifact-gemma-vector-input
+      - name: Verify and unpack the Gemma vectors
+        if: inputs.gemma_vectors_commit != ''
+        run: |
+          archive="scifact-gemma-vector-input/scifact-gemma-vectors.tar.gz"
+          sha256sum "$archive" > "$RUNNER_TEMP/stability/gemma-bundle-sha256.txt"
+          python -B - "$archive" "$RUNNER_TEMP/assets/gemma" <<'PY'
+          import sys
+          import tarfile
+
+          expected = {
+              "train/environment.json", "train/conformance.json",
+              "train/corpus.json", "train/corpus.npy", "train/train.json", "train/train.npy",
+              "test/test.json", "test/test.npy",
+          }
+          with tarfile.open(sys.argv[1]) as source:
+              entries = source.getmembers()
+              if {entry.name for entry in entries} != expected or len(entries) != len(expected):
+                  raise ValueError("Unexpected Gemma vector bundle layout")
+              if not all(entry.isfile() for entry in entries):
+                  raise ValueError("Gemma bundle entries must be regular files")
+              source.extractall(sys.argv[2], filter="data")
+          PY
+      - name: Build and measure four isolated graphs per encoder
+        run: |
+          assets="$RUNNER_TEMP/assets"
+          evidence="$RUNNER_TEMP/stability"
+          if [[ "$RUNNER_ENVIRONMENT" == github-hosted ]]; then
+            sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet
+          fi
+          docker compose pull
+          docker info --format 'CPUs={{.NCPU}} RAM_bytes={{.MemTotal}}' > "$evidence/docker-host.txt"
+          docker_root=$(docker info --format '{{.DockerRootDir}}')
+          disk_used=$(sudo df -P "$docker_root" | awk 'NR == 2 { sub(/%$/, "", $5); print $5 }')
+          if ((disk_used > 75)); then
+            echo "Vespa test runner requires no more than 75% disk use before starting." >&2
+            exit 1
+          fi
+          config=http://127.0.0.1:19071
+          search=http://127.0.0.1:18080
+          cleanup() { docker compose down --volumes; }
+          trap cleanup EXIT
+          models=(e5)
+          if [[ -d "$assets/gemma" ]]; then models+=(gemma); fi
+          seed_index=0
+          for seed in $(jq -r '.insertion_order_seeds[]' config/scifact-stability-v1.json); do
+            order=("${models[@]}")
+            if [[ ${#models[@]} == 2 && $((seed_index % 2)) == 1 ]]; then order=(gemma e5); fi
+            seed_index=$((seed_index + 1))
+            for model in "${order[@]}"; do
+              if [[ "$model" == e5 ]]; then
+                train="$assets/embeddings"
+                test="$assets/scifact"
+                prefix=""
+              else
+                train="$assets/gemma/train"
+                test="$assets/gemma/test"
+                prefix="gemma-"
+              fi
+              export COMPOSE_PROJECT_NAME="stability-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$model-$seed"
+              docker compose up -d --pull never
+              curl -fsS --max-time 5 --retry 30 --retry-all-errors --retry-delay 3 --retry-max-time 150 "$config/application/v2/tenant" >/dev/null
+              python -B infra/vespa/deploy.py "$config" > "$evidence/${prefix}deploy-$seed.json"
+              deadline=$((SECONDS + 90))
+              until curl -fsS --max-time 4 -G --data-urlencode 'yql=select projection_id from fragment where true' --data-urlencode 'hits=0' "$search/search/" \
+                | jq -e '.root.coverage.full == true and .root.fields.totalCount == 0' >/dev/null; do
+                if ((SECONDS >= deadline)); then exit 1; fi
+                sleep 2
+              done
+              python -u -B evaluation/scifact_stability.py run "$assets/scifact.zip" "$train" \
+                "$test" "$assets/beir.zip" "$evidence/${prefix}seed-$seed" --vespa "$search" --seed "$seed"
+              cleanup
+            done
+          done
+          python -B evaluation/scifact_stability.py aggregate "$evidence/aggregate.json" "$evidence"/*seed-*/manifest.json
+      - name: Upload stability evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: scifact-stability
+          path: ${{ runner.temp }}/stability
           retention-days: 7

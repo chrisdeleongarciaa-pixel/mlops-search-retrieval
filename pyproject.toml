@@ -12,6 +12,7 @@ dependencies = []
 
 [project.optional-dependencies]
 postgres = ["psycopg[binary]==3.3.8"]
+pdf = ["defusedxml==0.7.1", "pypdf==6.7.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

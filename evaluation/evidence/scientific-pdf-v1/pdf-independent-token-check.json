@@ -1,0 +1,25 @@
+{
+  "status": "verified",
+  "fragments": 94,
+  "maximum_actual_e5_tokens": 276,
+  "minimum_actual_e5_tokens": 6,
+  "canonical_sha256": "c463c9591ed9017eb822d0d1db5817ebf5bbef33541efd63f6c4329735b35df5",
+  "packages": {
+    "transformers": "5.20.2",
+    "tokenizers": "0.23.3",
+    "defusedxml": "0.7.1",
+    "pypdf": "6.7.0"
+  },
+  "litsearch_test_cohorts": {
+    "('inline_acl', 0)": 16,
+    "('inline_acl', 1)": 33,
+    "('inline_nonacl', 1)": 83,
+    "('inline_nonacl', 0)": 44,
+    "('manual_acl', 1)": 65,
+    "('manual_acl', 0)": 13,
+    "('manual_iclr', 1)": 41,
+    "('manual_iclr', 0)": 5
+  },
+  "development_ids_and_positive_documents_disjoint": true,
+  "verifier_sha256": "1b7c5cc98ce369f230b71b4f3c750c34eafed77f73f135360cf26a41d03920b2"
+}

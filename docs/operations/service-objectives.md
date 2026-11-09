@@ -1,6 +1,10 @@
 # Delimitación y objetivos de aceptación v1
 
-El dominio es *Learned Retrieval & Representation Learning*. El corpus testigo sirve para integración. SciFact BEIR, con relevancia por documento y su split oficial, es la primera referencia de calidad. La procedencia del contexto se mide por revisión y fragmento. El primer ciclo de evaluación representativa es en inglés. La evaluación de calidad en español y los ensayos en la A100 se retoman después.
+El dominio es *Learned Retrieval & Representation Learning*. El perfil de servicio es búsqueda bibliográfica en inglés sobre títulos y resúmenes de ML/NLP, con relevancia por artículo. LitSearch aporta las consultas y los positivos heredados para una selección congelada de 300 consultas. SciFact BEIR conserva la referencia de regresión y el corpus testigo verifica contratos y fallos. Español queda fuera del alcance por decisión del propietario del 8 de noviembre de 2026. La procedencia del contexto se mide por revisión y fragmento. La A100 queda condicionada a una carga que justifique su uso.
+
+Qwen2.5-7B-Instruct, con la revisión ya fijada en el manifiesto de modelos, es el candidato principal de reescritura. La comparación original/Qwen/Gemma-3-1B-IT usará el mismo esquema, recuperador, índice y juicios, con Recall@5/20 y revisión de restricciones perdidas o alteradas. EmbeddingGemma-300M conserva su función de encoder. La habilitación de reescritura requiere medir fidelidad y coste hasta JSON completo y validado. [Protocolo de reescritura](../../config/rewrite-experiment.json)
+
+La distribución inicial de carga es un escenario sintético de laboratorio con consultas de la colección. Se fijan 8 y 16 usuarios, cero pausa entre solicitudes, 20 resultados, timeout de 3 s, 100 solicitudes de calentamiento y 1.200 medidas por ruta. Las tasas abiertas se fijarán tras medir capacidad. Los plazos operativos cuentan reescritura si bloquea la recuperación. [Perfil de carga](../../config/workload-profile.json) · [Retención](retention-policy.md)
 
 ## Recuperación y disponibilidad
 
