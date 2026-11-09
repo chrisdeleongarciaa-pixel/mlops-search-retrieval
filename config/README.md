@@ -1,5 +1,5 @@
-# Configuración
+# Configuration
 
-`release.example.toml` es la plantilla de un conjunto compatible. Los valores vacíos indican referencias por resolver. Para registrar una versión candidata, completa los campos con revisiones inmutables o identificadores de artefactos verificables, y vincula su evidencia de evaluación. Los parámetros propios de cada entorno se colocan en `config/local/`, excluido de Git. Gestiona los secretos a través del mecanismo del entorno.
+`release.example.toml` describes a compatible set of code, data, transforms, index, model and policy. Fill unresolved references with immutable revisions or verifiable artifact IDs and link acceptance evidence. Put environment overrides in the ignored `config/local/` directory and obtain secrets from the environment.
 
-El manifiesto documenta la composición de una versión. Su lectura y validación para activar servicios forman parte de la integración futura.
+The manifest records release composition. Automatic promotion against that composition is a separate integration boundary.

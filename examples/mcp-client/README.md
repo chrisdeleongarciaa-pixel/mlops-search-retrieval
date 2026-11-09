@@ -1,26 +1,26 @@
-# MCP-01 · Integración de un modelo por API con un servidor MCP existente
+# MCP-01 · Model API with an existing MCP server
 
-El cliente usa el servidor upstream `@modelcontextprotocol/server-filesystem` por stdio y Qwen mediante una API local compatible con OpenAI. Descubre `read_text_file`, presenta una interfaz reducida al modelo, valida la solicitud de herramienta y devuelve su resultado al modelo para completar la respuesta. El expediente de prueba contiene texto sintético.
+The client uses upstream `@modelcontextprotocol/server-filesystem` over stdio and calls Qwen through a local compatible model API. It discovers `read_text_file`, exposes a bounded tool definition, validates the proposal and returns the tool result to the model. The test uses synthetic files.
 
-| Límite | Regla comprobada |
+| Boundary | Rule |
 | --- | --- |
-| Modelo | Recibe una única herramienta con el identificador lógico `brief`. El cliente rechaza cualquier otro nombre o argumento antes de emitir la llamada MCP. |
-| Cliente | Resuelve el identificador a un archivo generado por el ensayo. Los paths que propone el modelo carecen de autoridad. |
-| Servidor | Arranca con un directorio temporal permitido. Una llamada de control a un archivo sintético hermano verifica el rechazo fuera de esa raíz. |
-| Transporte | El proceso local usa stdio y el modelo escucha en loopback. Las solicitudes HTTP tienen plazo. El cierre del cliente termina el transporte. |
+| Model | One read tool with the logical document ID `brief`. Reject all other names and arguments before an MCP call. |
+| Client | Map the authorized ID to the test file. The model never supplies the filesystem path used in the call. |
+| Server | Restrict access to one temporary directory. Check rejection of a sibling file outside the allowed root. |
+| Transport | Run the server over stdio and inference on loopback. Bound model requests and close the client transport after the run. |
 
-Usar Node.js 24 o posterior y el GGUF Qwen fijado por hash en el [ensayo de inferencia](../../docs/verification/integration-gate.md). Con el binario llama.cpp b12211, iniciar el servidor en loopback.
+Use Node.js 24 or later. Actions pins 25.9.0. Start llama.cpp b12211 with the verified GGUF from [RI-01](../../docs/verification/integration-gate.md).
 
 ```sh
 llama-server --model /path/to/qwen.gguf --alias qwen-witness --host 127.0.0.1 \
   --port 18090 --threads 2 --ctx-size 1024 --parallel 1 --jinja
 ```
 
-Ejecutar desde esta carpeta después de que el endpoint `/health` devuelva estado `ok`.
+When `/health` returns `ok`, run from this directory.
 
 ```sh
 npm ci --ignore-scripts
 npm run verify
 ```
 
-El lock fija el SDK, el servidor y sus dependencias. El ensayo requiere una llamada real a la herramienta y una respuesta final que recupere la retención indicada por el archivo. También verifica el rechazo de una operación de escritura propuesta, un alias inválido y una ruta fuera de la raíz. La lista permitida del cliente es la decisión de autorización. Las anotaciones del servidor describen herramientas. [SDK cliente](https://ts.sdk.modelcontextprotocol.io/v2/get-started/first-client) · [Servidor upstream](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
+The test requires a real tool call and the retention value stated in the file. It also exercises rejected writes, aliases and paths. Client policy grants permission and upstream tool annotations describe capabilities. [Official client SDK](https://ts.sdk.modelcontextprotocol.io/v2/get-started/first-client) · [Official filesystem server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)

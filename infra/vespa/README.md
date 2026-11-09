@@ -1,9 +1,7 @@
 # Vespa
 
-Aquí se incorporará el paquete de aplicación con esquema, campos, perfiles y configuración de servicios. Mantén un vínculo entre la versión de esquema, la generación del índice y el espacio vectorial del manifiesto de versión.
+The application package binds the schema, fields, ranking profiles and services. Record the schema version with the index generation and vector space. [Publication decision](../../engineering/decisions/0001-publicacion.md) · [RRF baseline](../../engineering/decisions/0004-rrf.md)
 
-La [publicación](../../docs/decisions/0001-publicacion.md) determina la identidad de las proyecciones y su elegibilidad. El [baseline RRF](../../docs/decisions/0004-rrf.md) determina los perfiles y la evidencia que deben conservar las consultas experimentales.
+## Managed runtime preflight
 
-## Verificar namespaces en un runtime administrado
-
-En un runtime Linux con `unshare`, `ip`, `timeout` y Python 3, ejecuta `bash infra/vespa/check-container-namespaces.sh`. La sonda comprueba por separado la activación y escucha de loopback dentro de un namespace de red nuevo y el montaje de `/proc` dentro de un namespace de PID nuevo. El código 0 indica que pasaron ambas comprobaciones. El código 1 identifica al menos un fallo y el 2 indica que falta una herramienta. La prueba crea namespaces transitorios y no abre puertos fuera de ellos. Después de pasarla, verifica el motor OCI con la imagen fijada antes de arrancar Vespa.
+On Linux with `unshare`, `ip`, `timeout` and Python 3, run `bash infra/vespa/check-container-namespaces.sh`. It separately checks loopback inside a fresh network namespace and mounting `/proc` in a fresh PID namespace. Exit 0 means both checks passed, 1 means at least one failed and 2 means a tool is unavailable. The probe uses transient namespaces and binds inside them. After it passes, verify the pinned image with the selected OCI runtime.

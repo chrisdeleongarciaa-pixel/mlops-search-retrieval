@@ -1,9 +1,10 @@
 * text=auto eol=lf
-docs/contracts/reference/** -text
+engineering/reference/** -text
 
 # Preserve the bytes recorded by the run manifests and checksum indexes.
 evaluation/evidence/scientific-pdf-v1/** -text
 evaluation/evidence/scifact-gemma-exact-cpu/** -text
+evaluation/evidence/scifact-paired-42465181926/** -text
 config/litsearch-source.json -text
 config/requirements-architecture-win64.lock -text
 config/requirements-eval-win64.lock -text

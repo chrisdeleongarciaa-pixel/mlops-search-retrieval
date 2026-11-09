@@ -1,5 +1,3 @@
-# Pruebas de contrato
+# Contract tests
 
-Las pruebas de contrato ejercitan las mismas obligaciones en cada implementación de una interfaz. Usa escenarios con entregas repetidas, revisiones fuera de orden, timeouts, cancelación y fallos parciales. Registra qué casos usan dobles y qué casos ejercitan un servicio real.
-
-Mantén aquí las pruebas del contrato público del gateway y las suites reutilizables de los adaptadores. Usa oráculos independientes de la lógica de producción.
+Exercise common caller obligations, outputs and invariants across implementations. Cover replay, out-of-order revisions, deadlines, cancellation and partial failure. Record where a double isolates a boundary and where the suite uses a real dependency. Derive test oracles independently of production logic.

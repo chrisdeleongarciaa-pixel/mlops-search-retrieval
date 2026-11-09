@@ -1,55 +1,62 @@
-# Recuperación de literatura científica e inferencia con citas
+# Scientific literature retrieval with verifiable evidence
 
-Plataforma experimental para buscar literatura de ML/NLP en inglés. PostgreSQL conserva la revisión autorizada y su estado de publicación. Vespa sirve proyecciones reconstruibles para búsqueda léxica y vectorial. Los fragmentos conservan la identidad de su revisión y su transformación para resolver la evidencia que recibe el modelo.
+This project searches scientific literature with BM25, exact cosine retrieval, and HNSW in Vespa. PostgreSQL owns publication and access state. A search index can be rebuilt from versioned inputs, and a citation can be resolved to the bytes of its source. The project includes reproducible SciFact benchmarks, scientific PDF extraction, and a private-delivery test with a real model.
 
-## Configuración registrada
+## Results
 
-El checkpoint `checkpoint/2026-11-08` reúne el laboratorio de ingesta, publicación y búsqueda, los ensayos de recuperación en SciFact y el incremento de PDF científico. El registro identifica los componentes verificados, las condiciones de ensayo y los criterios pendientes para ampliar su alcance. [Registro de configuración](docs/checkpoints/2026-11-08.md)
+All quality scores below use the 300 official BEIR SciFact test queries. The HNSW and fusion rows are means across four fresh insertion orders on the same Vespa host. BM25 and dense lists were fused at depth 100 with equal-weight RRF and constant 60. The audit rebuilt both fusions from the recorded branches and recomputed their scores with the pinned evaluator. [Paired-run audit](docs/verification/scifact-stability.md) · [Per-build evidence](evaluation/evidence/scifact-paired-42465181926/audit.json)
 
-| Capacidad | Alcance demostrado |
+| Ranking | NDCG@10 | Recall@10 | Recall@100 |
+| --- | ---: | ---: | ---: |
+| BM25 | 0.66168 | 0.79094 | 0.88589 |
+| E5 exact | 0.69390 | 0.80722 | 0.93933 |
+| E5 HNSW | 0.69190 | 0.80639 | 0.94683 |
+| E5 exact + BM25 | 0.70202 | 0.82722 | 0.95767 |
+| E5 HNSW + BM25 | 0.70161 | 0.82722 | 0.95933 |
+| EmbeddingGemma exact | **0.78871** | **0.91856** | 0.97500 |
+| EmbeddingGemma HNSW | **0.78871** | **0.91856** | 0.97500 |
+| EmbeddingGemma exact + BM25 | 0.74246 | 0.85622 | **0.98000** |
+| EmbeddingGemma HNSW + BM25 | 0.74264 | 0.85622 | **0.98000** |
+
+Gemma HNSW meets the **0.75 NDCG@10** target for RET-02 on this test set. Fusion finds more relevant documents by rank 100 and scores below the target at rank 10. The paired bootstrap reports query-level intervals for exact and HNSW comparisons. [Bootstrap and decision record](docs/verification/scifact-stability.md#paired-uncertainty)
+
+| EmbeddingGemma cohort | Effective algorithm | ANN recall@10 | Vespa p95 |
+| --- | --- | ---: | ---: |
+| Full corpus | HNSW | 0.99908 | 9.44 ms |
+| ≈50% eligible | HNSW | 0.99958 | 9.07 ms |
+| ≈10% eligible | HNSW | 1.00000 | 7.24 ms |
+| ≈1% eligible | Exact by selectivity | 1.00000 | 5.41 ms |
+
+Each row summarizes four builds of 300 queries with one sequential client. All three HNSW cohorts passed RET-01 on every build. The last row records exact fallback. Engine latency starts with a precomputed query vector. [Per-build measurements and limits](docs/verification/scifact-stability.md#engine-acceptance)
+
+## System and verification
+
+| Stage | Verified scope |
 | --- | --- |
-| Aceptación y publicación | Ingesta idempotente con outbox transaccional. Continuidad de búsqueda y exclusión tras retiro bajo carreras ensayadas con PostgreSQL y Vespa. [Verificación](docs/verification/witness-increments.md) |
-| Recuperación | BM25, búsqueda exacta, HNSW y RRF. En SciFact, EmbeddingGemma exacta alcanzó 0,78871 NDCG@10 frente a 0,66168 de BM25. [Resultados por consulta](evaluation/evidence/scifact-gemma-exact-cpu/) |
-| Transformación PDF | GROBID, TEI y fragmentos con secciones, páginas, coordenadas y hashes. El ensayo de ocho páginas produjo 94 fragmentos verificables con presupuesto E5. [Verificación PDF](docs/verification/scientific-pdf.md) |
-| Corpus bibliográfico | LitSearch materializado con 64.183 artículos y 300 consultas de evaluación congeladas. Los resultados de ranking y reescritura quedan pendientes. [Contrato bibliográfico](docs/contracts/bibliographic-profile.md) |
-| Contexto e inferencia | El ensayo privado con Qwen real en CPU enlazó la consulta con una respuesta cuya cita resolvió al original. Verificó el rechazo tras revocación y ante fallo del backend. [Verificación de entrega e inferencia](docs/verification/integration-gate.md) |
+| Ingestion and publication | Idempotent acceptance and transactional outbox in PostgreSQL. Vespa activation is conditional on the current revision. Tests exercise updates, withdrawal, late workers and ACL. [Contracts](docs/contracts/witness-increments.md) · [Verification](docs/verification/witness-increments.md) |
+| Scientific PDFs | GROBID and TEI produce chunks with page coordinates and verifiable byte spans. An eight-page sample yielded 94 chunks. [PDF evidence](docs/verification/scientific-pdf.md) |
+| Bibliographic corpus | LitSearch materialization contains 64,183 articles and a frozen evaluation set of 300 queries. Ranking and rewrite results on LitSearch remain open. [Corpus contract](docs/contracts/bibliographic-profile.md) |
+| Inference and delivery | The private CPU witness used Qwen2.5-1.5B and llama.cpp. It resolved a generated citation to the accepted original and rejected unauthorized or revoked delivery. [RI-01 evidence](docs/verification/integration-gate.md) |
+| MCP client | A model API calls the upstream filesystem server through one allowed read tool. The example tests rejected tools, aliases and paths. [MCP example](examples/mcp-client/) |
 
-Sobre las 300 consultas oficiales de SciFact, E5 exacta obtuvo 0,69390 NDCG@10. RRF con EmbeddingGemma elevó Recall@100 de 0,975 a 0,980 y redujo NDCG@10 a 0,74246. En un ensayo distinto, HNSW con E5 y un cliente secuencial registró recall ANN@10 de 0,99158 y p95 de motor de 12,42 ms en la cohorte completa, como medias de cuatro construcciones. Las medidas de motor y de servicio tienen presupuestos distintos. La cohorte de ≈1 % utilizó búsqueda exacta por selectividad estimada. [Comparación exacta](evaluation/evidence/scifact-gemma-exact-cpu/manifest.json) · [Protocolo y resultados HNSW](docs/verification/scifact-stability.md)
+The private witness uses a synthetic UTF-8 document and a principal supplied by the harness. Authenticated transport, PDF generation activation, and service behavior under representative load have separate acceptance criteria. [Project status](docs/project-status.md)
 
-La prueba integral usa un documento UTF-8 sintético e identidad suministrada por el arnés. Quedan pendientes el transporte autenticado, la publicación de generaciones PDF, el rendimiento bajo carga representativa y la calidad de reescritura sobre LitSearch. [Estado frente al diseño](docs/estado-frente-al-diseno.md)
+## Reproduce
 
-## Estructura
+Python 3.12 or later is required. Run from the repository root.
 
-| Ruta | Responsabilidad |
-| --- | --- |
-| `src/search_retrieval/contracts/` | Identidades compartidas entre ingesta y consulta. |
-| `src/search_retrieval/ingestion/` | Recepción de cambios, transformación, outbox e indexación. |
-| `src/search_retrieval/query/` | Gateway, recuperación, ranking, contexto e inferencia. |
-| `src/search_retrieval/adapters/` | Implementaciones de interfaces para servicios externos. |
-| `config/` | Manifiesto de versión compatible y ubicación de configuración local. |
-| `infra/` | Migraciones, aplicación Vespa, almacenamiento y serving. |
-| `evaluation/` | Protocolo, datos sintéticos y manifiesto de ejecuciones independientes. |
-| `tests/` | Pruebas unitarias, de contrato y de integración con PostgreSQL. |
-| `docs/` | Límites de arquitectura, decisiones y procedimientos operativos. |
-
-## Instalación y pruebas
-
-Requiere Python 3.12 o posterior. Desde esta carpeta, ejecuta lo siguiente en PowerShell.
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[pdf]"
-.\.venv\Scripts\python.exe -m unittest discover -s tests/unit -v
-.\.venv\Scripts\python.exe -m unittest discover -s tests/contract -v
+```sh
+python -m pip install -e ".[pdf]"
+python -m unittest discover -s tests/unit -v
+python -m unittest discover -s tests/contract -v
 ```
 
-En macOS o Linux, el ejecutable del entorno virtual es `.venv/bin/python`. La instalación puede requerir descargar el backend de empaquetado. Las pruebas unitarias se ejecutan sin motores externos ni GPU.
+- [Architecture and state ownership](docs/architecture.md)
+- [Evidence index](evaluation/evidence/README.md)
+- [Integration gate and real-model procedure](docs/verification/integration-gate.md)
+- [Engineering runbooks](engineering/operations/README.md)
+- [v0.2 checkpoint release](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/releases/tag/v0.2)
 
-## Documentación de ingeniería
+## License
 
-- Autoridad de estado, interfaces y evolución de versiones. [Descripción del sistema](docs/architecture.md) · [Decisiones](docs/decisions/README.md)
-- Requisitos, cobertura y condiciones para aceptar cada capacidad. [Estado frente al diseño](docs/estado-frente-al-diseno.md) · [Objetivos de aceptación](docs/operations/service-objectives.md)
-- Configuración y reproducción de ensayos. [Laboratorio de publicación y búsqueda](docs/operations/witness-lab.md) · [Procedimiento bibliográfico y PDF](docs/operations/scientific-pdf.md) · [Suite de integración](tests/integration/README.md)
-- Comprobación automática en GitHub Actions y ensayo con modelo real. [Cobertura por ejecución](docs/verification/integration-gate.md) · [Cliente MCP y permisos](examples/mcp-client/)
-- Resultados por experimento y línea de investigación. [Registro experimental](docs/registro-tecnico-experimental.md) · [Programa de recuperación aprendida](docs/programa-learned-retrieval.md)
-- Presentación del proyecto. [Portafolio, CV y LinkedIn](docs/project-profile.md)
+Project code and authored documentation are available under [Apache License 2.0](LICENSE). Referenced models, datasets, external samples and upstream components retain their respective terms.

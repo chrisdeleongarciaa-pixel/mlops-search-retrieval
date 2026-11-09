@@ -1,5 +1,5 @@
-# Consulta
+# Query use cases
 
-Aquí viven los casos de uso de búsqueda y generación. El gateway obtiene la identidad del contexto autenticado y transmite un presupuesto común. La recuperación entrega candidatos con identidad de fragmento y posición por rama. El ensamblador construye el contexto y conserva el vínculo con los fragmentos que alimentan las citas.
+Retrieval receives an authenticated scope and budget. It returns ranked candidates with fragment identity and branch position. The context builder retains evidence provenance and the delivery layer validates citations against the effective prompt.
 
-Los contratos para [permisos](../../../docs/decisions/0002-autorizacion.md), [entrega y citas](../../../docs/decisions/0003-citas-y-entrega.md) y [RRF](../../../docs/decisions/0004-rrf.md) determinan cuándo se puede habilitar cada flujo.
+[Authorization](../../../engineering/decisions/0002-autorizacion.md) · [Delivery](../../../engineering/decisions/0003-citas-y-entrega.md) · [Fusion](../../../engineering/decisions/0004-rrf.md)

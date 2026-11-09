@@ -1,19 +1,15 @@
-# Serving con vLLM
+# vLLM serving pilot
 
-Aquí se incorporará la configuración para cargar el modelo, reservar recursos, limitar concurrencia y verificar disponibilidad del backend. Registra las revisiones del modelo, tokenizer y plantilla, junto con la versión del backend y los datos del entorno GPU en el manifiesto.
+Record model, tokenizer, template, backend, driver and runtime in the serving manifest. The gateway owns budgets and release policy. Integration tests should observe cancellation and resource release at the model process.
 
-El gateway aplica los presupuestos y la política de entrega. Las pruebas de integración deben observar la cancelación y la liberación de recursos en el proceso de inferencia.
+## Colab inventory
 
-## Inventario en Colab
+Run `colab_preflight.py` inside the Linux runtime and retain the JSON. The probe reads CPU, RAM, disk, GPU, driver, package versions and cgroup v2 limits. It installs no packages and downloads no weights. Check available storage for model files, cache and runtime. A Docker CLI entry establishes CLI presence.
 
-Ejecuta `colab_preflight.py` en el runtime Linux de Colab con `/content` y conserva el JSON junto al run. También se puede pegar el archivo como una celda de Python. La sonda registra CPU, RAM, disco, GPU, driver y las versiones instaladas que detecta. Reporta por separado la memoria y CPU visibles y los límites de cgroup v2 cuando están disponibles. La presencia del CLI de Docker por sí sola es una observación del inventario.
+## L4 capacity pilot
 
-La sonda consulta el runtime sin instalar paquetes, descargar pesos ni escribir archivos. Un fallo de `nvidia-smi` aparece como un error en el JSON. Antes de materializar el modelo, contrasta el espacio libre con el tamaño de los pesos, la caché y el entorno de vLLM.
+Verify all Qwen files against the [model manifest](../../../config/model-sources.json). The observed pilot used vLLM 0.33.0 on CUDA 13.0. Create an isolated environment with `python -m venv --without-pip venv` and install with `uv pip install --python venv/bin/python --torch-backend=cu130 --only-binary=:all: vllm==0.33.0`. Preserve the resolved environment with `uv pip freeze --python venv/bin/python`.
 
-## Ensayo de capacidad en Colab L4
+Bind to `127.0.0.1`, use BF16, context 4,096 and eight sequences. Set `--gpu-memory-utilization 0.77`, `--max-num-batched-tokens 2048`, `--enable-chunked-prefill`, `--no-enable-prefix-caching`, `--enforce-eager` and `--generation-config vllm`. The observed run used `VLLM_USE_FLASHINFER_SAMPLER=0` after the FlashInfer warmup required Ninja.
 
-Usa el modelo Qwen del [manifiesto](../../../config/model-sources.json) y comprueba el SHA-256 de todos los archivos antes de arrancar. El piloto usa vLLM 0.33.0 con el backend CUDA 13.0 en un entorno de Python aislado. Crea el entorno con `python -m venv --without-pip venv` y usa `uv pip install --python venv/bin/python --torch-backend=cu130 --only-binary=:all: vllm==0.33.0`. Guarda `uv pip freeze --python venv/bin/python` junto con el ensayo.
-
-El servidor escucha en `127.0.0.1`, carga los pesos en BF16 y admite hasta 4.096 tokens por solicitud y ocho secuencias simultáneas. Fija `--gpu-memory-utilization 0.77`, `--max-num-batched-tokens 2048`, `--enable-chunked-prefill`, `--no-enable-prefix-caching`, `--enforce-eager` y `--generation-config vllm`. El muestreador nativo se activa con `VLLM_USE_FLASHINFER_SAMPLER=0` para evitar el fallo de arranque por Ninja durante el calentamiento del muestreador FlashInfer. [Variables de vLLM](https://docs.vllm.ai/en/latest/configuration/env_vars/)
-
-Antes de medir, comprueba `/health` y una respuesta de chat con resultado conocido. Para el recorrido de completions, usa `vllm bench serve`, datos aleatorios con semilla 47, una solicitud de calentamiento, `--ignore-eos`, `--request-rate inf` y `--random-range-ratio 0`. Mide 16 solicitudes de 1.024 tokens de entrada y 96 de salida en cada nivel de concurrencia 1, 4 y 8. La carga cercana al límite usa ocho solicitudes concurrentes de 3.800 tokens de entrada y 256 de salida. Conserva las salidas por solicitud y los percentiles 50 y 95 de TTFT, TPOT, ITL y E2E. Muestrea VRAM con `nvidia-smi` cada 500 ms desde el arranque hasta que termine el ensayo. [CLI de benchmark](https://docs.vllm.ai/en/latest/cli/bench/serve/)
+Check `/health` and a known-answer chat. For `vllm bench serve` use random data with seed 47, one warmup, `--ignore-eos`, `--request-rate inf` and `--random-range-ratio 0`. Measure sixteen requests of 1,024 input and 96 output tokens at each of concurrency 1, 4 and 8. For the long case use eight concurrent requests of 3,800 input and 256 output tokens. Record per-request TTFT, TPOT, ITL and E2E and sample VRAM every 500 ms. [Observed pilot](../../../docs/verification/witness-increments.md#l4-inference-pilot) · [Benchmark CLI](https://docs.vllm.ai/en/latest/cli/bench/serve/)
