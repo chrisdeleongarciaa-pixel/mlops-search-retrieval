@@ -1,6 +1,10 @@
 name: WP-01 and LX-01 witness
 
 on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
     inputs:
       dense:
@@ -29,6 +33,7 @@ permissions:
 
 jobs:
   witness:
+    name: CPU integration gate
     if: "!inputs.stability"
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ inputs.dense && 120 || 20 }}
@@ -96,7 +101,7 @@ jobs:
             fi
             sleep 2
           done
-      - name: Run WP-01 against PostgreSQL and Vespa
+      - name: Verify acceptance, publication, ACL and retrieval against PostgreSQL and Vespa
         run: |
           evidence="$RUNNER_TEMP/wp01"
           export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
@@ -104,9 +109,13 @@ jobs:
             -c "SELECT current_setting('server_version_num'), current_setting('fsync'), current_setting('synchronous_commit'), current_setting('full_page_writes')")
           echo "$settings" | tee "$evidence/postgres-settings.txt"
           test "$settings" = "170011|on|on|on"
-          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_wp01 -v \
+          python -B -m unittest discover -s tests/integration -p test_accept_revision_postgres.py -v \
+            2>&1 | tee "$evidence/acceptance.log"
+          grep -Eq '^Ran [1-9][0-9]* tests? in ' "$evidence/acceptance.log"
+          grep -qx 'OK' "$evidence/acceptance.log"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -v \
             2>&1 | tee "$evidence/wp01.log"
-          grep -q '^Ran 1 test in ' "$evidence/wp01.log"
+          grep -q '^Ran 7 tests in ' "$evidence/wp01.log"
           grep -qx 'OK' "$evidence/wp01.log"
       - name: Record the LX-01 lexical baseline
         run: |
@@ -122,15 +131,6 @@ jobs:
             | tee "$evidence/replay.log"
           python -B -m search_retrieval.lab publish | tee "$evidence/publish.log"
           python -B evaluation/vespa_lexical.py evaluation/fixtures/lexical-probes.json "$evidence/lx01"
-      - name: Verify dense and hybrid withdrawal in the real witness
-        if: inputs.dense
-        run: |
-          evidence="$RUNNER_TEMP/wp01"
-          export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
-          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -k test_vector -v \
-            2>&1 | tee "$evidence/vector-withdrawal.log"
-          grep -q '^Ran 2 tests in ' "$evidence/vector-withdrawal.log"
-          grep -qx 'OK' "$evidence/vector-withdrawal.log"
       - name: Install pinned evaluation dependencies and materialize E5
         if: inputs.dense
         run: |
