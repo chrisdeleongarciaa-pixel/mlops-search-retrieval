@@ -1,9 +1,9 @@
-# Evidencia del incremento bibliográfico/PDF
+# Bibliographic and PDF evidence
 
-`evidence-index.json` identifica los resultados observados y los hashes del código y la configuración local sobre la base `c1fd4fd`. Los JSON conservan los artefactos de ejecución. Para publicar `scifact-recalculation-inputs.json` se sustituyeron las rutas absolutas locales por nombres de archivo. El registro conserva el hash del manifiesto original y los hashes de las entradas. El corpus y los pesos permanecen fuera de Git.
+`evidence-index.json` binds results and local code/configuration hashes to the base `c1fd4fd`. The published recalculation input record replaces absolute paths with filenames and retains original manifest and input hashes. Source corpus and weights remain external.
 
-`pdf-manifest.json`, `pdf-inputs.json` y `pdf-result.json` corresponden al intento final que pasó con PostgreSQL y GROBID reales. Los tres `failed-*.json` conservan los rechazos anteriores. El log de acceso distingue el timeout del cliente de la terminación posterior en el servidor. `pdf-container-effective.txt` contiene, en orden, memoria, memoria más swap, NanoCPUs e ID de imagen observados por Docker.
+`pdf-manifest.json`, `pdf-inputs.json` and `pdf-result.json` identify the successful PostgreSQL/GROBID run. The three `failed-*.json` files retain earlier rejections. The access log distinguishes client timeout from server completion. `pdf-container-effective.txt` records memory, memory plus swap, NanoCPUs and image ID in order.
 
-`pdf-independent-token-check.py` es una copia del verificador ejecutado desde `<workspace>/work/verify-pdf-token-budget.py`; conserva ese contexto de rutas. Su hash está en el resultado del recuento. El verificador reutilizable de rangos es `evaluation/verify_transformation.py`, y el recorrido completo se reproduce con `tests/integration/test_scientific_pdf.py` según la guía operativa.
+`pdf-independent-token-check.py` preserves the verifier as executed from the original workspace. Its hash appears in the count result. The reusable range verifier is `evaluation/verify_transformation.py`. Reproduce the full witness using the integration test and runbook.
 
-La colección congelada de LitSearch identifica selección, juicios heredados y los hashes de sus artefactos. El recálculo SciFact y la regeneración BM25 se registran por separado. Ninguno de estos archivos contiene una ejecución de reescritura Qwen/Gemma ni métricas de recuperación sobre LitSearch.
+The LitSearch manifest records the frozen selection and inherited judgments. The SciFact recalculation and BM25 regeneration are separate records. [Verification](../../../docs/verification/scientific-pdf.md) · [Runbook](../../../engineering/operations/scientific-pdf.md)

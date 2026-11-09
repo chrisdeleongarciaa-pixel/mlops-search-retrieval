@@ -1,12 +1,11 @@
-# Infraestructura
+# Infrastructure
 
-Aquí viven los archivos que ejecuta cada servicio. Los clientes y conversiones de protocolo se mantienen en `src/search_retrieval/adapters/`.
-
-| Ruta | Contenido previsto |
+| Component | Configuration |
 | --- | --- |
-| [postgres](postgres/README.md) | Migraciones y operación de PostgreSQL. |
-| [vespa](vespa/README.md) | Paquete de aplicación, esquemas y perfiles de ranking. |
-| [object-storage](object-storage/README.md) | Configuración del almacenamiento y políticas de ciclo de vida. |
-| [serving/vllm](serving/vllm/README.md) | Configuración del proceso de inferencia y sus recursos. |
+| [PostgreSQL](postgres/README.md) | Authority migrations and local Compose. |
+| [Vespa](vespa/README.md) | Application, schema, rank profiles and startup checks. |
+| [Object storage](object-storage/README.md) | File-backed originals and lifecycle constraints. |
+| [GROBID](grobid/compose.yaml) | Pinned scientific PDF parser and resource limits. |
+| [vLLM](serving/vllm/README.md) | Inference pilot and GPU preflight. |
 
-Los archivos de despliegue se incorporan cuando exista un entorno objetivo y se puedan verificar el aislamiento de red, los recursos y las versiones elegidas.
+Adapters live in the Python package. Deployment profiles identify effective image digests, resource limits and network scope. [Runbooks](../engineering/operations/README.md)

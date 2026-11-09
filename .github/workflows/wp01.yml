@@ -61,6 +61,7 @@ jobs:
           python -m pip install --no-deps --no-build-isolation -e .
           python -B -m unittest discover -s tests/unit -v
           python -B -m unittest discover -s tests/contract -v
+          python -B -m unittest discover -s evaluation -p test_paired_bootstrap.py -v
       - name: Start the pinned services and check feed and search
         run: |
           evidence="$RUNNER_TEMP/wp01"

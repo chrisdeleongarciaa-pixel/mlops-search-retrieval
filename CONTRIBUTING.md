@@ -1,8 +1,8 @@
-# Contribuir
+# Contributing
 
-- Instala el paquete en un entorno virtual y ejecuta las pruebas unitarias descritas en el README antes de abrir un cambio.
-- Coloca cada interfaz junto al caso de uso que la consume. Pon una definición en `contracts` cuando represente una identidad o un contrato compartido por varios componentes.
-- Conecta los adaptadores en el punto de arranque de cada proceso. Mantén los clientes externos y sus credenciales fuera de los casos de uso.
-- Cambia una decisión registrada cuando cambie una garantía. Describe el escenario adverso, cómo observar el resultado y dónde queda la evidencia.
-- Usa fixtures sintéticos en el repositorio. Mantén credenciales, modelos, corpus reales y resultados de ejecución fuera del control de versiones.
-- Ejecuta las pruebas contra motores reales al cambiar el comportamiento de una integración. Registra las versiones probadas y conserva resultados reproducibles.
+- Install the package in a virtual environment and run the unit and contract suites from the README.
+- Place an interface beside the use case that consumes it. Put identities and protocols shared across components in `contracts`.
+- Inject adapters at process startup. Keep service clients and credentials at their respective boundaries.
+- When a guarantee changes, update the decision, describe the adverse scenario and link observable evidence.
+- Use synthetic fixtures for contract tests. Publish selected reproducible evidence with hashes. Keep credentials, weights, full corpora and local run directories outside Git.
+- Run the relevant real-dependency tests for integration changes and record effective versions.

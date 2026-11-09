@@ -1,16 +1,12 @@
-# Recuperación densa e híbrida del laboratorio
+# Dense and hybrid retrieval
 
-| Operación | Precondición | Postcondición e invariante observable |
+| Operation | Precondition | Postcondition and invariant |
 | --- | --- | --- |
-| Codificar con E5 | Snapshot de artefactos con hashes verificados, rol de consulta o pasaje y entorno FP32 | Un vector finito y normalizado de 768 componentes por entrada, en el mismo orden. La máscara excluye el padding del promedio. El límite de 512 incluye prefijo y tokens especiales. |
-| Proyectar un fragmento | Revisión durable y generación habilitada para un espacio vectorial fijo | Se verifica el conjunto de fragmentos por la ruta de búsqueda antes de activar la proyección. La identidad de la proyección incluye el espacio. El registro en PostgreSQL conserva procedencia y controla la activación. |
-| Recuperar candidatos | Identidad de tenant, consulta, presupuesto y generación compatibles | Se rankea dentro de la elegibilidad. Una segunda lectura confirma el snapshot antes de devolver resultados. Tras un cambio se permite un reintento dentro del plazo. Un snapshot vacío compatible produce un vacío válido. Una cobertura parcial, un vector ausente o una generación incompatible producen un error explícito. |
-| Fusionar | Dos ramas completas para el mismo snapshot | RRF usa hasta 100 candidatos por rama, pesos iguales y constante 60, con desempate por ID. Antes de reutilizar el resultado en contexto se vuelve a consultar la autoridad. |
+| Encode | Verified model snapshot, retrieval role and fixed FP32 profile. | Return one finite normalized 768-dimensional vector per input in original order. E5 excludes padding from pooling. The 512-token limit includes prompt and special tokens. |
+| Project | Durable revision and generation bound to one vector space. | Verify the fragment set through search before activation. The space participates in projection identity. PostgreSQL retains provenance and controls activation. |
+| Retrieve | Authorized tenant, query, budget and compatible generation. | Rank within eligibility and revalidate before returning. Retry once within budget after a change. An empty compatible snapshot is valid. Partial coverage, missing vectors and incompatible generations fail explicitly. |
+| Fuse | Complete lexical and dense lists from the same snapshot. | Apply equal-weight RRF with depth 100 and constant 60. Break ties by document ID. Recheck authority before context reuse. |
 
-La prueba mutable admite hasta 400 fragmentos elegibles por solicitud. La autoridad proporciona las identidades de fragmentos de los manifiestos de publicación y Vespa confirma la presencia del conjunto y su espacio vectorial. La medición registra ese coste por separado. El corpus SciFact usa una generación inmutable y se valida al completar la carga. Sus filtros selectivos enumeran las identidades del subconjunto antes de buscar vecinos.
+The mutable witness permits up to 400 eligible fragments. PostgreSQL supplies fragment identities from manifests and Vespa verifies presence and vector space. Report coverage verification cost separately. The immutable SciFact generation verifies the complete corpus after loading.
 
-El retiro es una propiedad del protocolo de publicación y consulta. Un trabajador puede escribir una proyección física después del retiro. La actualización condicional de PostgreSQL impide que esa proyección se haga elegible y la revalidación excluye evidencia retirada de un resultado previo.
-
-El oráculo SciFact usa coseno FP64 de los vectores almacenados en `float32`, con desempate por ID. Vespa usa `prenormalized-angular` con la expresión `1 - distance(field, embedding)`. El umbral de `1e-5` separa intercambios de corte por precisión de cambios sustantivos. La medida estricta conserva toda diferencia de IDs.
-
-[Perfil de aceptación v1](../operations/service-objectives.md) · [Trazabilidad y reproducción](../verification/dense-retrieval.md)
+A worker can physically write a withdrawn projection. PostgreSQL's activation fence keeps it ineligible and revalidation excludes it from prior results. The SciFact oracle computes FP64 cosine on stored `float32` vectors with ID tie-breaking. Vespa uses `prenormalized-angular` and `1 - distance(field, embedding)`. The score tolerance `1e-5` handles boundary ties and strict ID overlap remains available. [Service objectives](../../engineering/operations/service-objectives.md) · [Verification](../verification/dense-retrieval.md)

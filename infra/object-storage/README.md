@@ -1,7 +1,7 @@
-# Almacenamiento de objetos
+# Object storage
 
-El primer perfil usa `FileObjectStore` con un directorio privado, existente y persistente. El sistema de archivos debe admitir enlaces duros dentro del directorio. Configura el mismo directorio al reiniciar el proceso o al conectar otros procesos que compartan el almacén.
+The first profile uses `FileObjectStore` with an existing private persistent directory. The filesystem must support hard links within that directory. Reuse the directory across restart and processes sharing the store.
 
-El adaptador escribe y sincroniza un archivo temporal, comprueba sus bytes y publica el objeto con un enlace que preserva cualquier referencia existente. Al reutilizar una referencia, comprueba el tamaño y SHA-256 del archivo. En POSIX también sincroniza el directorio. La prueba en Windows cubre la terminación y el reinicio del proceso con el mismo directorio persistente.
+The adapter writes and syncs a temporary file, checks its bytes and publishes by link while preserving an existing reference. Reuse verifies size and SHA-256. POSIX also syncs the directory. The Windows witness exercises process termination and restart with the same store.
 
-El directorio debe estar protegido frente a escrituras ajenas al adaptador. La limpieza de objetos y archivos temporales requiere coordinarse con las aceptaciones en curso y verificar las referencias vigentes. El perfil inicial conserva esos archivos hasta que se defina esa política.
+Protect the directory from outside writes. Coordinate cleanup with in-flight acceptance and check live references. The current profile retains unreferenced files until a cleanup policy is verified.

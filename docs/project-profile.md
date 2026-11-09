@@ -1,33 +1,23 @@
-# Recuperación de literatura científica con procedencia
+# Scientific literature retrieval with evidence provenance
 
-## Portafolio
+## Portfolio
 
-Desarrollé una plataforma experimental para buscar literatura de ML/NLP y preparar contexto verificable para un modelo generativo. El problema central es mantener la correspondencia entre los resultados, la revisión vigente del documento y la evidencia que recibe el modelo mientras el corpus cambia.
+I built a retrieval laboratory for English ML/NLP literature. PostgreSQL records idempotent acceptance, immutable revision identity and a transactional outbox. Vespa serves lexical and vector projections and publishes a new revision only after it is visible to search. Tests exercise withdrawal with an in-flight worker and prevent stale evidence from being reused.
 
-PostgreSQL registra la aceptación idempotente, los retiros y los eventos de publicación. Vespa sirve índices reconstruibles con BM25, búsqueda vectorial exacta y HNSW, con fusión RRF para la recuperación híbrida. En el laboratorio probé que un worker atrasado no vuelve a poner en búsqueda una revisión retirada. Para PDF científico, integré GROBID y una transformación de TEI que conserva secciones, coordenadas de página, rangos UTF-8 y hashes. Un ensayo con un original de ocho páginas produjo 94 fragmentos con localizadores comprobables. [Verificación de publicación](verification/witness-increments.md) · [Verificación de PDF](verification/scientific-pdf.md)
+The PDF pipeline uses GROBID and TEI to retain section, page coordinates, canonical byte ranges and hashes. An eight-page scientific PDF produced 94 verifiable chunks. In a separate end-to-end witness, a real Qwen model answered a query and cited an original byte range. The test rejected delivery after the underlying ACL grant was revoked. [PDF verification](verification/scientific-pdf.md) · [Real-model evidence](verification/integration-gate.md)
 
-Construí el arnés de evaluación para distinguir calidad de ranking, aproximación y latencia. Sobre 300 consultas de SciFact, la recuperación exacta con EmbeddingGemma alcanzó **0,78871 NDCG@10**, frente a **0,66168** de BM25. La fusión de ambas bajó a **0,74246**, aunque elevó Recall@100 de **0,975** a **0,980** frente a EmbeddingGemma exacta. Esto identifica un intercambio entre cobertura y orden temprano que puede estudiarse con candidatos congelados. También preparé LitSearch con 64.183 artículos y una selección de 300 consultas para evaluación posterior. [Rankings y métricas de SciFact](../evaluation/evidence/scifact-gemma-exact-cpu/manifest.json) · [Contrato de LitSearch](contracts/bibliographic-profile.md)
+I evaluated BM25, exact cosine, HNSW and reciprocal rank fusion on 300 SciFact queries. EmbeddingGemma HNSW reached **0.78871 NDCG@10** versus **0.66168** for BM25. Across four HNSW builds, the full-corpus mean ANN recall@10 was **0.99908** at **9.44 ms Vespa p95** with one sequential client. Fusion raised Recall@100 and reduced NDCG@10. The paired bootstrap and saved query scores make that tradeoff reproducible. [Paired audit](verification/scifact-stability.md)
 
-**Tecnologías.** Python, PostgreSQL, Vespa, Docker Compose, GROBID, TEI, BEIR, PyTorch, Transformers, Sentence Transformers, vLLM y GitHub Actions. E5 y EmbeddingGemma-300M se evaluaron como encoders. Qwen2.5-7B-Instruct se ensayó como backend generativo con vLLM en una L4. [Registro experimental](registro-tecnico-experimental.md)
-
-En la prueba integral de laboratorio, un Qwen de 1,5B en CPU devolvió una respuesta cuya cita se resolvió a los bytes del original. La prueba revocó el permiso al terminar la generación y verificó el rechazo antes de entregar. Un ejemplo separado conectó el mismo modelo por API al servidor MCP oficial de archivos con una herramienta de lectura permitida. [Evidencia de inferencia y MCP](verification/integration-gate.md)
+**Stack.** Python, PostgreSQL, Vespa, Docker Compose, GROBID, TEI, PyTorch, Transformers, Sentence Transformers, BEIR, llama.cpp, vLLM, MCP and GitHub Actions.
 
 ## CV
 
-**Recuperación de literatura científica con procedencia** · Python, PostgreSQL, Vespa, GROBID, Docker, BEIR
-
-- Implementé ingesta idempotente con outbox transaccional y publicación condicional en Vespa. Verifiqué continuidad y retiro ante trabajo atrasado con PostgreSQL y Vespa reales.
-- Evalué BM25, búsqueda exacta, HNSW y RRF con rankings reproducibles. EmbeddingGemma exacta obtuvo 0,78871 NDCG@10 frente a 0,66168 de BM25 en 300 consultas SciFact.
-- Integré transformación de PDF con GROBID, coordenadas de página y verificación de rangos y hashes. Materialicé LitSearch con 64.183 artículos y congelé 300 consultas de evaluación.
-
-**English CV** · Scientific Literature Retrieval and Evidence Provenance
-
-- Implemented idempotent ingestion with a transactional outbox and conditional publication. Verified query continuity and withdrawal under delayed workers using PostgreSQL and Vespa.
-- Benchmarked BM25, exact vector search, HNSW and RRF. Exact EmbeddingGemma reached 0.78871 NDCG@10 against BM25 at 0.66168 on 300 SciFact queries.
-- Integrated GROBID PDF extraction with page coordinates and byte-range verification. Prepared a 64,183-article LitSearch corpus and froze a 300-query evaluation set.
+- Implemented idempotent ingestion with a transactional outbox and conditional Vespa publication. Verified continuity, ACL and withdrawal with PostgreSQL and Vespa integration tests.
+- Benchmarked BM25, exact cosine, HNSW and RRF on 300 SciFact queries. Audited four fresh Gemma graphs and reproduced 0.78871 NDCG@10 for HNSW, with paired bootstrap intervals.
+- Integrated provenance-preserving PDF extraction and tested private delivery with a real Qwen model. Built a separate MCP client with an allowlisted read tool and permission failure tests.
 
 ## LinkedIn
 
-Construí un laboratorio de recuperación de literatura científica para estudiar qué ocurre cuando se actualiza o retira un artículo mientras hay búsquedas y trabajos de indexación en curso. Implementé aceptación idempotente en PostgreSQL, publicación condicional en Vespa y fragmentos de PDF que se pueden localizar por revisión, página y rango de bytes.
+I built a scientific literature retrieval system to test what happens when a document changes while search and indexing are active. The pipeline combines durable acceptance in PostgreSQL, conditional publication in Vespa, and PDF chunks with verifiable page and byte provenance.
 
-Un resultado que cambió el rumbo del proyecto fue el de SciFact. EmbeddingGemma con búsqueda exacta obtuvo 0,78871 NDCG@10 en 300 consultas. Al fusionarla con BM25 subió la cobertura a 100 candidatos, pero bajó NDCG@10. Conservar ambas listas por consulta permite revisar dónde se pierde un documento relevante y delimitar qué podría corregir un reranker. El laboratorio incluye además un piloto de inferencia con Qwen y vLLM, y un corpus LitSearch preparado para evaluar reescritura de consultas.
+The SciFact study showed a concrete ranking tradeoff. EmbeddingGemma HNSW reached 0.78871 NDCG@10, while fusion with BM25 raised Recall@100 to 0.980 and lowered NDCG@10 to 0.74264. I archived the per-query scores and bootstrap procedure. The project also includes real-model private delivery and a filesystem MCP integration with explicit read permissions. [Project results](../README.md#results)

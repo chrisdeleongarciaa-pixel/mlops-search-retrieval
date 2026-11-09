@@ -1,5 +1,5 @@
-# Adaptadores
+# Adapters
 
-El código de frontera se agrupa por integración cuando se implementa. PostgreSQL conserva el registro de revisiones, elegibilidad y outbox. Vespa mantiene proyecciones de búsqueda. El almacén de objetos conserva originales y artefactos inmutables. vLLM ejecuta inferencia. Los adaptadores de entrada exponen casos de uso al gateway y al worker.
+PostgreSQL stores revision, eligibility and outbox state. Vespa maintains search projections. The object-store adapter persists immutable originals. GROBID extracts PDF structure, and the model adapter streams through the compatible chat API.
 
-Cada adaptador traduce tipos y errores en su frontera. La configuración de red, credenciales y clientes se inyecta desde el arranque del proceso. Los archivos operativos de los servicios residen en [infra](../../../infra/README.md).
+Translate external types and failures at the boundary. Inject network settings, credentials and clients at startup. [Service configuration](../../../infra/README.md)

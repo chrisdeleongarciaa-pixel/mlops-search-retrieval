@@ -1,20 +1,12 @@
-# Pruebas de integración
+# Integration tests
 
-Usa instancias aisladas y datos sintéticos. Registra las versiones de los servicios y comprueba efectos observables en PostgreSQL, Vespa y el almacén de objetos. Cuando se conecte vLLM, distingue la integración de protocolo con un doble de la ejecución real con modelo y GPU.
+Use disposable services and synthetic originals. Record effective versions and check observable PostgreSQL, object-store and Vespa state. The [AV-04 witness](../../docs/verification/accept-revision.md#recovery-witness-av-04) kills the process after commit and before the receipt, then verifies replay.
 
-La primera prueba de ingesta es [AV-04](../../docs/verification/accept-revision.md#primer-ensayo-de-recuperación--av-04). Corta el proceso entre el commit de la aceptación y la entrega del recibo, y comprueba la recuperación al reiniciar y reenviar.
-
-## Ejecutar la suite de aceptación
-
-Instala el paquete con el extra `postgres` y proporciona `ACCEPT_REVISION_TEST_DSN` para una base PostgreSQL desechable. El rol debe poder crear y eliminar los esquemas de prueba generados por la suite. Cada caso aplica la migración en su propio esquema y usa un directorio temporal para originales. Ejecuta desde la raíz del proyecto con el Python del entorno virtual.
-
-```powershell
-python -m pip install -e ".[postgres]"
+```sh
+python -m pip install -e ".[postgres,pdf]"
 python -m unittest discover -s tests/integration -v
 ```
 
-Si falta el DSN, la suite de PostgreSQL se omite. Para AV-04 y AV-13, el entorno debe permitir iniciar y terminar procesos hijo.
+Set `ACCEPT_REVISION_TEST_DSN` to a disposable PostgreSQL database. The test role creates and drops each generated test schema. AV-04 and AV-13 require child process startup and termination. The suite reports a skip when the DSN is absent.
 
-## Publicación
-
-El primer recorrido que incluya publicación debe aceptar un cambio, comprobar que su revisión se hace consultable y resolver un fragmento a su original. Después añade una actualización con el feed retrasado, un retiro durante el procesamiento, una revocación durante la consulta y una cancelación durante la entrega.
+Set `WITNESS_VESPA_URL` to the deployed data endpoint for publication, retrieval and withdrawal. Follow the [PDF procedure](../../engineering/operations/scientific-pdf.md) for GROBID and [RI-01](../../docs/verification/integration-gate.md) for the real Qwen route. The automatic gate selects specific cases and checks their counts.

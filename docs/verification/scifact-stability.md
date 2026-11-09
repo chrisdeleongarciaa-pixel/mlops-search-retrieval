@@ -1,59 +1,68 @@
-# Verificación de estabilidad y encoder CUDA
+# Paired SciFact stability and quality audit
 
-| Requisito | Prueba o evidencia |
-| --- | --- |
-| Espacios separados y archivos oficiales | `config/embeddinggemma-300m.json`, verificación de Git blobs y SHA‑256 LFS y conformidad con `encode_query` / `encode_document`. |
-| Mismas consultas y cohortes | Manifiesto de cada semilla, hashes de IDs elegibles y permutación, hashes de matrices y evidencia de índice vacío al inicio. |
-| RET‑01 | `samples-*.jsonl.gz` conserva consulta, tiempo, trazas y profundidad. `aggregate.json` presenta media y desviación estándar por algoritmo y cohorte. |
-| RET‑02 | `rankings.json` y `per-query.json` por construcción, con el evaluador BEIR fijado. La puntuación se calcula solo en la generación completa. |
-| Runtime CUDA | `query_encoder_cuda.py` registra las formas capturadas, paridad de vectores y vecinos, tiempos y memoria por modo. |
+Run [42465181926](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42465181926) executed E5 and EmbeddingGemma in separate spaces on the same Vespa 8.781.11 host. Docker exposed two CPUs and 8,154,017,792 bytes of RAM. The recorded encoding environments differ. Both produced normalized FP32 vectors stored as `float32` with 768 dimensions. Host matching applies to Vespa measurements and does not identify a causal encoder speed difference.
 
-El workflow **WP-01 and LX-01 witness** con `stability=true` ejecuta las cuatro construcciones de E5 usando el artefacto del ensayo original. Se despliega Vespa de nuevo antes de cada orden. El agregado acepta el conjunto completo de cuatro semillas de un modelo y declara si se completó la comparación de ambos.
+The registered profile uses 5,183 articles, 809 development queries and the official 300-query BEIR test split. It freezes exploration at zero, requests 100 candidates, and uses one sequential client. The four fresh indices use insertion orders 11, 29, 47 and 83. The same query IDs and eligibility cohorts are replayed across both models and all builds. [Protocol](../../config/scifact-stability-v1.json) · [Encoder decision](../../engineering/decisions/0005-encoder-comparison.md)
 
-Con `gemma_vectors_commit`, el mismo job toma un archivo `scifact-gemma-vectors.tar.gz` del commit indicado. El archivo contiene matrices y manifiestos de SciFact para train y test. El job alterna el orden de E5 y Gemma entre semillas y usa el mismo host para los ocho índices.
+## Audit procedure
 
-La revisión oficial de Gemma está sujeta a la licencia de Google. Con un snapshot local autorizado de la revisión fijada, instala el complemento de Sentence Transformers sobre el entorno denso y ejecuta estos comandos. Los directorios de salida deben ser nuevos.
+The audit verifies all 56 files recorded by the eight manifests, checks the freeze and query IDs, and replays algorithm labels from the traces. All eight builds pass recorded exact parity. Full-corpus ANN overlap is recomputed from the saved candidate lists. The audit recomposes RRF for each query from the BM25 and dense branches, matches the saved fusion scores and order, and independently reevaluates all 40 ranking lists with pinned BEIR and qrels. It reproduces the original engine aggregate. The 32 cohort samples contain 9,600 observations and 300 unique queries. [Audit output](../../evaluation/evidence/scifact-paired-42465181926/audit.json)
 
-```bash
-python -m pip install --require-hashes --no-deps -r config/requirements-embeddinggemma.lock
-python -m pip check
-python evaluation/scifact_gemma.py "$gemma_snapshot" "$dataset" "$gemma_train" --device cuda
-python evaluation/scifact_gemma.py "$gemma_snapshot" "$dataset" "$gemma_test" --split test --device cuda
+```sh
+gh run download 42465181926 -n scifact-stability -D paired-run
+python evaluation/audit_scifact_stability.py paired-run scifact.zip beir-source.zip paired-audit
 ```
 
-Para cada encoder y semilla, despliega la misma versión de Vespa en un volumen nuevo y ejecuta el arnés. La ejecución valida la cobertura del corpus antes de abrir el split test.
+Use the pinned [evaluation environment](../../config/requirements-eval-win64.lock) or its Linux equivalent and an installed project. The audit checks both input archives. The original trace artifact is retained by Actions according to its retention policy. The repository archives the audit, per-build metrics and original per-query score bytes in gzip form. [Evidence index](../../evaluation/evidence/README.md)
 
-```bash
-python evaluation/scifact_stability.py run "$dataset" "$gemma_train" "$gemma_test" \
-  "$beir_archive" "$output" --vespa "$vespa_url" --seed 11
-python evaluation/scifact_stability.py aggregate "$report" "$e5_runs"/seed-*/manifest.json \
-  "$gemma_runs"/seed-*/manifest.json
+## Engine acceptance
+
+Values are the mean and sample standard deviation across four builds. Each row has 300 observations per build. The p95 is the client-observed Vespa call using precomputed query vectors.
+
+| Gemma cohort | Effective algorithm | ANN recall@10 | Overlap@100 | Vespa p95 | RET-01 |
+| --- | --- | ---: | ---: | ---: | --- |
+| Full | HNSW | 0.99908 ± 0.00032 | 0.97511 ± 0.00111 | 9.44 ± 1.04 ms | Pass in 4/4 |
+| ≈50% | HNSW | 0.99958 ± 0.00017 | 0.98688 ± 0.00052 | 9.07 ± 1.18 ms | Pass in 4/4 |
+| ≈10% | HNSW | 1.00000 ± 0.00000 | 0.99934 ± 0.00014 | 7.24 ± 0.45 ms | Pass in 4/4 |
+| ≈1% | Exact by selectivity | 1.00000 ± 0.00000 | 1.00000 ± 0.00000 | 5.41 ± 0.18 ms | Exact fallback |
+
+Across the 12 Gemma HNSW build/cohort cells, the worst recall@10 was 0.99867 and the largest p95 was 10.57 ms. The thresholds are recall ≥0.95 and p95 <25 ms at this load point. This closes RET-01 for Gemma in the registered single-client engine profile. Service latency, query encoding cost, throughput under load and hybrid latency require separate measurements.
+
+## Retrieval quality
+
+| Full-corpus ranking | NDCG@10 | Recall@10 | Recall@100 |
+| --- | ---: | ---: | ---: |
+| BM25 | 0.66168 | 0.79094 | 0.88589 |
+| E5 exact | 0.69390 | 0.80722 | 0.93933 |
+| E5 HNSW | 0.69190 | 0.80639 | 0.94683 |
+| E5 exact + BM25 | 0.70202 | 0.82722 | 0.95767 |
+| E5 HNSW + BM25 | 0.70161 | 0.82722 | 0.95933 |
+| Gemma exact | 0.78871 | 0.91856 | 0.97500 |
+| Gemma HNSW | 0.78871 | 0.91856 | 0.97500 |
+| Gemma exact + BM25 | 0.74246 | 0.85622 | 0.98000 |
+| Gemma HNSW + BM25 | 0.74264 | 0.85622 | 0.98000 |
+
+Gemma HNSW + BM25 scores **0.74259–0.74273** NDCG@10 across the four builds. Exact and HNSW Gemma alone meet RET-02 in every build. Both Gemma fusions miss the 0.75 point target. Fusion adds 0.005 Recall@100 and loses early-rank quality. The quality result comes from re-scoring the observed branch rankings with the frozen RRF configuration.
+
+## Paired uncertainty
+
+The bootstrap uses 10,000 percentile resamples with seed `20261108`. Each draw resamples the same 300 query IDs for both arms. When an arm has four builds, scores are averaged within query before resampling. The interval reflects variation across queries conditional on the observed builds. Build-to-build variation is reported separately above.
+
+| Comparison | Δ NDCG@10 | 95% paired interval | Wins / ties / losses |
+| --- | ---: | --- | ---: |
+| Gemma exact − E5 exact | +0.09482 | [0.06175, 0.12784] | 91 / 175 / 34 |
+| Gemma exact + BM25 − Gemma exact | −0.04626 | [−0.07422, −0.01899] | 37 / 197 / 66 |
+| Gemma HNSW + BM25 − Gemma HNSW | −0.04608 | [−0.07405, −0.01873] | 37 / 197 / 66 |
+| Gemma HNSW − E5 HNSW | +0.09681 | [0.06317, 0.12994] | 92 / 174 / 34 |
+
+The absolute Gemma HNSW interval is **[0.75269, 0.82372]**. For Gemma HNSW + BM25 it is **[0.70063, 0.78317]**. The intervals describe SciFact queries under this protocol. Transfer to another collection remains an empirical question.
+
+Run an exact-score comparison directly against the archived per-query data. For the four-build estimate, repeat each side's input flag once for each registered seed.
+
+```sh
+python evaluation/paired_bootstrap.py \
+  --left evaluation/evidence/scifact-paired-42465181926/gemma-seed-11-per-query.json.gz --left-ranker exact \
+  --right evaluation/evidence/scifact-paired-42465181926/seed-11-per-query.json.gz --right-ranker exact
 ```
 
-En un entorno CUDA compatible con TorchInductor, usa los pesos locales del encoder y su matriz de corpus del mismo espacio.
-
-```bash
-python evaluation/query_encoder_cuda.py e5 "$e5_snapshot" "$dataset" "$e5_bundle" "$e5_cuda"
-python evaluation/query_encoder_cuda.py gemma "$gemma_snapshot" "$dataset" "$gemma_train" "$gemma_cuda"
-```
-
-Para medir el recorrido de servicio completo con E5 eager en GPU, ejecuta el testigo con PostgreSQL, Vespa y la ingesta preparada, y pasa `--device cuda` a `evaluation/vespa_vector.py`.
-
-## Corrida E5 observada
-
-La corrida `42290872584` reutilizó los vectores auditados y ejecutó 4.800 comparaciones en cuatro índices Vespa 8.781.11 independientes. Pasó la paridad exacta en todos los cortes. Los valores de la tabla son media ± desviación estándar muestral de cuatro métricas calculadas por construcción. Cada cohorte contiene 1.200 observaciones de 300 consultas únicas.
-
-| Cohorte | Algoritmo efectivo | Recall ANN@10 | Solapamiento@100 | p95 del motor |
-| --- | --- | ---: | ---: | ---: |
-| Completa | HNSW | 0,99158 ± 0,00129 | 0,93716 ± 0,00180 | 12,42 ± 0,34 ms |
-| ≈ 50 % | HNSW | 0,99658 ± 0,00110 | 0,96908 ± 0,00113 | 13,30 ± 3,24 ms |
-| ≈ 10 % | HNSW | 0,99992 ± 0,00017 | 0,99925 ± 0,00021 | 10,30 ± 1,01 ms |
-| ≈ 1 % | Exacta por selectividad estimada | 1,00000 ± 0,00000 | 1,00000 ± 0,00000 | 6,44 ± 0,14 ms |
-
-Las tres cohortes HNSW cumplieron RET‑01 en las cuatro construcciones. El mayor NDCG@10 fue 0,70202, de RRF con exacta, por debajo del umbral 0,75. El agregado original marcó el 1 % como indeterminado. La reproducción verificó los hashes de las muestras y reconoció el plan exacto junto a la decisión `Skip` del filtro global. Vespa registra esa decisión cuando su estimación queda por debajo del límite inferior. La reclasificación conserva las latencias medidas y el agregado original. [Corrida E5](https://github.com/chrisdeleongarciaa-pixel/mlops-search-retrieval/actions/runs/42290872584) · [Decisión de filtro en Vespa 8.781.11](https://github.com/vespa-engine/vespa/blob/v8.781.11/searchcore/src/vespa/searchcore/proton/matching/query.cpp) · [Agregado de la reproducción](../../evaluation/evidence/scifact-stability-e5-42290872584/aggregate.json)
-
-Pasaron 32 pruebas locales entre unitarias, de contrato y de evaluación. E5 repitió la conformidad FP32 con sus pesos fijados tras extraer el forward compartido, con error máximo por componente de 0.
-
-La revisión oficial de EmbeddingGemma‑300M pasó la conformidad FP32 en CPU con Sentence Transformers 6.2.0. Coincidieron IDs de tokens y máscaras, el pasaje largo se truncó de 1.210 a 512 tokens y el error máximo por componente fue 9,50 × 10⁻⁸. La ejecución detectó que `preprocess` incluye la modalidad como texto. El adaptador conserva esa modalidad al mover tensores al dispositivo y el arnés CUDA exige que siga siendo igual a la del grafo capturado. Las mediciones CUDA requieren un entorno GPU. [Conformidad Gemma](../../evaluation/evidence/embeddinggemma-300m-cpu/conformance.json) · [Entorno](../../evaluation/evidence/embeddinggemma-300m-cpu/environment.json) · [Hashes del snapshot](../../evaluation/evidence/embeddinggemma-300m-cpu/snapshot-sha256.json)
-
-[Contrato de comparación](../decisions/0005-encoder-comparison.md) · [Solicitud de acceso al checkpoint](https://huggingface.co/google/embeddinggemma-300m)
+[Bootstrap script](../../evaluation/paired_bootstrap.py) · [Archived exact run](../../evaluation/evidence/scifact-gemma-exact-cpu/manifest.json) · [Earlier E5 stability](../../evaluation/evidence/scifact-stability-e5-42290872584/aggregate.json)

@@ -5,8 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mlops-search-retrieval"
 version = "0.1.0"
-description = "Base para búsqueda documental e inferencia con procedencia"
+description = "Scientific literature retrieval with hybrid search and verifiable evidence"
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.12"
 dependencies = []
 
