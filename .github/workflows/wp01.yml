@@ -7,6 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
+      real_inference:
+        description: Run the private delivery witness with Qwen 1.5B on CPU
+        type: boolean
+        default: false
       dense:
         description: Run E5, SciFact and the vector witness
         type: boolean
@@ -33,7 +37,7 @@ permissions:
 
 jobs:
   witness:
-    name: CPU integration gate
+    name: ${{ inputs.real_inference && 'Real inference witness' || 'CPU integration gate' }}
     if: "!inputs.stability"
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ inputs.dense && 120 || 20 }}
@@ -111,12 +115,45 @@ jobs:
           test "$settings" = "170011|on|on|on"
           python -B -m unittest discover -s tests/integration -p test_accept_revision_postgres.py -v \
             2>&1 | tee "$evidence/acceptance.log"
-          grep -Eq '^Ran [1-9][0-9]* tests? in ' "$evidence/acceptance.log"
+          grep -q '^Ran 12 tests in ' "$evidence/acceptance.log"
           grep -qx 'OK' "$evidence/acceptance.log"
-          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py -v \
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py \
+            -k test_se -k test_wp -k test_vector -v \
             2>&1 | tee "$evidence/wp01.log"
           grep -q '^Ran 7 tests in ' "$evidence/wp01.log"
           grep -qx 'OK' "$evidence/wp01.log"
+      - name: Verify private delivery with real Qwen inference
+        if: github.event_name == 'workflow_dispatch' && inputs.real_inference
+        run: |
+          set -euo pipefail
+          assets="$RUNNER_TEMP/inference"
+          evidence="$RUNNER_TEMP/wp01"
+          mkdir -p "$assets/runtime"
+          curl -fLsS --retry 3 --max-time 180 \
+            https://github.com/ggml-org/llama.cpp/releases/download/b12211/llama-b12211-bin-ubuntu-x64.tar.gz \
+            -o "$assets/llama.tar.gz"
+          echo "962924b5431bc1237a9e5d26ba072d37b6fe05f79b495206e7ff6134887624c5  $assets/llama.tar.gz" | sha256sum -c -
+          tar -xzf "$assets/llama.tar.gz" -C "$assets/runtime" --no-same-owner
+          curl -fLsS --retry 3 --max-time 360 \
+            'https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/91cad51170dc346986eccefdc2dd33a9da36ead9/qwen2.5-1.5b-instruct-q4_k_m.gguf?download=true' \
+            -o "$assets/qwen.gguf"
+          echo "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e  $assets/qwen.gguf" | sha256sum -c -
+          server=$(find "$assets/runtime" -type f -name llama-server -print -quit)
+          test -x "$server"
+          export LD_LIBRARY_PATH="$(dirname "$server")${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          export WITNESS_MODEL_ID=qwen-witness
+          export WITNESS_MODEL_URL=http://127.0.0.1:18090
+          export ACCEPT_REVISION_TEST_DSN="postgresql://postgres:$RETRIEVAL_LAB_PASSWORD@127.0.0.1:$RETRIEVAL_LAB_PG_PORT/retrieval_lab"
+          "$server" --model "$assets/qwen.gguf" --alias "$WITNESS_MODEL_ID" --host 127.0.0.1 \
+            --port 18090 --threads 2 --ctx-size 1024 --parallel 1 --jinja > "$evidence/llama-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" || true' EXIT
+          curl -fsS --retry 30 --retry-all-errors --retry-delay 2 --retry-max-time 90 \
+            --max-time 3 "$WITNESS_MODEL_URL/health"
+          python -B -m unittest discover -s tests/integration -p test_witness_pipeline.py \
+            -k test_real_model_private_delivery -v 2>&1 | tee "$evidence/real-inference.log"
+          grep -q '^Ran 1 test in ' "$evidence/real-inference.log"
+          grep -qx 'OK' "$evidence/real-inference.log"
       - name: Record the LX-01 lexical baseline
         run: |
           evidence="$RUNNER_TEMP/wp01"

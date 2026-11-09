@@ -92,7 +92,7 @@ class Delivery:
         if self.tokenizer.count(messages) + self.output_reserve > self.context_limit:
             raise DeliveryRejected("Question exceeds prompt budget")
         for hit in result.hits:
-            if hit.projection_id not in current.projections:
+            if not current.permits(hit):
                 continue
             candidate = prompt([*retained, hit])
             if self.tokenizer.count(candidate) + self.output_reserve <= self.context_limit:
@@ -126,7 +126,7 @@ class Delivery:
         if (
             (current.tenant, current.generation)
             != (result.eligibility.tenant, result.eligibility.generation)
-            or any(hit.projection_id not in current.projections for hit in retained)
+            or any(not current.permits(hit) for hit in retained)
         ):
             raise DeliveryRejected("Evidence revoked before delivery")
 
