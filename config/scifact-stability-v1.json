@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "models": ["intfloat/multilingual-e5-base", "google/embeddinggemma-300m"],
+  "dataset_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "insertion_order_seeds": [11, 29, 47, 83],
+  "cohorts_percent": [100, 50, 10, 1],
+  "hits": 100,
+  "explore_additional_hits": 0,
+  "query_clients": 1,
+  "max_tokens_including_prompt": 512,
+  "dimensions": 768,
+  "inference_precision": "FP32",
+  "stored_dtype": "float32",
+  "ann_recall_at_10_min": 0.95,
+  "vespa_p95_ms_limit": 25,
+  "ndcg_at_10_min": 0.75
+}

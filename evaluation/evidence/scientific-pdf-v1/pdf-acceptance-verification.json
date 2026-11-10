@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "original_sha256": "3758229de3e08d024975e2c1b69bf89d960393def9f3827a515cebbc464c2aa2",
+  "original_bytes": 173406,
+  "receipt_sequence": 1,
+  "outbox_count": 1,
+  "observed_original_from_independent_sql_connection": true,
+  "transformation": {
+    "status": "verified",
+    "fragments": 94,
+    "canonical_bytes": 27064,
+    "missing_locators": 0
+  }
+}

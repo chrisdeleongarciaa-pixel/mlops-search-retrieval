@@ -1,0 +1,13 @@
+services:
+  grobid:
+    image: lfoppiano/grobid@sha256:eb306e6d494f6f7e89b35bbaf3b4925afd58c6a5638c775f2a1c35bfd3c5db0d
+    platform: linux/amd64
+    ports:
+      - "127.0.0.1:18070:8070"
+    mem_limit: 2560m
+    memswap_limit: 4g
+    cpus: 2
+    volumes:
+      - ./grobid.yaml:/opt/grobid/grobid-home/config/grobid.yaml:ro
+    environment:
+      JAVA_OPTS: "-Xmx1g"

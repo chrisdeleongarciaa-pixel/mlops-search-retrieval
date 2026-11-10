@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "English ML/NLP bibliographic laboratory",
+  "queries": "litsearch-300-frozen",
+  "source": "synthetic laboratory arrivals; no production traffic distribution claimed",
+  "routes": ["bm25", "dense", "hybrid", "rewrite-when-validated"],
+  "per_request": ["query_id", "request_id", "arrival_time", "route", "filters", "hits", "deadline", "terminal_state"],
+  "closed_loop": {"users": [8, 16], "think_time_ms": 0, "hits": 20, "timeout_ms": 3000, "warmup_requests": 100, "measured_requests": 1200},
+  "open_loop": {"arrival_process": "Poisson", "seed": 20261108, "rates_qps": null, "rate_selection": "calibrate after closed-loop throughput; freeze before open-loop run"},
+  "mutations": "existing witness publication, withdrawal and ACL barriers",
+  "status": "specified-not-executed"
+}

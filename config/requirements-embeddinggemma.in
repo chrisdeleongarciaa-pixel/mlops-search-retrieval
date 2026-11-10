@@ -1,0 +1,7 @@
+# Overlay for the existing dense runtime.
+cloudpickle==3.1.2
+joblib==1.6.0
+narwhals==2.28.0
+scikit-learn==1.9.1
+sentence-transformers==6.2.0
+threadpoolctl==3.8.0

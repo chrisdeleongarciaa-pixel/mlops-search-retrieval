@@ -1,0 +1,66 @@
+{
+  "mode": "hybrid",
+  "generation": "witness-e5-42278239372-1",
+  "eligible_projections": [
+    "9969e25b9cc23e1a6e39391202aac09cfd3cd55289599dd2cf9d7a83dcc926b3",
+    "b8783ad3fc7a698f057dfef6148c762493c8db07bc7834c852cfb2e075124746",
+    "c5b6d5cc5e948276cfd8baf0b4f667bc1c5a4d49ddb183cbf92938754472e159"
+  ],
+  "clients": 1,
+  "requests": 120,
+  "complete": 120,
+  "depth": 100,
+  "warmup": 3,
+  "repeats": 20,
+  "query_cache": false,
+  "result_cache": false,
+  "retrieval_client_ms": {
+    "p50": 117.59097,
+    "p95": 180.858928,
+    "p99": 223.843584
+  },
+  "stage_ms": {
+    "eligibility_ms": {
+      "p50": 9.133455,
+      "p95": 13.902851,
+      "p99": 17.822992
+    },
+    "encode_query_ms": {
+      "p50": 77.275765,
+      "p95": 133.985938,
+      "p99": 182.349835
+    },
+    "revalidation_ms": {
+      "p50": 9.253026,
+      "p95": 14.721186,
+      "p99": 18.478239
+    },
+    "vector_coverage_ms": {
+      "p50": 5.991187,
+      "p95": 8.362763,
+      "p99": 10.616125
+    },
+    "vespa_dense_ms": {
+      "p50": 8.46005,
+      "p95": 14.01748,
+      "p99": 17.246364
+    },
+    "vespa_lexical_ms": {
+      "p50": 4.122422,
+      "p95": 6.840528,
+      "p99": 8.640814
+    }
+  },
+  "SRV-01": {
+    "scope": "single-client retrieval component",
+    "passed": false
+  },
+  "samples_sha256": "eec60b730e10ab175cbfd98f2493c088e08a59b8bf4e08734e58f54e05fc169c",
+  "workload_sha256": "4236a073205b0b30574604ad2198a22283d5b1067043a6657b450efb90cffc9e",
+  "model_space_id": "f8ddb8c12a6cfa93db040afa5191ab0c0580f9fd0eeedf2ab15a076ee999118d",
+  "model_state": "warm",
+  "inference_precision": "FP32",
+  "device": "cpu",
+  "torch": "2.14.0+cpu",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39"
+}

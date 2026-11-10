@@ -1,0 +1,16 @@
+{
+  "documents": {
+    "es-protocolo": {"tenant": "lab", "revision": 1, "lang": "es", "text": "El protocolo LIMA conserva el registro durante siete días.", "vector": [0.8, 0.6]},
+    "es-distractor": {"tenant": "lab", "revision": 1, "lang": "es", "text": "LIMA registra el nombre del dispositivo.", "vector": [0.6, 0.8]},
+    "en-protocol": {"tenant": "lab", "revision": 1, "lang": "en", "text": "The LIMA protocol retains the log for seven days.", "vector": [0.0, 1.0]},
+    "other-tenant": {"tenant": "other", "revision": 1, "lang": "es", "text": "El protocolo LIMA conserva el registro durante siete días.", "vector": [1.0, 0.0]}
+  },
+  "queries": {
+    "retencion-es": {"text": "¿Cuánto tiempo conserva LIMA el registro?", "tenant": "lab", "vector": [1.0, 0.0], "qrels": {"es-protocolo": 1, "es-distractor": 0, "en-protocol": 1}, "answer": "siete días"},
+    "retention-en": {"text": "How long does LIMA retain the log?", "tenant": "lab", "qrels": {"es-protocolo": 1, "es-distractor": 0, "en-protocol": 1}, "answer": "seven days"},
+    "sin-evidencia": {"text": "¿Quién inventó LIMA?", "tenant": "lab", "qrels": {"es-protocolo": 0, "es-distractor": 0, "en-protocol": 0}, "answer": null}
+  },
+  "exact_top2": ["es-protocolo", "es-distractor"],
+  "approximate_run_top2": ["es-protocolo", "en-protocol"],
+  "expected": {"ann_recall_at_2": 0.5, "approximate_relevance_recall_at_2": 1.0}
+}

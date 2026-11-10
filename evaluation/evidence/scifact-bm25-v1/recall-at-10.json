@@ -1,0 +1,16 @@
+{
+  "dataset": "BEIR/SciFact",
+  "split": "test",
+  "queries": 300,
+  "source_run_sha256": "bae7b2a196cbba05bac019b0934a0a3613dbbaaeb72f13f6b484ec101d6c05da",
+  "dataset_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "qrels_sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+  "evaluator_revision": "ef83d29307061c65d04b035b4f4e7c18bd8374af",
+  "evaluator_sha256": "f346bd20f258e552895e438257e3cc91308b65e0b1ee6c09422e987084bc3bd0",
+  "protocol": "EvaluateRetrieval.evaluate(qrels, reciprocal_rank_scores, [10,100], ignore_identical_ids=True)",
+  "metrics": {
+    "NDCG@10": 0.66168,
+    "Recall@10": 0.79094,
+    "Recall@100": 0.88589
+  }
+}

@@ -1,0 +1,13 @@
+services:
+  vespa:
+    image: vespaengine/vespa@sha256:aa9e7347e8fb7e06bae439a99febdf5c30fe220f150205572dab0d00deaf3f20
+    platform: linux/amd64
+    hostname: retrieval-vespa
+    ports:
+      - "127.0.0.1:${RETRIEVAL_LAB_VESPA_PORT:-8080}:8080"
+      - "127.0.0.1:${RETRIEVAL_LAB_CONFIG_PORT:-19071}:19071"
+    volumes:
+      - vespa_data:/opt/vespa/var
+
+volumes:
+  vespa_data:

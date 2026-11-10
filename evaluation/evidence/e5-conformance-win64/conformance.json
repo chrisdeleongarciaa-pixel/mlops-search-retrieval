@@ -1,0 +1,35 @@
+{
+  "token_matches": {
+    "input_ids": true,
+    "attention_mask": true
+  },
+  "tokens_before": [
+    7,
+    10,
+    13,
+    704
+  ],
+  "tokens_after": [
+    7,
+    10,
+    13,
+    512
+  ],
+  "max_absolute_error": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "cosine": [
+    1.000000238418579,
+    1.0,
+    0.9999998807907104,
+    1.0000001192092896
+  ],
+  "limits": {
+    "max_absolute_error": 1e-05,
+    "min_cosine": 0.99999
+  },
+  "passed": true
+}

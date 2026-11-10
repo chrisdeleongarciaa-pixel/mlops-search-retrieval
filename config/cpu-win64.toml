@@ -1,0 +1,30 @@
+schema_version = 1
+profile = "witness-cpu-win64"
+python = "3.12.10"
+python_platform = "win_amd64"
+container_platform = "linux/amd64"
+lock = "requirements-cpu-win64.lock"
+
+[postgres]
+version = "17.11"
+image = "postgres@sha256:996e9dc583ba9f0265a2c75547a9c95fb22c251e394749cab205a0a00e1856a1"
+compose = "../infra/postgres/compose.cpu.yaml"
+fsync = "on"
+synchronous_commit = "on"
+full_page_writes = "on"
+migrations = [
+  "../infra/postgres/migrations/0001_ingestion_acceptance.sql",
+  "../infra/postgres/migrations/0002_source_events.sql",
+  "../infra/postgres/migrations/0003_publication.sql",
+  "../infra/postgres/migrations/0004_private_acl.sql",
+]
+
+[originals]
+backend = "FileObjectStore"
+persistent_directory = "INGESTION_OBJECTS"
+
+[vespa]
+version = "8.781.11"
+image = "vespaengine/vespa@sha256:aa9e7347e8fb7e06bae439a99febdf5c30fe220f150205572dab0d00deaf3f20"
+compose = "../infra/vespa/compose.witness.yaml"
+application = "../infra/vespa/app"

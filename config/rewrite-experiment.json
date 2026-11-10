@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "status": "specified-awaiting-model-execution",
+  "primary": {"model": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c702b33eeacc393d103063234e8bc28", "source_manifest": "model-sources.json"},
+  "comparator": {"model": "google/gemma-3-1b-it", "revision": null, "status": "must-pin-before-execution"},
+  "runtime": "vllm-0.33.0",
+  "grammar_backend": "xgrammar",
+  "precision": "BF16",
+  "temperature": 0,
+  "max_output_tokens": 256,
+  "schema_source": "search_retrieval.query.rewrite.SCHEMA",
+  "prompt": "Rewrite an English scientific literature search query only if useful for retrieval. Preserve all named entities, quoted literals, negations, methodological constraints and scope. Do not add facts, filters or an answer. Return JSON with action keep or rewrite and rewritten_text. For keep, copy the original exactly.",
+  "arms": ["original", "qwen", "gemma"],
+  "retrievers": ["bm25", "embeddinggemma-exact"],
+  "query_population": "litsearch-300-frozen",
+  "metrics": ["Recall@5", "Recall@20", "constraints-lost", "constraints-altered", "invalid-json", "incomplete-output", "time-to-validated-json"],
+  "annotation": "Independent semantic judgments on original and rewrite, including hard queries",
+  "service_activation": "pending quality, fidelity and latency verification"
+}

@@ -1,0 +1,1802 @@
+[
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 1,
+    "status": "complete",
+    "retrieval_ms": 40.037868,
+    "engine_calls_ms": [
+      12.344886
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 1,
+    "status": "complete",
+    "retrieval_ms": 43.046284,
+    "engine_calls_ms": [
+      15.337955
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 1,
+    "status": "complete",
+    "retrieval_ms": 46.063967,
+    "engine_calls_ms": [
+      17.606973
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 1,
+    "status": "complete_empty",
+    "retrieval_ms": 39.088505,
+    "engine_calls_ms": [
+      12.522437
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 1,
+    "status": "complete",
+    "retrieval_ms": 41.215795,
+    "engine_calls_ms": [
+      14.289096
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 1,
+    "status": "complete_empty",
+    "retrieval_ms": 59.111084,
+    "engine_calls_ms": [
+      16.371355
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 2,
+    "status": "complete",
+    "retrieval_ms": 58.978269,
+    "engine_calls_ms": [
+      20.858676
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 2,
+    "status": "complete",
+    "retrieval_ms": 42.534962,
+    "engine_calls_ms": [
+      14.922477
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 2,
+    "status": "complete",
+    "retrieval_ms": 42.21574,
+    "engine_calls_ms": [
+      16.258733
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 2,
+    "status": "complete_empty",
+    "retrieval_ms": 48.555915,
+    "engine_calls_ms": [
+      14.645372
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 2,
+    "status": "complete",
+    "retrieval_ms": 76.19198,
+    "engine_calls_ms": [
+      30.153195
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 2,
+    "status": "complete_empty",
+    "retrieval_ms": 81.440978,
+    "engine_calls_ms": [
+      41.131556
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 3,
+    "status": "complete",
+    "retrieval_ms": 58.995761,
+    "engine_calls_ms": [
+      17.463736
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 3,
+    "status": "complete",
+    "retrieval_ms": 54.937284,
+    "engine_calls_ms": [
+      17.857491
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 3,
+    "status": "complete",
+    "retrieval_ms": 57.42254,
+    "engine_calls_ms": [
+      21.199873
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 3,
+    "status": "complete_empty",
+    "retrieval_ms": 52.448404,
+    "engine_calls_ms": [
+      12.094688
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 3,
+    "status": "complete",
+    "retrieval_ms": 57.535176,
+    "engine_calls_ms": [
+      20.961856
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 3,
+    "status": "complete_empty",
+    "retrieval_ms": 62.168754,
+    "engine_calls_ms": [
+      15.036523
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 4,
+    "status": "complete",
+    "retrieval_ms": 46.417129,
+    "engine_calls_ms": [
+      16.727641
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 4,
+    "status": "complete",
+    "retrieval_ms": 42.718634,
+    "engine_calls_ms": [
+      16.573142
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 4,
+    "status": "complete",
+    "retrieval_ms": 38.630186,
+    "engine_calls_ms": [
+      10.817383
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 4,
+    "status": "complete_empty",
+    "retrieval_ms": 37.916633,
+    "engine_calls_ms": [
+      11.976978
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 4,
+    "status": "complete",
+    "retrieval_ms": 41.970884,
+    "engine_calls_ms": [
+      16.098316
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 4,
+    "status": "complete_empty",
+    "retrieval_ms": 56.524459,
+    "engine_calls_ms": [
+      19.812372
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 5,
+    "status": "complete",
+    "retrieval_ms": 58.896386,
+    "engine_calls_ms": [
+      23.615565
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 5,
+    "status": "complete",
+    "retrieval_ms": 45.655146,
+    "engine_calls_ms": [
+      14.489301
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 5,
+    "status": "complete",
+    "retrieval_ms": 50.362228,
+    "engine_calls_ms": [
+      19.628188
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 5,
+    "status": "complete_empty",
+    "retrieval_ms": 43.013981,
+    "engine_calls_ms": [
+      15.099811
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 5,
+    "status": "complete",
+    "retrieval_ms": 42.784998,
+    "engine_calls_ms": [
+      17.747165
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 5,
+    "status": "complete_empty",
+    "retrieval_ms": 36.165013,
+    "engine_calls_ms": [
+      11.305283
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 6,
+    "status": "complete",
+    "retrieval_ms": 46.15123,
+    "engine_calls_ms": [
+      15.691295
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 6,
+    "status": "complete",
+    "retrieval_ms": 62.983178,
+    "engine_calls_ms": [
+      16.439072
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 6,
+    "status": "complete",
+    "retrieval_ms": 58.820734,
+    "engine_calls_ms": [
+      18.303975
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 6,
+    "status": "complete_empty",
+    "retrieval_ms": 54.577152,
+    "engine_calls_ms": [
+      13.25775
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 6,
+    "status": "complete",
+    "retrieval_ms": 58.219609,
+    "engine_calls_ms": [
+      21.526112
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 6,
+    "status": "complete_empty",
+    "retrieval_ms": 52.836359,
+    "engine_calls_ms": [
+      13.38608
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 7,
+    "status": "complete",
+    "retrieval_ms": 57.399532,
+    "engine_calls_ms": [
+      18.620005
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 7,
+    "status": "complete",
+    "retrieval_ms": 69.937687,
+    "engine_calls_ms": [
+      26.344351
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 7,
+    "status": "complete",
+    "retrieval_ms": 58.373008,
+    "engine_calls_ms": [
+      20.142429
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 7,
+    "status": "complete_empty",
+    "retrieval_ms": 64.433316,
+    "engine_calls_ms": [
+      24.130847
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 7,
+    "status": "complete",
+    "retrieval_ms": 64.635324,
+    "engine_calls_ms": [
+      21.812047
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 7,
+    "status": "complete_empty",
+    "retrieval_ms": 55.325006,
+    "engine_calls_ms": [
+      17.997202
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 8,
+    "status": "complete",
+    "retrieval_ms": 55.218326,
+    "engine_calls_ms": [
+      15.016896
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 8,
+    "status": "complete",
+    "retrieval_ms": 108.38438,
+    "engine_calls_ms": [
+      12.939616
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 8,
+    "status": "complete",
+    "retrieval_ms": 56.878675,
+    "engine_calls_ms": [
+      22.641776
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 8,
+    "status": "complete_empty",
+    "retrieval_ms": 39.325335,
+    "engine_calls_ms": [
+      11.821661
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 8,
+    "status": "complete",
+    "retrieval_ms": 43.989215,
+    "engine_calls_ms": [
+      14.661149
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 8,
+    "status": "complete_empty",
+    "retrieval_ms": 38.5669,
+    "engine_calls_ms": [
+      10.908132
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 9,
+    "status": "complete",
+    "retrieval_ms": 46.721877,
+    "engine_calls_ms": [
+      14.81034
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 9,
+    "status": "complete",
+    "retrieval_ms": 49.051079,
+    "engine_calls_ms": [
+      19.32425
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 9,
+    "status": "complete",
+    "retrieval_ms": 51.216015,
+    "engine_calls_ms": [
+      19.997317
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 9,
+    "status": "complete_empty",
+    "retrieval_ms": 38.815222,
+    "engine_calls_ms": [
+      11.7167
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 9,
+    "status": "complete",
+    "retrieval_ms": 44.942615,
+    "engine_calls_ms": [
+      15.579687
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 9,
+    "status": "complete_empty",
+    "retrieval_ms": 37.189025,
+    "engine_calls_ms": [
+      11.605655
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 10,
+    "status": "complete",
+    "retrieval_ms": 40.777213,
+    "engine_calls_ms": [
+      12.188744
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 10,
+    "status": "complete",
+    "retrieval_ms": 46.230761,
+    "engine_calls_ms": [
+      14.833373
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 10,
+    "status": "complete",
+    "retrieval_ms": 58.869937,
+    "engine_calls_ms": [
+      15.908278
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 10,
+    "status": "complete_empty",
+    "retrieval_ms": 50.216117,
+    "engine_calls_ms": [
+      12.597166
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 10,
+    "status": "complete",
+    "retrieval_ms": 53.852964,
+    "engine_calls_ms": [
+      13.496225
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 10,
+    "status": "complete_empty",
+    "retrieval_ms": 42.294329,
+    "engine_calls_ms": [
+      14.4517
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 11,
+    "status": "complete",
+    "retrieval_ms": 46.553684,
+    "engine_calls_ms": [
+      14.535547
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 11,
+    "status": "complete",
+    "retrieval_ms": 54.739435,
+    "engine_calls_ms": [
+      15.600336
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 11,
+    "status": "complete",
+    "retrieval_ms": 53.546374,
+    "engine_calls_ms": [
+      12.824591
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 11,
+    "status": "complete_empty",
+    "retrieval_ms": 44.669956,
+    "engine_calls_ms": [
+      14.871224
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 11,
+    "status": "complete",
+    "retrieval_ms": 45.308557,
+    "engine_calls_ms": [
+      14.880701
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 11,
+    "status": "complete_empty",
+    "retrieval_ms": 41.109727,
+    "engine_calls_ms": [
+      13.053572
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 12,
+    "status": "complete",
+    "retrieval_ms": 48.064208,
+    "engine_calls_ms": [
+      17.389497
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 12,
+    "status": "complete",
+    "retrieval_ms": 48.419647,
+    "engine_calls_ms": [
+      17.893799
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 12,
+    "status": "complete",
+    "retrieval_ms": 38.167826,
+    "engine_calls_ms": [
+      11.559679
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 12,
+    "status": "complete_empty",
+    "retrieval_ms": 38.220148,
+    "engine_calls_ms": [
+      10.978744
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 12,
+    "status": "complete",
+    "retrieval_ms": 57.432404,
+    "engine_calls_ms": [
+      16.807212
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 12,
+    "status": "complete_empty",
+    "retrieval_ms": 58.351579,
+    "engine_calls_ms": [
+      12.434112
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 13,
+    "status": "complete",
+    "retrieval_ms": 89.731123,
+    "engine_calls_ms": [
+      17.542703
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 13,
+    "status": "complete",
+    "retrieval_ms": 54.789263,
+    "engine_calls_ms": [
+      13.260425
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 13,
+    "status": "complete",
+    "retrieval_ms": 39.190205,
+    "engine_calls_ms": [
+      12.912999
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 13,
+    "status": "complete_empty",
+    "retrieval_ms": 42.332277,
+    "engine_calls_ms": [
+      13.02732
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 13,
+    "status": "complete",
+    "retrieval_ms": 53.257296,
+    "engine_calls_ms": [
+      19.007228
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 13,
+    "status": "complete_empty",
+    "retrieval_ms": 40.770752,
+    "engine_calls_ms": [
+      12.037479
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 14,
+    "status": "complete",
+    "retrieval_ms": 56.955874,
+    "engine_calls_ms": [
+      12.760171
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 14,
+    "status": "complete",
+    "retrieval_ms": 47.703051,
+    "engine_calls_ms": [
+      13.746043
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 14,
+    "status": "complete",
+    "retrieval_ms": 39.434558,
+    "engine_calls_ms": [
+      10.733045
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 14,
+    "status": "complete_empty",
+    "retrieval_ms": 46.497768,
+    "engine_calls_ms": [
+      12.336229
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 14,
+    "status": "complete",
+    "retrieval_ms": 59.099337,
+    "engine_calls_ms": [
+      22.898866
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 14,
+    "status": "complete_empty",
+    "retrieval_ms": 33.681792,
+    "engine_calls_ms": [
+      8.823409
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 15,
+    "status": "complete",
+    "retrieval_ms": 39.944512,
+    "engine_calls_ms": [
+      13.827347
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 15,
+    "status": "complete",
+    "retrieval_ms": 42.667487,
+    "engine_calls_ms": [
+      17.79804
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 15,
+    "status": "complete",
+    "retrieval_ms": 35.208787,
+    "engine_calls_ms": [
+      10.281945
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 15,
+    "status": "complete_empty",
+    "retrieval_ms": 37.489679,
+    "engine_calls_ms": [
+      11.252873
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 15,
+    "status": "complete",
+    "retrieval_ms": 37.314918,
+    "engine_calls_ms": [
+      10.818235
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 15,
+    "status": "complete_empty",
+    "retrieval_ms": 39.541949,
+    "engine_calls_ms": [
+      9.458976
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 16,
+    "status": "complete",
+    "retrieval_ms": 60.07496,
+    "engine_calls_ms": [
+      20.917005
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 16,
+    "status": "complete",
+    "retrieval_ms": 51.816212,
+    "engine_calls_ms": [
+      17.645555
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 16,
+    "status": "complete",
+    "retrieval_ms": 39.751421,
+    "engine_calls_ms": [
+      13.850107
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 16,
+    "status": "complete_empty",
+    "retrieval_ms": 37.635649,
+    "engine_calls_ms": [
+      10.798548
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 16,
+    "status": "complete",
+    "retrieval_ms": 37.762005,
+    "engine_calls_ms": [
+      11.698168
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 16,
+    "status": "complete_empty",
+    "retrieval_ms": 35.246494,
+    "engine_calls_ms": [
+      8.642152
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 17,
+    "status": "complete",
+    "retrieval_ms": 37.773423,
+    "engine_calls_ms": [
+      11.571348
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 17,
+    "status": "complete",
+    "retrieval_ms": 41.017086,
+    "engine_calls_ms": [
+      13.973507
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 17,
+    "status": "complete",
+    "retrieval_ms": 37.895252,
+    "engine_calls_ms": [
+      10.522815
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 17,
+    "status": "complete_empty",
+    "retrieval_ms": 53.894327,
+    "engine_calls_ms": [
+      15.921345
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 17,
+    "status": "complete",
+    "retrieval_ms": 44.703649,
+    "engine_calls_ms": [
+      11.517731
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 17,
+    "status": "complete_empty",
+    "retrieval_ms": 38.208827,
+    "engine_calls_ms": [
+      10.126162
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 18,
+    "status": "complete",
+    "retrieval_ms": 45.527096,
+    "engine_calls_ms": [
+      12.494195
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 18,
+    "status": "complete",
+    "retrieval_ms": 44.273656,
+    "engine_calls_ms": [
+      13.295591
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 18,
+    "status": "complete",
+    "retrieval_ms": 38.419914,
+    "engine_calls_ms": [
+      13.286411
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 18,
+    "status": "complete_empty",
+    "retrieval_ms": 41.172114,
+    "engine_calls_ms": [
+      10.97159
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 18,
+    "status": "complete",
+    "retrieval_ms": 47.167874,
+    "engine_calls_ms": [
+      9.50952
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 18,
+    "status": "complete_empty",
+    "retrieval_ms": 48.401285,
+    "engine_calls_ms": [
+      12.927954
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 19,
+    "status": "complete",
+    "retrieval_ms": 46.168333,
+    "engine_calls_ms": [
+      12.258263
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 19,
+    "status": "complete",
+    "retrieval_ms": 50.053864,
+    "engine_calls_ms": [
+      11.22822
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 19,
+    "status": "complete",
+    "retrieval_ms": 41.304512,
+    "engine_calls_ms": [
+      12.893189
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 19,
+    "status": "complete_empty",
+    "retrieval_ms": 40.731167,
+    "engine_calls_ms": [
+      12.603589
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 19,
+    "status": "complete",
+    "retrieval_ms": 45.179097,
+    "engine_calls_ms": [
+      15.395573
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 19,
+    "status": "complete_empty",
+    "retrieval_ms": 41.675484,
+    "engine_calls_ms": [
+      9.507546
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "term",
+    "kind": "term",
+    "repeat": 20,
+    "status": "complete",
+    "retrieval_ms": 51.994568,
+    "engine_calls_ms": [
+      18.741572
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "phrase",
+    "kind": "phrase",
+    "repeat": 20,
+    "status": "complete",
+    "retrieval_ms": 42.779032,
+    "engine_calls_ms": [
+      11.398759
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "acronym",
+    "kind": "acronym",
+    "repeat": 20,
+    "status": "complete",
+    "retrieval_ms": 48.892943,
+    "engine_calls_ms": [
+      11.639859
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 2.0072526357005938
+      }
+    ]
+  },
+  {
+    "query_id": "identifier",
+    "kind": "identifier",
+    "repeat": 20,
+    "status": "complete_empty",
+    "retrieval_ms": 34.736385,
+    "engine_calls_ms": [
+      9.55257
+    ],
+    "candidates": []
+  },
+  {
+    "query_id": "retention-en",
+    "kind": "factual",
+    "repeat": 20,
+    "status": "complete",
+    "retrieval_ms": 46.491681,
+    "engine_calls_ms": [
+      13.7555
+    ],
+    "candidates": [
+      {
+        "projection_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+        "fragment_id": "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4-0",
+        "score": 8.81200051195636
+      }
+    ]
+  },
+  {
+    "query_id": "expected-empty",
+    "kind": "out-of-corpus",
+    "repeat": 20,
+    "status": "complete_empty",
+    "retrieval_ms": 38.969811,
+    "engine_calls_ms": [
+      8.924447
+    ],
+    "candidates": []
+  }
+]

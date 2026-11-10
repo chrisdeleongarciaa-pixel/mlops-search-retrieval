@@ -1,0 +1,101 @@
+{
+  "e5": {
+    "repo": "intfloat/multilingual-e5-base",
+    "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+    "files": {
+      "config.json": {
+        "sha256": "9dab198f24c8c0879e481cf7822005d5ecbceedbacb390ffafa594e28d31bac4",
+        "bytes": 694,
+        "origin": "verified-metadata-file"
+      },
+      "model.safetensors": {
+        "sha256": "a18a44fad1d0b46ded15928144138cff1135d5cc8233bdd90be5f18822de09a7",
+        "bytes": 1112201288,
+        "origin": "published-lfs"
+      },
+      "tokenizer.json": {
+        "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+        "bytes": 17082660,
+        "origin": "published-lfs"
+      },
+      "tokenizer_config.json": {
+        "sha256": "efb5c0d09722e5fe59a462cd2a9976ee216d55b037597d997cd3fe833216da15",
+        "bytes": 418,
+        "origin": "verified-metadata-file"
+      },
+      "sentencepiece.bpe.model": {
+        "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+        "bytes": 5069051,
+        "origin": "published-lfs"
+      },
+      "special_tokens_map.json": {
+        "sha256": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f",
+        "bytes": 280,
+        "origin": "verified-metadata-file"
+      }
+    },
+    "status": "weights-not-materialized"
+  },
+  "qwen": {
+    "repo": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "files": {
+      "config.json": {
+        "sha256": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "bytes": 663,
+        "origin": "verified-metadata-file"
+      },
+      "generation_config.json": {
+        "sha256": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "bytes": 243,
+        "origin": "verified-metadata-file"
+      },
+      "merges.txt": {
+        "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "bytes": 1671839,
+        "origin": "verified-metadata-file"
+      },
+      "model.safetensors.index.json": {
+        "sha256": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "bytes": 27752,
+        "origin": "verified-metadata-file"
+      },
+      "tokenizer.json": {
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "bytes": 7031645,
+        "origin": "verified-metadata-file"
+      },
+      "tokenizer_config.json": {
+        "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "bytes": 7305,
+        "origin": "verified-metadata-file"
+      },
+      "vocab.json": {
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "bytes": 2776833,
+        "origin": "verified-metadata-file"
+      },
+      "model-00001-of-00004.safetensors": {
+        "sha256": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "bytes": 3945441440,
+        "origin": "published-lfs"
+      },
+      "model-00002-of-00004.safetensors": {
+        "sha256": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "bytes": 3864726352,
+        "origin": "published-lfs"
+      },
+      "model-00003-of-00004.safetensors": {
+        "sha256": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "bytes": 3864726424,
+        "origin": "published-lfs"
+      },
+      "model-00004-of-00004.safetensors": {
+        "sha256": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "bytes": 3556377672,
+        "origin": "published-lfs"
+      }
+    },
+    "status": "weights-not-materialized"
+  }
+}

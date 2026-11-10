@@ -1,0 +1,51 @@
+{
+  "experiment": "LX-01",
+  "profile": "single-client-witness",
+  "tenant": "lab",
+  "generation": "witness-v1",
+  "eligible_projections": [
+    "668d44cd8beaafc86300b3cd1f5999dfb1d953700ebbb3b16ca1a1b2bd43c6a4",
+    "a25b6ac4a5436b6ba5b7e833fb537f95e2c3c92c8f67446a36fce3b1669670c4",
+    "f8d017e1f516b0808f9d78193ccd671f443c37f1791db18027796d1c59f07cac"
+  ],
+  "snapshot_unchanged_at_observed_reads": true,
+  "top_k": 10,
+  "warmup": 3,
+  "repeats": 20,
+  "requests": 120,
+  "complete": 120,
+  "empty": 40,
+  "error_rate": 0.0,
+  "completed_per_second": 32.37422756118223,
+  "retrieval_client_ms": {
+    "p50": 29.860369,
+    "p95": 42.100087,
+    "p99": 68.061428
+  },
+  "engine_client_ms": {
+    "p50": 8.991435,
+    "p95": 14.032658,
+    "p99": 22.164916
+  },
+  "stage_ms": {
+    "eligibility_ms": {
+      "p50": 9.240707,
+      "p95": 15.834857,
+      "p99": 27.758767
+    },
+    "vespa_lexical_ms": {
+      "p50": 8.994049,
+      "p95": 14.035773,
+      "p99": 22.169103
+    },
+    "revalidation_ms": {
+      "p50": 10.297793,
+      "p95": 13.841509,
+      "p99": 17.01245
+    }
+  },
+  "workload_sha256": "4236a073205b0b30574604ad2198a22283d5b1067043a6657b450efb90cffc9e",
+  "code_sha256": "2c74bd04d274e885bedf8962a8e2e788eef86db451330e73ce3c58b8ddb5996d",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "python": "3.12.10"
+}

@@ -1,0 +1,10 @@
+INFO  [2026-11-08 23:15:59,569] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=2406 bytes=unknown
+INFO  [2026-11-08 23:20:37,418] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=138 bytes=unknown
+INFO  [2026-11-08 23:23:55,808] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=31 bytes=unknown
+INFO  [2026-11-08 23:25:40,024] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=255 bytes=unknown
+INFO  [2026-11-08 23:31:09,569] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=105 bytes=unknown
+ERROR [2026-11-08 23:31:12,312] org.grobid.service.process.GrobidRestProcessFiles: Could not get an engine from the pool within configured time. Sending service unavailable.
+INFO  [2026-11-08 23:31:12,336] org.grobid.service.access: client=172.18.0.1 endpoint=processFulltextDocument status=503 duration_ms=1304 bytes=174132
+INFO  [2026-11-08 23:32:30,994] org.grobid.service.access: client=172.18.0.1 endpoint=processFulltextDocument status=200 duration_ms=411834 bytes=174132
+INFO  [2026-11-08 23:36:00,255] org.grobid.service.access: client=172.18.0.1 endpoint=version status=200 duration_ms=83 bytes=unknown
+INFO  [2026-11-08 23:36:32,924] org.grobid.service.access: client=172.18.0.1 endpoint=processFulltextDocument status=200 duration_ms=33043 bytes=174132

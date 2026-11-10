@@ -1,0 +1,41 @@
+schema_version = 1
+state = "template"
+
+[code]
+commit = ""
+image_digest = ""
+dependency_lock = ""
+
+[data]
+corpus_manifest = ""
+
+[transformation]
+manifest = ""
+
+[retrieval]
+encoder_revision = ""
+tokenizer_revision = ""
+vector_space_manifest = ""
+
+[index]
+schema_revision = ""
+generation = ""
+
+[ranking]
+profile_revision = ""
+
+[generation]
+model_revision = ""
+tokenizer_revision = ""
+chat_template_revision = ""
+
+[runtime]
+manifest = ""
+
+[policy]
+authorization_revision = ""
+publication_revision = ""
+delivery_revision = ""
+
+[evaluation]
+run_manifest = ""

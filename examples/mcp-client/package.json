@@ -1,0 +1,12 @@
+{
+  "name": "retrieval-mcp-witness",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "verify": "node witness.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "@modelcontextprotocol/server-filesystem": "2.2.0"
+  }
+}

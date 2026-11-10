@@ -1,0 +1,15 @@
+schema_version = 1
+state = "template"
+run_id = ""
+release_manifest = ""
+workload_manifest = ""
+evaluator_revision = ""
+metric_spec = ""
+hardware_manifest = ""
+results_uri = ""
+
+[dataset]
+corpus_manifest = ""
+queries = ""
+judgments = ""
+split = ""

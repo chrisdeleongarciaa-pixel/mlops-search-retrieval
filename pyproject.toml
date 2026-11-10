@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=70.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlops-search-retrieval"
+version = "0.1.0"
+description = "Scientific literature retrieval with hybrid search and verifiable evidence"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]==3.3.8"]
+pdf = ["defusedxml==0.7.1", "pypdf==6.7.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["search_retrieval", "search_retrieval.*"]
+namespaces = false

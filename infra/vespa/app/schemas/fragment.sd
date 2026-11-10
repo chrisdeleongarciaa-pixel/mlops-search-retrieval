@@ -1,0 +1,63 @@
+schema fragment {
+    document fragment {
+        field tenant type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field generation type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field projection_id type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field fragment_id type string {
+            indexing: summary
+        }
+        field digest type string {
+            indexing: summary
+        }
+        field body type string {
+            indexing: index | summary
+            index: enable-bm25
+        }
+        field vector_space type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field study_bucket type int {
+            indexing: attribute
+            attribute: fast-search
+            rank: filter
+        }
+        field embedding type tensor<float>(x[768]) {
+            indexing: attribute | index | summary
+            attribute {
+                distance-metric: prenormalized-angular
+            }
+        }
+    }
+    fieldset default {
+        fields: body
+    }
+    rank-profile lexical {
+        first-phase {
+            expression: bm25(body)
+        }
+    }
+    rank-profile dense {
+        inputs {
+            query(q) tensor<float>(x[768])
+        }
+        post-filter-threshold: 1.0
+        approximate-threshold: 0.02
+        first-phase {
+            expression: 1 - distance(field, embedding)
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "run_id": 42540081953,
+  "commit": "d9c15ecf2dd175aa60d358241ffc12352957d31b",
+  "profile": "PostgreSQL and Vespa on Ubuntu 24.04, synthetic UTF-8 original",
+  "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+  "runtime": "llama.cpp b12211 (CPU, 2 threads, 1024 context)",
+  "sha256": {
+    "real-inference.log": "5f811721cd90304a4c8c0ecedfa1c2a656478d684dfaa93680440391e9edbd2f",
+    "mcp-witness.json": "dbe5f36cfc65cdea01227cd1f968bdc5795a34c56d4af650a7dda487986764af"
+  },
+  "ri01": {
+    "model": "qwen-witness",
+    "generation": "model-033c246f44604d0f850d4d747aba244e",
+    "sequence": 1,
+    "private_answer": {
+      "text": "The official color of the Meridian protocol is cobalt.",
+      "citations": [
+        "890cd05c184fb0dcec3f24311df973b8c8d84c7c057eb1029beeab3f7517f005-0"
+      ]
+    },
+    "citation": {
+      "id": "890cd05c184fb0dcec3f24311df973b8c8d84c7c057eb1029beeab3f7517f005-0",
+      "end": 54,
+      "start": 0,
+      "sha256": "b7e1328dff638186b7c5d0f63f90cb55e51401fb9a44757574c822e07971b3f6"
+    },
+    "original_sha256": "b7e1328dff638186b7c5d0f63f90cb55e51401fb9a44757574c822e07971b3f6",
+    "delivery_seconds": 4.313,
+    "unauthorized_principal": "denied",
+    "unreachable_backend": "rejected",
+    "revocation_after_generation": "rejected"
+  },
+  "mcp01": {
+    "model": "qwen-witness",
+    "node": "v22.23.4",
+    "server": "@modelcontextprotocol/server-filesystem@2.2.0",
+    "transport": "stdio",
+    "tool": "read_text_file",
+    "answer": "The retention period for the Meridian protocol is seventeen days.",
+    "deniedTool": true,
+    "deniedAlias": true,
+    "serverDeniedOutsideDirectory": true
+  }
+}
