@@ -2,7 +2,6 @@
 
 from dataclasses import asdict, dataclass
 from hashlib import sha256
-import json
 import math
 import re
 from typing import Callable
@@ -11,6 +10,7 @@ from defusedxml import ElementTree
 from defusedxml.common import DefusedXmlException
 from xml.etree.ElementTree import ParseError
 
+from search_retrieval.contracts.canonical import canonical_json
 from search_retrieval.contracts.identity import RevisionKey
 
 
@@ -43,10 +43,6 @@ class Recipe:
                 raise ValueError("Recipe limits must be positive integers")
         if self.normalization != "tei-head-p-whitespace-v1":
             raise ValueError("Unsupported normalization")
-
-
-def canonical_json(value) -> bytes:
-    return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False).encode("utf-8")
 
 
 def coordinates(element):

@@ -1,0 +1,16 @@
+{
+  "kind": "query-set",
+  "schema_version": 1,
+  "body": {
+    "name": "beir/scifact/test",
+    "split": "regression",
+    "judgments": "human",
+    "queries": 300,
+    "queries_member": "scifact/queries.jsonl",
+    "queries_sha256": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+    "qrels_member": "scifact/qrels/test.tsv",
+    "qrels_sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+    "note": "Spent test split: it selected and reported earlier SciFact results, so it serves pipeline regression only and supports no improvement claim."
+  },
+  "sha256": "ce1d5f082e3c4bfc152288291a553946c4fbae5dd6e7247a7272b6b89eeeb0d2"
+}
