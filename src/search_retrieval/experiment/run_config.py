@@ -36,12 +36,15 @@ SPACE = ({"encoder": str, "revision": str, "files": dict, "query_template": str,
           "pooling": str, "normalize": bool, "max_tokens": int, "dtype": str, "dim": int},
          {"mrl_dim": int, "quantization": str, "legacy_id": str})
 
-CORPUS = {"name": str, "source": str, "license": str, "format": str, "archive": str,
-          "archive_sha256": str, "corpus_member": str, "documents": int}
+# Each corpus and query-set format requires its own optional fields; the runner checks them.
+CORPUS = ({"name": str, "source": str, "license": str, "format": str, "documents": int},
+          {"archive": str, "archive_sha256": str, "corpus_member": str,
+           "index_directory": str, "index_sha256": str})
 TRANSFORM = {"parser": str, "parser_version": str, "configuration": dict, "chunking": dict, "tokenizer": str}
-QUERY_SET = ({"name": str, "split": str, "judgments": str, "queries_member": str, "queries_sha256": str,
-              "qrels_member": str, "qrels_sha256": str, "queries": int}, {"note": str})
-RUNTIME = {"python": str, "platform": str, "locks": dict}
+QUERY_SET = ({"name": str, "split": str, "judgments": str, "queries_sha256": str,
+              "qrels_sha256": str, "queries": int},
+             {"note": str, "queries_member": str, "qrels_member": str, "ir_datasets": str})
+RUNTIME = ({"python": str, "platform": str, "locks": dict}, {"tools": dict})
 
 
 @dataclass(frozen=True)
@@ -138,8 +141,9 @@ def resolve(root: Path, relative: str) -> ResolvedRun:
     try:
         corpus, corpus_digest = read_manifest(root, config["corpus"]["manifest"], "corpus")
         _typed(corpus, "corpus", CORPUS)
-        if not is_sha256(corpus["archive_sha256"]) or corpus["documents"] <= 0:
-            raise ManifestError("corpus: invalid archive digest or document count")
+        if corpus["documents"] <= 0 or not all(
+                is_sha256(corpus[name]) for name in ("archive_sha256", "index_sha256") if name in corpus):
+            raise ManifestError("corpus: invalid digest or document count")
         transform_body, transform_digest = read_manifest(root, config["transform"]["manifest"], "transform")
         _typed(transform_body, "transform", TRANSFORM)
         transform = TransformKey(**transform_body)

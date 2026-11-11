@@ -13,7 +13,9 @@ from unittest import mock
 
 from search_retrieval.experiment import provenance
 from search_retrieval.experiment.manifests import ManifestError, parse_manifest, read_manifest, seal
-from search_retrieval.experiment.outputs import parse_trec_run, trec_run, verify_outputs, write_run
+from search_retrieval.experiment.outputs import (
+    parse_trec_run, read_trec_run, trec_run, verify_outputs, write_run,
+)
 from search_retrieval.experiment.provenance import (
     ProvenanceError, authorize_split, observed_runtime, verify_provenance,
 )
@@ -384,23 +386,51 @@ class OutputTests(unittest.TestCase):
             with self.subTest(rankings=rankings), self.assertRaises(ValueError):
                 trec_run(rankings, "tag")
 
+    def stream(self, resolved):
+        return [(qid, self.RANKINGS[qid], {"qid": qid, "metrics": {"nDCG@10": 0.5}}) for qid in sorted(self.RANKINGS)]
+
     def test_two_writes_of_one_run_are_byte_identical_and_timings_are_not_hashed(self):
         repository = Repository(self)
         resolved = resolve(repository.root, repository.config("dev"))
-        records = [{"qid": qid, "metrics": {"ndcg_cut_10": 0.5}} for qid in sorted(self.RANKINGS)]
         outputs = []
         for number, elapsed in enumerate((1.0, 99.0)):
             output = repository.root / f"out-{number}"
-            write_run(output, resolved, "run", self.RANKINGS, records, {"ndcg_cut_10": 0.5},
-                      {"python": "3.12.10"}, {"rank_ms": elapsed})
+            manifest = write_run(output, resolved, "run", iter(self.stream(resolved)), {"python": "3.12.10"},
+                                 lambda: ({"nDCG@10": 0.5}, {"rank_ms": elapsed}))
             outputs.append({path.name: path.read_bytes() for path in output.iterdir()})
         self.assertEqual(set(outputs[0]), {"run.trec", "per-query.jsonl", "manifest.json", "timings.json"})
         for name in ("run.trec", "per-query.jsonl", "manifest.json"):
             self.assertEqual(outputs[0][name], outputs[1][name])
         self.assertNotEqual(outputs[0]["timings.json"], outputs[1]["timings.json"])
+        self.assertEqual(outputs[0]["run.trec"], trec_run(self.RANKINGS, "fixture.bm25"))
+        self.assertEqual(manifest["outputs"]["run.trec"], sha256(outputs[0]["run.trec"]).hexdigest())
+        self.assertEqual(manifest["queries"], 2)
         self.assertEqual(verify_outputs(repository.root / "out-0")["keys"]["run"], resolved.run.digest)
         with self.assertRaises(FileExistsError):
-            write_run(repository.root / "out-0", resolved, "run", self.RANKINGS, records, {}, {}, {})
+            write_run(repository.root / "out-0", resolved, "run", iter(()), {}, lambda: ({}, {}))
         (repository.root / "out-1/run.trec").write_bytes(b"q1 Q0 d1 1 9.0 tag\n")
         with self.assertRaisesRegex(ValueError, "does not match the run manifest"):
             verify_outputs(repository.root / "out-1")
+
+    def test_a_failed_or_unordered_stream_leaves_no_output(self):
+        repository = Repository(self)
+        resolved = resolve(repository.root, repository.config("dev"))
+        output = repository.root / "out"
+
+        def failing():
+            yield from self.stream(resolved)[:1]
+            raise RuntimeError("ranker stopped")
+
+        for stream, error in ((failing(), RuntimeError), (reversed(self.stream(resolved)), ValueError),
+                              (iter(self.stream(resolved) + self.stream(resolved)[-1:]), ValueError)):
+            with self.subTest(error=error), self.assertRaises(error):
+                write_run(output, resolved, "run", stream, {}, lambda: ({}, {}))
+            self.assertEqual([path.name for path in repository.root.glob("out*")], [])
+
+    def test_trec_reader_requires_contiguous_queries_and_ranks_from_one(self):
+        lines = ["q1 Q0 d2 1 2.5 t", "q1 Q0 d1 2 0.1 t", "q2 Q0 d1 1 1.0 t"]
+        self.assertEqual(list(read_trec_run(lines)), [("q1", [("d2", 2.5), ("d1", 0.1)]), ("q2", [("d1", 1.0)])])
+        for broken in (lines + ["q1 Q0 d3 3 0.0 t"], ["q1 Q0 d2 2 2.5 t"], ["q1 Q1 d2 1 2.5 t"], ["q1 Q0 d2 1 2.5"],
+                       ["q1 Q0 d2 1 2.5 t", "q1 Q0 d1 3 0.1 t"]):
+            with self.subTest(broken=broken), self.assertRaises(ValueError):
+                list(read_trec_run(broken))

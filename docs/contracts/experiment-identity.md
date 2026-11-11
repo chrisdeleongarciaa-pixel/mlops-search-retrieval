@@ -58,9 +58,39 @@ SciFact `test` is declared `regression`: its judgments selected and reported the
 
 Stage timings live outside `per-query.jsonl` so that the reproducible files can be compared by hash.
 
+## Corpora, query sets and engines
+
+| Corpus format | Source of documents, queries and judgments | Verified on every run |
+| --- | --- | --- |
+| `beir-zip` | One BEIR archive. Queries and judgments are members named by the query-set manifest. | Archive, query member and judgment member hashes, document count, judged documents inside the corpus. |
+| `anserini-lucene-index` | A prebuilt Lucene index under `<data-dir>/anserini/`. Queries and judgments come from the `ir_datasets` identifier in the query-set manifest, cached under `<data-dir>/ir_datasets/`. | Digest of every index file name, size and content. Hash of `qid<TAB>text` query lines and of `qid<TAB>iteration<TAB>doc<TAB>relevance` judgment lines in dataset order. |
+
+A run answers exactly the judged queries, in increasing query ID order. A query for which the engine returns nothing is recorded with an empty list and scores zero.
+
+| Ranking profile | Engine | Declared parameters |
+| --- | --- | --- |
+| `bm25-reference` | In-process ranker of the archived SciFact baseline. | `k1 = 1.2`, `b = 0.75`, depth 100. Fixed in code and checked against the configuration. |
+| `anserini-bm25` | `io.anserini.search.SearchCollection` from the pinned Anserini jar, with the pinned queries passed as a `TsvString` topic file. | Float `k1` and `b` in `[index].lexical`, `[ranking].target_hits`, the index directory as `schema_revision`. |
+
+The runtime manifest of an Anserini run adds `tools`: the Java version and the SHA-256 of the jar. `BENCH_JAVA` and `BENCH_ANSERINI_JAR` locate them. `BENCH_THREADS` sets search threads and is recorded with the timings.
+
+## Evaluation
+
+[ir_measures](../../evaluation/measures.py) computes nDCG@10, RR@10, R@10, R@100, R@1000 and Judged@10 for every query of every run. Aggregates are arithmetic means over all judged queries.
+
+- **Rank as written.** The order of a run is its ranking. The evaluator receives reciprocal ranks, so score ties cannot be reordered by the `trec_eval` rule of descending document ID.
+- **Judgment holes.** Unjudged documents count as non-relevant. Judged@10 reports how much of the top ten that default decided.
+- **Paired comparison.** [The bootstrap](../../evaluation/paired_bootstrap.py) reads `per-query.jsonl` with the ranker name `run`.
+
+## Regression suite
+
+`python evaluation/bench.py regress --data-dir DIR` executes each [registered reference run](../../config/runs/regression.toml) and compares one measure with its published or archived value. `--fast` keeps the checks that finish in minutes. A reported figure presumes that the suite passed at the same code commit.
+
 ## Limits
 
 - Git ordering shows that a configuration was committed before the report. It cannot show that test judgments were never inspected by other means.
 - `report` refuses an existing output directory. A second report into another directory is not prevented.
 - Byte identity is claimed within one runtime manifest. Another platform is another `RunKey`.
-- `bm25-reference` is the in-process ranker of the SciFact baseline. Anserini parity and Vespa calibration have separate gates.
+- `anserini-bm25` runs Anserini directly. Pyserini wraps the same engine and is not installed. Vespa calibration against it has a separate gate.
+- SciFact stays on its pinned BEIR archive. `ir_datasets` serves MS MARCO.
+- The index digest reads every index file, which adds time to each Anserini run.

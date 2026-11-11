@@ -14,7 +14,16 @@ def read_scores(paths, ranker, metric):
     for path in paths:
         opener = gzip.open if path.suffix == ".gz" else open
         with opener(path, "rt", encoding="utf-8") as source:
-            scores = {qid: row[metric] for qid, row in json.load(source)[ranker].items()}
+            if path.suffix == ".jsonl":
+                # per-query.jsonl of a hashed run holds one ranker; name it "run".
+                if ranker != "run":
+                    raise ValueError('Use the ranker name "run" for a per-query.jsonl file')
+                rows = [json.loads(line) for line in source if line.strip()]
+                scores = {row["qid"]: row["metrics"][metric] for row in rows}
+                if len(scores) != len(rows):
+                    raise ValueError(f"Duplicate query IDs: {path}")
+            else:
+                scores = {qid: row[metric] for qid, row in json.load(source)[ranker].items()}
         if not scores or any(type(value) not in (float, int) or not isfinite(value)
                              for value in scores.values()):
             raise ValueError(f"Expected finite per-query scores: {path}")
