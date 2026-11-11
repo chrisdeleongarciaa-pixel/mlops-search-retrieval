@@ -6,6 +6,7 @@ The checkout links evidence to its experiment and commit. Release [v0.2](https:/
 | --- | --- | --- |
 | Bibliographic and PDF checkpoint | [Hashes and outcomes](scientific-pdf-v1/evidence-index.json) | LitSearch inputs, SciFact reproduction, PDF extraction and rejected attempts. |
 | SciFact exact scores | [Manifest](scifact-gemma-exact-cpu/manifest.json) · [Per-query scores](scifact-gemma-exact-cpu/per-query.json) | Exact E5 and Gemma, BM25 and RRF. |
+| Hashed run configuration | [Manifest](bench-scifact-bm25-07d90e3f23a4/manifest.json) · [Per-query records](bench-scifact-bm25-07d90e3f23a4/per-query.jsonl) · [Verification report](../../docs/verification/experiment-identity.md) | BM25 reference on the spent SciFact test split, rebuilt byte for byte from its configuration. The run file is regenerated from the configuration and checked against the manifest hash. |
 | Paired E5/Gemma | [Audit](scifact-paired-42465181926/audit.json) · [Verification report](../../docs/verification/scifact-stability.md) | Eight indices, engine traces, independently recomputed rankings and paired intervals. |
 | Early E5 HNSW stability | [Aggregate](scifact-stability-e5-42290872584/aggregate.json) | Four E5 insertion orders on the earlier host. |
 | Mutable service | [Lexical](dense-witness-actions-42278239372/lx01/manifest.json) · [Dense](dense-witness-actions-42278239372/vector-service/dense-manifest.json) · [Hybrid](dense-witness-actions-42278239372/vector-service/hybrid-manifest.json) | Single-client retrieval timing with actual E5 encoding and eligibility reads. |

@@ -1,0 +1,79 @@
+{
+  "command": "run",
+  "configuration": {
+    "path": "config/runs/scifact-regression.bm25-reference.toml",
+    "values": {
+      "corpus": {
+        "manifest": "manifests/corpus/beir-scifact.json"
+      },
+      "index": {
+        "engine": "in-process",
+        "lexical": {
+          "b": 0.75,
+          "k1": 1.2,
+          "tokenizer": "unicode-word-casefold"
+        },
+        "schema_revision": "none"
+      },
+      "queries": {
+        "judgments": "human",
+        "manifest": "manifests/queries/beir-scifact-test.json",
+        "set": "beir/scifact/test"
+      },
+      "ranking": {
+        "fusion": {
+          "kind": "none"
+        },
+        "profile": "bm25-reference",
+        "target_hits": 100
+      },
+      "run": {
+        "code_commit": "def272015553a5de58d3de1947920f631a023b33",
+        "id": "scifact-regression.bm25-reference",
+        "split": "regression"
+      },
+      "runtime": {
+        "manifest": "manifests/runtime/eval-win64.json"
+      },
+      "transform": {
+        "manifest": "manifests/transform/beir-title-space-text-v1.json"
+      }
+    }
+  },
+  "environment": {
+    "packages": {
+      "colorama": "0.4.6",
+      "numpy": "2.5.4",
+      "pytrec-eval-terrier": "0.5.10",
+      "scipy": "1.18.1",
+      "tqdm": "4.67.1"
+    },
+    "platform": "win_amd64",
+    "python": "3.12.10"
+  },
+  "keys": {
+    "corpus": "27e7e64f87525b7105c12b36fe7753503d4f3889b055a27f01369bc5cc0403a6",
+    "frozen": "401136fee12e673e12b771e8cce33b6db82c6a8abe0c64044f5d7db4a8eda970",
+    "generation": "2c26ff9bc175c6a2ae4b7ec5761368313bc61d31042c2319fe8571338320e4a0",
+    "query_set": "f06f8692f8c79c4e26d59ec55cbbf974c86c47419c6cc9ea6cfecff607b3b554",
+    "run": "07d90e3f23a49b85702d0ab454a194e1beaff7b860f1521c4f4214f9e90d9991",
+    "runtime": "497ab12a9f44be8402e1356028bdb8046c353b4c8f5d7be02b04939bb020dcf2",
+    "spaces": {},
+    "transform": "fe6b511ac5113517def6f5dd8e8bc7819929f5fb3f240686f1a61e01a333f27e"
+  },
+  "legacy_space_ids": {},
+  "metrics": {
+    "ndcg_cut_10": 0.6616762967340878,
+    "recall_10": 0.7909444444444444,
+    "recall_100": 0.8858888888888888
+  },
+  "observations": "timings.json",
+  "outputs": {
+    "per-query.jsonl": "ba54b95c15559c28e82ddb699acfb36e54105711c4bed2d1a1c8ef09c55b4935",
+    "run.trec": "f7f51fdad496ccd4ae623d270fad6d44f7871aa1b3f2931781421bdfc87f3d35"
+  },
+  "queries": 300,
+  "run_id": "scifact-regression.bm25-reference",
+  "schema_version": 1,
+  "split": "regression"
+}
