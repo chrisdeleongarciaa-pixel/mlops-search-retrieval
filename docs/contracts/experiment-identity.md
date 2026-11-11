@@ -1,6 +1,6 @@
 # Experiment identity and run configuration
 
-A run is one TOML file. Every figure traces to hashed keys, and a change in any key is a different experiment. [Verification](../verification/experiment-identity.md) · [Runner](../../evaluation/bench.py)
+A run is one TOML file. Every figure traces to hashed keys, and a change in any key is a different experiment. [Identity verification](../verification/experiment-identity.md) · [Evaluation verification](../verification/standard-evaluation.md) · [Runner](../../evaluation/bench.py)
 
 ## Keys
 
