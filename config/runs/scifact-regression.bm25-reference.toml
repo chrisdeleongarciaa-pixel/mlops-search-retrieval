@@ -1,7 +1,7 @@
 # In-process BM25 reference on the spent SciFact test split. Pipeline regression only.
 [run]
 id = "scifact-regression.bm25-reference"
-code_commit = "def272015553a5de58d3de1947920f631a023b33"
+code_commit = "a6dde5a37d4480d620485fc0f5f3f276ee257746"
 split = "regression"
 
 [corpus]
@@ -26,4 +26,4 @@ judgments = "human"
 manifest = "manifests/queries/beir-scifact-test.json"
 
 [runtime]
-manifest = "manifests/runtime/eval-win64.json"
+manifest = "manifests/runtime/bench-win64.json"
