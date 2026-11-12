@@ -34,12 +34,12 @@ SECTIONS = {
 OPTIONAL_SECTIONS = {"space", "load"}
 SPACE = ({"encoder": str, "revision": str, "files": dict, "query_template": str, "doc_template": str,
           "pooling": str, "normalize": bool, "max_tokens": int, "dtype": str, "dim": int},
-         {"mrl_dim": int, "quantization": str, "legacy_id": str})
+         {"mrl_dim": int, "quantization": str, "legacy_id": str, "adapter": str, "source": str})
 
 # Each corpus and query-set format requires its own optional fields; the runner checks them.
 CORPUS = ({"name": str, "source": str, "license": str, "format": str, "documents": int},
           {"archive": str, "archive_sha256": str, "corpus_member": str,
-           "index_directory": str, "index_sha256": str})
+           "index_directory": str, "index_sha256": str, "ir_datasets": str, "documents_sha256": str})
 TRANSFORM = {"parser": str, "parser_version": str, "configuration": dict, "chunking": dict, "tokenizer": str}
 QUERY_SET = ({"name": str, "split": str, "judgments": str, "queries_sha256": str,
               "qrels_sha256": str, "queries": int},
@@ -118,7 +118,9 @@ def parse_config(data: bytes) -> dict:
     if not isinstance(spaces, dict):
         raise ConfigError("[space] holds one table per named space")
     for name, table in spaces.items():
-        _section(f"space.{name}", table, SPACE)
+        # A space is described inline or taken from the registry by its manifest.
+        if not (isinstance(table, dict) and set(table) == {"manifest"} and type(table["manifest"]) is str):
+            _section(f"space.{name}", table, SPACE)
     run = config["run"]
     if not RUN_ID.fullmatch(run["id"]):
         raise ConfigError("[run].id may contain letters, digits, dot, underscore and hyphen")
@@ -132,6 +134,28 @@ def _typed(body: dict, kind: str, schema) -> None:
     require(body, kind, required, optional)
 
 
+def space_key(table: dict) -> SpaceKey:
+    """Build the key of a space from its description. Registry annotations are not hashed."""
+    return SpaceKey(
+        encoder=table["encoder"], revision=table["revision"], files=table["files"],
+        query_template=table["query_template"], document_template=table["doc_template"],
+        pooling=table["pooling"], normalize=table["normalize"], max_tokens=table["max_tokens"],
+        dtype=table["dtype"], dimensions=table["dim"],
+        mrl_dimensions=table.get("mrl_dim", table["dim"]),
+        quantization=table.get("quantization", "none"),
+    )
+
+
+def read_space(root: Path, relative: str) -> tuple[dict, SpaceKey]:
+    """Load a registered space: its sealed description and its key."""
+    body, _ = read_manifest(root, relative, "space")
+    require(body, "space", *SPACE)
+    try:
+        return body, space_key(body)
+    except ValueError as error:
+        raise ManifestError(f"{relative}: {error}") from error
+
+
 def resolve(root: Path, relative: str) -> ResolvedRun:
     """Build every key of the run. Each referenced manifest must match its own digest."""
     try:
@@ -142,7 +166,8 @@ def resolve(root: Path, relative: str) -> ResolvedRun:
         corpus, corpus_digest = read_manifest(root, config["corpus"]["manifest"], "corpus")
         _typed(corpus, "corpus", CORPUS)
         if corpus["documents"] <= 0 or not all(
-                is_sha256(corpus[name]) for name in ("archive_sha256", "index_sha256") if name in corpus):
+                is_sha256(corpus[name]) for name in ("archive_sha256", "index_sha256", "documents_sha256")
+                if name in corpus):
             raise ManifestError("corpus: invalid digest or document count")
         transform_body, transform_digest = read_manifest(root, config["transform"]["manifest"], "transform")
         _typed(transform_body, "transform", TRANSFORM)
@@ -159,14 +184,7 @@ def resolve(root: Path, relative: str) -> ResolvedRun:
                 config["queries"]["set"], config["queries"]["judgments"], config["run"]["split"]):
             raise ConfigError("[queries] and [run].split disagree with the query-set manifest")
         spaces = {
-            name: SpaceKey(
-                encoder=table["encoder"], revision=table["revision"], files=table["files"],
-                query_template=table["query_template"], document_template=table["doc_template"],
-                pooling=table["pooling"], normalize=table["normalize"], max_tokens=table["max_tokens"],
-                dtype=table["dtype"], dimensions=table["dim"],
-                mrl_dimensions=table.get("mrl_dim", table["dim"]),
-                quantization=table.get("quantization", "none"),
-            )
+            name: read_space(root, table["manifest"])[1] if set(table) == {"manifest"} else space_key(table)
             for name, table in config.get("space", {}).items()
         }
         digests = sorted(space.digest for space in spaces.values())

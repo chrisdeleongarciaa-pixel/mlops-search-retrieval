@@ -1,0 +1,16 @@
+{
+  "kind": "transform",
+  "schema_version": 1,
+  "body": {
+    "parser": "none",
+    "parser_version": "0",
+    "configuration": {
+      "document": "title-text-fields"
+    },
+    "chunking": {
+      "policy": "identity"
+    },
+    "tokenizer": "none"
+  },
+  "sha256": "fcd81e9edc614343f230e47ffb18d6208d2e061cc974f99209f6f98f14409048"
+}

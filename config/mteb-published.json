@@ -1,0 +1,47 @@
+{
+  "source": {
+    "repository": "https://github.com/embeddings-benchmark/results",
+    "commit": "f8fa68f43a0d3868334c764cec9d21ce39c7ecbc",
+    "read": "2026-11-12",
+    "note": "Scores are fractions as stored in the result files. The tolerance is in points (hundredths)."
+  },
+  "tolerance_points": 0.5,
+  "checks": [
+    {
+      "name": "multilingual-e5-base",
+      "space": "manifests/space/multilingual-e5-base-fp32.json",
+      "task": "SciFact",
+      "split": "test",
+      "measure": "ndcg_at_10",
+      "published": 0.6965,
+      "published_path": "results/intfloat__multilingual-e5-base/d13f1b27baf31030b7fd040960d60d909913633f/SciFact.json",
+      "published_model_revision": "d13f1b27baf31030b7fd040960d60d909913633f",
+      "published_mteb_version": "1.20.0",
+      "difference_from_published": "The space pins model revision d128750597153bb5987e10b1c3493a34e5a4502a."
+    },
+    {
+      "name": "embeddinggemma-300m",
+      "space": "manifests/space/mteb-embeddinggemma-300m.json",
+      "task": "SciFact",
+      "split": "test",
+      "measure": "ndcg_at_10",
+      "published": 0.78675,
+      "published_path": "results/google__embeddinggemma-300m/64614b0b8b64f0c6c1e52b07e4e9a4e8fe4d2da2/SciFact.json",
+      "published_model_revision": "64614b0b8b64f0c6c1e52b07e4e9a4e8fe4d2da2",
+      "published_mteb_version": "2.27.1",
+      "difference_from_published": "The space pins model revision 57c266a740f537b4dc058e1b0cda161fd15afa75. The document prompt 'title: none | text: ' is inferred from the model's Sentence Transformers prompts, which MTEB's wrapper applies."
+    },
+    {
+      "name": "qwen3-embedding-0.6b",
+      "space": "manifests/space/mteb-scifact-qwen3-embedding-0.6b.json",
+      "task": "SciFact",
+      "split": "test",
+      "measure": "ndcg_at_10",
+      "published": 0.69718,
+      "published_path": "results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/SciFact.json",
+      "published_model_revision": "b22da495047858cce924d27d76261e96be6febc0",
+      "published_mteb_version": "1.38.9",
+      "difference_from_published": "The space pins model revision 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 and a limit of 8192 tokens; MTEB sets no explicit limit. The query instruction is MTEB's SciFact task prompt."
+    }
+  ]
+}

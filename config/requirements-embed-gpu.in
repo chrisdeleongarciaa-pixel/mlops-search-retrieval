@@ -1,0 +1,8 @@
+torch==2.14.0
+transformers==5.20.2
+sentence-transformers==6.2.0
+mteb==2.27.12
+numpy==2.5.4
+ir-datasets==0.6.3
+ir-measures==0.4.3
+pytrec-eval-terrier==0.5.10
