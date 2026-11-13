@@ -3,7 +3,7 @@
     "max": 200,
     "min": 200
   },
-  "code_commit": "018aea54d16b6c5f8787c06122df4e71d6708782",
+  "code_commit": "0dc16f83cebe6a8d9649ad1c54e5d5c26ca79c2b",
   "cpu_count": 4,
   "device": "cpu",
   "epsilon": 3.815872366995094e-06,
@@ -17,8 +17,8 @@
   "processor": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
   "python": "3.12.10",
   "seconds": {
-    "index": 0.2860346000234131,
-    "total": 1.2635760999983177
+    "index": 0.24709260000963695,
+    "total": 0.9686725000210572
   },
   "states": {
     "certified": 1109,

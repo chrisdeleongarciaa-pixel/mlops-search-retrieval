@@ -15,8 +15,9 @@
     },
     "score": "float64 sum of products of canonical rows, reduced over the dimension axis",
     "tie_break": "document ID, code point order",
+    "implementation_sha256": "647b5827ffd0bbbb8968d3e9606240315dc12f435415f6c0b66aacae755156d5",
     "rows_sha256": "b005497d204c8e4afe2d081be1b5c1acedacb3158772171283bd2ed075f98470",
     "scores_sha256": "a2a6dc53a1900ee611a19b26021121ed3fa64d56740399e4c8445f1a32a16aa2"
   },
-  "sha256": "612ddbb0cce0283f47e17bb73e0ade2d6456bda992cf721f8135ad0cf9870624"
+  "sha256": "643b3192ff93beb623c60010631cf002180bd35d1ad5db70cb87ef910a494790"
 }
