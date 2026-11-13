@@ -1,7 +1,7 @@
 # Anserini BM25 with its default parameters on MS MARCO passage dev.
 [run]
 id = "msmarco-dev.anserini-bm25-default"
-code_commit = "a6dde5a37d4480d620485fc0f5f3f276ee257746"
+code_commit = "b8e653ac04407f9854e105605e08b21081867b7f"
 split = "dev"
 
 [corpus]

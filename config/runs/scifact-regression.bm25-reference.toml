@@ -1,7 +1,7 @@
 # In-process BM25 reference on the spent SciFact test split. Pipeline regression only.
 [run]
 id = "scifact-regression.bm25-reference"
-code_commit = "a6dde5a37d4480d620485fc0f5f3f276ee257746"
+code_commit = "382b632d8b5b7f264c28e9cbd79a8cb2e5ceec5e"
 split = "regression"
 
 [corpus]

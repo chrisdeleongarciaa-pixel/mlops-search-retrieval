@@ -7,8 +7,8 @@
     "judgments": "human",
     "queries": 6980,
     "ir_datasets": "msmarco-passage/dev/small",
-    "queries_sha256": "e78507bbc601b29049134caa49e4c56abc015421c1f7c76ab3f889dd37a16076",
+    "queries_sha256": "f4f71fa87b6be4fb968cca2b8f8554c4ebd003e6c3488af3ac1cc5629c3de189",
     "qrels_sha256": "ddc607dbe7b748d7168e8675a242f0811d47febaa2e69d3af09d7ab249c68d7e"
   },
-  "sha256": "0a37bb3defa5ab420f9b50b4a359b1b47020635e240fc6a056909eb82b630d51"
+  "sha256": "1b108543b26cf74a88bfdfb3790eb33e2f2f46852321eee0006f14ade0e60180"
 }
