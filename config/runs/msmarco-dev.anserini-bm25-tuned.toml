@@ -1,7 +1,7 @@
 # Anserini BM25 with the published tuned parameters on MS MARCO passage dev. Lexical reference.
 [run]
 id = "msmarco-dev.anserini-bm25-tuned"
-code_commit = "382b632b8b5b7f264c28e9cbd79a8cb2e5ceec5e"
+code_commit = "382b632d8b5b7f264c28e9cbd79a8cb2e5ceec5e"
 split = "dev"
 
 [corpus]
