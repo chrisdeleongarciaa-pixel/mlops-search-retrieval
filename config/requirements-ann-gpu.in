@@ -1,2 +1,4 @@
 faiss-gpu-cuvs==1.16.0
 numpy==2.5.4
+# Needed by `pip install --no-build-isolation -e .`: Python 3.12 venvs ship without it.
+setuptools==70.2.0
