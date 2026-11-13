@@ -1,6 +1,6 @@
-# Scientific literature retrieval with verifiable evidence
+# SLRWVE
 
-This project searches scientific literature with BM25, exact cosine retrieval, and HNSW in Vespa. PostgreSQL owns publication and access state. A search index can be rebuilt from versioned inputs, and a citation can be resolved to the bytes of its source. The project includes reproducible SciFact benchmarks, scientific PDF extraction, and a private-delivery test with a real model.
+Scratch/Retrival scientific literature with BM25, exact cosine retrieval, and HNSW in Vespa. PostgreSQL owns publication and access state. A search index can be rebuilt from versioned inputs, and a citation can be resolved to the bytes of its source. The project includes reproducible SciFact benchmarks, scientific PDF extraction, and a private-delivery test with a real model.
 
 ## Results
 
