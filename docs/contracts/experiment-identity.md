@@ -31,7 +31,7 @@ python evaluation/bench.py seal manifests/corpus/beir-scifact.json
 | Operation | Precondition | Postcondition and invariant |
 | --- | --- | --- |
 | Resolve | Complete configuration. Every referenced manifest matches its digest. No `<placeholder>` values. | All keys are built or the run is rejected. Table and key order do not affect any key. |
-| Bind to code | The project is the top level of its own Git work tree. The tree has no uncommitted or untracked files. `code_commit` is a full commit ID and an ancestor of `HEAD`. | Between `code_commit` and `HEAD`, only `config/runs/`, `manifests/`, `docs/`, `engineering/` and `evaluation/evidence/` differ. |
+| Bind to code | The project is the top level of its own Git work tree. The tree has no uncommitted or untracked files. `code_commit` is a full commit ID and an ancestor of `HEAD`. | Between `code_commit` and `HEAD`, only `config/runs/`, `config/ann/`, `manifests/`, `docs/`, `engineering/` and `evaluation/evidence/` differ. |
 | Bind to runtime | Runtime manifest with interpreter version, platform tag and lock file digests. | The interpreter and platform match, each lock file matches its digest and every pinned package is installed at its pinned version. |
 | `run` | Split `dev` or `regression`. | Test judgments are never opened. |
 | `report` | Split `test` and `--frozen-dev` naming a `dev` configuration. | The two configurations agree on every `RunKey` member except the query set. The development configuration was last changed in a commit before `HEAD`. |

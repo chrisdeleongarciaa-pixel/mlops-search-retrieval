@@ -18,7 +18,7 @@ class ProvenanceError(RuntimeError):
 
 
 # After the code commit, only experiment declarations, documentation and archived evidence may change.
-DECLARATION_PATHS = ("config/runs/", "manifests/", "docs/", "engineering/", "evaluation/evidence/")
+DECLARATION_PATHS = ("config/runs/", "config/ann/", "manifests/", "docs/", "engineering/", "evaluation/evidence/")
 PIN = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)==([^\s\\]+)")
 
 
