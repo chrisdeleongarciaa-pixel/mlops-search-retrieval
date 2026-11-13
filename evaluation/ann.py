@@ -32,6 +32,21 @@ from oracle import FlatSearcher, GPU_MAX_K, OracleError, exact_top_k, read_oracl
 from vector_store import Identity, VectorStoreError, _write_atomic
 
 
+ORACLE_CODE = ("evaluation/oracle.py", "evaluation/canonical.py", "evaluation/vector_store.py",
+               "src/search_retrieval/contracts/cohorts.py")
+SWEEP_CODE = ORACLE_CODE + ("evaluation/ann_sweep.py",)
+
+
+def code_digest(paths) -> str:
+    """Digest of the measurement code. Results computed by other code are not reused."""
+    digest = sha256()
+    for relative in paths:
+        data = inside(ROOT, relative).read_bytes()
+        digest.update(f"{relative}\t{len(data)}\n".encode("utf-8"))
+        digest.update(data)
+    return digest.hexdigest()
+
+
 def environment(device: str) -> dict:
     packages = {}
     for name in ("faiss-cpu", "faiss-gpu-cuvs", "numpy"):
@@ -71,15 +86,17 @@ def command_oracle(args, config: dict, commit: str) -> dict:
         raise ConfigError(f"The GPU searcher returns at most {GPU_MAX_K} candidates")
     documents, queries = open_sets(config, args.vectors_dir)
     buckets = cohort_buckets(documents.ids)
+    implementation = code_digest(ORACLE_CODE)
     written = {}
     for permille in sorted(oracle["cohorts_permille"], reverse=True):
         directory = oracle_directory(args.out_dir, documents, queries, permille)
         if (directory / "manifest.json").exists():
             body, _, _ = read_oracle(directory)
-            if body["documents"] == documents.digest and body["queries"] == queries.digest and body["k"] == oracle["k"]:
+            if (body["documents"], body["queries"], body["k"], body["implementation_sha256"]) == (
+                    documents.digest, queries.digest, oracle["k"], implementation):
                 written[permille] = {"directory": str(directory), "reused": True}
                 continue
-            raise OracleError(f"{directory} holds an oracle of other inputs")
+            raise OracleError(f"{directory} holds an oracle of other inputs or code; move it aside to recompute")
         eligible = np.nonzero(cohort_mask(buckets, permille))[0].astype(np.int64)
         started = perf_counter()
         searcher = FlatSearcher(documents, eligible, args.device) if eligible.size else None
@@ -89,7 +106,8 @@ def command_oracle(args, config: dict, commit: str) -> dict:
         observation = {"code_commit": commit, "seconds": {"index": indexed, "total": perf_counter() - started},
                        "initial_candidates": oracle["initial_candidates"], **environment(args.device)}
         sealed = write_oracle(directory, result, documents=documents, queries=queries, permille=permille,
-                              rule=COHORT_RULE, eligible=eligible, k=oracle["k"], observation=observation)
+                              rule=COHORT_RULE, eligible=eligible, k=oracle["k"], implementation=implementation,
+                              observation=observation)
         del searcher
         written[permille] = {"directory": str(directory), "oracle": sealed["sha256"], "eligible": int(eligible.size),
                              "states": result.state_counts(), "observed_max_error": result.observed_max_error,
@@ -112,12 +130,15 @@ def command_sweep(args, config: dict, commit: str, config_bytes: bytes) -> dict:
     for permille in cohorts:
         directory = oracle_directory(args.out_dir, documents, queries, permille)
         body, rows, scores = read_oracle(directory)
-        if (body["documents"], body["queries"]) != (documents.digest, queries.digest):
-            raise OracleError(f"{directory} holds an oracle of other inputs")
+        if (body["documents"], body["queries"], body["implementation_sha256"]) != (
+                documents.digest, queries.digest, code_digest(ORACLE_CODE)):
+            raise OracleError(f"{directory} holds an oracle of other inputs or code; run the oracle command")
         oracles[permille] = (rows, scores)
         masks[permille] = cohort_mask(buckets, permille)
         oracle_digests[permille] = sha256((directory / "manifest.json").read_bytes()).hexdigest()
-    sweep_dir = args.out_dir / f"{documents.digest[:16]}-{queries.digest[:16]}" / f"sweep-{sha256(config_bytes).hexdigest()[:16]}"
+    measurement = code_digest(SWEEP_CODE)
+    sweep_dir = (args.out_dir / f"{documents.digest[:16]}-{queries.digest[:16]}"
+                 / f"sweep-{sha256(config_bytes).hexdigest()[:16]}-{measurement[:16]}")
     records = []
     for build in builds:
         directory = sweep_dir / build.label
@@ -129,7 +150,8 @@ def command_sweep(args, config: dict, commit: str, config_bytes: bytes) -> dict:
     points = [json.loads(line) for record in records
               for line in (sweep_dir / record["build"] / "points.jsonl").read_text(encoding="utf-8").splitlines()]
     summary = {
-        "code_commit": commit, "config": {"path": args.config, "sha256": sha256(config_bytes).hexdigest()},
+        "code_commit": commit, "measurement_code_sha256": measurement,
+        "config": {"path": args.config, "sha256": sha256(config_bytes).hexdigest()},
         "documents": documents.digest, "queries": queries.digest, "oracles": oracle_digests,
         "builds": {record["build"]: {key: record[key] for key in ("structure_sha256", "estimated_bytes_per_vector",
                                                                    "build_seconds", "points_sha256")}

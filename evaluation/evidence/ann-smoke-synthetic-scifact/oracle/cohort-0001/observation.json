@@ -1,0 +1,28 @@
+{
+  "candidates": {
+    "max": 5,
+    "min": 5
+  },
+  "code_commit": "018aea54d16b6c5f8787c06122df4e71d6708782",
+  "cpu_count": 4,
+  "device": "cpu",
+  "epsilon": 3.815665145614563e-06,
+  "initial_candidates": 200,
+  "observed_max_error": 3.864988684654236e-08,
+  "packages": {
+    "faiss-cpu": "1.16.0",
+    "numpy": "2.5.4"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+  "python": "3.12.10",
+  "seconds": {
+    "index": 0.00036619999445974827,
+    "total": 0.19049539999105036
+  },
+  "states": {
+    "certified": 0,
+    "complete": 1109,
+    "full-scan": 0
+  }
+}

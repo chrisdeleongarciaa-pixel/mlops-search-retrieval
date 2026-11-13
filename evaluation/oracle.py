@@ -189,7 +189,8 @@ ARRAYS = {"rows": "<i8", "scores": "<f8"}
 
 
 def write_oracle(directory, result: OracleResult, *, documents: CanonicalRows, queries: CanonicalRows,
-                 permille: int, rule: str, eligible: np.ndarray, k: int, observation: dict) -> dict:
+                 permille: int, rule: str, eligible: np.ndarray, k: int, implementation: str,
+                 observation: dict) -> dict:
     import json
     from hashlib import sha256
 
@@ -209,6 +210,8 @@ def write_oracle(directory, result: OracleResult, *, documents: CanonicalRows, q
                    "eligible_rows_sha256": sha256(np.ascontiguousarray(eligible, dtype="<i8").tobytes()).hexdigest()},
         "score": "float64 sum of products of canonical rows, reduced over the dimension axis",
         "tie_break": "document ID, code point order",
+        # The code that defines the score, the ranking and the cohorts: another definition is another oracle.
+        "implementation_sha256": implementation,
         "rows_sha256": hashes["rows"], "scores_sha256": hashes["scores"],
     }
     sealed = seal("exact-oracle", body)

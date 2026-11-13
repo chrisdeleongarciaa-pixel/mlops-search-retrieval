@@ -209,7 +209,8 @@ class OracleTests(unittest.TestCase):
         result = exact_top_k(self.queries, self.documents, eligible, 10, FlatSearcher(self.documents, eligible), initial=20)
         target = self.root / "oracle"
         sealed = write_oracle(target, result, documents=self.documents, queries=self.queries, permille=1000,
-                              rule=COHORT_RULE, eligible=eligible, k=10, observation={"device": "cpu"})
+                              rule=COHORT_RULE, eligible=eligible, k=10, implementation=A,
+                              observation={"device": "cpu"})
         body, rows, scores = read_oracle(target)
         self.assertEqual(body, sealed["body"])
         np.testing.assert_array_equal(rows, result.rows)

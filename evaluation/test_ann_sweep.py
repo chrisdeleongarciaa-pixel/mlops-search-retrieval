@@ -30,7 +30,7 @@ queries = "manifests/queries/x.json"
 k = 20
 initial_candidates = 40
 query_batch = 64
-cohorts_permille = [1000, 100]
+cohorts_permille = [1000, 100, 10]
 
 [measure]
 recall_at = [5, 20]
@@ -46,7 +46,7 @@ m = [4, 8]
 ef_construction = [20]
 insertion_seeds = [11, 29]
 ef_search = [20, 400]
-cohorts_permille = [1000, 100]
+cohorts_permille = [1000, 100, 10]
 
 [[ivfpq]]
 name = "lowmem"
@@ -111,11 +111,11 @@ class ConfigTests(unittest.TestCase):
             "missing field": CONFIG.replace("warmup = 0\n", ""),
             "oracle too shallow": CONFIG.replace("k = 20", "k = 10"),
             "ef below depth": CONFIG.replace("ef_search = [20, 400]", "ef_search = [10, 400]"),
-            "cohort without oracle": CONFIG.replace("cohorts_permille = [1000, 100]\n\n[[ivfpq]]",
-                                                    "cohorts_permille = [1000, 10]\n\n[[ivfpq]]"),
+            "cohort without oracle": CONFIG.replace("cohorts_permille = [1000, 100, 10]\n\n[[ivfpq]]",
+                                                    "cohorts_permille = [1000, 5]\n\n[[ivfpq]]"),
             "duplicate values": CONFIG.replace("m = [4, 8]", "m = [4, 4]"),
-            "permille out of range": CONFIG.replace("cohorts_permille = [1000, 100]\nquery", "x").replace(
-                "[oracle]\nk = 20", "[oracle]\nk = 20\ncohorts_permille = [2000]"),
+            "permille out of range": CONFIG.replace("cohorts_permille = [1000, 100, 10]\n\n[measure]",
+                                                    "cohorts_permille = [1000, 100, 10, 2000]\n\n[measure]"),
             "duplicate name": CONFIG.replace('name = "lowmem"', 'name = "grid"'),
             "bad nbits": CONFIG.replace("nbits = 4", "nbits = 17"),
         }
@@ -140,7 +140,7 @@ class FaissBuildTests(unittest.TestCase):
         self.config = parse_sweep(CONFIG.encode())
         buckets = cohort_buckets(self.documents.ids)
         self.masks, self.oracles = {}, {}
-        for permille in (1000, 100):
+        for permille in (1000, 100, 10):
             mask = cohort_mask(buckets, permille)
             eligible = np.nonzero(mask)[0].astype(np.int64)
             result = exact_top_k(self.queries, self.documents, eligible, 20, FlatSearcher(self.documents, eligible),
@@ -160,6 +160,14 @@ class FaissBuildTests(unittest.TestCase):
         points = {(point["cohort_permille"], point["search"]["ef_search"]): point for point in self.points(directory)}
         self.assertEqual(points[(1000, 400)]["recall"]["@20"]["tie_aware"]["mean"], 1.0)
         self.assertLessEqual(points[(1000, 20)]["recall"]["@20"]["tie_aware"]["mean"], 1.0)
+        # Cohort 10 holds 5 documents, fewer than the depth of 20. The 15 positions per query it cannot
+        # fill are not short results. FAISS filtered HNSW still leaves some eligible documents unfound at
+        # efSearch 400 (reproduced with FAISS alone: 3 empty positions in 3 queries); each lowers recall.
+        eligible = int(self.masks[10].sum())
+        short = points[(10, 400)]["short_results"]
+        self.assertEqual(eligible, 5)
+        self.assertLess(short, 30 * (20 - eligible))
+        self.assertAlmostEqual(points[(10, 400)]["recall"]["@20"]["tie_aware"]["mean"], 1 - short / (30 * eligible))
         filtered = points[(100, 400)]
         self.assertGreater(filtered["recall"]["@5"]["tie_aware"]["queries"], 0)
         self.assertGreater(points[(1000, 400)]["distances_per_query"], points[(1000, 20)]["distances_per_query"])

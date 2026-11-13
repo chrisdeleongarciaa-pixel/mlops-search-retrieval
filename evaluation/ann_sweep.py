@@ -9,7 +9,8 @@ smaller). Strict recall is the share of the exact top m found among the first m 
 Tie-aware recall counts a result as found when its exact score is at least the m-th exact
 score, so a result tied with the exact list at its boundary is not a miss. Both are reported;
 summaries use the tie-aware value. Queries whose cohort holds no document are excluded and
-counted.
+counted. Short results count the positions left empty within the first min(depth, eligible)
+ranks, where the cohort could have filled them.
 
 A build is defined by its family, parameters, insertion order and add batch: FAISS inserts
 each add call's vectors level by level, so the same rows added in different batches give a
@@ -367,7 +368,8 @@ def run_build(build: Build, documents: CanonicalRows, queries: CanonicalRows, or
             found_scores = exact_scores_of(queries64, documents, found)
             point = {"build": build.label, "family": build.family, "cohort_permille": permille,
                      "search": {"ef_search" if build.family == "hnsw" else "nprobe": value},
-                     "short_results": int((found < 0).sum()), "seconds": elapsed,
+                     # Empty positions the index could have filled: within the eligible count only.
+                     "short_results": int((found[:, :min(depth, int(mask.sum()))] < 0).sum()), "seconds": elapsed,
                      "qps": queries.n / float(np.median(elapsed)), "distances_per_query": computed / queries.n,
                      "recall": {}}
             columns = []
