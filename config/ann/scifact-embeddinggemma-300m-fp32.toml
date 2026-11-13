@@ -1,0 +1,31 @@
+# Exact oracle of embeddinggemma-300m-fp32 over SciFact, for the engine parity check of step 5.
+# The sweep below exercises the pipeline on real embeddings. With 5,183 documents it is not
+# an ANN result.
+
+[inputs]
+space = "manifests/space/embeddinggemma-300m-fp32.json"
+corpus = "manifests/corpus/beir-scifact.json"
+transform = "manifests/transform/beir-title-text-fields-v1.json"
+queries = "manifests/queries/beir-scifact-test.json"
+
+[oracle]
+k = 100
+initial_candidates = 200
+query_batch = 1024
+cohorts_permille = [1000, 500, 100, 10, 1]
+
+[measure]
+recall_at = [10, 100]
+search_threads = 0
+build_threads = 0
+timing_repeats = 3
+warmup = 1
+add_batch = 65536
+
+[[hnsw]]
+name = "reference"
+m = [16]
+ef_construction = [200]
+insertion_seeds = [11]
+ef_search = [100, 200, 400]
+cohorts_permille = [1000]
