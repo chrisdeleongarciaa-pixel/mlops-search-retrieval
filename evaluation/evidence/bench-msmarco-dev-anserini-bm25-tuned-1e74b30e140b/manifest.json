@@ -27,7 +27,7 @@
         "target_hits": 1000
       },
       "run": {
-        "code_commit": "a6dde5a37d4480d620485fc0f5f3f276ee257746",
+        "code_commit": "382b632d8b5b7f264c28e9cbd79a8cb2e5ceec5e",
         "id": "msmarco-dev.anserini-bm25-tuned",
         "split": "dev"
       },
@@ -66,27 +66,27 @@
   },
   "keys": {
     "corpus": "b297a98ba74bfb9dc5de5a7f4d5469d6174718dad38653c04fa040910ddb80d8",
-    "frozen": "934fc3178d14666a0089c2db0204a686db45f39e4fd6f2dad657c9889eda85d4",
+    "frozen": "c890b59e26e7562e694e9539d0b2d6a105bfc0da07a74e75abcda395e10bdf33",
     "generation": "6d8083879b06afdc44d9cd6739a7d0a16cb35622f7b7b10f95996bf7b37e6539",
-    "query_set": "8468bf8236c3c24bb970adfdb14e659447285eec612b1203405a77bd4d1256ab",
-    "run": "a5f7250907aa4ebfdfe2a19c327859fc8e6e331f64ff811cb3b7bcda6a813582",
+    "query_set": "6683521ac00d777149fa71b081c51751bf3920ae18b164a0bcfd106731ecf837",
+    "run": "1e74b30e140bd46475b4b144c205d3027279c16c32ad8ddee5dbdb04e7c145c7",
     "runtime": "a1dd1fb5d5f59c3f901214bf3e3c6ff0c47c867c85dee07c9b4b0eb7e53bf46a",
     "spaces": {},
     "transform": "53d39794cc824f2ae0cac70891184a0e206de423fbdb3776d7b69effee6bc1cf"
   },
   "legacy_space_ids": {},
   "metrics": {
-    "Judged@10": 0.04078796561604584,
-    "R@10": 0.39145176695319966,
+    "Judged@10": 0.04080229226361032,
+    "R@10": 0.39159503342884433,
     "R@100": 0.6701408787010505,
     "R@1000": 0.8573424068767909,
-    "RR@10": 0.18736452221767405,
-    "nDCG@10": 0.23396626644403987
+    "RR@10": 0.18741227770955565,
+    "nDCG@10": 0.23403789968186223
   },
   "observations": "timings.json",
   "outputs": {
-    "per-query.jsonl": "d297a42b4531183242bea6d113cbb030b0c8e48c63303afcec7104818d155000",
-    "run.trec": "deb6d6bea4da329531eec709cd2cb4ce0b9f27f96ad47f927087a925fdba9f79"
+    "per-query.jsonl": "ed081c1e007b795cffe8f79b4f2228a92031deafb668b7de34b688c070f6e442",
+    "run.trec": "5fda8c01c513bd9f516b0a8c3f36ed0c6e0fef7dd65bbd8f9a1dca66f2ef2938"
   },
   "queries": 6980,
   "run_id": "msmarco-dev.anserini-bm25-tuned",

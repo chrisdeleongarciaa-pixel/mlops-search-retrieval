@@ -27,7 +27,7 @@
         "target_hits": 1000
       },
       "run": {
-        "code_commit": "a6dde5a37d4480d620485fc0f5f3f276ee257746",
+        "code_commit": "382b632d8b5b7f264c28e9cbd79a8cb2e5ceec5e",
         "id": "msmarco-dev.anserini-bm25-default",
         "split": "dev"
       },
@@ -66,10 +66,10 @@
   },
   "keys": {
     "corpus": "b297a98ba74bfb9dc5de5a7f4d5469d6174718dad38653c04fa040910ddb80d8",
-    "frozen": "eaacd99596f32777db667f254a2a78d0acbce179fa8c7cb561dab28304e5f96e",
+    "frozen": "c9ad9aef945f1ff39eff236ae8d79f63cdf08e3500ee7649561150803596e1f6",
     "generation": "9167ba85cf9889f9e08748d709ee0c04f4ca607893fff109729575bda02095ca",
-    "query_set": "8468bf8236c3c24bb970adfdb14e659447285eec612b1203405a77bd4d1256ab",
-    "run": "1d53ee81d1f92b9ed1488d28b2d94252e31b3a51a798caed86efe3f418c40749",
+    "query_set": "6683521ac00d777149fa71b081c51751bf3920ae18b164a0bcfd106731ecf837",
+    "run": "b9fdbc3ceb7d2525f6d90b8260bbeef11c4dc659106c45eefbf51aa41ea487ba",
     "runtime": "a1dd1fb5d5f59c3f901214bf3e3c6ff0c47c867c85dee07c9b4b0eb7e53bf46a",
     "spaces": {},
     "transform": "53d39794cc824f2ae0cac70891184a0e206de423fbdb3776d7b69effee6bc1cf"
@@ -80,13 +80,13 @@
     "R@10": 0.378689111747851,
     "R@100": 0.6578438395415472,
     "R@1000": 0.8526146131805158,
-    "RR@10": 0.18395631509528357,
-    "nDCG@10": 0.2283445831253894
+    "RR@10": 0.18398616227770956,
+    "nDCG@10": 0.228371020822125
   },
   "observations": "timings.json",
   "outputs": {
-    "per-query.jsonl": "1cb842923eb637ef9f44d00848d55773f3ebf7f17625ea7871190b3a63a0c639",
-    "run.trec": "54d23739664647507a9202178b4a50518b42fbfc02fe2ec9a8d32c922ccbd3a0"
+    "per-query.jsonl": "628bea7a74fd261a291411531c3ac0ac5ff895d784f4759d524b75eb255598f1",
+    "run.trec": "56911a784ee1bb7775b0dd090f37c1fe8be08822288f46e21f2e0e945d108e64"
   },
   "queries": 6980,
   "run_id": "msmarco-dev.anserini-bm25-default",
