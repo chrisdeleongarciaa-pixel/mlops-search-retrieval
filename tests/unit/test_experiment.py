@@ -11,7 +11,7 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest import mock
 
-from search_retrieval.experiment import provenance
+from search_retrieval.experiment import provenance, textmode
 from search_retrieval.experiment.manifests import ManifestError, parse_manifest, read_manifest, seal
 from search_retrieval.experiment.outputs import (
     parse_trec_run, read_trec_run, trec_run, verify_outputs, write_run,
@@ -434,3 +434,23 @@ class OutputTests(unittest.TestCase):
                        ["q1 Q0 d2 1 2.5 t", "q1 Q0 d1 3 0.1 t"]):
             with self.subTest(broken=broken), self.assertRaises(ValueError):
                 list(read_trec_run(broken))
+
+
+class TextModeTests(unittest.TestCase):
+    def test_utf8_mode_continues_and_legacy_mode_is_refused_or_rerun(self):
+        with (mock.patch.object(textmode, "utf8_mode", return_value=True),
+              mock.patch.object(textmode.subprocess, "call") as call):
+            self.assertIsNone(textmode.rerun_in_utf8_mode())
+            textmode.require_utf8_mode("reader")
+            call.assert_not_called()
+        with (mock.patch.object(textmode, "utf8_mode", return_value=False),
+              mock.patch.object(textmode.subprocess, "call", return_value=3) as call,
+              mock.patch.object(textmode.sys, "argv", ["program.py", "run", "config.toml"])):
+            self.assertEqual(textmode.rerun_in_utf8_mode(), 3)
+            call.assert_called_once_with([textmode.sys.executable, "-X", "utf8", "program.py", "run", "config.toml"])
+            with self.assertRaisesRegex(RuntimeError, "UTF-8 mode"):
+                textmode.require_utf8_mode("reader")
+
+    def test_the_legacy_code_page_changes_non_ascii_text_silently(self):
+        # The defect this guards against: UTF-8 bytes of "café" read as cp1252 give other characters.
+        self.assertEqual("café".encode("utf-8").decode("cp1252"), "cafÃ©")

@@ -31,6 +31,7 @@ from search_retrieval.experiment.provenance import (
     ProvenanceError, authorize_split, observed_runtime, verify_provenance,
 )
 from search_retrieval.experiment.run_config import ConfigError, ResolvedRun, resolve
+from search_retrieval.experiment.textmode import require_utf8_mode, rerun_in_utf8_mode
 from measures import aggregate, evaluate
 from scifact_bm25 import bm25
 
@@ -113,6 +114,7 @@ class AnseriniIndex:
         if directory_digest(self.index) != self.corpus_manifest["index_sha256"]:
             raise ManifestError("Index does not match its corpus manifest")
         os.environ["IR_DATASETS_HOME"] = str((data_dir / "ir_datasets").resolve())
+        require_utf8_mode("ir_datasets")
         import ir_datasets
 
         self.dataset = ir_datasets.load(self.query_set["ir_datasets"])
@@ -319,6 +321,9 @@ def main() -> int:
     commands.add_parser("seal").add_argument("manifest")
     commands.add_parser("digest-index").add_argument("directory", type=Path)
     args = parser.parse_args()
+    rerun = rerun_in_utf8_mode()
+    if rerun is not None:
+        return rerun
     try:
         if args.command == "seal":
             result = reseal(args.manifest)

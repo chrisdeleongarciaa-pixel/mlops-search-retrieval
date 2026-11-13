@@ -29,6 +29,7 @@ from search_retrieval.adapters.space_encoder import SpaceEncoder, render
 from search_retrieval.experiment.manifests import ManifestError, read_manifest, require, seal
 from search_retrieval.experiment.provenance import ProvenanceError, _git, verify_clean, verify_repository
 from search_retrieval.experiment.run_config import CORPUS, QUERY_SET, TRANSFORM, ConfigError, read_space, space_key
+from search_retrieval.experiment.textmode import require_utf8_mode, rerun_in_utf8_mode
 from vector_store import (
     Identity, VectorSetWriter, VectorStoreError, derive, derived_space, ids_bytes,
     parity_report, verify_vector_set,
@@ -92,6 +93,7 @@ def _archive(corpus: dict, data_dir: Path) -> Path:
 
 def _ir_dataset(identifier: str, data_dir: Path):
     os.environ["IR_DATASETS_HOME"] = str((data_dir / "ir_datasets").resolve())
+    require_utf8_mode("ir_datasets")
     import ir_datasets
 
     return ir_datasets.load(identifier)
@@ -343,6 +345,9 @@ def main() -> int:
     parity.add_argument("documents", type=Path)
     parity.add_argument("queries", type=Path)
     args = parser.parse_args()
+    rerun = rerun_in_utf8_mode()
+    if rerun is not None:
+        return rerun
     try:
         if args.command == "encode":
             if min(args.batch_size, args.shard_rows, args.parity_sample) < 1:
@@ -357,7 +362,7 @@ def main() -> int:
             result = command_derive(args)
         else:
             result = parity_report(args.documents, args.queries)
-    except (ConfigError, ManifestError, ProvenanceError, VectorStoreError, ValueError, OSError) as error:
+    except (ConfigError, ManifestError, ProvenanceError, VectorStoreError, ValueError, OSError, RuntimeError) as error:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
         return 1
     print(json.dumps(result, sort_keys=True))
