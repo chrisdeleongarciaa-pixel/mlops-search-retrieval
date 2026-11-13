@@ -138,8 +138,9 @@ def exact_top_k(queries: CanonicalRows, documents: CanonicalRows, eligible: np.n
     states = np.zeros(nq, dtype=np.uint8)
     used = np.zeros(nq, dtype=np.int64)
     d = documents.dimensions
-    epsilon = gamma(d, U32) * queries.max_norm() * (documents.max_norm(eligible) if n else 0.0)
-    slack = 2 * gamma(d, U64) * queries.max_norm() * (documents.max_norm(eligible) if n else 0.0)
+    # One pass over the eligible rows: at MS MARCO scale each pass reads every shard.
+    norms = queries.max_norm() * (documents.max_norm(eligible) if n else 0.0)
+    epsilon, slack = gamma(d, U32) * norms, 2 * gamma(d, U64) * norms
     observed = 0.0
     if n == 0:
         return OracleResult(rows, scores, states, used, epsilon, observed)
