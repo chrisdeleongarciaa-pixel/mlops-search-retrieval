@@ -247,6 +247,7 @@ class ParityTests(unittest.TestCase):
         self.assertTrue(report["passed"])
         self.assertGreaterEqual(report["min_cosine"], 0.9999)
         self.assertEqual((report["identical_top_k"], report["queries"], report["sample_every"]), (6, 6, 2))
+        self.assertEqual((report["mean_overlap_at_k"], report["max_exact_score_gap_at_differing_ranks"]), (1.0, 0.0))
         expected = sum(in_parity_sample(f"d{index:03d}", 2) for index in range(64))
         self.assertEqual(report["sample_rows"], expected)
 
@@ -266,6 +267,28 @@ class ParityTests(unittest.TestCase):
         report = parity_report(target, self.root / "queries")
         self.assertFalse(report["passed"])
         self.assertLess(report["min_cosine"], 0.9999)
+
+    def test_near_tied_neighbours_that_change_places_are_reported_without_changing_the_verdict(self):
+        # float16 has a grid of 2**-11 between 0.5 and 1: 0.7999 and 0.8 share the cell 1638,
+        # and 0.60013 and 0.6 share the cell 1229. Both rows are stored identically, so the tie
+        # goes to the lower ID, d000, while float32 ranks d001 first for the query (1, 0).
+        rows = np.zeros((12, 16), dtype=np.float32)
+        rows[0, :2], rows[1, :2] = (0.7999, (1 - 0.7999 ** 2) ** 0.5), (0.8, 0.6)
+        rows[np.arange(2, 12), np.arange(2, 12)] = 1.0
+        self.assertTrue((rows[0].astype(np.float16) == rows[1].astype(np.float16)).all())
+        query_rows = np.zeros((1, 16), dtype=np.float32)
+        query_rows[0, 0] = 1.0
+        target, queries = self.root / "ties", self.root / "tie-queries"
+        writer = VectorSetWriter(queries, Identity(self.half, "query", {"queries": A}), shard_rows=1, parity_every=1)
+        writer.append(["q"], query_rows, 0)
+        writer.finish(1)
+        write_set(target, rows, shard_rows=12, identity=documents(self.half), parity_every=1)
+        report = parity_report(target, queries, k=2)
+        self.assertGreaterEqual(report["min_cosine"], 0.9999)
+        self.assertEqual((report["identical_top_k"], report["passed"]), (0, False))
+        self.assertEqual((report["mean_overlap_at_k"], report["min_overlap_at_k"]), (1.0, 1.0))
+        # The exact scores of the two documents differ by about 0.0001.
+        self.assertAlmostEqual(report["max_exact_score_gap_at_differing_ranks"], 1e-4, delta=2e-5)
 
     def test_float32_sets_keep_no_sample_and_float16_sets_require_one(self):
         with self.assertRaisesRegex(VectorStoreError, "parity sample"):

@@ -154,10 +154,10 @@ class VectorSetWriter:
         ordinal = 0
         while (directory / _names(ordinal)["manifest"]).exists():
             body, ids, rows, _ = read_shard(directory, ordinal, identity.body())
-            if body["rows"] != shard_rows and (directory / _names(ordinal + 1)["manifest"]).exists():
-                raise VectorStoreError("Only the last shard may be short")
             if body["shard_rows"] != shard_rows or body["parity_every"] != parity_every:
                 raise VectorStoreError("Resume with the shard size and parity interval of the existing shards")
+            if body["rows"] != shard_rows and (directory / _names(ordinal + 1)["manifest"]).exists():
+                raise VectorStoreError("Only the last shard may be short")
             self._account(body, ids, rows)
             ordinal += 1
         known = {name for done in range(ordinal) for name in _names(done).values()}
@@ -327,16 +327,20 @@ def derive(source: Path, destination: Path, parent: SpaceKey, operation: dict) -
     return writer.finish(body["rows"])
 
 
-def top_k(queries: np.ndarray, documents: np.ndarray, ids: list[str], k: int) -> list[list[str]]:
-    """Exact inner-product ranking in float64 with ties broken by document ID."""
+def top_k_indices(queries: np.ndarray, documents: np.ndarray, ids: list[str], k: int):
+    """Exact inner-product ranking in float64 with ties broken by document ID.
+
+    Returns the score matrix and, per query, the column indices of its top k.
+    """
     scores = queries.astype(np.float64) @ documents.astype(np.float64).T
-    order = np.argsort(np.array(ids))
-    ranked_ids = [ids[index] for index in order]
-    result = []
-    for row in scores[:, order]:
-        best = np.argsort(-row, kind="stable")[:k]
-        result.append([ranked_ids[index] for index in best])
-    return result
+    order = np.argsort(np.array(ids), kind="stable")
+    best = [order[np.argsort(-row[order], kind="stable")[:k]] for row in scores]
+    return scores, best
+
+
+def top_k(queries: np.ndarray, documents: np.ndarray, ids: list[str], k: int) -> list[list[str]]:
+    _, best = top_k_indices(queries, documents, ids, k)
+    return [[ids[index] for index in row] for row in best]
 
 
 def parity_report(documents: Path, queries: Path, *, k: int = 10) -> dict:
@@ -344,6 +348,11 @@ def parity_report(documents: Path, queries: Path, *, k: int = 10) -> dict:
 
     Passes when every sampled row has cosine >= 0.9999 with its float32 original and every
     query has the same top-k over the sample in both precisions.
+
+    The remaining fields describe the queries whose lists differ and do not affect the
+    verdict: how much of the exact top-k the stored rows still return, and the largest
+    float32 score difference between the documents found at the same rank in both lists.
+    A small gap means near-tied neighbours changed places.
     """
     body = verify_vector_set(documents)["body"]
     every = body["parity_every"]
@@ -363,12 +372,20 @@ def parity_report(documents: Path, queries: Path, *, k: int = 10) -> dict:
     a, b = stored_rows.astype(np.float64), original_rows.astype(np.float64)
     cosines = (a * b).sum(axis=1) / (np.linalg.norm(a, axis=1) * np.linalg.norm(b, axis=1))
     query_rows = np.concatenate([rows for _, rows, _ in iterate_shards(queries)]).astype(np.float32)
-    exact = top_k(query_rows, original_rows, sample_ids, k)
-    observed = top_k(query_rows, stored_rows, sample_ids, k)
-    identical = sum(left == right for left, right in zip(exact, observed, strict=True))
+    scores, exact = top_k_indices(query_rows, original_rows, sample_ids, k)
+    _, observed = top_k_indices(query_rows, stored_rows, sample_ids, k)
+    identical, overlaps, gaps = 0, [], []
+    for row, left, right in zip(scores, exact, observed, strict=True):
+        overlaps.append(len(set(left.tolist()) & set(right.tolist())) / k)
+        if (left == right).all():
+            identical += 1
+        else:
+            gaps.append(float(np.abs(row[left] - row[right]).max()))
     return {
         "sample_rows": len(sample_ids), "sample_every": every, "queries": len(query_rows), "k": k,
         "min_cosine": float(cosines.min()), "identical_top_k": identical,
+        "mean_overlap_at_k": float(np.mean(overlaps)), "min_overlap_at_k": float(np.min(overlaps)),
+        "max_exact_score_gap_at_differing_ranks": max(gaps) if gaps else 0.0,
         "limits": {"min_cosine": PARITY_MIN_COSINE, "identical_top_k": len(query_rows)},
         "passed": bool(cosines.min() >= PARITY_MIN_COSINE and identical == len(query_rows)),
     }
