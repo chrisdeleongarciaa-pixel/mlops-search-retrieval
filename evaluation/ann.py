@@ -92,7 +92,7 @@ def command_oracle(args, config: dict, commit: str) -> dict:
         directory = oracle_directory(args.out_dir, documents, queries, permille)
         if (directory / "manifest.json").exists():
             body, _, _ = read_oracle(directory)
-            if (body["documents"], body["queries"], body["k"], body["implementation_sha256"]) == (
+            if (body["documents"], body["queries"], body["k"], body.get("implementation_sha256")) == (
                     documents.digest, queries.digest, oracle["k"], implementation):
                 written[permille] = {"directory": str(directory), "reused": True}
                 continue
@@ -130,7 +130,7 @@ def command_sweep(args, config: dict, commit: str, config_bytes: bytes) -> dict:
     for permille in cohorts:
         directory = oracle_directory(args.out_dir, documents, queries, permille)
         body, rows, scores = read_oracle(directory)
-        if (body["documents"], body["queries"], body["implementation_sha256"]) != (
+        if (body["documents"], body["queries"], body.get("implementation_sha256")) != (
                 documents.digest, queries.digest, code_digest(ORACLE_CODE)):
             raise OracleError(f"{directory} holds an oracle of other inputs or code; run the oracle command")
         oracles[permille] = (rows, scores)
