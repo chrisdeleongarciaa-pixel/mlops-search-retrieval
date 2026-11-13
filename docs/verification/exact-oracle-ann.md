@@ -14,11 +14,11 @@ Contract: [exact oracle and ANN sweeps](../contracts/exact-oracle-ann.md). Verif
 | FAISS builds | With a beam over the whole corpus HNSW returns the exact list. Single-thread builds repeat their graph; another insertion order changes it. IVF-PQ repeats with its seeds and reports fewer bytes per vector. A result outside the cohort stops the sweep. A changed per-query file or `points.jsonl` marks the build incomplete. |
 | Configuration | Each configuration rule, removed alone, fails a test. |
 
-Twenty-three seeded faults in the oracle, cohorts, sweeps and configuration rules were each detected, after four tests that passed for the wrong reason were corrected. Two more mutants are equivalent: an unreachable cap in tie-aware recall, and a BLAS product that equals the numpy reduction on this machine.
+Twenty-two seeded faults in the oracle, cohorts, sweeps and configuration rules were each detected. Getting there took two new tests (the strict cohort threshold, a changed `points.jsonl`) and two corrected ones that had passed for the wrong reason (a replace that changed nothing, a duplicate TOML key). Two more mutants are equivalent: an unreachable cap in tie-aware recall, and a BLAS product that equals the numpy reduction on this machine.
 
 ## End-to-end run on SciFact with the synthetic space
 
-Pipeline exercise only: 5,183 documents of the 64-dimension synthetic float16 space from step 3 and its 1,109 query rows. At this size exact search is cheap and HNSW is almost trivial; the numbers measure the code, not ANN quality. Code commit `9cdc1bd` (oracle definition and sweeps). [Evidence](../../evaluation/evidence/ann-smoke-synthetic-scifact/summary.json)
+Pipeline exercise only: 5,183 documents of the 64-dimension synthetic float16 space from step 3 and its 1,109 query rows. At this size exact search is cheap and HNSW is almost trivial; the numbers measure the code, not ANN quality. Code commit `0dc16f8`. [Evidence](../../evaluation/evidence/ann-smoke-synthetic-scifact/summary.json)
 
 ### Oracle
 
