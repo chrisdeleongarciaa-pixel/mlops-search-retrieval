@@ -38,6 +38,10 @@ PROFILES = {
           "min": {"cpu_ram": 30_000, "disk_space": 80, "cpu_cores_effective": 8}, "disk": 80},
     "B": {"fixed_h": 0.5, "gpu_h": 2.5, "cpu_h": 7.0, "download_gb": 20.0,
           "min": {"cpu_ram": 64_000, "disk_space": 200, "cpu_cores_effective": 16}, "disk": 200},
+    # Phase B with B_ENGINE=0, calibrated on phase A (2026-11-18, RTX 3090, 30 vCPU): setup 0.4 h,
+    # HNSW M16/efC200 of 64,183 rows in 9 s, so about 0.5 h per 8.8 M build at 30 threads.
+    "B-ann": {"fixed_h": 0.7, "gpu_h": 3.4, "cpu_h": 2.7, "download_gb": 15.0,
+              "min": {"cpu_ram": 60_000, "disk_space": 120, "cpu_cores_effective": 16}, "disk": 120},
 }
 
 

@@ -216,6 +216,16 @@ serve_and_load() {   # serve_and_load COLLECTION FUSION
 phase_b() {
     stage step3-msmarco env MSMARCO=1 bash infra/gpu/step3-embedding.sh
     stage step4-msmarco bash infra/gpu/step4-ann.sh
+    # B_ENGINE=0: MS MARCO vectors, certified oracle and HNSW sweeps only, without the Vespa
+    # projection of 8.8 M passages and the engine runs (decision 0007, reduced for budget).
+    if [ "${B_ENGINE:-1}" = 0 ]; then
+        echo "Phase B without the engine: MS MARCO projection, parity and runs skipped."
+        return 0
+    fi
+    # The stack stages are shared with phase A; on a host that runs phase B alone they start it.
+    stage stack stack_up
+    stage migrate migrate
+    stage vespa-deploy deploy_vespa
     stage project-msmarco project config/ann/msmarco-embeddinggemma-300m-fp32.toml \
         manifests/transform/passage-identity-v1.json msmarco
     stage parity-msmarco parity config/ann/msmarco-embeddinggemma-300m-fp32.toml msmarco 100
