@@ -164,9 +164,25 @@ def show(instance_id: int) -> dict | None:
     return result["instances"] if isinstance(result.get("instances"), dict) else result
 
 
+def onstart_script(public_key: str) -> str:
+    """VM start script that authorizes a public key for root.
+
+    A VM copies the account's SSH keys only when it is created, and keys attached later do not
+    reach it (observed on instance 61293666, as the vast.ai VM guide warns); a key stored in the
+    account in the wrong form leaves the VM unreachable. VM start scripts need a shebang.
+    """
+    if not public_key.startswith(("ssh-ed25519 ", "ssh-rsa ", "ecdsa-sha2-")) or "'" in public_key or "\n" in public_key:
+        raise ValueError("Expected one OpenSSH public key line")
+    return ("#!/bin/bash\nset -e\ninstall -d -m 700 /root/.ssh\n"
+            f"grep -qxF '{public_key}' /root/.ssh/authorized_keys 2>/dev/null"
+            f" || echo '{public_key}' >> /root/.ssh/authorized_keys\n"
+            "chmod 600 /root/.ssh/authorized_keys\n")
+
+
 def command_create(args) -> int:
+    onstart = onstart_script(Path(args.authorized_key).read_text(encoding="utf-8").strip()) if args.authorized_key else None
     body = {"client_id": "me", "image": VM_IMAGE, "disk": PROFILES[args.phase]["disk"], "label": args.label,
-            "runtype": "ssh_direc ssh_proxy", "env": {}, "onstart": None, "python_utf8": False,
+            "runtype": "ssh_direc ssh_proxy", "env": {}, "onstart": onstart, "python_utf8": False,
             "lang_utf8": False, "force": False, "cancel_unavail": True}
     result = call("PUT", f"/asks/{args.offer}/", body, retries=1)
     print(json.dumps(result))
@@ -350,6 +366,7 @@ def main() -> int:
     create.add_argument("offer", type=int)
     create.add_argument("--phase", choices=PROFILES, default="A")
     create.add_argument("--label", default="retrieval-workbench")
+    create.add_argument("--authorized-key", help="OpenSSH public key file to authorize for root at boot")
     wait = commands.add_parser("wait-ssh")
     wait.add_argument("instance", type=int)
     wait.add_argument("--timeout-min", type=float, default=25)

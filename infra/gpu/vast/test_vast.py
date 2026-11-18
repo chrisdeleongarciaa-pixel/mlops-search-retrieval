@@ -108,6 +108,18 @@ class ShowTests(unittest.TestCase):
             self.assertEqual(vast.show(7)["id"], 7)
 
 
+class OnstartTests(unittest.TestCase):
+    def test_script_authorizes_the_key_once(self):
+        script = vast.onstart_script("ssh-ed25519 AAAAexample user")
+        self.assertTrue(script.startswith("#!/bin/bash\n"))
+        self.assertIn("grep -qxF 'ssh-ed25519 AAAAexample user' /root/.ssh/authorized_keys", script)
+
+    def test_rejects_anything_but_one_public_key(self):
+        for text in ("SHA256:jPM+UVAO user", "ssh-ed25519 AAAA'; rm -rf / '", "ssh-ed25519 A\nssh-rsa B"):
+            with self.subTest(text=text), self.assertRaises(ValueError):
+                vast.onstart_script(text)
+
+
 class EstimateTests(unittest.TestCase):
     def test_reference_machine_takes_the_profile_hours(self):
         hours = vast.estimate(offer(inet_down=1e9), "A")["hours"]
