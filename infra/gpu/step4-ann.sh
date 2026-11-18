@@ -26,7 +26,7 @@ DEVICE="${DEVICE:-cuda}"
 PYTHON="${PYTHON:-python3.12}"
 BLOCK_ROWS="${BLOCK_ROWS:-4000000}"
 OUT="$WORK/ann"
-mkdir -p "$OUT" "$WORK/reports"
+mkdir -p "$OUT" "$WORK/reports/sweeps"
 
 if [ ! -x "$WORK/venv-ann/bin/python" ]; then
     "$PYTHON" -m venv "$WORK/venv-ann"
@@ -56,5 +56,5 @@ if [ "${SCIFACT_ONLY:-0}" != "1" ]; then
 fi
 
 # One summary per sweep: frontiers, structure digests and bytes per vector.
-find "$OUT" -name summary.json -path '*sweep-*' -exec cp --parents {} "$WORK/reports/" \;
+(cd "$OUT" && find . -name summary.json -path "*sweep-*" -exec cp --parents {} "$WORK/reports/sweeps/" \;)
 echo "Reports: $WORK/reports. Oracles and sweeps: $OUT."

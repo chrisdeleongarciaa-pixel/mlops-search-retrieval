@@ -32,8 +32,18 @@ DEPTH = 1000
 
 
 def branch(directory: Path) -> tuple[dict, dict]:
+    """A finished run's rankings for every query it answered, including those without results.
+
+    run.trec has no line for a query without hits, while per-query.jsonl has one record per
+    query; a query absent from the TREC file is an empty ranking (it scores zero, as in bench.py).
+    """
     manifest = verify_outputs(directory)
-    return manifest, parse_trec_run((directory / "run.trec").read_bytes())
+    hits = parse_trec_run((directory / "run.trec").read_bytes())
+    with (directory / "per-query.jsonl").open(encoding="utf-8") as stream:
+        queries = [json.loads(line)["qid"] for line in stream if line.strip()]
+    if len(queries) != manifest["queries"] or len(set(queries)) != len(queries) or not hits.keys() <= set(queries):
+        raise ValueError(f"The TREC run and the per-query records of {directory} disagree")
+    return manifest, {qid: hits.get(qid, []) for qid in queries}
 
 
 def fused(lexical: dict, dense: dict, method: dict) -> dict[str, list[tuple[str, float]]]:
