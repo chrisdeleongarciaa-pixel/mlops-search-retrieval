@@ -87,6 +87,12 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(destroyed, [7])
         self.assertIn("unreachable", (Path(self.out) / "monitor.log").read_text())
 
+    def test_operator_outage_does_not_count_as_unreachable(self):
+        outage = [RuntimeError("getaddrinfo failed")] * 3
+        code, destroyed = self.run_monitor(Remote(), [*outage, None], reachable=False, unreachable_min=-1)
+        self.assertEqual((code, destroyed), (0, []))
+        self.assertIn("not counted", (Path(self.out) / "monitor.log").read_text())
+
     def test_overdue_instance_destroys(self):
         old = time.time() - 7 * 3600
         code, destroyed = self.run_monitor(Remote(), [self.running(start=old)])

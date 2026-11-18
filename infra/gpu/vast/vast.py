@@ -311,8 +311,13 @@ def command_monitor(args) -> int:
         try:
             instance = show(args.instance)
         except RuntimeError as error:
-            log(f"API error: {error}", journal)
-            instance = {"actual_status": "unknown"}
+            # The API itself is unreachable: the operator's network is down, not the VM. That time
+            # does not count as the VM being unreachable (observed: a 96-minute laptop outage on
+            # 2026-11-18 would otherwise have destroyed a healthy VM); the guard on the VM still runs.
+            log(f"API error, not counted as the VM being unreachable: {error}", journal)
+            last_contact = time.time()
+            time.sleep(args.poll_s)
+            continue
         if instance is None:
             log("instance no longer exists", journal)
             return 0
