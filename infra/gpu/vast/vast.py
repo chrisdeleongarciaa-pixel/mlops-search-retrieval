@@ -193,6 +193,11 @@ def ssh(target: tuple[str, int], command: str, timeout: int = 120, stdout: Any =
                           stdout=stdout, stderr=subprocess.PIPE, timeout=timeout)
 
 
+def booted(instance: dict) -> bool:
+    """VM instances stay at actual_status "created" while running; cur_state reports the machine."""
+    return "running" in (instance.get("actual_status"), instance.get("cur_state"))
+
+
 def reachable(instance: dict) -> tuple[str, int] | None:
     for target in ssh_targets(instance):
         try:
@@ -210,8 +215,8 @@ def command_wait_ssh(args) -> int:
         if instance is None:
             log("instance not found")
             return 1
-        status = instance.get("actual_status")
-        target = reachable(instance) if status == "running" else None
+        status = f"{instance.get('actual_status')}/{instance.get('cur_state')}"
+        target = reachable(instance) if booted(instance) else None
         if target:
             print(json.dumps({"host": target[0], "port": target[1], "status": status}))
             return 0
@@ -297,7 +302,7 @@ def command_monitor(args) -> int:
             balance = credit()
         except RuntimeError:
             balance = None
-        target = reachable(instance) if instance.get("actual_status") == "running" else None
+        target = reachable(instance) if booted(instance) else None
         if target:
             last_contact = time.time()
             pull(target, f"cd {REMOTE} && tar -czf - --ignore-failed-read reports stages pipeline.log watchdog.log "
