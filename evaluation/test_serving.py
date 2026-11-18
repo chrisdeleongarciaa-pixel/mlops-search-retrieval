@@ -224,4 +224,5 @@ class TeiParityTests(unittest.TestCase):
         result = compare(shifted, canonical)
         self.assertFalse(result["passed"])
         self.assertEqual(result["queries_over_error_limit"], 1)
-        self.assertAlmostEqual(result["max_absolute_error"], 2e-5, places=9)
+        # The shift is applied to a float32 value, so it is 2e-5 only to float32 resolution.
+        self.assertAlmostEqual(result["max_absolute_error"], 2e-5, delta=1e-7)
