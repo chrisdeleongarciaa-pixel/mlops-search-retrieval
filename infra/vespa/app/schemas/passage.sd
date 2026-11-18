@@ -1,0 +1,80 @@
+schema passage {
+    # Immutable collections (LitSearch, SciFact, MS MARCO) projected from canonical vector sets.
+    # `collection` names one projection: a vector set, its corpus text and this schema revision.
+    document passage {
+        field collection type string {
+            indexing: attribute | summary
+            attribute: fast-search
+            match: exact
+            rank: filter
+        }
+        field doc_id type string {
+            indexing: attribute | summary
+            match: exact
+            rank: filter
+        }
+        field text type string {
+            indexing: index | summary
+            index: enable-bm25
+        }
+        # Selectivity cohort: sha256(b"cohort\x00" + id) mod 1000, as in contracts/cohorts.py.
+        field cohort_bucket type int {
+            indexing: attribute | summary
+            attribute: fast-search
+            rank: filter
+        }
+        # Who may see the document: "public", or the principals granted by the authority.
+        field acl_tokens type array<string> {
+            indexing: attribute | summary
+            attribute: fast-search
+            match: exact
+            rank: filter
+        }
+        field embedding type tensor<float>(x[768]) {
+            indexing: attribute | index
+            attribute {
+                distance-metric: prenormalized-angular
+            }
+            index {
+                hnsw {
+                    max-links-per-node: 16
+                    neighbors-to-explore-at-insert: 200
+                }
+            }
+        }
+    }
+    fieldset default {
+        fields: text
+    }
+    document-summary ids {
+        summary collection {}
+        summary doc_id {}
+        summary cohort_bucket {}
+    }
+    rank-profile bm25 {
+        first-phase {
+            expression: bm25(text)
+        }
+    }
+    # The tuned parameters of the Anserini MS MARCO reference, for the engine calibration.
+    rank-profile bm25-msmarco inherits bm25 {
+        rank-properties {
+            bm25(text).k1: 0.82
+            bm25(text).b: 0.68
+        }
+    }
+    rank-profile dense {
+        inputs {
+            query(q) tensor<float>(x[768])
+        }
+        # Every strategy threshold explicit: post-filtering off, ACORN-1 (filter first) below 30 %
+        # eligible, exact search below 2 %.
+        post-filter-threshold: 1.0
+        filter-first-threshold: 0.30
+        approximate-threshold: 0.02
+        first-phase {
+            # Inner product of unit vectors, the score of the exact oracle.
+            expression: 1 - distance(field, embedding)
+        }
+    }
+}

@@ -35,6 +35,7 @@ from search_retrieval.experiment.textmode import require_utf8_mode, rerun_in_utf
 from measures import aggregate, evaluate
 import prepared_collection
 from scifact_bm25 import bm25
+import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -241,7 +242,120 @@ def anserini_bm25(resolved: ResolvedRun, dataset, queries: dict[str, str], work:
     return stream(), "not-applicable", {"tools": tools, "threads": int(threads)}
 
 
-SYSTEMS = {"bm25-reference": bm25_reference, "anserini-bm25": anserini_bm25}
+class QueriesOnly:
+    """Queries and judgments from ir_datasets for a corpus served by an engine (MS MARCO text)."""
+
+    def __init__(self, resolved: ResolvedRun, data_dir: Path):
+        self.corpus_manifest, self.query_set, self.corpus = resolved.corpus, resolved.query_set_manifest, None
+        _fields(self.query_set, "query-set", "ir_datasets")
+        os.environ["IR_DATASETS_HOME"] = str((data_dir / "ir_datasets").resolve())
+        require_utf8_mode("ir_datasets")
+        import ir_datasets
+
+        self.dataset = ir_datasets.load(self.query_set["ir_datasets"])
+        digest, self.queries = sha256(), {}
+        for query in self.dataset.queries_iter():
+            digest.update(f"{query.query_id}\t{query.text}\n".encode("utf-8"))
+            self.queries[query.query_id] = query.text
+        if digest.hexdigest() != self.query_set["queries_sha256"]:
+            raise ManifestError("Queries do not match the query-set manifest")
+
+    judgments = AnseriniIndex.judgments
+
+
+FORMATS["ir-datasets-docs"] = QueriesOnly
+VESPA_FUSIONS = {"none", "rrf", "convex"}
+
+
+def vespa_projection(resolved: ResolvedRun) -> tuple[dict, object]:
+    """The projection named by [index].schema_revision, checked against the run's corpus and space."""
+    from search_retrieval.adapters.vespa_passages import VespaPassages
+    from search_retrieval.experiment.manifests import parse_manifest
+
+    try:
+        url, root = os.environ["BENCH_VESPA_URL"], Path(os.environ["BENCH_PROJECTIONS_DIR"])
+    except KeyError as error:
+        raise ProvenanceError(f"Set {error.args[0]} for a Vespa run") from error
+    label = resolved.config["index"]["schema_revision"]
+    projection, _ = parse_manifest((root / label / "manifest.json").read_bytes(), "vespa-projection")
+    if projection["collection"] != label or projection["corpus"] != resolved.corpus_digest:
+        raise ConfigError("The projection does not hold this run's corpus")
+    spaces = {space.digest for space in resolved.spaces.values()}
+    if spaces and spaces != {projection["space"]}:
+        raise ConfigError("The projection holds another vector space")
+    return projection, VespaPassages(url, timeout=120)
+
+
+def query_vectors(resolved: ResolvedRun, queries: dict[str, str]):
+    """Canonical query rows of the run's space, by query ID."""
+    from canonical import CanonicalRows
+    from embed import set_directory
+    from vector_store import Identity
+
+    if len(resolved.spaces) != 1:
+        raise ConfigError("A dense Vespa run names exactly one space")
+    space = next(iter(resolved.spaces.values()))
+    try:
+        vectors_dir = Path(os.environ["BENCH_VECTORS_DIR"])
+    except KeyError as error:
+        raise ProvenanceError("Set BENCH_VECTORS_DIR for a dense Vespa run") from error
+    rows = CanonicalRows(set_directory(vectors_dir, space.digest, Identity(
+        space, "query", {"queries": resolved.query_set_manifest["queries_sha256"]})))
+    index = {item: position for position, item in enumerate(rows.ids)}
+    missing = queries.keys() - index.keys()
+    if missing:
+        raise ConfigError(f"The query vector set lacks {len(missing)} queries")
+    return {qid: rows.take(np.array([index[qid]]), np.float32)[0].tolist() for qid in queries}, rows.digest
+
+
+def vespa_system(resolved: ResolvedRun, dataset, queries: dict[str, str], work: Path):
+    """BM25, dense or fused retrieval from a Vespa projection. Branches are read at the run depth."""
+    from search_retrieval.query.ranking import Ranked, convex, fuse
+
+    index, ranking = resolved.config["index"], resolved.config["ranking"]
+    profile, fusion, depth = ranking["profile"], ranking["fusion"], ranking["target_hits"]
+    lexical = index.get("lexical", {})
+    if index["engine"] != "vespa" or set(index) - {"engine", "schema_revision", "lexical"} or fusion["kind"] not in VESPA_FUSIONS:
+        raise ConfigError("A Vespa run names engine vespa, the collection label and a known fusion")
+    if (profile == "vespa-hybrid") != (fusion["kind"] != "none"):
+        raise ConfigError("Only vespa-hybrid fuses, and it must name its fusion")
+    if profile in ("vespa-bm25", "vespa-hybrid") and set(lexical) != {"profile"}:
+        raise ConfigError("BM25 runs name the rank profile in [index].lexical")
+    _, client = vespa_projection(resolved)
+    vectors, vectors_digest = query_vectors(resolved, queries) if profile != "vespa-bm25" else (None, None)
+    explore = int(fusion.get("explore", 0)) if profile == "vespa-hybrid" else 0
+
+    def branch_lexical(qid):
+        return [Ranked(hit.doc_id, hit.score) for hit in client.lexical(index["schema_revision"], queries[qid], depth,
+                                                                       profile=lexical["profile"])]
+
+    def branch_dense(qid):
+        hits, _ = client.dense(index["schema_revision"], vectors[qid], depth, approximate=True, explore=explore)
+        return [Ranked(hit.doc_id, hit.score) for hit in hits]
+
+    def stream():
+        for qid in queries:
+            if profile == "vespa-bm25":
+                hits = branch_lexical(qid)
+            elif profile == "vespa-dense":
+                hits = branch_dense(qid)
+            elif fusion["kind"] == "rrf":
+                if set(fusion) - {"kind", "k", "explore"} or fusion.get("k", 60) != 60:
+                    raise ConfigError("RRF uses k = 60, the constant of the existing baseline")
+                hits = list(fuse(branch_lexical(qid), branch_dense(qid), depth=depth).fused)
+            else:
+                if set(fusion) - {"kind", "alpha", "normalization", "explore"} or fusion.get("normalization") != "minmax":
+                    raise ConfigError("Convex fusion names alpha and normalization = minmax")
+                hits = list(convex(branch_lexical(qid), branch_dense(qid), alpha=float(fusion["alpha"]), depth=depth).fused)
+            ordered = sorted(hits, key=lambda hit: (-hit.score, hit.id))[:depth]
+            yield qid, [(hit.id, float(hit.score)) for hit in ordered]
+
+    extra = {"query_vectors": vectors_digest} if vectors_digest else {}
+    return stream(), "engine-reported" if profile != "vespa-bm25" else "not-applicable", extra
+
+
+SYSTEMS = {"bm25-reference": bm25_reference, "anserini-bm25": anserini_bm25,
+           "vespa-bm25": vespa_system, "vespa-dense": vespa_system, "vespa-hybrid": vespa_system}
 
 
 def execute(command: str, config: str, frozen_dev: str | None, data_dir: Path, output: Path | None) -> dict:
@@ -268,8 +382,9 @@ def execute(command: str, config: str, frozen_dev: str | None, data_dir: Path, o
     with TemporaryDirectory(ignore_cleanup_errors=True) as work:
         started = perf_counter()
         results, strategy, extra = SYSTEMS[profile](resolved, dataset, queries, Path(work))
-        environment = {**environment, **{name: value for name, value in extra.items() if name == "tools"}}
-        timings.update({name: value for name, value in extra.items() if name != "tools"})
+        recorded = ("tools", "query_vectors")
+        environment = {**environment, **{name: value for name, value in extra.items() if name in recorded}}
+        timings.update({name: value for name, value in extra.items() if name not in recorded})
 
         def records():
             batch = []

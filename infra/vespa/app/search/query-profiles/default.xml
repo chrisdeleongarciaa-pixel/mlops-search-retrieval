@@ -1,0 +1,4 @@
+<query-profile id="default">
+  <!-- Benchmark runs read 1,000 hits per query; the default cap is 400. -->
+  <field name="maxHits">1000</field>
+</query-profile>
