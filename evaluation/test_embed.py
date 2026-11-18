@@ -80,15 +80,18 @@ class RegistryTests(unittest.TestCase):
     def test_every_registered_space_is_distinct_and_names_an_adapter(self):
         spaces = {path.name: read_space(ROOT, path.relative_to(ROOT).as_posix())
                   for path in sorted((ROOT / "manifests/space").glob("*.json"))}
-        self.assertGreaterEqual(len(spaces), 5)
+        self.assertEqual(sorted(spaces), ["embeddinggemma-300m-fp32.json", "mteb-embeddinggemma-300m.json",
+                                          "multilingual-e5-base-fp32.json"])
         self.assertEqual(len({key.digest for _, key in spaces.values()}), len(spaces))
         for name, (body, key) in spaces.items():
             with self.subTest(space=name):
                 self.assertIn(body["adapter"], ("transformers-masked-mean", "sentence-transformers"))
                 self.assertEqual((key.quantization, key.mrl_dimensions), ("none", key.dimensions))
-        fp32, fp16 = spaces["embeddinggemma-300m-fp32.json"][1], spaces["embeddinggemma-300m-fp16.json"][1]
-        self.assertEqual((fp32.files, fp32.query_template, fp32.dtype, fp16.dtype),
-                         (fp16.files, fp16.query_template, "float32", "float16"))
+        # The MTEB gate runs the same files and query template as the workbench space.
+        workbench, gate = spaces["embeddinggemma-300m-fp32.json"][1], spaces["mteb-embeddinggemma-300m.json"][1]
+        self.assertEqual((workbench.files, workbench.query_template, workbench.dtype),
+                         (gate.files, gate.query_template, "float32"))
+        self.assertNotEqual(workbench, gate)
 
 
 class EncodeSetTests(unittest.TestCase):

@@ -16,7 +16,7 @@ from search_retrieval.contracts.cohorts import COHORT_RULE, cohort_bucket, cohor
 from search_retrieval.contracts.identity import SpaceKey
 from canonical import CanonicalRows
 from oracle import (
-    CERTIFIED, COMPLETE, FULL_SCAN, FlatSearcher, OracleError, exact_scores, exact_top_k, gamma, read_oracle,
+    CERTIFIED, COMPLETE, FULL_SCAN, BlockedSearcher, FlatSearcher, OracleError, exact_scores, exact_top_k, gamma, read_oracle,
     write_oracle, U32,
 )
 from vector_store import Identity, VectorSetWriter, VectorStoreError
@@ -172,6 +172,31 @@ class OracleTests(unittest.TestCase):
         for query, expected in enumerate(reference(queries, documents, eligible, 5)):
             self.assertEqual(limited.rows[query].tolist(), [position for position, _ in expected])
 
+    def test_blocked_candidates_give_the_same_oracle(self):
+        eligible = np.arange(101)
+        whole = exact_top_k(self.queries, self.documents, eligible, 10, FlatSearcher(self.documents, eligible),
+                            initial=20)
+        for block_rows in (7, 30, 101):
+            blocked = exact_top_k(self.queries, self.documents, eligible, 10,
+                                  BlockedSearcher(self.documents, eligible, self.queries, 20, "cpu", block_rows),
+                                  initial=20)
+            with self.subTest(block_rows=block_rows):
+                np.testing.assert_array_equal(blocked.rows, whole.rows)
+                np.testing.assert_array_equal(blocked.scores, whole.scores)
+                self.check(blocked, eligible, 10)
+
+    def test_blocked_ties_beyond_the_candidates_fall_back_to_a_full_scan(self):
+        rng = np.random.default_rng(9)
+        rows = unit(rng.standard_normal((60, 16)))
+        rows[10:50] = rows[0]
+        documents = write(self.root / "blocked-ties", [f"t{(index * 7) % 61:02d}" for index in range(60)], rows)
+        queries = write(self.root / "blocked-tie-queries", ["q0"], rows[0:1], role="query")
+        eligible = np.arange(60)
+        result = exact_top_k(queries, documents, eligible, 5, BlockedSearcher(documents, eligible, queries, 8, "cpu", 25),
+                             initial=8)
+        self.assertEqual(result.states.tolist(), [FULL_SCAN])
+        self.assertEqual(result.rows[0].tolist(), [position for position, _ in reference(queries, documents, eligible, 5)[0]])
+
     def test_a_searcher_that_breaks_the_error_bound_stops_the_oracle(self):
         eligible = np.arange(101)
         searcher = FlatSearcher(self.documents, eligible)
@@ -180,7 +205,7 @@ class OracleTests(unittest.TestCase):
             def limit(self):
                 return searcher.limit()
 
-            def search(self, queries, k):
+            def search(self, queries, k, positions=None):
                 scores, rows = searcher.search(queries, k)
                 return scores + 1e-3, rows
 

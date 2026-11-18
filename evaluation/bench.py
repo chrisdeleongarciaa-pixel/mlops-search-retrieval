@@ -33,6 +33,7 @@ from search_retrieval.experiment.provenance import (
 from search_retrieval.experiment.run_config import ConfigError, ResolvedRun, resolve
 from search_retrieval.experiment.textmode import require_utf8_mode, rerun_in_utf8_mode
 from measures import aggregate, evaluate
+import prepared_collection
 from scifact_bm25 import bm25
 
 
@@ -138,7 +139,29 @@ class AnseriniIndex:
         return judgments
 
 
-FORMATS = {"beir-zip": BeirZip, "anserini-lucene-index": AnseriniIndex}
+class PreparedCollection:
+    """A collection materialized as JSON lines, pinned file by file (see prepared_collection.py)."""
+
+    def __init__(self, resolved: ResolvedRun, data_dir: Path):
+        self.corpus_manifest, self.query_set, self.data_dir = resolved.corpus, resolved.query_set_manifest, data_dir
+        if resolved.transform.chunking != {"policy": "identity"} or resolved.transform.configuration not in (
+                TITLE_SPACE_TEXT, {"document": "title-text-fields"}):
+            raise ConfigError("Unsupported transform for a prepared title and abstract corpus")
+        self.corpus = {item: title + " " + abstract
+                       for item, title, abstract in prepared_collection.documents(self.corpus_manifest, data_dir)}
+        if len(self.corpus) != self.corpus_manifest["documents"]:
+            raise ManifestError("Corpus document count does not match its manifest")
+        self.queries = prepared_collection.queries(self.corpus_manifest, self.query_set, data_dir)
+
+    def judgments(self) -> dict[str, dict[str, int]]:
+        judgments = prepared_collection.judgments(self.corpus_manifest, self.query_set, self.data_dir)
+        if any(not labels.keys() <= self.corpus.keys() for labels in judgments.values()):
+            raise ManifestError("Judgments name documents outside the corpus")
+        return judgments
+
+
+FORMATS = {"beir-zip": BeirZip, "anserini-lucene-index": AnseriniIndex,
+           prepared_collection.FORMAT: PreparedCollection}
 
 
 def bm25_reference(resolved: ResolvedRun, dataset, queries: dict[str, str], work: Path):

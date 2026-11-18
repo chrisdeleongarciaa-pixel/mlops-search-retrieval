@@ -8,5 +8,6 @@
 | 0004 | [RRF baseline](0004-rrf.md) | Implemented and evaluated. Promotion depends on quality by profile. |
 | 0005 | [Encoder comparison and HNSW stability](0005-encoder-comparison.md) | Four-build SciFact audit complete. GPU runtime and transfer pending. |
 | 0006 | [Bibliographic and scientific PDF profile](0006-bibliographic-pdf.md) | Adopted. Extraction quality and rewrite ranking require separate tests. |
+| 0007 | [Reduced workbench scope](0007-reduced-workbench-scope.md) | Adopted 2026-11-17. One dense space, LitSearch and MS MARCO, single generation. |
 
 Record alternatives, versions, verification and the conditions that would reopen a decision. [Verification index](../../evaluation/evidence/README.md)

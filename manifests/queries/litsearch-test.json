@@ -1,0 +1,16 @@
+{
+  "kind": "query-set",
+  "schema_version": 1,
+  "body": {
+    "name": "litsearch/test",
+    "split": "test",
+    "judgments": "inherited",
+    "queries": 300,
+    "queries_file": "queries.jsonl",
+    "queries_sha256": "f18fd37b61b731de652e0e5a7692a30000e86a9a9f3db750006bf1fe1b227028",
+    "qrels_file": "qrels.tsv",
+    "qrels_sha256": "95dc70dd0431174b8975da5636c375e8fb281e896e385a8616e14ee9c8b4f2e7",
+    "note": "Frozen stratified selection of 300 queries. Positives come from the source collection; other documents are unjudged."
+  },
+  "sha256": "1b34b58393dcf34629e14692d54e174e2e3fd27ed3f2d71de1a083c632353287"
+}

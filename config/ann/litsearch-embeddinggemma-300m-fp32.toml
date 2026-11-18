@@ -1,0 +1,30 @@
+# Exact oracle of EmbeddingGemma over LitSearch (64,183 articles) for its 300 test queries, for
+# the engine parity check of step 5, with the HNSW setting of the engine and three orders.
+
+[inputs]
+space = "manifests/space/embeddinggemma-300m-fp32.json"
+corpus = "manifests/corpus/litsearch.json"
+transform = "manifests/transform/beir-title-text-fields-v1.json"
+queries = "manifests/queries/litsearch-test.json"
+
+[oracle]
+k = 100
+initial_candidates = 200
+query_batch = 1024
+cohorts_permille = [1000, 500, 100, 10, 1]
+
+[measure]
+recall_at = [10, 100]
+search_threads = 0
+build_threads = 0
+timing_repeats = 3
+warmup = 1
+add_batch = 65536
+
+[[hnsw]]
+name = "reference"
+m = [16]
+ef_construction = [200]
+insertion_seeds = [11, 29, 47]
+ef_search = [100, 128, 192, 256, 384, 512]
+cohorts_permille = [1000, 500, 100, 10, 1]

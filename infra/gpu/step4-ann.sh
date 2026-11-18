@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Step 4 on a Linux GPU host: exact oracle on the GPU, ANN sweeps on the CPU.
 #
-#   bash infra/gpu/step4-ann.sh                 # SciFact for three spaces, then MS MARCO
+#   bash infra/gpu/step4-ann.sh                 # SciFact and LitSearch, then MS MARCO
 #   SCIFACT_ONLY=1 bash infra/gpu/step4-ann.sh  # skip MS MARCO
 #
 # Run after infra/gpu/step3-embedding.sh, from the same clean checkout and with the same WORK.
-# MS MARCO needs the float16 vectors written by `MSMARCO=1 bash infra/gpu/step3-embedding.sh`.
-# The MS MARCO oracle keeps 13.6 GB of float16 rows on the GPU; the sweeps hold one index at a
-# time in host memory, up to about 18 GB for M = 48, plus page cache for the vector shards.
+# MS MARCO needs the float32 vectors written by `MSMARCO=1 bash infra/gpu/step3-embedding.sh`.
+# Its oracle indexes BLOCK_ROWS rows at a time on the GPU (4 M rows of 768 float32 = 12.3 GB);
+# each HNSW build holds about 30 GB in host memory, plus page cache for the 27 GB of shards.
 # Every oracle cohort and every build is kept once finished; run the script again to resume.
 set -euo pipefail
 
@@ -24,6 +24,7 @@ fi
 WORK="${WORK:-$PWD/var}"
 DEVICE="${DEVICE:-cuda}"
 PYTHON="${PYTHON:-python3.12}"
+BLOCK_ROWS="${BLOCK_ROWS:-4000000}"
 OUT="$WORK/ann"
 mkdir -p "$OUT" "$WORK/reports"
 
@@ -42,18 +43,16 @@ run() {
     name="$(basename "$config" .toml)"
     echo "== oracle $name"
     "$P" evaluation/ann.py oracle "$config" --vectors-dir "$WORK/vectors" --out-dir "$OUT" --device "$DEVICE" \
-        | tee "$WORK/reports/oracle-$name.jsonl"
+        --block-rows "$BLOCK_ROWS" | tee "$WORK/reports/oracle-$name.jsonl"
     echo "== sweep $name"
     "$P" evaluation/ann.py sweep "$config" --vectors-dir "$WORK/vectors" --out-dir "$OUT" \
         | tee "$WORK/reports/sweep-$name.jsonl"
 }
 
-for space in multilingual-e5-base-fp32 embeddinggemma-300m-fp32 qwen3-embedding-0.6b-fp32; do
-    run "config/ann/scifact-$space.toml"
-done
-
+run config/ann/scifact-embeddinggemma-300m-fp32.toml
+run config/ann/litsearch-embeddinggemma-300m-fp32.toml
 if [ "${SCIFACT_ONLY:-0}" != "1" ]; then
-    run config/ann/msmarco-embeddinggemma-300m-fp16.toml
+    run config/ann/msmarco-embeddinggemma-300m-fp32.toml
 fi
 
 # One summary per sweep: frontiers, structure digests and bytes per vector.

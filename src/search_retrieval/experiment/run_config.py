@@ -39,11 +39,13 @@ SPACE = ({"encoder": str, "revision": str, "files": dict, "query_template": str,
 # Each corpus and query-set format requires its own optional fields; the runner checks them.
 CORPUS = ({"name": str, "source": str, "license": str, "format": str, "documents": int},
           {"archive": str, "archive_sha256": str, "corpus_member": str,
-           "index_directory": str, "index_sha256": str, "ir_datasets": str, "documents_sha256": str})
+           "index_directory": str, "index_sha256": str, "ir_datasets": str, "documents_sha256": str,
+           "directory": str, "corpus_file": str})
 TRANSFORM = {"parser": str, "parser_version": str, "configuration": dict, "chunking": dict, "tokenizer": str}
 QUERY_SET = ({"name": str, "split": str, "judgments": str, "queries_sha256": str,
               "qrels_sha256": str, "queries": int},
-             {"note": str, "queries_member": str, "qrels_member": str, "ir_datasets": str})
+             {"note": str, "queries_member": str, "qrels_member": str, "ir_datasets": str,
+              "queries_file": str, "qrels_file": str})
 RUNTIME = ({"python": str, "platform": str, "locks": dict}, {"tools": dict})
 
 

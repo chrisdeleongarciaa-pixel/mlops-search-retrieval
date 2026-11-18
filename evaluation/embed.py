@@ -30,6 +30,7 @@ from search_retrieval.experiment.manifests import ManifestError, read_manifest, 
 from search_retrieval.experiment.provenance import ProvenanceError, _git, verify_clean, verify_repository
 from search_retrieval.experiment.run_config import CORPUS, QUERY_SET, TRANSFORM, ConfigError, read_space, space_key
 from search_retrieval.experiment.textmode import require_utf8_mode, rerun_in_utf8_mode
+import prepared_collection
 from vector_store import (
     Identity, VectorSetWriter, VectorStoreError, derive, derived_space, ids_bytes,
     parity_report, verify_vector_set,
@@ -120,6 +121,13 @@ def iterate_documents(corpus: dict, transform: dict, data_dir: Path):
             yield (row.doc_id, *document_fields(form, "", row.text))
         if digest.hexdigest() != corpus["documents_sha256"]:
             raise ManifestError("Documents do not match the corpus manifest")
+    elif corpus["format"] == prepared_collection.FORMAT:
+        count = 0
+        for item, title, abstract in prepared_collection.documents(corpus, data_dir):
+            count += 1
+            yield (item, *document_fields(form, title, abstract))
+        if count != corpus["documents"]:
+            raise ManifestError("Corpus document count does not match its manifest")
     else:
         raise ConfigError(f"Batch embedding does not read the corpus format {corpus['format']}")
 
@@ -139,6 +147,8 @@ def iterate_queries(query_set: dict, corpus: dict, data_dir: Path):
         if sha256(data).hexdigest() != query_set["queries_sha256"]:
             raise ManifestError("Queries do not match the query-set manifest")
         rows = {row["_id"]: row["text"] for row in map(json.loads, data.splitlines())}
+    elif corpus["format"] == prepared_collection.FORMAT:
+        rows = prepared_collection.queries(corpus, query_set, data_dir)
     else:
         raise ConfigError("The query-set manifest names no readable query source")
     for item in sorted(rows):

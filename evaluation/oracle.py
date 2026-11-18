@@ -86,12 +86,55 @@ class FlatSearcher:
     def limit(self) -> int:
         return self.eligible.size if self.max_k is None else min(self.eligible.size, self.max_k)
 
-    def search(self, queries: np.ndarray, k: int) -> tuple[np.ndarray, np.ndarray]:
+    def search(self, queries: np.ndarray, k: int, positions=None) -> tuple[np.ndarray, np.ndarray]:
         """Approximate scores and global row positions, best first."""
         scores, local = self.index.search(np.ascontiguousarray(queries, dtype=np.float32), k)
         if (local < 0).any():
             raise OracleError("The flat index returned fewer candidates than requested")
         return scores.astype(np.float64), self.eligible[local]
+
+
+class BlockedSearcher:
+    """Candidates for every query, computed one block of rows at a time.
+
+    For corpora larger than device memory: each block is indexed, searched for all queries and
+    released, and the best `k` of every block are merged. A document left out scores at most
+    the k-th candidate of its block, which is at most the lowest merged candidate, so the
+    certificate holds. `limit()` is the number kept, so a query that is not certified is scanned
+    in full instead of searched again.
+    """
+
+    def __init__(self, documents: CanonicalRows, eligible: np.ndarray, queries: CanonicalRows, k: int,
+                 device: str, block_rows: int, batch: int = 1024):
+        if block_rows <= 0 or k <= 0:
+            raise ValueError("Block size and candidates must be positive")
+        self.eligible, self.k = eligible, min(k, eligible.size)
+        nq = queries.n
+        self.scores = np.full((nq, self.k), -np.inf, dtype=np.float64)
+        self.rows = np.full((nq, self.k), -1, dtype=np.int64)
+        for start in range(0, eligible.size, block_rows):
+            block = eligible[start:start + block_rows]
+            searcher = FlatSearcher(documents, block, device)
+            wanted = min(self.k, block.size)
+            for first in range(0, nq, batch):
+                positions = np.arange(first, min(first + batch, nq), dtype=np.int64)
+                found_scores, found = searcher.search(queries.take(positions, np.float32), wanted)
+                scores = np.concatenate([self.scores[positions], found_scores], axis=1)
+                rows = np.concatenate([self.rows[positions], found], axis=1)
+                best = np.argsort(-scores, axis=1, kind="stable")[:, :self.k]
+                self.scores[positions] = np.take_along_axis(scores, best, axis=1)
+                self.rows[positions] = np.take_along_axis(rows, best, axis=1)
+            del searcher
+        if (self.rows < 0).any():
+            raise OracleError("A query received fewer candidates than requested")
+
+    def limit(self) -> int:
+        return self.k
+
+    def search(self, queries: np.ndarray, k: int, positions=None) -> tuple[np.ndarray, np.ndarray]:
+        if positions is None or k > self.k:
+            raise OracleError("Blocked candidates are read by query position, up to the number kept")
+        return self.scores[positions, :k], self.rows[positions, :k]
 
 
 @dataclass
@@ -149,7 +192,7 @@ def exact_top_k(queries: CanonicalRows, documents: CanonicalRows, eligible: np.n
         positions = np.arange(start, min(start + batch, nq), dtype=np.int64)
         values32 = queries.take(positions, np.float32)
         wanted = min(initial, limit)
-        approximate, candidates = searcher.search(values32, wanted)
+        approximate, candidates = searcher.search(values32, wanted, positions)
         for offset, query_row in enumerate(positions):
             query = values32[offset].astype(np.float64)
             found_scores, found = approximate[offset], candidates[offset]
@@ -174,7 +217,8 @@ def exact_top_k(queries: CanonicalRows, documents: CanonicalRows, eligible: np.n
                     states[query_row], used[query_row] = FULL_SCAN, n
                     break
                 wanted = min(found.size * 4, limit)
-                found_scores, found = searcher.search(values32[offset:offset + 1], wanted)
+                found_scores, found = searcher.search(values32[offset:offset + 1], wanted,
+                                                      positions[offset:offset + 1])
                 found_scores, found = found_scores[0], found[0]
             if states[query_row] != FULL_SCAN:
                 rows[query_row, :count] = found[best]

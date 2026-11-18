@@ -28,7 +28,7 @@ from search_retrieval.experiment.run_config import CORPUS, QUERY_SET, ConfigErro
 from ann_sweep import SweepError, completed, expand, frontiers, json_bytes, parse_sweep, run_build
 from canonical import CanonicalRows
 from embed import ROOT, set_directory
-from oracle import FlatSearcher, GPU_MAX_K, OracleError, exact_top_k, read_oracle, write_oracle
+from oracle import BlockedSearcher, FlatSearcher, GPU_MAX_K, OracleError, exact_top_k, read_oracle, write_oracle
 from vector_store import Identity, VectorStoreError, _write_atomic
 
 
@@ -99,11 +99,18 @@ def command_oracle(args, config: dict, commit: str) -> dict:
             raise OracleError(f"{directory} holds an oracle of other inputs or code; move it aside to recompute")
         eligible = np.nonzero(cohort_mask(buckets, permille))[0].astype(np.int64)
         started = perf_counter()
-        searcher = FlatSearcher(documents, eligible, args.device) if eligible.size else None
+        if not eligible.size:
+            searcher = None
+        elif args.block_rows and eligible.size > args.block_rows:
+            searcher = BlockedSearcher(documents, eligible, queries, oracle["initial_candidates"], args.device,
+                                       args.block_rows, oracle["query_batch"])
+        else:
+            searcher = FlatSearcher(documents, eligible, args.device)
         indexed = perf_counter() - started
         result = exact_top_k(queries, documents, eligible, oracle["k"], searcher,
                              initial=oracle["initial_candidates"], batch=oracle["query_batch"])
         observation = {"code_commit": commit, "seconds": {"index": indexed, "total": perf_counter() - started},
+                       "searcher": type(searcher).__name__ if searcher else None, "block_rows": args.block_rows,
                        "initial_candidates": oracle["initial_candidates"], **environment(args.device)}
         sealed = write_oracle(directory, result, documents=documents, queries=queries, permille=permille,
                               rule=COHORT_RULE, eligible=eligible, k=oracle["k"], implementation=implementation,
@@ -172,6 +179,8 @@ def main() -> int:
         command.add_argument("--out-dir", type=Path, required=True)
         if name == "oracle":
             command.add_argument("--device", default="cpu")
+            command.add_argument("--block-rows", type=int, default=0,
+                                 help="index at most this many rows at a time (0: all eligible rows at once)")
         else:
             command.add_argument("--only", nargs="+")
     commands.add_parser("verify-oracle").add_argument("directory", type=Path)
