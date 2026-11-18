@@ -116,8 +116,8 @@ def estimate(offer: dict, phase: str) -> dict:
     return {"hours": round(hours, 2), "cost": round(cost, 3), "price": round(offer["dph_total"], 4)}
 
 
-def ranked(phase: str) -> list[tuple[dict, dict]]:
-    pairs = [(offer, estimate(offer, phase)) for offer in search(phase)]
+def ranked(phase: str, exclude: tuple[int, ...] = ()) -> list[tuple[dict, dict]]:
+    pairs = [(offer, estimate(offer, phase)) for offer in search(phase) if offer.get("machine_id") not in exclude]
     return sorted(pairs, key=lambda pair: (pair[1]["cost"], pair[1]["hours"]))
 
 
@@ -130,7 +130,7 @@ def describe(offer: dict, cost: dict) -> str:
 
 
 def command_offers(args) -> int:
-    for offer, cost in ranked(args.phase)[:args.top]:
+    for offer, cost in ranked(args.phase, tuple(args.exclude_machines))[:args.top]:
         print(describe(offer, cost))
     return 0
 
@@ -139,7 +139,7 @@ def command_watch_offers(args) -> int:
     """Poll the market until the best offer's expected cost is within --max-cost."""
     deadline = time.time() + args.timeout_min * 60
     while True:
-        pairs = ranked(args.phase)
+        pairs = ranked(args.phase, tuple(args.exclude_machines))
         if pairs and pairs[0][1]["cost"] <= args.max_cost:
             offer, cost = pairs[0]
             log("chosen: " + describe(offer, cost))
@@ -158,9 +158,10 @@ def command_watch_offers(args) -> int:
 
 def show(instance_id: int) -> dict | None:
     result = call("GET", f"/instances/{instance_id}/", query={"owner": "me"})
-    if not result:
+    # A destroyed instance comes back as {"instances": null} (observed 2026-11-18), not as a 404.
+    if not result or "instances" in result and not result["instances"]:
         return None
-    return result.get("instances") if isinstance(result.get("instances"), dict) else result
+    return result["instances"] if isinstance(result.get("instances"), dict) else result
 
 
 def command_create(args) -> int:
@@ -337,9 +338,11 @@ def main() -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     offers = commands.add_parser("offers")
     offers.add_argument("--phase", choices=PROFILES, default="A")
+    offers.add_argument("--exclude-machines", type=int, nargs="*", default=[], help="machines that failed before")
     offers.add_argument("--top", type=int, default=15)
     watch = commands.add_parser("watch-offers")
     watch.add_argument("--phase", choices=PROFILES, default="A")
+    watch.add_argument("--exclude-machines", type=int, nargs="*", default=[], help="machines that failed before")
     watch.add_argument("--max-cost", type=float, required=True)
     watch.add_argument("--timeout-min", type=float, default=60)
     watch.add_argument("--poll-s", type=float, default=120)

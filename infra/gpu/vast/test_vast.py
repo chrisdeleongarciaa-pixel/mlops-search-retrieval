@@ -83,7 +83,7 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(destroyed, [7])
 
     def test_unreachable_destroys(self):
-        code, destroyed = self.run_monitor(Remote(), [self.running()], reachable=False, unreachable_min=0)
+        code, destroyed = self.run_monitor(Remote(), [self.running()], reachable=False, unreachable_min=-1)
         self.assertEqual(destroyed, [7])
         self.assertIn("unreachable", (Path(self.out) / "monitor.log").read_text())
 
@@ -95,6 +95,17 @@ class MonitorTests(unittest.TestCase):
     def test_vanished_instance_ends_without_destroying(self):
         code, destroyed = self.run_monitor(Remote(), [None])
         self.assertEqual((code, destroyed), (0, []))
+
+
+class ShowTests(unittest.TestCase):
+    def test_destroyed_instance_is_absent(self):
+        for reply in ({"instances": None}, None, {}):
+            with self.subTest(reply=reply), mock.patch.object(vast, "call", return_value=reply):
+                self.assertIsNone(vast.show(7))
+
+    def test_live_instance_is_returned(self):
+        with mock.patch.object(vast, "call", return_value={"instances": {"id": 7, "cur_state": "running"}}):
+            self.assertEqual(vast.show(7)["id"], 7)
 
 
 class EstimateTests(unittest.TestCase):
