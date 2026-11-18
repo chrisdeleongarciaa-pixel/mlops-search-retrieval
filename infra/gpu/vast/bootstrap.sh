@@ -12,6 +12,16 @@ apt_install() { apt-get install -y -q --no-install-recommends "$@" >/dev/null; }
 apt-get update -q >/dev/null
 apt_install git curl ca-certificates gnupg python3 python3-pip util-linux
 
+# The VM's guest driver, not the host's, decides the CUDA version: the image ships 535 (CUDA
+# 12.2) while torch 2.14 and FAISS 1.16 need CUDA 13 (driver 580 or later). Observed 2026-11-18.
+driver_major="$(nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -n 1 | cut -d. -f1)"
+if [ "${driver_major:-0}" -lt 580 ]; then
+    echo "bootstrap: guest driver $driver_major is older than 580; installing nvidia-driver-580"
+    apt_install "linux-headers-$(uname -r)" nvidia-driver-580
+    echo "bootstrap: reboot the VM and run this script again" >&2
+    exit 3
+fi
+
 if ! command -v docker >/dev/null; then
     apt_install docker.io
     systemctl enable --now docker

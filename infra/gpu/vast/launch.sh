@@ -25,7 +25,16 @@ scp -q -o BatchMode=yes -o "UserKnownHostsFile=$HOME/.ssh/known_hosts.vast" -P "
     cd $REMOTE && git fetch -q /root/workbench.bundle main && git checkout -q main && git reset -q --hard FETCH_HEAD
     git remote remove origin 2>/dev/null || true; git log --oneline -1"
 
-"${SSH[@]}" "bash $REMOTE/infra/gpu/vast/bootstrap.sh > /root/bootstrap.log 2>&1; status=\$?; tail -n 8 /root/bootstrap.log; exit \$status"
+bootstrap() { "${SSH[@]}" "bash $REMOTE/infra/gpu/vast/bootstrap.sh >> /root/bootstrap.log 2>&1; status=\$?; tail -n 8 /root/bootstrap.log; exit \$status"; }
+status=0; bootstrap || status=$?
+if [ "$status" = 3 ]; then   # a new guest driver was installed: reboot and finish
+    "${SSH[@]}" "systemctl reboot" || true
+    sleep 60
+    for _ in $(seq 1 40); do "${SSH[@]}" true 2>/dev/null && break; sleep 15; done
+    bootstrap
+elif [ "$status" != 0 ]; then
+    exit "$status"
+fi
 
 # Secrets travel on stdin, never on a command line.
 printf 'HF_TOKEN=%s\n' "$(cat "$HF_TOKEN_FILE")" | "${SSH[@]}" "umask 077; cat > /root/.workbench.env"
