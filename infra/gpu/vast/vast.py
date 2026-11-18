@@ -180,7 +180,9 @@ def onstart_script(public_key: str) -> str:
 
 
 def command_create(args) -> int:
-    onstart = onstart_script(Path(args.authorized_key).read_text(encoding="utf-8").strip()) if args.authorized_key else None
+    # Type and key only: the comment of a .pub file is often an e-mail address.
+    key = " ".join(Path(args.authorized_key).read_text(encoding="utf-8").split()[:2]) if args.authorized_key else None
+    onstart = onstart_script(key) if key else None
     body = {"client_id": "me", "image": VM_IMAGE, "disk": PROFILES[args.phase]["disk"], "label": args.label,
             "runtype": "ssh_direc ssh_proxy", "env": {}, "onstart": onstart, "python_utf8": False,
             "lang_utf8": False, "force": False, "cancel_unavail": True}
