@@ -6,3 +6,4 @@ numpy==2.5.4
 ir-datasets==0.6.3
 ir-measures==0.4.3
 pytrec-eval-terrier==0.5.10
+psycopg[binary]==3.3.8
