@@ -239,7 +239,7 @@ def command_wait_ssh(args) -> int:
         if target:
             print(json.dumps({"host": target[0], "port": target[1], "status": status}))
             return 0
-        log(f"status {status} ({instance.get('status_msg', '')[:80]}); ssh not yet reachable")
+        log(f"status {status} ({(instance.get('status_msg') or '')[:80]}); ssh not yet reachable")
         time.sleep(20)
     log(f"ssh not reachable after {args.timeout_min} min")
     return 1
