@@ -45,7 +45,7 @@ fi
 
 "${SSH[@]}" "set -e; cd $REMOTE; mkdir -p var; rm -f var/pipeline.pid var/pipeline.exit var/final.json
     set -a; . /etc/environment 2>/dev/null || true; . /root/.workbench.env; set +a
-    setsid nohup env PHASES='$PHASES' bash infra/gpu/run-all.sh </dev/null >>var/pipeline.log 2>&1 &
+    setsid nohup env PHASES='$PHASES' B_ENGINE='${B_ENGINE:-1}' bash infra/gpu/run-all.sh </dev/null >>var/pipeline.log 2>&1 &
     unset HF_TOKEN
     setsid nohup env INSTANCE_ID=$INSTANCE BUDGET_USD=$BUDGET PRICE_PER_HOUR=$PRICE MAX_HOURS=$MAX_HOURS \
         bash infra/gpu/watchdog.sh </dev/null >>var/watchdog.log 2>&1 &
