@@ -45,8 +45,11 @@ Each build directory holds per-query recall arrays, `points.jsonl` and, written 
 | File | Purpose |
 | --- | --- |
 | [`smoke-synthetic-scifact.toml`](../../config/ann/smoke-synthetic-scifact.toml) | Pipeline exercise on the synthetic space. |
-| `scifact-<space>.toml` | Oracles of E5, EmbeddingGemma and Qwen3 over SciFact for the engine parity check of step 5. |
-| [`msmarco-embeddinggemma-300m-fp16.toml`](../../config/ann/msmarco-embeddinggemma-300m-fp16.toml) | The step 4 gate: oracle over 8,841,823 passages for five cohorts; HNSW M 16/32/48 × efConstruction 200/400; three insertion orders for M 16, efConstruction 200, over all cohorts; IVF-PQ with 16,384 lists and 96 bytes per code. |
+| [`scifact-embeddinggemma-300m-fp32.toml`](../../config/ann/scifact-embeddinggemma-300m-fp32.toml) | Oracle of SciFact, used by ACL-01. |
+| [`litsearch-embeddinggemma-300m-fp32.toml`](../../config/ann/litsearch-embeddinggemma-300m-fp32.toml) | Oracle of LitSearch for the engine parity check; HNSW M 16, efConstruction 200, three insertion orders. |
+| [`msmarco-embeddinggemma-300m-fp32.toml`](../../config/ann/msmarco-embeddinggemma-300m-fp32.toml) | The step 4 gate: oracle over 8,841,823 passages in blocks of rows, five cohorts, three insertion orders. |
+
+The M × efConstruction grid and IVF-PQ were removed by [decision 0007](../../engineering/decisions/0007-reduced-workbench-scope.md). For corpora larger than device memory, `ann.py oracle --block-rows` indexes one block at a time and merges the best candidates of each block; the certificate holds because a document left out scores at most the k-th candidate of its block.
 
 ## Limits
 

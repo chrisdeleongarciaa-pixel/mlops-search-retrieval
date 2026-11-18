@@ -60,13 +60,13 @@ QPS on this laptop varied by up to a factor of two between runs of the same sett
 
 ## Not executed
 
-Run after step 3 on a Linux GPU host. [`infra/gpu/run-steps-3-4.sh`](../../infra/gpu/run-steps-3-4.sh) runs both steps; [`infra/gpu/step4-ann.sh`](../../infra/gpu/step4-ann.sh) runs step 4 alone.
+Run after step 3 on a Linux GPU host. [`infra/gpu/run-all.sh`](../../infra/gpu/run-all.sh) runs every step ([procedure](../../infra/gpu/README.md)); [`infra/gpu/step4-ann.sh`](../../infra/gpu/step4-ann.sh) runs step 4 alone. [Decision 0007](../../engineering/decisions/0007-reduced-workbench-scope.md) removed the HNSW grid, IVF-PQ and the float16 space.
 
 | Check | Status |
 | --- | --- |
-| GPU flat searcher (`GpuIndexFlatIP`, float16 storage, `use_cuvs = false`) | Not executed. Written against the FAISS 1.16.0 headers; faiss-cpu has no GPU classes. The observed-error check is the guard if the precision assumption is wrong. |
-| Oracle over 8,841,823 MS MARCO passages, five cohorts | Not executed. |
-| HNSW grid, three insertion orders and IVF-PQ on MS MARCO: the step 4 gate | Not executed. |
-| SciFact oracles for E5, EmbeddingGemma and Qwen3 | Not executed: they need the step 3 vectors. |
+| GPU flat searcher (`GpuIndexFlatIP`, float32, `use_cuvs = false`) | Not executed. Written against the FAISS 1.16.0 headers; faiss-cpu has no GPU classes. The observed-error check is the guard if the precision assumption is wrong. |
+| Blocked oracle over 8,841,823 MS MARCO passages, five cohorts | Not executed. The block merge is tested on CPU with blocks of 7, 30 and 101 rows. |
+| HNSW M 16 / efConstruction 200, three insertion orders on MS MARCO: the step 4 gate | Not executed. |
+| SciFact and LitSearch EmbeddingGemma oracles | Not executed: they need the step 3 vectors. |
 | Linux lock with faiss-gpu-cuvs 1.16.0 | Resolved for `x86_64-manylinux_2_28` with hashes; never installed. It pins the CUDA 13.5 runtime. |
-| Host memory and run time for MS MARCO | Not measured. Estimated from the index layout: 13.6 GB of float16 rows on the GPU for the oracle, up to about 18 GB of host memory per HNSW build. |
+| Host memory and run time for MS MARCO | Not measured. Estimated from the index layout: 27.2 GB of float32 rows, indexed on the GPU in blocks of 4,000,000 rows (12.3 GB), and about 32 GB of host memory per HNSW build. |

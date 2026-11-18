@@ -5,8 +5,9 @@
         [--lexical-profile bm25] [--depth 1000] [--out-dir config/runs/generated]
 
 Collection labels exist only once a projection is fed, so these declarations are written on the
-host after `vespa_project.py` and committed there. Every file names the code commit at HEAD and
-is resolved before it is kept: a declaration that does not resolve is not written.
+host after `vespa_project.py` and committed there. Every file names one code commit (HEAD, or
+--code-commit) and is resolved before it is kept: a declaration that does not resolve is not
+written. A test report requires its development declaration to name the same code commit.
 """
 
 import argparse
@@ -47,10 +48,12 @@ def main() -> int:
     parser.add_argument("--lexical-profile", default="bm25")
     parser.add_argument("--depth", type=int, default=1000)
     parser.add_argument("--out-dir", default="config/runs/generated")
+    parser.add_argument("--code-commit", help="the code commit to declare (default HEAD); dev and test runs that "
+                                              "are compared at report time must name the same one")
     args = parser.parse_args()
     try:
         query_set, _ = read_manifest(ROOT, args.queries, "query-set")
-        commit = _git(ROOT, "rev-parse", "HEAD")
+        commit = args.code_commit or _git(ROOT, "rev-parse", "HEAD")
         systems = [(system, {"kind": "none"}) for system in args.systems]
         if args.hybrid:
             kind, _, alpha = args.hybrid.partition(":")

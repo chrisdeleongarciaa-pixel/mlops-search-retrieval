@@ -8,10 +8,11 @@ Each file under [`manifests/space/`](../../manifests/space) is a sealed manifest
 
 | Space | Role | Templates | Limit, dimension, dtype |
 | --- | --- | --- | --- |
-| `multilingual-e5-base-fp32` | Historical control | `query: {text}` · `passage: {text}` | 512, 768, float32 |
-| `embeddinggemma-300m-fp32`, `-fp16` | Workbench base | `task: search result \| query: {text}` · `title: {title or none} \| text: {text}` | 512, 768 |
-| `qwen3-embedding-0.6b-fp32`, `-fp16` | Reference of similar size | Web-search instruction on the query only · `{text}` | 512, 1024 |
-| `mteb-embeddinggemma-300m`, `mteb-scifact-qwen3-embedding-0.6b` | Adapter gate only | The configuration under which MTEB published its SciFact figure. | 2048 and 8192 |
+| `embeddinggemma-300m-fp32` | The only workbench space | `task: search result \| query: {text}` · `title: {title or none} \| text: {text}` | 512, 768, float32 |
+| `mteb-embeddinggemma-300m` | Adapter gate only | The configuration under which MTEB published its SciFact figure. | 2048, 768, float32 |
+| `multilingual-e5-base-fp32` | Archived evidence only | `query: {text}` · `passage: {text}` | 512, 768, float32 |
+
+Qwen3-Embedding and float16 storage were removed by [decision 0007](../../engineering/decisions/0007-reduced-workbench-scope.md). The store still reads and writes float16 and derived forms.
 
 `{title or none}` renders an empty title as `none`. The transform decides what reaches the template: `title-space-text` joins title and text into `{text}`, `title-text-fields` keeps them apart, `passage` has no title. A change of template, limit, file or dtype is a different space.
 
@@ -54,6 +55,6 @@ The parity sample is chosen by ID hash, so it is the same on every run. The repo
 
 - MS MARCO has two corpus manifests: the Lucene index read by Anserini and the passage text read for embedding. They describe the same 8,841,823 passages under different digests, so a lexical and a dense run do not yet share a corpus identity.
 - SPLADE and ColBERT are not registered. Sparse and multi-vector rows need their own stored form.
-- The adapter gate compares against MTEB's configuration, which differs from the workbench spaces in token limit and, for Qwen3 and EmbeddingGemma, in templates. It validates the adapter code path, not the workbench templates.
+- The adapter gate compares against MTEB's configuration, which differs from the workbench spaces in token limit and, for EmbeddingGemma, in templates. It validates the adapter code path, not the workbench templates.
 - The pinned model revisions differ from the revisions MTEB evaluated.
 - Text read through `ir_datasets` requires Python UTF-8 mode. The programs enforce it. [Text mode](../../src/search_retrieval/experiment/textmode.py)
