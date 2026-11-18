@@ -40,15 +40,18 @@ def judge(measured: float, published: float, tolerance_points: float) -> dict:
 
 def gate_model(encoder, body: dict, name: str, batch_size: int):
     from mteb.models.abs_encoder import AbsEncoder
-    from mteb.models.model_meta import ModelMeta
+    from mteb.models.model_meta import ModelMeta, ScoringFunction
     from mteb.types import PromptType
 
     class GateModel(AbsEncoder):
         """MTEB hands corpus rows as `text` = title + space + body; queries as `text`."""
 
         def __init__(self):
+            # The enum, not the string: mteb 2.27 selects the similarity by identity
+            # (`is ScoringFunction.COSINE`) and create_empty does not convert overwrites.
             self.mteb_model_meta = ModelMeta.create_empty(overwrites={
-                "name": f"local/{name}", "revision": body["revision"], "similarity_fn_name": "cosine",
+                "name": f"local/{name}", "revision": body["revision"],
+                "similarity_fn_name": ScoringFunction.COSINE,
             })
 
         def encode(self, inputs, *, task_metadata, hf_split, hf_subset, prompt_type=None, **kwargs):
