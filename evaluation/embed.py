@@ -235,6 +235,13 @@ def command_encode(args) -> dict:
         items = iterate_documents(corpus, transform, args.data_dir)
         template, expected = body["doc_template"], corpus["documents"]
     directory = set_directory(args.vectors_dir, space.digest, identity)
+    if (directory / "manifest.json").exists():
+        # A finished set is verified and reused, so a rerun of the whole pipeline resumes past it.
+        sealed = verify_vector_set(directory)
+        if sealed["body"]["identity"] != identity.body() or (expected is not None and sealed["body"]["rows"] != expected):
+            raise VectorStoreError(f"{directory} holds another vector set")
+        return {"vector_set": sealed["sha256"], "directory": str(directory), "rows": sealed["body"]["rows"],
+                "truncated": sealed["body"]["truncated"], "space": space.digest, "reused": True}
     parity_every = None
     if space.dtype == "float16":
         parity_every = max(1, (expected or args.parity_sample) // args.parity_sample)
