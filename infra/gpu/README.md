@@ -36,6 +36,21 @@ scp -P <port> root@<host>:mlops-search-retrieval/var/results-*.tar.gz .
 
 Stopping keeps the disk, which vast.ai still bills at its storage rate, and restarting a stopped instance needs its GPU to be free again. Destroy the instance once the results are copied.
 
+## Rent, launch and guard with `vast/`
+
+[`vast/vast.py`](vast/vast.py) runs on the operator's machine (standard library only; the API key file is named by `VAST_API_KEY_FILE`):
+
+| Command | What it does |
+| --- | --- |
+| `offers --phase A` | Lists VM offers with one GPU of 24 GB or more, a CUDA 13 driver and a compute capability that has a pinned TEI image, ranked by expected cost: price × estimated hours ÷ reliability, plus download cost. The hours come from planning figures per phase (`PROFILES`), scaled by the offer's TFLOPS, cores and bandwidth. |
+| `watch-offers --phase A --max-cost 2.5` | Polls the market until the best offer's expected cost is within the limit. |
+| `create OFFER --phase A` | Rents the offer as a VM (`docker.io/vastai/kvm:ubuntu_terminal`, SSH). |
+| `wait-ssh INSTANCE` | Waits until the VM answers on SSH. |
+| `monitor INSTANCE --out DIR --max-hours H` | Every two minutes copies the reports and logs, then destroys the instance when the guard on it has finished (after copying its results archive), when credit drops below `--reserve`, when the VM is unreachable for 30 minutes, or 30 minutes past `--max-hours`. |
+| `destroy INSTANCE` | Destroys the instance and checks that it is gone. |
+
+[`vast/launch.sh`](vast/launch.sh) copies HEAD to the VM as a git bundle, runs [`vast/bootstrap.sh`](vast/bootstrap.sh) (Docker, compose, NVIDIA Container Toolkit, a GPU check from a container), writes the secrets to root-only files outside the clone, starts `run-all.sh` and `watchdog.sh` detached and checks both. On the VM the watchdog destroys the instance on success, failure, 45 minutes without any file changing under `var/` at low load, or `MAX_HOURS`, after packing the results and waiting 15 minutes for the monitor to copy them. The account key is placed on the VM only when vast.ai provides no `CONTAINER_API_KEY` there; rotate it after the run.
+
 ## Budget
 
 Run times were not measured. These are estimates from the size of the work and will be off by a factor of two or more.

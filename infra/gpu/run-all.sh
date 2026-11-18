@@ -23,8 +23,11 @@ PHASES="${PHASES:-A B}"
 export WORK
 mkdir -p "$WORK/stages" "$WORK/reports" "$WORK/projections"
 # The watchdog follows this process. setsid forks when launched from an interactive shell, so the
-# launcher's $! is not this process; record it here, before anything can fail.
+# launcher's $! is not this process; record it here, before anything can fail. The exit status
+# goes to pipeline.exit so the watchdog can tell success from failure.
+rm -f "$WORK/pipeline.exit"
 echo $$ > "$WORK/pipeline.pid"
+trap 'echo $? > "$WORK/pipeline.exit"' EXIT
 if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
     echo "The work tree must be clean." >&2
     exit 1
