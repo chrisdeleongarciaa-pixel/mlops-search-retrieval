@@ -1,6 +1,6 @@
 # 0007 · Reduced workbench scope
 
-Decided by the project owner on 2026-11-17, to deploy a working retrieval system with measured results within a small GPU budget.
+Decided by the project owner on 2026-11-17, to deploy a working retrieval system with measured results.
 
 | Kept | Removed |
 | --- | --- |

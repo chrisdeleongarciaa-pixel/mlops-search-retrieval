@@ -1,6 +1,6 @@
 # Vector space verification
 
-Contract: [vector spaces and canonical vectors](../contracts/vector-spaces.md). Verified on CPython 3.12.10, Windows amd64, numpy 2.5.4, without torch and without model weights. Everything that loads a model is listed under [Not executed](#not-executed).
+Contract: [vector spaces and canonical vectors](../contracts/vector-spaces.md). Verified on CPython 3.12.10, Windows amd64, numpy 2.5.4, without torch and without model weights. The runs that load the model are under [Executed on a GPU](#executed-on-a-gpu).
 
 | Requirement | Evidence |
 | --- | --- |
@@ -48,16 +48,25 @@ The two archived exact results are within 0.5 points of the published figures, w
 
 On SciFact the published Qwen3-Embedding-0.6B figure is 9 points below EmbeddingGemma. Its higher multilingual average does not transfer to this collection.
 
-## Not executed
+## Executed on a GPU
 
-Run [`infra/gpu/step3-embedding.sh`](../../infra/gpu/step3-embedding.sh) on a Linux host with an NVIDIA GPU. It writes one report per check under `var/reports/`.
+[`infra/gpu/step3-embedding.sh`](../../infra/gpu/step3-embedding.sh) through `run-all.sh`, CPython 3.12.10, torch 2.14.0, transformers 5.20.2, sentence-transformers 6.2.0, mteb 2.27.12, installed from the Linux GPU lock. [Evidence](../../evaluation/evidence/gpu-litsearch-rtx3090-2026-11-18/reports) · [Second GPU](../../evaluation/evidence/gpu-msmarco-encoding-rtx4090-2026-11-19/reports)
+
+| Check | RTX 3090, 2026-11-18 | RTX 4090, 2026-11-19 | Verdict |
+| --- | --- | --- | --- |
+| Adapter conformance, `embeddinggemma-300m-fp32`, with an input of 8,010 tokens | max absolute error 3.1e-7, min cosine 0.99999999999 | 2.4e-7, 0.99999999999 | SATISFIED |
+| MTEB SciFact nDCG@10 through the adapter | 0.78675 (rerun at `1d6d69e`) | 0.78675 in the pipeline | SATISFIED: published 0.78675, tolerance 0.5 points |
+| Vector sets | SciFact and LitSearch corpora and queries, verified | Those again and MS MARCO passage (8,841,823 rows) with its 6,980 dev queries, verified | SATISFIED |
+
+The MTEB figure was produced at revision `57c266a` with mteb 2.27.12; the published one at `64614b0` with mteb 2.27.1. Equality to five decimals is plausible if the weights are the same across those revisions, which was not checked.
+
+## Not executed
 
 | Check | Status |
 | --- | --- |
-| `SpaceEncoder` with real weights, on any device | Not executed. No torch and no weights on this machine. |
-| Adapter conformance for the five workbench spaces | Not executed. |
-| Vector sets of SciFact for E5, EmbeddingGemma and Qwen3 | Not executed. |
-| float16 parity on real embeddings | Not executed. |
-| MTEB gate for the three models | Not executed. `mteb_gate.py` follows the encoder protocol read in the MTEB source and has never run. |
-| MS MARCO passage in float16 (`MSMARCO=1`) | Not executed. |
-| The Linux GPU lock | Resolved for `x86_64-manylinux_2_28` with hashes; never installed. |
+| float16 parity on real embeddings | Not executed: float16 was removed from the pipeline by decision 0007. |
+| E5 and Qwen3 spaces on a GPU | Not executed: removed by decision 0007. |
+
+## Corrections made during verification
+
+- **MTEB similarity (found on the GPU).** mteb 2.27.12 compares the model's similarity by identity with `ScoringFunction.COSINE`, and `ModelMeta.create_empty` keeps the string `"cosine"` as given; the gate failed with "Unsupported similarity function". It now passes the enum.

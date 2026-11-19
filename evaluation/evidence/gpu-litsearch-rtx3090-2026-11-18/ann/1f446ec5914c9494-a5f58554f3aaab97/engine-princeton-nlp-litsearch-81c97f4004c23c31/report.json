@@ -1,0 +1,1112 @@
+{
+  "approximate": {
+    "1000:0": {
+      "cohort_permille": 1000,
+      "explore_additional_hits": 0,
+      "per_query": {
+        "file": "cohort1000-explore0000.npy",
+        "sha256": "042f9f5552d5195886fcc07ffee48a735cf46f0c75c1bb5a80291cb61225140c"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.13333333333333333,
+            "below_0.99": 0.13333333333333333,
+            "excluded": 0,
+            "mean": 0.9790000000000002,
+            "q00": 0.0,
+            "q01": 0.7,
+            "q05": 0.9,
+            "q10": 0.9,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.12666666666666668,
+            "below_0.99": 0.12666666666666668,
+            "excluded": 0,
+            "mean": 0.9796666666666668,
+            "q00": 0.0,
+            "q01": 0.7,
+            "q05": 0.9,
+            "q10": 0.9,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.6866666666666666,
+            "below_0.99": 0.9266666666666666,
+            "excluded": 0,
+            "mean": 0.8940999999999999,
+            "q00": 0.0,
+            "q01": 0.6699,
+            "q05": 0.74,
+            "q10": 0.79,
+            "q50": 0.92,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.6866666666666666,
+            "below_0.99": 0.9266666666666666,
+            "excluded": 0,
+            "mean": 0.8941666666666667,
+            "q00": 0.0,
+            "q01": 0.6699,
+            "q05": 0.74,
+            "q10": 0.79,
+            "q50": 0.92,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 11.097308000103112,
+        "p95": 15.193246900048512
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "1000:100": {
+      "cohort_permille": 1000,
+      "explore_additional_hits": 100,
+      "per_query": {
+        "file": "cohort1000-explore0100.npy",
+        "sha256": "93053fb4396e5a2433f6dad816feaaaff43754c34ecbbb6aeabf84c7ff531900"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.07333333333333333,
+            "below_0.99": 0.07333333333333333,
+            "excluded": 0,
+            "mean": 0.9886666666666667,
+            "q00": 0.0,
+            "q01": 0.899,
+            "q05": 0.9,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.06666666666666667,
+            "below_0.99": 0.06666666666666667,
+            "excluded": 0,
+            "mean": 0.9893333333333332,
+            "q00": 0.0,
+            "q01": 0.899,
+            "q05": 0.9,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.27666666666666667,
+            "below_0.99": 0.65,
+            "excluded": 0,
+            "mean": 0.9564666666666667,
+            "q00": 0.0,
+            "q01": 0.8099000000000001,
+            "q05": 0.87,
+            "q10": 0.89,
+            "q50": 0.97,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.2733333333333333,
+            "below_0.99": 0.65,
+            "excluded": 0,
+            "mean": 0.9565666666666666,
+            "q00": 0.0,
+            "q01": 0.8099000000000001,
+            "q05": 0.87,
+            "q10": 0.89,
+            "q50": 0.97,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 11.23448850000841,
+        "p95": 12.455800599980194
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "1000:300": {
+      "cohort_permille": 1000,
+      "explore_additional_hits": 300,
+      "per_query": {
+        "file": "cohort1000-explore0300.npy",
+        "sha256": "8db153e8dcb519b5177d724a5b9913ed4399754900c942ac054004aad13c14d7"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.02666666666666667,
+            "below_0.99": 0.02666666666666667,
+            "excluded": 0,
+            "mean": 0.9943333333333334,
+            "q00": 0.0,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.02,
+            "below_0.99": 0.02,
+            "excluded": 0,
+            "mean": 0.995,
+            "q00": 0.0,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.05333333333333334,
+            "below_0.99": 0.31333333333333335,
+            "excluded": 0,
+            "mean": 0.9842666666666666,
+            "q00": 0.0,
+            "q01": 0.9199,
+            "q05": 0.94,
+            "q10": 0.97,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.05333333333333334,
+            "below_0.99": 0.31,
+            "excluded": 0,
+            "mean": 0.9843666666666667,
+            "q00": 0.0,
+            "q01": 0.9199,
+            "q05": 0.94,
+            "q10": 0.97,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 12.90583150000657,
+        "p95": 14.15189899979623
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "100:0": {
+      "cohort_permille": 100,
+      "explore_additional_hits": 0,
+      "per_query": {
+        "file": "cohort0100-explore0000.npy",
+        "sha256": "f2fe634e2ab15eda16224c99b383ddd04a5140f563fabf0c4a3f47f25a41afa9"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.10666666666666667,
+            "below_0.99": 0.10666666666666667,
+            "excluded": 0,
+            "mean": 0.9879999999999999,
+            "q00": 0.8,
+            "q01": 0.8,
+            "q05": 0.9,
+            "q10": 0.9,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.10666666666666667,
+            "below_0.99": 0.10666666666666667,
+            "excluded": 0,
+            "mean": 0.9879999999999999,
+            "q00": 0.8,
+            "q01": 0.8,
+            "q05": 0.9,
+            "q10": 0.9,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.35,
+            "below_0.99": 0.84,
+            "excluded": 0,
+            "mean": 0.9510333333333333,
+            "q00": 0.8,
+            "q01": 0.8399,
+            "q05": 0.8795000000000001,
+            "q10": 0.9,
+            "q50": 0.96,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.35,
+            "below_0.99": 0.84,
+            "excluded": 0,
+            "mean": 0.9510333333333333,
+            "q00": 0.8,
+            "q01": 0.8399,
+            "q05": 0.8795000000000001,
+            "q10": 0.9,
+            "q50": 0.96,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 10.502585000040199,
+        "p95": 12.62826735002136
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "100:100": {
+      "cohort_permille": 100,
+      "explore_additional_hits": 100,
+      "per_query": {
+        "file": "cohort0100-explore0100.npy",
+        "sha256": "765be82c0baa3140f51818e44c2fdc0efb6bdae6612d2294536beead1df10b7d"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.03,
+            "below_0.99": 0.03,
+            "excluded": 0,
+            "mean": 0.9966666666666667,
+            "q00": 0.8,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.03,
+            "below_0.99": 0.03,
+            "excluded": 0,
+            "mean": 0.9966666666666667,
+            "q00": 0.8,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.02,
+            "below_0.99": 0.26,
+            "excluded": 0,
+            "mean": 0.9892,
+            "q00": 0.89,
+            "q01": 0.9399,
+            "q05": 0.96,
+            "q10": 0.97,
+            "q50": 0.99,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.02,
+            "below_0.99": 0.26,
+            "excluded": 0,
+            "mean": 0.9892,
+            "q00": 0.89,
+            "q01": 0.9399,
+            "q05": 0.96,
+            "q10": 0.97,
+            "q50": 0.99,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 12.829878500042469,
+        "p95": 14.73845434999248
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "100:300": {
+      "cohort_permille": 100,
+      "explore_additional_hits": 300,
+      "per_query": {
+        "file": "cohort0100-explore0300.npy",
+        "sha256": "711e6f75e5a194e36669c34d6f726ebece2011e0e3a5a5fc13e6ee352fbf706b"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.01,
+            "excluded": 0,
+            "mean": 0.9990000000000001,
+            "q00": 0.9,
+            "q01": 0.999,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.01,
+            "excluded": 0,
+            "mean": 0.9990000000000001,
+            "q00": 0.9,
+            "q01": 0.999,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.043333333333333335,
+            "excluded": 0,
+            "mean": 0.9979666666666667,
+            "q00": 0.97,
+            "q01": 0.97,
+            "q05": 0.99,
+            "q10": 0.99,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.043333333333333335,
+            "excluded": 0,
+            "mean": 0.9979666666666667,
+            "q00": 0.97,
+            "q01": 0.97,
+            "q05": 0.99,
+            "q10": 0.99,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 14.305549999903633,
+        "p95": 17.179677599995102
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "10:0": {
+      "cohort_permille": 10,
+      "explore_additional_hits": 0,
+      "per_query": {
+        "file": "cohort0010-explore0000.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 8.375001000104021,
+        "p95": 9.490526449985737
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "10:100": {
+      "cohort_permille": 10,
+      "explore_additional_hits": 100,
+      "per_query": {
+        "file": "cohort0010-explore0100.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 8.026124499906473,
+        "p95": 9.738024500063602
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "10:300": {
+      "cohort_permille": 10,
+      "explore_additional_hits": 300,
+      "per_query": {
+        "file": "cohort0010-explore0300.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 9.108596500027488,
+        "p95": 10.086375550088178
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "1:0": {
+      "cohort_permille": 1,
+      "explore_additional_hits": 0,
+      "per_query": {
+        "file": "cohort0001-explore0000.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 7.861296499982018,
+        "p95": 8.862644999919667
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "1:100": {
+      "cohort_permille": 1,
+      "explore_additional_hits": 100,
+      "per_query": {
+        "file": "cohort0001-explore0100.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 7.489577000001191,
+        "p95": 8.834045500020693
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "1:300": {
+      "cohort_permille": 1,
+      "explore_additional_hits": 300,
+      "per_query": {
+        "file": "cohort0001-explore0300.npy",
+        "sha256": "5485c6b2a1b42da3ca8362b2086b4c03a071e70583b8c1462d45c433c2a64638"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.0,
+            "below_0.99": 0.0,
+            "excluded": 0,
+            "mean": 1.0,
+            "q00": 1.0,
+            "q01": 1.0,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 6.771702000150981,
+        "p95": 8.377488000007816
+      },
+      "strategies": {
+        "exact_by_selectivity": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "500:0": {
+      "cohort_permille": 500,
+      "explore_additional_hits": 0,
+      "per_query": {
+        "file": "cohort0500-explore0000.npy",
+        "sha256": "969fccda6f48dda6f5e68c9d7678b60ac6b207192d307130b8a5e912c351f230"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.08666666666666667,
+            "below_0.99": 0.08666666666666667,
+            "excluded": 0,
+            "mean": 0.9863333333333333,
+            "q00": 0.0,
+            "q01": 0.799,
+            "q05": 0.9,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.08666666666666667,
+            "below_0.99": 0.08666666666666667,
+            "excluded": 0,
+            "mean": 0.9863333333333333,
+            "q00": 0.0,
+            "q01": 0.799,
+            "q05": 0.9,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.5633333333333334,
+            "below_0.99": 0.9,
+            "excluded": 0,
+            "mean": 0.9179999999999999,
+            "q00": 0.0,
+            "q01": 0.7499,
+            "q05": 0.78,
+            "q10": 0.83,
+            "q50": 0.93,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.5633333333333334,
+            "below_0.99": 0.9,
+            "excluded": 0,
+            "mean": 0.9179999999999999,
+            "q00": 0.0,
+            "q01": 0.7499,
+            "q05": 0.78,
+            "q10": 0.83,
+            "q50": 0.93,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 10.081806000016513,
+        "p95": 11.218965450075302
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "500:100": {
+      "cohort_permille": 500,
+      "explore_additional_hits": 100,
+      "per_query": {
+        "file": "cohort0500-explore0100.npy",
+        "sha256": "cea8c519cc0cd4fd177ffacff540677629e1a2ad4ec5c6f48a96cd9e9c3febe6"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.013333333333333334,
+            "below_0.99": 0.013333333333333334,
+            "excluded": 0,
+            "mean": 0.995,
+            "q00": 0.0,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.013333333333333334,
+            "below_0.99": 0.013333333333333334,
+            "excluded": 0,
+            "mean": 0.995,
+            "q00": 0.0,
+            "q01": 0.9,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.14,
+            "below_0.99": 0.5366666666666666,
+            "excluded": 0,
+            "mean": 0.9704999999999999,
+            "q00": 0.0,
+            "q01": 0.86,
+            "q05": 0.91,
+            "q10": 0.939,
+            "q50": 0.98,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.14,
+            "below_0.99": 0.5366666666666666,
+            "excluded": 0,
+            "mean": 0.9704999999999999,
+            "q00": 0.0,
+            "q01": 0.86,
+            "q05": 0.91,
+            "q10": 0.939,
+            "q50": 0.98,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 11.374219000117591,
+        "p95": 13.063708249990215
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    },
+    "500:300": {
+      "cohort_permille": 500,
+      "explore_additional_hits": 300,
+      "per_query": {
+        "file": "cohort0500-explore0300.npy",
+        "sha256": "b5bd4b9e583f55ff6a658e07235a7f07816f188c01da48965fae96fcc1db4a0c"
+      },
+      "recall": {
+        "@10": {
+          "strict": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.01,
+            "excluded": 0,
+            "mean": 0.9956666666666666,
+            "q00": 0.0,
+            "q01": 0.999,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.01,
+            "excluded": 0,
+            "mean": 0.9956666666666666,
+            "q00": 0.0,
+            "q01": 0.999,
+            "q05": 1.0,
+            "q10": 1.0,
+            "q50": 1.0,
+            "queries": 300
+          }
+        },
+        "@100": {
+          "strict": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.13,
+            "excluded": 0,
+            "mean": 0.9903333333333334,
+            "q00": 0.0,
+            "q01": 0.9499,
+            "q05": 0.97,
+            "q10": 0.98,
+            "q50": 1.0,
+            "queries": 300
+          },
+          "tie_aware": {
+            "below_0.95": 0.01,
+            "below_0.99": 0.13,
+            "excluded": 0,
+            "mean": 0.9903333333333334,
+            "q00": 0.0,
+            "q01": 0.9499,
+            "q05": 0.97,
+            "q10": 0.98,
+            "q50": 1.0,
+            "queries": 300
+          }
+        }
+      },
+      "short_results": 0,
+      "single_client_ms": {
+        "p50": 14.948201000038353,
+        "p95": 17.208489350014133
+      },
+      "strategies": {
+        "hnsw": 300
+      },
+      "traces_mentioning_filter_first": 300
+    }
+  },
+  "code_commit": "1f8af906af5019b19ff1c03858d2b3e457a48309",
+  "collection": "princeton-nlp-litsearch-81c97f4004c23c31",
+  "documents": "1f446ec5914c94941c1228b3174877843dc46fcbc9bb422bd4c0b28c28ea938c",
+  "exact": {
+    "1": {
+      "agree": 300,
+      "failures": [],
+      "max_score_gap": 1.258417199334616e-07,
+      "oracle": "cbc04ddfa8e2db7f52b8c04bc146ddcbcbef41ff94933475ec73cf58767ffd7b",
+      "queries": 300
+    },
+    "10": {
+      "agree": 300,
+      "failures": [],
+      "max_score_gap": 1.6145114301036045e-07,
+      "oracle": "a2e3c4978b2cf4d95e58ad7457e612d6f68ca2a74937b3d7083d2119a2591798",
+      "queries": 300
+    },
+    "100": {
+      "agree": 300,
+      "failures": [],
+      "max_score_gap": 1.8409527013929505e-07,
+      "oracle": "1b00b666393302f8d713fbd0c821b64bea29819509187100c625fa8eb8922fb9",
+      "queries": 300
+    },
+    "500": {
+      "agree": 300,
+      "failures": [],
+      "max_score_gap": 1.954080817156978e-07,
+      "oracle": "22c27933a7e1c03f8d3d355215d54873b8cdbc3f020e3337cadc16f6dc78c449",
+      "queries": 300
+    },
+    "1000": {
+      "agree": 300,
+      "failures": [],
+      "max_score_gap": 2.110747922001721e-07,
+      "oracle": "754a2e34fa12cd5dd5254770d7b063ba20696cc46a9b3b92d80b7a8f112c75cc",
+      "queries": 300
+    }
+  },
+  "k": 100,
+  "queries": "a5f58554f3aaab97b679ec349c03925c20c0314593db5b178c7cc6cf141d9479",
+  "tolerance": 1e-05
+}

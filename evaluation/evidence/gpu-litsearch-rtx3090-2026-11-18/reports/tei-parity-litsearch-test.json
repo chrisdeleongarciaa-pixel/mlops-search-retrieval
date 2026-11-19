@@ -1,0 +1,1 @@
+{"space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd", "query_vector_set": "a5f58554f3aaab97b679ec349c03925c20c0314593db5b178c7cc6cf141d9479", "queries": 300, "max_absolute_error": 0.00010621825129346861, "min_cosine": 0.9999995052545781, "queries_over_error_limit": 300, "limits": {"max_absolute_error": 1e-05, "min_cosine": 0.99999}, "passed": false}

@@ -45,12 +45,13 @@ class MonitorTests(unittest.TestCase):
         args = Namespace(instance=7, out=self.out, max_hours=6.0, reserve=0.3, poll_s=0, unreachable_min=30)
         for key, value in overrides.items():
             setattr(args, key, value)
-        destroyed = []
+        destroyed, self.stopped = [], []
         with mock.patch.object(vast, "show", side_effect=instance), \
                 mock.patch.object(vast, "credit", return_value=balance), \
                 mock.patch.object(vast, "reachable", return_value=("h", 22) if reachable else None), \
                 mock.patch.object(vast, "ssh", side_effect=remote.ssh), \
                 mock.patch.object(vast, "destroy", side_effect=lambda i, j=None: destroyed.append(i) or True), \
+                mock.patch.object(vast, "stop", side_effect=lambda i, j=None: self.stopped.append(i) or True), \
                 mock.patch.object(vast.time, "sleep"):
             code = vast.command_monitor(args)
         return code, destroyed
@@ -65,26 +66,42 @@ class MonitorTests(unittest.TestCase):
     def running(self, start=None):
         return {"actual_status": "running", "dph_total": 0.4, "start_date": start or time.time()}
 
-    def test_guard_finished_copies_the_archive_then_destroys(self):
-        remote = Remote(final='{"reason": "success", "elapsed_s": 10}')
+    def test_success_copies_the_archive_then_destroys(self):
+        remote = Remote(final='{"reason": "success", "elapsed_s": 10, "action": "destroy", "at": "t1"}')
         code, destroyed = self.run_monitor(remote, [self.running()])
-        self.assertEqual((code, destroyed), (0, [7]))
+        self.assertEqual((code, destroyed, self.stopped), (0, [7], []))
         self.assertEqual((Path(self.out) / "results-1.tar.gz").read_bytes(), b"archive-bytes")
         self.assertTrue((Path(self.out) / "snapshot.tar.gz").exists())
-        self.assertIn("ending instance: success", (Path(self.out) / "monitor.log").read_text())
+        self.assertIn("ending instance (destroy): success", (Path(self.out) / "monitor.log").read_text())
+
+    def test_a_held_failure_is_copied_once_and_kept(self):
+        remote = Remote(final='{"reason": "failure (exit 1)", "action": "hold", "at": "t1"}')
+        code, destroyed = self.run_monitor(remote, [self.running(), self.running(), None])
+        self.assertEqual((code, destroyed, self.stopped), (0, [], []))
+        self.assertEqual(sum(command.startswith("cat ") for command in remote.commands), 1)
+        self.assertIn("held for a fix", (Path(self.out) / "monitor.log").read_text())
+
+    def test_the_guard_stop_decision_stops(self):
+        remote = Remote(final='{"reason": "overtime", "action": "stop", "at": "t1"}')
+        code, destroyed = self.run_monitor(remote, [self.running()])
+        self.assertEqual((code, destroyed, self.stopped), (0, [], [7]))
+
+    def test_a_stopped_instance_ends_the_watch(self):
+        code, destroyed = self.run_monitor(Remote(), [{"actual_status": "exited", "intended_status": "stopped"}])
+        self.assertEqual((code, destroyed, self.stopped), (0, [], []))
 
     def test_keeps_watching_while_the_pipeline_runs(self):
         remote = Remote()
         code, destroyed = self.run_monitor(remote, [self.running(), self.running(), None])
         self.assertEqual((code, destroyed), (0, []))
 
-    def test_credit_below_the_reserve_destroys(self):
+    def test_credit_below_the_reserve_stops(self):
         code, destroyed = self.run_monitor(Remote(), [self.running()], balance=0.2)
-        self.assertEqual(destroyed, [7])
+        self.assertEqual((destroyed, self.stopped), ([], [7]))
 
-    def test_unreachable_destroys(self):
+    def test_unreachable_stops(self):
         code, destroyed = self.run_monitor(Remote(), [self.running()], reachable=False, unreachable_min=-1)
-        self.assertEqual(destroyed, [7])
+        self.assertEqual((destroyed, self.stopped), ([], [7]))
         self.assertIn("unreachable", (Path(self.out) / "monitor.log").read_text())
 
     def test_operator_outage_does_not_count_as_unreachable(self):
@@ -93,10 +110,10 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual((code, destroyed), (0, []))
         self.assertIn("not counted", (Path(self.out) / "monitor.log").read_text())
 
-    def test_overdue_instance_destroys(self):
+    def test_overdue_instance_stops(self):
         old = time.time() - 7 * 3600
         code, destroyed = self.run_monitor(Remote(), [self.running(start=old)])
-        self.assertEqual(destroyed, [7])
+        self.assertEqual((destroyed, self.stopped), ([], [7]))
 
     def test_vanished_instance_ends_without_destroying(self):
         code, destroyed = self.run_monitor(Remote(), [None])

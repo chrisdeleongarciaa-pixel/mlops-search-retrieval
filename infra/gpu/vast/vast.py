@@ -263,6 +263,26 @@ def destroy(instance_id: int, journal: Path | None = None) -> bool:
     return False
 
 
+def stop(instance_id: int, journal: Path | None = None) -> bool:
+    """Stop the instance: the GPU is released and the disk kept (billed at the storage rate)."""
+    for attempt in range(1, 6):
+        try:
+            call("PUT", f"/instances/{instance_id}/", {"state": "stopped"}, retries=1)
+        except RuntimeError as error:
+            log(f"stop attempt {attempt} failed: {error}", journal)
+        time.sleep(10)
+        instance = show(instance_id)
+        if instance is None or stopped(instance):
+            log(f"instance {instance_id} stopped", journal)
+            return True
+    log(f"instance {instance_id} still running after five stop requests: stop it in the console", journal)
+    return False
+
+
+def stopped(instance: dict) -> bool:
+    return instance.get("intended_status") == "stopped" or instance.get("actual_status") in ("exited", "stopped")
+
+
 def command_destroy(args) -> int:
     return 0 if destroy(args.instance) else 1
 
@@ -299,17 +319,26 @@ def pull(target, remote_command: str, path: Path, timeout: int = 600) -> bool:
 
 
 def command_monitor(args) -> int:
-    """Copy reports every poll; destroy the instance when the guard on it finishes or anything fails."""
+    """Copy reports every poll and apply the guard's decision from the laptop.
+
+    The guard on the VM records its decision in final.json: `destroy` after success, `hold` after
+    a failure (the instance is kept for a fix and the monitor keeps watching), `stop` at the time
+    limit or when a held pipeline was not resumed. Low credit, a VM unreachable for
+    --unreachable-min and an instance past --max-hours are stopped, not destroyed, so the disk and
+    what was computed on it survive.
+    """
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     journal = out / "monitor.log"
     started = time.time()
     last_contact = time.time()
+    copied_for = None
     log(f"monitor of {args.instance}: max {args.max_hours} h, reserve ${args.reserve}, poll {args.poll_s} s", journal)
 
-    def end(reason: str) -> int:
-        log(f"ending instance: {reason}", journal)
-        return 0 if destroy(args.instance, journal) else 1
+    def end(reason: str, action: str = "stop") -> int:
+        log(f"ending instance ({action}): {reason}", journal)
+        done = destroy(args.instance, journal) if action == "destroy" else stop(args.instance, journal)
+        return 0 if done else 1
 
     while True:
         try:
@@ -324,6 +353,9 @@ def command_monitor(args) -> int:
             continue
         if instance is None:
             log("instance no longer exists", journal)
+            return 0
+        if stopped(instance):
+            log("instance is stopped; its disk is kept", journal)
             return 0
         age_h = (time.time() - float(instance.get("start_date") or started)) / 3600 if instance.get("start_date") else (time.time() - started) / 3600
         try:
@@ -340,14 +372,20 @@ def command_monitor(args) -> int:
             log(f"running {age_h:.2f} h, ${instance.get('dph_total', 0):.3f}/h, credit {balance}, "
                 f"last line: {lines[0][:120] if lines else ''}", journal)
             if any(line.startswith("{\"reason\"") for line in lines):
-                final = next(line for line in lines if line.startswith("{\"reason\""))
-                log(f"guard finished: {final}", journal)
-                name = ssh(target, f"ls -1t {REMOTE}/results-*.tar.gz | head -n 1", timeout=60).stdout.decode().strip()
-                if name and pull(target, f"cat {name}", out / Path(name).name, timeout=1800):
-                    log(f"copied {Path(name).name}", journal)
+                final = json.loads(next(line for line in lines if line.startswith("{\"reason\"")))
+                action = final.get("action", "destroy")
+                if copied_for != final.get("at"):
+                    log(f"guard decision: {final}", journal)
+                    name = ssh(target, f"ls -1t {REMOTE}/results-*.tar.gz | head -n 1", timeout=60).stdout.decode().strip()
+                    if name and pull(target, f"cat {name}", out / Path(name).name, timeout=1800):
+                        log(f"copied {Path(name).name}", journal)
+                        copied_for = final.get("at")
+                    else:
+                        log("could not copy the results archive; the snapshot is the last copy", journal)
+                if action == "hold":
+                    log("held for a fix: the instance is kept until the pipeline is resumed or the guard stops it", journal)
                 else:
-                    log("could not copy the results archive; the snapshot is the last copy", journal)
-                return end(json.loads(final)["reason"])
+                    return end(final["reason"], action)
         else:
             log(f"no ssh contact (status {instance.get('actual_status')}) for "
                 f"{(time.time() - last_contact) / 60:.0f} min", journal)
