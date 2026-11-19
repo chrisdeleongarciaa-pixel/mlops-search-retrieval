@@ -10,16 +10,16 @@ export DEBIAN_FRONTEND=noninteractive
 
 # vast.ai writes multi-line, unquoted values (PUBLIC_KEY, SSH_PUBLIC_KEY) to /etc/environment, so
 # any script that sources it as shell fails; dpkg's install-info trigger is one (exit 127, observed
-# 2026-11-18). Keep NAME=value lines only and quote values that contain spaces; keep a backup.
-if [ ! -f /etc/environment.vast ]; then
-    cp /etc/environment /etc/environment.vast
-    awk '/^[A-Za-z_][A-Za-z0-9_]*=/ {
-            name = substr($0, 1, index($0, "=") - 1); value = substr($0, index($0, "=") + 1)
-            if (value ~ / / && value !~ /^".*"$/) value = "\"" value "\""
-            print name "=" value }' /etc/environment.vast > /etc/environment.new
-    mv /etc/environment.new /etc/environment
-    dpkg --configure -a >/dev/null 2>&1 || true
-fi
+# 2026-11-18). Keep NAME=value lines only and quote values that contain spaces; keep the first copy.
+# vast.ai writes the file again at every boot (observed after a restart on 2026-11-19), so this runs
+# every time; lines already sanitized pass through unchanged.
+[ -f /etc/environment.vast ] || cp /etc/environment /etc/environment.vast
+awk '/^[A-Za-z_][A-Za-z0-9_]*=/ {
+        name = substr($0, 1, index($0, "=") - 1); value = substr($0, index($0, "=") + 1)
+        if (value ~ / / && value !~ /^".*"$/) value = "\"" value "\""
+        print name "=" value }' /etc/environment > /etc/environment.new
+mv /etc/environment.new /etc/environment
+dpkg --configure -a >/dev/null 2>&1 || true
 
 apt_install() { apt-get install -y -q --no-install-recommends "$@" >/dev/null; }
 apt-get update -q >/dev/null
