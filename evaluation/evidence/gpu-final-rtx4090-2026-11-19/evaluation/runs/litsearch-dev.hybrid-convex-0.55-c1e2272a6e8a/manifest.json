@@ -1,0 +1,171 @@
+{
+  "command": "run",
+  "configuration": {
+    "path": "config/runs/generated/litsearch-dev.hybrid-convex-0.55.toml",
+    "values": {
+      "corpus": {
+        "manifest": "manifests/corpus/litsearch.json"
+      },
+      "index": {
+        "engine": "vespa",
+        "lexical": {
+          "profile": "bm25"
+        },
+        "schema_revision": "princeton-nlp-litsearch-47aa8f9feb63d989"
+      },
+      "queries": {
+        "judgments": "inherited",
+        "manifest": "manifests/queries/litsearch-dev.json",
+        "set": "litsearch/dev"
+      },
+      "ranking": {
+        "fusion": {
+          "alpha": 0.55,
+          "kind": "convex",
+          "normalization": "minmax"
+        },
+        "profile": "vespa-hybrid",
+        "target_hits": 1000
+      },
+      "run": {
+        "code_commit": "baa03ea2ea0788ac0e38a5d24be929ae2bc024eb",
+        "id": "litsearch-dev.hybrid-convex-0.55",
+        "split": "dev"
+      },
+      "runtime": {
+        "manifest": "manifests/runtime/gpu-linux-x86_64.json"
+      },
+      "space": {
+        "dense": {
+          "manifest": "manifests/space/embeddinggemma-300m-fp32.json"
+        }
+      },
+      "transform": {
+        "manifest": "manifests/transform/beir-title-text-fields-v1.json"
+      }
+    }
+  },
+  "environment": {
+    "packages": {
+      "annotated-doc": "0.0.6",
+      "annotated-types": "0.8.0",
+      "anyio": "4.16.0",
+      "certifi": "2026.10.23",
+      "charset-normalizer": "3.5.2",
+      "click": "8.5.1",
+      "cloudpickle": "3.1.2",
+      "cuda-bindings": "13.5.0",
+      "cuda-pathfinder": "1.8.6",
+      "cuda-toolkit": "13.0.3.0",
+      "datasets": "5.2.0",
+      "dill": "0.4.1",
+      "filelock": "4.2.10",
+      "fsspec": "2026.9.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.8.0",
+      "httpcore2": "2.16.0",
+      "httpx2": "2.16.0",
+      "huggingface-hub": "2.4.0",
+      "idna": "3.20",
+      "ir-datasets": "0.6.3",
+      "ir-measures": "0.4.3",
+      "jinja2": "3.1.6",
+      "joblib": "1.6.0",
+      "lxml": "6.1.3",
+      "lz4": "4.4.5",
+      "markdown-it-py": "4.3.0",
+      "markupsafe": "3.0.4",
+      "mdurl": "0.1.2",
+      "mpmath": "1.3.0",
+      "mteb": "2.27.12",
+      "multiprocess": "0.70.19",
+      "narwhals": "2.28.0",
+      "networkx": "3.7",
+      "numpy": "2.5.4",
+      "nvidia-cublas": "13.1.1.3",
+      "nvidia-cuda-cupti": "13.0.85",
+      "nvidia-cuda-nvrtc": "13.0.88",
+      "nvidia-cuda-runtime": "13.0.96",
+      "nvidia-cudnn-cu13": "9.24.0.43",
+      "nvidia-cufft": "12.0.0.61",
+      "nvidia-cufile": "1.15.1.6",
+      "nvidia-curand": "10.4.0.35",
+      "nvidia-cusolver": "12.0.4.66",
+      "nvidia-cusparse": "12.6.3.3",
+      "nvidia-cusparselt-cu13": "0.8.1",
+      "nvidia-nccl-cu13": "2.30.7",
+      "nvidia-nvjitlink": "13.5.37",
+      "nvidia-nvshmem-cu13": "3.4.5",
+      "nvidia-nvtx": "13.0.85",
+      "packaging": "26.3",
+      "pandas": "3.1.1",
+      "polars": "2.1.0",
+      "polars-runtime-32": "2.1.0",
+      "psycopg": "3.3.8",
+      "psycopg-binary": "3.3.8",
+      "pyarrow": "26.0.1",
+      "pydantic": "2.14.3",
+      "pydantic-core": "2.50.4",
+      "pygments": "2.21.0",
+      "python-dateutil": "4.0.0",
+      "pytrec-eval-terrier": "0.5.10",
+      "pyyaml": "6.0.3",
+      "regex": "2026.11.9",
+      "requests": "2.34.2",
+      "rich": "15.0.0",
+      "safetensors": "0.8.0",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.2.0",
+      "setuptools": "84.2.1",
+      "shellingham": "1.5.4",
+      "sympy": "1.14.0",
+      "threadpoolctl": "3.8.0",
+      "tokenizers": "0.23.3",
+      "torch": "2.14.0",
+      "tqdm": "4.70.1",
+      "transformers": "5.20.2",
+      "triton": "3.8.0",
+      "truststore": "0.10.5",
+      "typer": "0.29.1",
+      "typing-extensions": "4.16.0",
+      "typing-inspection": "0.4.5",
+      "tzdata": "2026.6",
+      "urllib3": "2.8.0",
+      "xxhash": "4.1.0"
+    },
+    "platform": "linux_x86_64",
+    "python": "3.12.10",
+    "query_vectors": "bb2fe83c6f85a7c91a08c501fd06bcc4f0e312e17f124321f53a14636848c68d"
+  },
+  "keys": {
+    "corpus": "6522240841e8a16dd1455a8f6d093c1e4d338284a9d0c5313839823103d5350f",
+    "frozen": "49ea4659cf6de80763e80ac74581ef650c222b067e1e5b9cccc6a73898ed89fa",
+    "generation": "36723a6cbd00386e2b37221b23afd40f87f7bcde07f3014b1a1e593eb51259ff",
+    "query_set": "b27a67f12ebae5ea7df85b346760e5ba614459185597d1a976b3cc0aca0204e2",
+    "run": "c1e2272a6e8ab76afcb88188db143baadb006b713bdbc0ecc412d6af7b821d9f",
+    "runtime": "09263ab54ddaaca00d015c3bef3a9f2758636acb82435331e0158d5982b26157",
+    "spaces": {
+      "dense": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd"
+    },
+    "transform": "fcd81e9edc614343f230e47ffb18d6208d2e061cc974f99209f6f98f14409048"
+  },
+  "legacy_space_ids": {},
+  "metrics": {
+    "Judged@10": 0.07170542635658915,
+    "R@10": 0.6895348837209303,
+    "R@100": 0.8435400516795866,
+    "R@1000": 0.9512273901808785,
+    "RR@10": 0.5070505721668512,
+    "nDCG@10": 0.5483872321981559
+  },
+  "observations": "timings.json",
+  "outputs": {
+    "per-query.jsonl": "5c1d41a86959b8b9f9f29c242e19c34bf3927254b530d0b20be52f568bf5b52f",
+    "run.trec": "774de02e0b9faad5b7cfe1b45530b56573a9dc18e1bb08202b407f0671c65c74"
+  },
+  "queries": 258,
+  "run_id": "litsearch-dev.hybrid-convex-0.55",
+  "schema_version": 1,
+  "split": "dev"
+}

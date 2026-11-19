@@ -1,0 +1,25 @@
+{
+  "kind": "vector-shard",
+  "schema_version": 1,
+  "body": {
+    "identity": {
+      "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd",
+      "role": "query",
+      "collection": {
+        "queries": "e7e8c6b01585ab6f6fea27229942c12d0d778a18f629ac67566752a8a0dce013"
+      },
+      "dtype": "float32",
+      "width": 768
+    },
+    "ordinal": 0,
+    "rows": 258,
+    "shard_rows": 50000,
+    "parity_every": null,
+    "rows_sha256": "16f7d1699c40598bdc203bd90d741c368d831084fff919b18ae77620204fea1c",
+    "ids_sha256": "ab4be7be08ecea89e00028048aabe1f3f62d49c0637d8d3651ddf2852f8b44c2",
+    "truncated": 0,
+    "sample_rows": null,
+    "sample_sha256": null
+  },
+  "sha256": "6215ef6b6a3ccd1cc60365888e315794871d5d5fd887cdb1aaf46b05bbb55a3d"
+}

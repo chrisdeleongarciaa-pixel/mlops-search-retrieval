@@ -75,9 +75,27 @@ FAISS 1.16.0 (`faiss-gpu-cuvs`, from the Linux lock), `GpuIndexFlatIP` in float3
 
 The MS MARCO oracle used blocks of 4,000,000 rows and took about 3 minutes for the five cohorts after the vectors were encoded (commit `bdb8cef`, the guard replaced at `6b4176a`). Its manifests and observations are in the [evidence](../../evaluation/evidence/gpu-msmarco-oracle-rtx4090-2026-11-19/ann); the `rows.npy` and `scores.npy` arrays were copied with the run's archive and are not in the repository. LitSearch and SciFact HNSW sweeps ran on the GPU hosts as well (three insertion orders each, [summaries](../../evaluation/evidence/gpu-litsearch-rtx3090-2026-11-18/reports/sweeps)).
 
+The full-cohort oracle is also EmbeddingGemma's exact retrieval on MS MARCO dev: scored with ir_measures ([`oracle_quality.py`](../../evaluation/oracle_quality.py)), RR@10 0.3246, nDCG@10 0.3854 and R@100 0.8843 over 6,980 queries, against RR@10 0.1874 for the Anserini BM25 reference with the same queries (paired difference +0.137, 95 % [0.128, 0.146]; 3,031 wins, 2,894 ties, 1,055 losses). The row positions are the passage IDs, checked against the vector set's `ids_sha256`. [Report](../../evaluation/evidence/gpu-msmarco-oracle-rtx4090-2026-11-19/reports/msmarco-dev-embeddinggemma-exact-quality.json)
+
+### The step 4 gate: HNSW on MS MARCO
+
+FAISS `IndexHNSWFlat`, M 16, efConstruction 200, three insertion orders (seeds 11, 29, 47), 6,980 dev queries against the certified oracle above, on an RTX 4090 VM with 61 vCPU (commit `baa03ea`, 2026-11-19). Mean tie-aware recall from the non-dominated points of the three builds ([frontier CSV](../../evaluation/evidence/gpu-final-rtx4090-2026-11-19/reports/msmarco-ann-frontier.csv), [summary](../../evaluation/evidence/gpu-final-rtx4090-2026-11-19/ann)):
+
+| Cohort | Recall@10 at efSearch 100 / 256 / 1024 | Recall@100 at 100 / 1024 | QPS at 100 / 1024 |
+| --- | --- | --- | --- |
+| 100 % (8,841,823) | 0.965 / 0.982 / 0.992 | 0.920 / 0.989 | 21,096 / 2,789 |
+| 50 % | 0.961 / 0.980 / 0.992 | — | 20,778 / 2,722 |
+| 10 % | 0.910 / 0.965 / 0.988 | — | 20,847 / 2,721 |
+| 1 % | 0.446 / 0.679 / 0.937 | — | 20,733 / 2,756 |
+| 0.1 % | 0.093 / 0.180 / 0.440 | — | 20,679 / 2,718 |
+
+- The three insertion orders give three different graphs (three structure digests) whose recall differs by at most 0.002 at any setting.
+- A build takes 18.5 minutes on 61 threads and holds about 3,216 bytes per vector.
+- A filtered graph search degrades sharply below 10 % eligible: this is the measured case for the engine's switch to exact search below 2 %, which returned the oracle's lists exactly at 1 % and 0.1 % in the LitSearch engine parity.
+- The vector set encoded on two different RTX 4090 hosts (Bulgaria and Japan) has the same digest, `c37aeaf9…`, and so the same oracle (`98990451…` for the full cohort): the encoding reproduced byte for byte.
+
 ## Not executed
 
 | Check | Status |
 | --- | --- |
-| HNSW M 16 / efConstruction 200, three insertion orders on MS MARCO: the step 4 gate | Not executed. The MS MARCO vectors and oracle are kept on a stopped instance for it. |
 | Host memory of an HNSW build over MS MARCO | Not measured. Estimated from the index layout at about 31 GB. |

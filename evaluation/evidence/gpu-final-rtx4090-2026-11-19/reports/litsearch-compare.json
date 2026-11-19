@@ -1,0 +1,88 @@
+{
+  "split": "litsearch/test",
+  "questions": 300,
+  "systems": {
+    "bm25": {
+      "broad_R@20": {
+        "mean": 43.376068376068375,
+        "ci95": [
+          32.68696581196582,
+          54.27350427350427
+        ],
+        "questions": 78
+      },
+      "specific_R@5": {
+        "mean": 52.927927927927925,
+        "ci95": [
+          46.3963963963964,
+          59.45945945945946
+        ],
+        "questions": 222
+      }
+    },
+    "dense": {
+      "broad_R@20": {
+        "mean": 55.76923076923077,
+        "ci95": [
+          44.87179487179487,
+          66.45299145299145
+        ],
+        "questions": 78
+      },
+      "specific_R@5": {
+        "mean": 57.207207207207205,
+        "ci95": [
+          50.67567567567568,
+          63.513513513513516
+        ],
+        "questions": 222
+      }
+    },
+    "hybrid-convex-0.55": {
+      "broad_R@20": {
+        "mean": 62.17948717948718,
+        "ci95": [
+          51.7094017094017,
+          72.86324786324786
+        ],
+        "questions": 78
+      },
+      "specific_R@5": {
+        "mean": 65.76576576576576,
+        "ci95": [
+          59.45945945945946,
+          71.84684684684684
+        ],
+        "questions": 222
+      }
+    }
+  },
+  "published": {
+    "BM25": {
+      "broad_R@20": 39.9,
+      "specific_R@5": 50.0
+    },
+    "GTR-T5-large": {
+      "broad_R@20": 43.8,
+      "specific_R@5": 39.6
+    },
+    "Instructor-XL": {
+      "broad_R@20": 56.5,
+      "specific_R@5": 52.3
+    },
+    "E5-large-v2": {
+      "broad_R@20": 55.4,
+      "specific_R@5": 56.2
+    },
+    "GritLM-7B": {
+      "broad_R@20": 70.8,
+      "specific_R@5": 74.8
+    },
+    "GPT-4o reranking (w/ GritLM)": {
+      "broad_R@20": 75.3,
+      "specific_R@5": 79.2
+    }
+  },
+  "published_source": "Ajith et al., LitSearch, arXiv:2407.18940v2, Table 3 (597 questions)",
+  "note": "The split is a stratified sample of the paper's questions; the published systems ran on all 597."
+}

@@ -36,12 +36,26 @@ Phase A of [`run-all.sh`](../../infra/gpu/run-all.sh) at commit `1f8af90`, 2026-
 
 Phase B without the engine at commit `51d6a25`, 2026-11-19, on an RTX 4090 VM (23 vCPU, 49 GB): the 8,841,823 MS MARCO passages were encoded in float32 at about 1,100 passages per second and the set verified; conformance (2.4e-7) and the MTEB figure (0.78675) passed on that GPU as well. [Evidence](../../evaluation/evidence/gpu-msmarco-encoding-rtx4090-2026-11-19)
 
+### Second deployment and external comparison
+
+Phase A again on an RTX 4090 VM (61 vCPU) at commit `baa03ea`, 2026-11-19, up to the LitSearch test report. [Evidence](../../evaluation/evidence/gpu-final-rtx4090-2026-11-19/reports)
+
+| Check | Result |
+| --- | --- |
+| Fusion chosen on development | Convex, alpha 0.55, as on the first host. |
+| Test report, once | nDCG@10: BM25 0.406, dense 0.463, fused 0.528. Fused minus dense +0.065, paired 95 % [0.038, 0.094]: promoted. |
+| LitSearch paper's measures on the same test runs | R@5 on 222 specific questions and R@20 on 78 broad ones: BM25 52.9 [46.4, 59.5] and 43.4 [32.7, 54.3]; dense 57.2 [50.7, 63.5] and 55.8 [44.9, 66.5]; fused 65.8 [59.5, 71.8] and 62.2 [51.7, 72.9]. The paper's Table 3 (597 questions): BM25 50.0 and 39.9, E5-large-v2 56.2 and 55.4, GritLM-7B 74.8 and 70.8. [Comparison](../../evaluation/evidence/gpu-final-rtx4090-2026-11-19/reports/litsearch-compare.json) |
+
+The split is a stratified sample of the paper's 597 questions, so the paper's figures are reference points, not the same measurement; BM25 agreeing with the paper within its interval is the check that the measures are computed alike.
+
 ## Not executed
 
 | Check | Status |
 | --- | --- |
+| Hybrid route with parallel branches under SRV-01 load, against the sequential baseline on the same host | Not executed. The parallel branches are implemented (`--branches parallel`, the default) and tested with HTTP fakes: two 0.2 s branches take about 0.2 s instead of 0.4 s with identical hits. The measured hybrid p95 above is the sequential route. |
+| ACL-01 with the widened probe and batched sampling | Not executed. Tested with fakes: the measurement continues past skipped probes until 1,000 are measured. |
+| TEI parity's ranking impact (identical top 10, nDCG@10 change) | Not executed. Implemented and tested; the vector gate result above stands. |
 | MS MARCO projection, engine parity and runs; Vespa BM25 against Anserini | Not executed. |
-| MS MARCO HNSW sweeps | Not executed. The MS MARCO oracle ran and certified all 6,980 queries in its five cohorts (see the [oracle verification](exact-oracle-ann.md#executed-on-a-gpu)). |
 | PostgreSQL integration tests | Not executed locally; the authority ran in ACL-01 on the GPU host. |
 
 ## Corrections made during verification
