@@ -42,6 +42,11 @@ PROFILES = {
     # HNSW M16/efC200 of 64,183 rows in 9 s, so about 0.5 h per 8.8 M build at 30 threads.
     "B-ann": {"fixed_h": 0.7, "gpu_h": 3.4, "cpu_h": 2.7, "download_gb": 15.0,
               "min": {"cpu_ram": 60_000, "disk_space": 120, "cpu_cores_effective": 16}, "disk": 120},
+    # MS MARCO up to its oracle (ONLY_MSMARCO=1 ANN_SWEEP=0), calibrated on 2026-11-19: an RTX 4090
+    # VM (82.2 TFLOPS) encoded 8,841,823 passages in 2.27 h, i.e. 5.33 h at the reference 35 TFLOPS;
+    # setup, downloads and the oracle about 0.85 h.
+    "B-oracle": {"fixed_h": 0.85, "gpu_h": 5.33, "cpu_h": 0.0, "download_gb": 12.0,
+                 "min": {"cpu_ram": 45_000, "disk_space": 100, "cpu_cores_effective": 8}, "disk": 100},
 }
 
 
