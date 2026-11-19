@@ -7,7 +7,7 @@
 # Triggers, checked every POLL_S seconds (30):
 #   success   run-all.sh wrote 0 to $WORK/pipeline.exit
 #   failure   it wrote another status, or its process (from $WORK/pipeline.pid) vanished
-#   overtime  MAX_HOURS since the watchdog started, or 90 % of BUDGET_USD / PRICE_PER_HOUR
+#   overtime  GRACE_MIN before the deadline: MAX_HOURS since start, or 90 % of BUDGET_USD / PRICE_PER_HOUR
 #   inactive  no file under $WORK changed for IDLE_MIN minutes (45) while the 1-minute load
 #             average stayed under IDLE_LOAD (1.0)
 # On any trigger it packs the reports, logs, JSON records and the commits made on the host into
@@ -47,6 +47,9 @@ else
 fi
 [ -n "$KEY" ] || { echo "watchdog: no vast.ai API key (CONTAINER_API_KEY or VAST_API_KEY_FILE)" >&2; exit 1; }
 STARTED=$(date +%s)
+# Overtime fires a grace period before the deadline, so the archive can still be copied within
+# the budget; at the deadline itself the grace would be cut to zero and the copy lost.
+OVERTIME_S=$(( DEADLINE_S > GRACE_MIN * 60 ? DEADLINE_S - GRACE_MIN * 60 : 0 ))
 
 if [ -z "${WATCH_PID:-}" ]; then
     for _ in $(seq 1 120); do [ -s "$WORK/pipeline.pid" ] && break; sleep 1; done
@@ -119,7 +122,7 @@ while true; do
         sleep 2; [ -f "$WORK/pipeline.exit" ] && continue
         finish "failure (pipeline $WATCH_PID vanished)"
     fi
-    [ "$elapsed" -ge "$DEADLINE_S" ] && finish overtime
+    [ "$elapsed" -ge "$OVERTIME_S" ] && finish overtime
     idle && finish inactive
     sleep "$POLL_S"
 done
