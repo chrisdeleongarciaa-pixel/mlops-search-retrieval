@@ -345,7 +345,15 @@ def command_monitor(args) -> int:
         done = destroy(args.instance, journal) if action == "destroy" else stop(args.instance, journal)
         return 0 if done else 1
 
+    last_poll = time.time()
     while True:
+        # A gap far longer than the poll interval means this process was suspended (the operator's
+        # machine slept: 51 minutes on 2026-11-19, after which the monitor stopped a healthy VM as
+        # unreachable). That time says nothing about the VM, so contact is counted from now.
+        if time.time() - last_poll > 3 * args.poll_s + 120:
+            log(f"the monitor was suspended for {(time.time() - last_poll) / 60:.0f} min; not counted", journal)
+            last_contact = time.time()
+        last_poll = time.time()
         try:
             instance = show(args.instance)
         except RuntimeError as error:

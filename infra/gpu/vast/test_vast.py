@@ -110,6 +110,16 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual((code, destroyed), (0, []))
         self.assertIn("not counted", (Path(self.out) / "monitor.log").read_text())
 
+    def test_a_suspended_monitor_does_not_count_its_sleep_as_unreachable(self):
+        # The clock jumps 51 minutes between two polls, then ssh fails once: the VM is not stopped.
+        # started, last_contact and last_poll read 1000; the next read, at the top of the loop, is 4060.
+        clock = iter([1000.0] * 3 + [4060.0 + step for step in range(60)])
+        with mock.patch.object(vast.time, "time", side_effect=lambda: next(clock)):
+            code, destroyed = self.run_monitor(Remote(), [self.running(start=1000.0), None], reachable=False,
+                                               unreachable_min=45)
+        self.assertEqual((code, destroyed, self.stopped), (0, [], []))
+        self.assertIn("suspended", (Path(self.out) / "monitor.log").read_text())
+
     def test_overdue_instance_stops(self):
         old = time.time() - 7 * 3600
         code, destroyed = self.run_monitor(Remote(), [self.running(start=old)])
