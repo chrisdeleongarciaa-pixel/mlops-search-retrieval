@@ -53,12 +53,17 @@ encode() {
 "$P" evaluation/embed.py conformance --space "manifests/space/$SPACE.json" --model-dir "$MODEL" \
     --device "$DEVICE" | tee "$WORK/reports/conformance-$SPACE.json"
 
-# LitSearch is prepared from its pinned parquet files; the outputs must match the archived hashes.
-if [ ! -f "$WORK/data/litsearch/corpus.jsonl" ]; then
+# ONLY_MSMARCO=1 (with MSMARCO=1): the adapter gate above, then MS MARCO alone; SciFact, LitSearch
+# and the MTEB figure are left to a phase A host.
+if [ "${ONLY_MSMARCO:-0}" = "1" ]; then
+    echo "== ONLY_MSMARCO: SciFact, LitSearch and the MTEB gate skipped"
+elif [ ! -f "$WORK/data/litsearch/corpus.jsonl" ]; then
     "$P" evaluation/prepare_litsearch.py "$WORK/data/litsearch-source" "$WORK/data/litsearch" --download
 fi
 
-for collection in "beir-scifact:beir-scifact-test" "litsearch:litsearch-test litsearch-dev"; do
+[ "${ONLY_MSMARCO:-0}" = "1" ] && SMALL_COLLECTIONS="" || SMALL_COLLECTIONS="beir-scifact:beir-scifact-test litsearch:litsearch-test@litsearch-dev"
+for collection in $SMALL_COLLECTIONS; do
+    collection="${collection//@/ }"
     corpus="manifests/corpus/${collection%%:*}.json"
     echo "== $SPACE on $corpus"
     "$P" evaluation/embed.py verify "$(encode --corpus "$corpus" --transform "$TITLE_FIELDS")"
@@ -69,8 +74,10 @@ for collection in "beir-scifact:beir-scifact-test" "litsearch:litsearch-test lit
 done
 
 # The published MTEB figure through the same adapter, with the official evaluator.
-"$P" evaluation/mteb_gate.py embeddinggemma-300m --model-dir "$MODEL" --device "$DEVICE" --batch-size "$BATCH" \
-    | tee "$WORK/reports/mteb-embeddinggemma-300m.json" || echo "MTEB gate failed" >&2
+if [ "${ONLY_MSMARCO:-0}" != "1" ]; then
+    "$P" evaluation/mteb_gate.py embeddinggemma-300m --model-dir "$MODEL" --device "$DEVICE" --batch-size "$BATCH" \
+        | tee "$WORK/reports/mteb-embeddinggemma-300m.json" || echo "MTEB gate failed" >&2
+fi
 
 if [ "${MSMARCO:-0}" = "1" ]; then
     echo "== MS MARCO passage, float32"

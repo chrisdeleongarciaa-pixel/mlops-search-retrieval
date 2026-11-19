@@ -44,13 +44,21 @@ run() {
     echo "== oracle $name"
     "$P" evaluation/ann.py oracle "$config" --vectors-dir "$WORK/vectors" --out-dir "$OUT" --device "$DEVICE" \
         --block-rows "$BLOCK_ROWS" | tee "$WORK/reports/oracle-$name.jsonl"
+    if [ "${ANN_SWEEP:-1}" = "0" ] && [ "$name" = msmarco-embeddinggemma-300m-fp32 ]; then
+        echo "== sweep $name skipped (ANN_SWEEP=0)"
+        return 0
+    fi
     echo "== sweep $name"
     "$P" evaluation/ann.py sweep "$config" --vectors-dir "$WORK/vectors" --out-dir "$OUT" \
         | tee "$WORK/reports/sweep-$name.jsonl"
 }
 
-run config/ann/scifact-embeddinggemma-300m-fp32.toml
-run config/ann/litsearch-embeddinggemma-300m-fp32.toml
+# ONLY_MSMARCO=1 leaves the SciFact and LitSearch oracles and sweeps to a phase A host;
+# ANN_SWEEP=0 stops MS MARCO after its certified oracle.
+if [ "${ONLY_MSMARCO:-0}" != "1" ]; then
+    run config/ann/scifact-embeddinggemma-300m-fp32.toml
+    run config/ann/litsearch-embeddinggemma-300m-fp32.toml
+fi
 if [ "${SCIFACT_ONLY:-0}" != "1" ]; then
     run config/ann/msmarco-embeddinggemma-300m-fp32.toml
 fi
