@@ -45,7 +45,7 @@ fi
 encode() {
     "$P" evaluation/embed.py encode --space "manifests/space/$SPACE.json" --model-dir "$MODEL" \
         --data-dir "$WORK/data" --vectors-dir "$WORK/vectors" --device "$DEVICE" --batch-size "$BATCH" "$@" \
-        | tee /dev/stderr | tail -n 1 | "$P" -c "import json, sys; print(json.load(sys.stdin)['directory'])"
+        | tee -a /dev/stderr | tail -n 1 | "$P" -c "import json, sys; print(json.load(sys.stdin)['directory'])"
 }
 
 "$P" evaluation/fetch_model.py "manifests/space/$SPACE.json" "$MODEL"
