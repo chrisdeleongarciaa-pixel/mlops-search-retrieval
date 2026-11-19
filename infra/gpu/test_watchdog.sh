@@ -34,5 +34,19 @@ run_case "inactive without resume stops" "PUT" \
     '(sleep 120) & echo $! > "$T/var/pipeline.pid"' IDLE_MIN=0 IDLE_LOAD=1000
 run_case "invalid hold minutes refuses to start" "" \
     'echo 1 > "$T/var/pipeline.pid"' HOLD_MIN=x
+# KEEP_DISK=1 stops after success, and the archive carries the oracle arrays and vector-set records.
+run_case "success with KEEP_DISK stops" "PUT" \
+    'mkdir -p "$T/var/ann/x/oracle/cohort-1000" "$T/var/vectors/s/document-d"
+     echo a > "$T/var/ann/x/oracle/cohort-1000/rows.npy"; echo m > "$T/var/vectors/s/document-d/manifest.json"
+     echo z > "$T/var/vectors/s/document-d/shard-00000.npy"
+     (sleep 2; echo 0 > "$T/var/pipeline.exit") & echo $! > "$T/var/pipeline.pid"' KEEP_DISK=1
+packed="$(tar -tzf "$(ls "$T"/var/results-*.tar.gz | head -n 1)" | sort | tr '\n' ' ')"
+case "$packed" in
+    *"ann/x/oracle/cohort-1000/rows.npy"*"vectors/s/document-d/manifest.json"*) case "$packed" in
+        *shard-00000.npy*) fail=$((fail + 1)); echo "--- FAIL archive holds vector shards" ;;
+        *) pass=$((pass + 1)); echo "--- ok   archive holds the oracle arrays and vector-set records, not the shards" ;;
+        esac ;;
+    *) fail=$((fail + 1)); echo "--- FAIL archive contents: $packed" ;;
+esac
 echo "passed $pass, failed $fail"
 [ "$fail" = 0 ]

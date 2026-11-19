@@ -6,7 +6,7 @@
 #     setsid nohup bash infra/gpu/watchdog.sh </dev/null >var/watchdog.log 2>&1 &
 #
 # Triggers, checked every POLL_S seconds (30):
-#   success   run-all.sh wrote 0 to $WORK/pipeline.exit                   -> destroy
+#   success   run-all.sh wrote 0 to $WORK/pipeline.exit                   -> destroy (stop with KEEP_DISK=1)
 #   failure   it wrote another status, or its process vanished             -> hold, then stop
 #   inactive  no file under $WORK changed for IDLE_MIN minutes (45) while
 #             the 1-minute load average stayed under IDLE_LOAD (1.0)       -> hold, then stop
@@ -34,6 +34,9 @@ IDLE_MIN="${IDLE_MIN:-45}"
 IDLE_LOAD="${IDLE_LOAD:-1.0}"
 GRACE_MIN="${GRACE_MIN:-15}"
 HOLD_MIN="${HOLD_MIN:-60}"
+# KEEP_DISK=1: stop instead of destroying after success, when the disk holds data a later run needs
+# (the vector shards are not in the archive).
+KEEP_DISK="${KEEP_DISK:-0}"
 MAX_HOURS="${MAX_HOURS:-0}"
 API="${VAST_API_URL:-https://console.vast.ai/api/v0}"
 
@@ -74,8 +77,11 @@ pack() {
         rm -rf "$WORK/patches"
         git -C "$REPO" format-patch -q -o "$WORK/patches" "$(cat "$WORK/code-commit")..HEAD" 2>/dev/null || true
     fi
+    # JSON records of oracles, sweeps, projections and vector sets, and the oracle arrays themselves
+    # (rows.npy and scores.npy, about 11 MB per MS MARCO cohort); the vector shards stay on disk.
     (cd "$WORK" && tar -czf "$archive" --ignore-failed-read reports stages patches pipeline.log watchdog.log \
-        pipeline.exit $(find ann projections labels -name '*.json' -o -type f -path 'labels/*' 2>/dev/null) 2>/dev/null)
+        pipeline.exit $(find ann projections labels vectors -name '*.json' -o -type f -path 'labels/*' \
+                        -o -path '*/oracle/cohort-*' -name '*.npy' 2>/dev/null) 2>/dev/null)
     echo "watchdog: packed $archive ($(du -h "$archive" | cut -f1))"
 }
 
@@ -155,7 +161,7 @@ hold() {   # hold REASON new|any: keep the instance for a fix, then stop it
 while true; do
     if [ -f "$WORK/pipeline.exit" ]; then
         status="$(cat "$WORK/pipeline.exit")"
-        if [ "$status" = 0 ]; then finish success destroy; fi
+        if [ "$status" = 0 ]; then [ "$KEEP_DISK" = 1 ] && finish success stop; finish success destroy; fi
         hold "failure (exit $status)" any; continue
     fi
     if [ -n "${WATCH_PID:-}" ] && ! kill -0 "$WATCH_PID" 2>/dev/null; then
