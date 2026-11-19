@@ -129,8 +129,9 @@ bench_report() { # bench_report TEST_CONFIG DEV_CONFIG
 declare_runs() { "$P" evaluation/declare_runs.py --code-commit "$CODE_COMMIT" --runtime "$RUNTIME" "$@" >/dev/null; }
 
 phase_a() {
-    stage step3-litsearch bash infra/gpu/step3-embedding.sh
-    stage step4-litsearch env SCIFACT_ONLY=1 bash infra/gpu/step4-ann.sh
+    # ONLY_MSMARCO belongs to phase B; phase A always builds its own SciFact and LitSearch sets.
+    stage step3-litsearch env ONLY_MSMARCO=0 bash infra/gpu/step3-embedding.sh
+    stage step4-litsearch env ONLY_MSMARCO=0 SCIFACT_ONLY=1 bash infra/gpu/step4-ann.sh
     stage stack stack_up
     stage migrate migrate
     stage vespa-deploy deploy_vespa
@@ -184,6 +185,11 @@ phase_a() {
             "$WORK/reports/litsearch-test-$system-manifest.json"; done
         touch "$WORK/stages/test-reports.done"
     fi
+    # The same test runs in the measures of the LitSearch paper (R@5 specific, R@20 broad).
+    stage litsearch-compare "$P" evaluation/litsearch_compare.py "bm25=$(cat "$WORK/stages/test-bm25.out")" \
+        "dense=$(cat "$WORK/stages/test-dense.out")" "$hybrid_name=$(cat "$WORK/stages/test-$hybrid_name.out")" \
+        --queries manifests/queries/litsearch-test.json --corpus manifests/corpus/litsearch.json \
+        --data-dir "$WORK/data" --out "$WORK/reports/litsearch-compare.json"
 
     stage tei-up sh -c "$COMPOSE --profile tei up -d tei"
     stage tei-health wait_for http://127.0.0.1:8081/health 900
@@ -195,22 +201,26 @@ phase_a() {
     stage acl-01 sh -c "'$P' evaluation/acl_revocation.py config/ann/scifact-embeddinggemma-300m-fp32.toml \
         --collection '$(label scifact)' --vectors-dir '$WORK/vectors' --projections-dir '$WORK/projections' \
         --vespa-url $VESPA --postgres-dsn '$DSN' --out '$WORK/reports/acl-01.json' || true"
-    stage srv-01 serve_and_load "$lit" "$hybrid"
+    stage srv-01 serve_and_load "$lit" "$hybrid" parallel srv-01 bm25 dense hybrid
+    # The hybrid route with its branches one after the other, on the same host: the baseline of
+    # the parallel branches above.
+    stage srv-01-sequential serve_and_load "$lit" "$hybrid" sequential srv-01-sequential hybrid
 }
 
-serve_and_load() {   # serve_and_load COLLECTION FUSION
+serve_and_load() {   # serve_and_load COLLECTION FUSION BRANCHES OUT_DIR ROUTE...
     local cpus; cpus="$(nproc)"
     local generator="${GENERATOR_CPUS:-0-1}"
-    taskset -c "2-$((cpus - 1))" "$P" -m search_retrieval.serving.http --vespa-url "$VESPA" --collection "$1" \
-        --space "$SPACE" --tei-url http://127.0.0.1:8081 --postgres-dsn "$DSN" --source "$1" --fusion "$2" \
-        --port 8090 > "$WORK/reports/service.log" 2>&1 &
+    local collection="$1" fusion="$2" branches="$3" out="$4"; shift 4
+    taskset -c "2-$((cpus - 1))" "$P" -m search_retrieval.serving.http --vespa-url "$VESPA" --collection "$collection" \
+        --space "$SPACE" --tei-url http://127.0.0.1:8081 --postgres-dsn "$DSN" --source "$collection" --fusion "$fusion" \
+        --branches "$branches" --port 8090 > "$WORK/reports/service-$out.log" 2>&1 &
     local service=$!
     wait_for http://127.0.0.1:8090/health 60
     "$P" evaluation/load.py --url http://127.0.0.1:8090 --corpus manifests/corpus/litsearch.json \
         --queries manifests/queries/litsearch-test.json manifests/queries/litsearch-dev.json --data-dir "$WORK/data" \
-        --out-dir "$WORK/reports/srv-01" --rates ${RATES:-10 20 40} --measured "${MEASURED:-5000}" \
-        --repeats "${REPEATS:-3}" --cpus "$generator" || true
-    kill "$service"
+        --out-dir "$WORK/reports/$out" --rates ${RATES:-10 20 40} --measured "${MEASURED:-5000}" \
+        --repeats "${REPEATS:-3}" --cpus "$generator" --routes "$@" || true
+    kill "$service"; wait "$service" 2>/dev/null || true
 }
 
 phase_b() {

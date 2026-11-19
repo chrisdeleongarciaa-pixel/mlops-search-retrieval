@@ -48,7 +48,7 @@ fi
     setsid nohup env PHASES='$PHASES' B_ENGINE='${B_ENGINE:-1}' ONLY_MSMARCO='${ONLY_MSMARCO:-0}' ANN_SWEEP='${ANN_SWEEP:-1}' bash infra/gpu/run-all.sh </dev/null >>var/pipeline.log 2>&1 &
     unset HF_TOKEN
     setsid nohup env INSTANCE_ID=$INSTANCE BUDGET_USD=$BUDGET PRICE_PER_HOUR=$PRICE MAX_HOURS=$MAX_HOURS \
-        bash infra/gpu/watchdog.sh </dev/null >>var/watchdog.log 2>&1 &
+        KEEP_DISK='${KEEP_DISK:-0}' bash infra/gpu/watchdog.sh </dev/null >>var/watchdog.log 2>&1 &
     sleep 15
     echo '--- watchdog.log'; tail -n 3 var/watchdog.log
     echo '--- pipeline.log'; tail -n 5 var/pipeline.log

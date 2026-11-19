@@ -102,6 +102,37 @@ class ServiceTests(Fixture):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 service.search("q", **bad)
 
+    def test_parallel_branches_overlap_and_return_the_same_hits(self):
+        # The hybrid route's lexical query used to run before encoding and the dense query, so its
+        # latency was the sum of both branches; with branches="parallel" it is about the longer one.
+        import time
+        from unittest import mock
+
+        slow_lexical, slow_encode = self.engine.lexical, self.encoder.encode_queries
+
+        def lexical(*args, **kwargs):
+            time.sleep(0.2)
+            return slow_lexical(*args, **kwargs)
+
+        def encode(*args, **kwargs):
+            time.sleep(0.2)
+            return slow_encode(*args, **kwargs)
+
+        results = {}
+        with mock.patch.object(self.engine, "lexical", side_effect=lexical), \
+                mock.patch.object(self.encoder, "encode_queries", side_effect=encode):
+            for mode in ("sequential", "parallel"):
+                service = RetrievalService(self.engine, self.encoder, PublicAuthority(), "live", branch_depth=20,
+                                           branches=mode)
+                answer = service.search("topic1 paper", route="hybrid", k=5)
+                results[mode] = answer
+        self.assertEqual(results["parallel"].hits, results["sequential"].hits)
+        self.assertGreaterEqual(results["sequential"].stages_ms["service_total"], 400)
+        self.assertLess(results["parallel"].stages_ms["service_total"], 350)
+        self.assertEqual(set(results["parallel"].stages_ms), set(results["sequential"].stages_ms))
+        with self.assertRaises(ValueError):
+            RetrievalService(self.engine, self.encoder, PublicAuthority(), "live", branches="eventually")
+
     def test_private_documents_need_a_grant_and_the_authority_has_the_last_word(self):
         authority = MemoryAuthority({"p00": "alice"})
         service = self.service(authority)
@@ -213,6 +244,44 @@ class RevocationTests(Fixture):
         self.assertGreaterEqual(result["delivery_s"], 0.2)
 
 
+    def test_revocations_continue_past_skipped_probes_until_the_target_is_measured(self):
+        # 2026-11-18: 317 of 1,000 probes were skipped and ACL-01 stopped at 683 measured revocations.
+        from unittest import mock
+        import acl_revocation
+
+        class Documents:
+            def __init__(self, ids, vectors):
+                self.ids, self.vectors, self.n = ids, vectors, len(ids)
+
+            def take(self, positions, dtype):
+                return self.vectors[positions].astype(dtype)
+
+        class Ledger(MemoryAuthority):
+            def __init__(self):
+                super().__init__({})
+                self.public_again = []
+
+            def make_private(self, grants):
+                self.grants.update(grants)
+
+            def make_public(self, doc_ids):
+                self.public_again.extend(doc_ids)
+
+        outcomes = iter([{"skipped": "x"}] * 4 + [{"leaks": 0, "delivery_s": 0.01, "engine_s": 0.02}] * 20)
+        authority = Ledger()
+        with mock.patch.object(acl_revocation, "measure_one", side_effect=lambda *a, **k: dict(next(outcomes))):
+            results = acl_revocation.run_revocations(None, self.engine, authority, FixedEncoder(),
+                                                     Documents(self.ids, self.vectors), "live", target=6,
+                                                     principals=3, settle_s=0)
+        self.assertEqual(sum("skipped" not in item for item in results), 6)
+        self.assertEqual(len(results), 10)
+        self.assertEqual(sorted(authority.public_again), sorted(self.ids[:12]))
+
+    def test_the_probe_explores_widely(self):
+        import acl_revocation
+        self.assertGreaterEqual(acl_revocation.PROBE_EXPLORE, 100)
+
+
 class TeiParityTests(unittest.TestCase):
     def test_compare_applies_the_conformance_tolerance_per_query(self):
         from tei_parity import compare
@@ -226,3 +295,21 @@ class TeiParityTests(unittest.TestCase):
         self.assertEqual(result["queries_over_error_limit"], 1)
         # The shift is applied to a float32 value, so it is 2e-5 only to float32 resolution.
         self.assertAlmostEqual(result["max_absolute_error"], 2e-5, delta=1e-7)
+
+    def test_ranking_impact_reports_moved_documents_and_ndcg(self):
+        from tei_parity import ndcg_at, ranking_impact
+
+        rng = np.random.default_rng(3)
+        documents = unit(rng.standard_normal((50, 8)))
+        doc_ids = [f"d{index}" for index in range(50)]
+        canonical = documents[:4] + 0.0  # each query is its own document: rank 1
+        judgments = {f"q{index}": {f"d{index}": 1} for index in range(4)}
+        same = ranking_impact(canonical.copy(), canonical, documents, doc_ids, list(judgments), judgments, k=10)
+        self.assertEqual((same["identical_top_k"], same["mean_overlap_at_k"], same["mean_ndcg_delta"]), (1.0, 1.0, 0.0))
+        moved = canonical.copy()
+        moved[0] = documents[7]  # query 0 now retrieves another document first
+        result = ranking_impact(moved, canonical, documents, doc_ids, list(judgments), judgments, k=10)
+        self.assertEqual(result["identical_top_k"], 0.75)
+        self.assertLess(result["mean_ndcg_delta"], 0)
+        self.assertEqual(result["judged_queries"], 4)
+        self.assertAlmostEqual(ndcg_at(["a", "b"], {"b"}, 10), 1 / np.log2(3))

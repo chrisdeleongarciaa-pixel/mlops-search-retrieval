@@ -79,9 +79,12 @@ pack() {
     fi
     # JSON records of oracles, sweeps, projections and vector sets, and the oracle arrays themselves
     # (rows.npy and scores.npy, about 11 MB per MS MARCO cohort); the vector shards stay on disk.
+    # The engine runs' outputs (run.trec, per-query records, manifests) live in the clone.
     (cd "$WORK" && tar -czf "$archive" --ignore-failed-read reports stages patches pipeline.log watchdog.log \
         pipeline.exit $(find ann projections labels vectors -name '*.json' -o -type f -path 'labels/*' \
-                        -o -path '*/oracle/cohort-*' -name '*.npy' 2>/dev/null) 2>/dev/null)
+                        -o -path '*/oracle/cohort-*' -name '*.npy' 2>/dev/null) \
+        -C "$REPO" $(cd "$REPO" && find evaluation/runs -mindepth 2 -maxdepth 2 \( -name run.trec \
+                     -o -name per-query.jsonl -o -name manifest.json -o -name timings.json \) 2>/dev/null) 2>/dev/null)
     echo "watchdog: packed $archive ($(du -h "$archive" | cut -f1))"
 }
 

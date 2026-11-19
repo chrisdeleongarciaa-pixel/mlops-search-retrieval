@@ -7,6 +7,7 @@ takes effect at delivery as soon as it is committed, before the engine's partial
 visible. An unreachable authority fails the request.
 """
 
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from time import perf_counter_ns
 from typing import Protocol
@@ -67,11 +68,17 @@ def _timed(stages: dict, name: str, operation, *args, **kwargs):
 class RetrievalService:
     def __init__(self, engine: VespaPassages, encoder: Encoder | None, authority: Authority, collection: str, *,
                  fusion: Fusion = Fusion(), branch_depth: int = 100, explore: int = 0,
-                 lexical_profile: str = "bm25"):
+                 lexical_profile: str = "bm25", branches: str = "parallel", workers: int = 64):
         if branch_depth <= 0 or explore < 0:
             raise ValueError("Branch depth must be positive and exploration not negative")
+        if branches not in ("parallel", "sequential") or workers <= 0:
+            raise ValueError("Branches run in parallel or sequential, with a positive number of workers")
         self.engine, self.encoder, self.authority, self.collection = engine, encoder, authority, collection
         self.fusion, self.branch_depth, self.explore, self.lexical_profile = fusion, branch_depth, explore, lexical_profile
+        # Hybrid requests send the lexical query from this pool while the request thread encodes the
+        # query and runs the dense query, so the route waits for the longer branch, not their sum.
+        self.branches = branches
+        self._pool = ThreadPoolExecutor(workers, thread_name_prefix="lexical") if branches == "parallel" else None
 
     def search(self, query: str, *, route: str = "hybrid", k: int = 10, principal: str | None = None) -> Answer:
         if route not in ROUTES or not query.strip() or not 1 <= k <= self.branch_depth:
@@ -82,14 +89,20 @@ class RetrievalService:
         started = perf_counter_ns()
         tokens = self.authority.tokens(principal)
         depth = self.branch_depth if route == "hybrid" else k
-        lexical = dense = None
+        lexical = dense = pending = None
         if route in ("bm25", "hybrid"):
-            lexical = _timed(stages, "engine_lexical", self.engine.lexical, self.collection, query, depth,
-                             profile=self.lexical_profile, tokens=tokens)
+            arguments = (stages, "engine_lexical", self.engine.lexical, self.collection, query, depth)
+            options = {"profile": self.lexical_profile, "tokens": tokens}
+            if route == "hybrid" and self._pool is not None:
+                pending = self._pool.submit(_timed, *arguments, **options)
+            else:
+                lexical = _timed(*arguments, **options)
         if route in ("dense", "hybrid"):
             vector, = _timed(stages, "encode", self.encoder.encode_queries, [query])
             dense, _ = _timed(stages, "engine_dense", self.engine.dense, self.collection, vector, depth,
                               approximate=True, explore=self.explore, tokens=tokens)
+        if pending is not None:
+            lexical = pending.result()
         if route == "hybrid":
             branches = ([Ranked(hit.doc_id, hit.score) for hit in lexical], [Ranked(hit.doc_id, hit.score) for hit in dense])
             fused = _timed(stages, "fusion", lambda: (fuse(*branches, depth=depth) if self.fusion.kind == "rrf"

@@ -78,6 +78,45 @@ def measure_one(service: RetrievalService, engine: VespaPassages, authority, enc
     return {"doc_id": doc_id, "leaks": leaks, "delivery_s": delivery, "engine_s": engine_gone}
 
 
+PROBE_EXPLORE = 200
+
+
+def run_revocations(service: RetrievalService, engine: VespaPassages, authority, encoder: FixedEncoder,
+                    documents, collection: str, target: int, principals: int, settle_s: float = 1.0) -> list[dict]:
+    """Measure revocations until `target` were measured or every document was tried.
+
+    A document is measured only if its principal retrieves it first before the revocation; the
+    others are recorded as skipped, and further documents are granted in batches of `target`
+    until enough were measured. Every granted document is made public again at the end.
+    """
+    candidates = sorted(range(documents.n), key=documents.ids.__getitem__)
+    results, measured, start, granted = [], 0, 0, {}
+    try:
+        while measured < target and start < len(candidates):
+            batch = candidates[start:start + target]
+            grants = {documents.ids[position]: f"principal-{(start + index) % principals}"
+                      for index, position in enumerate(batch)}
+            start += len(batch)
+            authority.make_private(grants)
+            granted.update(grants)
+            for doc_id, principal in grants.items():
+                engine.update_tokens(collection, doc_id, [principal])
+            sleep(settle_s)
+            for position in batch:
+                if measured >= target:
+                    break
+                doc_id = documents.ids[position]
+                vector = documents.take(np.array([position]), np.float32)[0].tolist()
+                result = measure_one(service, engine, authority, encoder, collection, doc_id, granted[doc_id], vector)
+                results.append(result)
+                measured += "skipped" not in result
+    finally:
+        for doc_id in granted:
+            engine.update_tokens(collection, doc_id, [PUBLIC])
+        authority.make_public(list(granted))
+    return results
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("config")
@@ -102,24 +141,12 @@ def main() -> int:
         engine = VespaPassages(args.vespa_url, timeout=10)
         authority = PostgresAcl(args.postgres_dsn, tenant="bench", source=args.collection)
         encoder = FixedEncoder()
-        service = RetrievalService(engine, encoder, authority, args.collection, branch_depth=10)
-        order = sorted(range(documents.n), key=documents.ids.__getitem__)[:args.documents]
-        grants = {documents.ids[position]: f"principal-{index % args.principals}" for index, position in enumerate(order)}
-        authority.make_private(grants)
-        for doc_id, principal in grants.items():
-            engine.update_tokens(args.collection, doc_id, [principal])
-        sleep(1.0)
-        results = []
-        try:
-            for position in order:
-                doc_id = documents.ids[position]
-                vector = documents.take(np.array([position]), np.float32)[0].tolist()
-                results.append(measure_one(service, engine, authority, encoder, args.collection, doc_id,
-                                           grants[doc_id], vector))
-        finally:
-            for doc_id in grants:
-                engine.update_tokens(args.collection, doc_id, [PUBLIC])
-            authority.make_public(list(grants))
+        # The probe searches with the document's own vector; a wide HNSW exploration keeps an
+        # approximate miss from being mistaken for a document the principal cannot see (2026-11-18:
+        # 317 of 1,000 probes skipped with the default exploration).
+        service = RetrievalService(engine, encoder, authority, args.collection, branch_depth=10, explore=PROBE_EXPLORE)
+        results = run_revocations(service, engine, authority, encoder, documents, args.collection,
+                                  args.documents, args.principals)
         measured = [item for item in results if "skipped" not in item]
         delivery = np.array([item["delivery_s"] for item in measured if item["delivery_s"] is not None])
         engine_s = np.array([item["engine_s"] for item in measured if item["engine_s"] is not None])

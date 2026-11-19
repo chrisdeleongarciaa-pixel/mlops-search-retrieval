@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Unit, contract, evaluation and GPU-tooling tests (CPU)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12.10"
+      - name: Install the pinned CPU dependencies
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: \
+            -r config/requirements-cpu-linux-amd64.lock \
+            -r config/requirements-pdf.lock \
+            -r config/requirements-ann-linux-amd64-cpu.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+      - name: Unit and contract tests
+        run: |
+          python -B -m unittest discover -s tests/unit -v
+          python -B -m unittest discover -s tests/contract -v
+      - name: Evaluation tests (oracle, ANN sweeps, fusion, serving with HTTP fakes, load, ACL-01)
+        env:
+          PYTHONUTF8: "1"
+        run: python -B -m unittest discover -s evaluation -v
+      - name: Rented-GPU tooling (offer ranking, monitor, guard triggers)
+        run: |
+          python -B -m unittest discover -s infra/gpu/vast -v
+          bash infra/gpu/test_watchdog.sh
+          for script in infra/gpu/*.sh infra/gpu/vast/*.sh; do bash -n "$script"; done

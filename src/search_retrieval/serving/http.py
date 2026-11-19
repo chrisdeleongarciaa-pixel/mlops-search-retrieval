@@ -85,7 +85,7 @@ def build(args) -> RetrievalService:
     kind, _, alpha = args.fusion.partition(":")
     return RetrievalService(VespaPassages(args.vespa_url, timeout=args.engine_timeout), encoder, authority,
                             args.collection, fusion=Fusion(kind, float(alpha) if alpha else 0.5),
-                            branch_depth=args.branch_depth, explore=args.explore)
+                            branch_depth=args.branch_depth, explore=args.explore, branches=args.branches)
 
 
 def main() -> int:
@@ -100,6 +100,8 @@ def main() -> int:
     parser.add_argument("--fusion", default="rrf")
     parser.add_argument("--branch-depth", type=int, default=100)
     parser.add_argument("--explore", type=int, default=0)
+    parser.add_argument("--branches", choices=("parallel", "sequential"), default="parallel",
+                        help="run the hybrid route's lexical and dense branches concurrently or one after the other")
     parser.add_argument("--engine-timeout", type=float, default=2.0)
     parser.add_argument("--encode-timeout", type=float, default=2.0)
     parser.add_argument("--host", default="127.0.0.1")
