@@ -1,0 +1,23 @@
+{
+  "kind": "vespa-projection",
+  "schema_version": 1,
+  "body": {
+    "collection": "beir-scifact-ec89a6a623e2921a",
+    "documents": 5183,
+    "vector_set": "f2f6bf5f1c8235fdd0e987e9cde70a4dfb9371c13082087067b1ec5daaff5601",
+    "corpus": "27e7e64f87525b7105c12b36fe7753503d4f3889b055a27f01369bc5cc0403a6",
+    "text_transform": "fe6b511ac5113517def6f5dd8e8bc7819929f5fb3f240686f1a61e01a333f27e",
+    "application": "eba8bd9a6c1a572e11184fb520695d5583fb30746cc38085814f1990721cb76a",
+    "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd",
+    "sample": {
+      "sampled": 221,
+      "mismatches": [],
+      "mismatch_count": 0
+    },
+    "acl_tokens": [
+      "public"
+    ],
+    "code_commit": "baa03ea2ea0788ac0e38a5d24be929ae2bc024eb"
+  },
+  "sha256": "b2b29a92ce483264a5b0541e06b4685e9e489b75dc1278a31ce401144a15e8dc"
+}

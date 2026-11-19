@@ -1,0 +1,108 @@
+query: 6980 rows
+{"directory": "/root/mlops-search-retrieval/var/vectors/39ef5bd9cfc77676/query-8240f91423b21b8a", "encode_seconds": 3.2781634490002034, "encoded_rows": 6980, "resumed_from_rows": 0, "rows": 6980, "rows_per_second": 2129.2409938036517, "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd", "truncated": 0, "vector_set": "795156b6e5e1b8aba750bb506a7c6b25a1091c7d9935392d6f990ce52bd1676b"}
+{"rows": 6980, "vector_set": "795156b6e5e1b8aba750bb506a7c6b25a1091c7d9935392d6f990ce52bd1676b", "verified": "/root/mlops-search-retrieval/var/vectors/39ef5bd9cfc77676/query-8240f91423b21b8a"}
+Reports: /root/mlops-search-retrieval/var/reports. Each vector set keeps manifest.json and encoding.json beside its shards.
+== step4-msmarco (02:28:28)
+Collecting cuda-pathfinder==1.8.6 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 5))
+  Using cached cuda_pathfinder-1.8.6-py3-none-any.whl (62 kB)
+Collecting cuda-toolkit==13.5.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 10))
+  Downloading cuda_toolkit-13.5.0-py2.py3-none-any.whl (2.7 kB)
+Collecting faiss-gpu-cuvs==1.16.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 16))
+  Downloading faiss_gpu_cuvs-1.16.0-cp311-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (121.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 121.2/121.2 MB 3.6 MB/s eta 0:00:00
+Collecting libcuvs-cu13==26.10.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 19))
+  Downloading libcuvs_cu13-26.10.0-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (241.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 241.2/241.2 MB 3.9 MB/s eta 0:00:00
+Collecting libkvikio-cu13==26.10.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 23))
+  Downloading libkvikio_cu13-26.10.0-py3-none-manylinux_2_28_x86_64.whl (3.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 3.0 MB/s eta 0:00:00
+Collecting libraft-cu13==26.10.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 27))
+  Downloading libraft_cu13-26.10.0-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (20.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 20.6/20.6 MB 3.9 MB/s eta 0:00:00
+Collecting librmm-cu13==26.10.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 33))
+  Downloading librmm_cu13-26.10.0-py3-none-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (4.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 3.6 MB/s eta 0:00:00
+Collecting numpy==2.5.4 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 40))
+  Using cached numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+Collecting nvidia-cublas==13.10.0.20 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 110))
+  Downloading nvidia_cublas-13.10.0.20-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl (444.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.3/444.3 MB 14.7 MB/s eta 0:00:00
+Collecting nvidia-cuda-nvrtc==13.5.37 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 119))
+  Downloading nvidia_cuda_nvrtc-13.5.37-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (58.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.2/58.2 MB 23.0 MB/s eta 0:00:00
+Collecting nvidia-cuda-runtime==13.5.37 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 127))
+  Downloading nvidia_cuda_runtime-13.5.37-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.5/2.5 MB 129.6 MB/s eta 0:00:00
+Collecting nvidia-cufile==1.20.0.107 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 133))
+  Downloading nvidia_cufile-1.20.0.107-py3-none-manylinux_2_27_x86_64.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 6.2 MB/s eta 0:00:00
+Collecting nvidia-curand==10.4.5.25 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 137))
+  Downloading nvidia_curand-10.4.5.25-py3-none-manylinux_2_27_x86_64.whl (77.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 77.1/77.1 MB 11.4 MB/s eta 0:00:00
+Collecting nvidia-cusolver==12.4.1.2 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 145))
+  Downloading nvidia_cusolver-12.4.1.2-py3-none-manylinux_2_27_x86_64.whl (260.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 260.0/260.0 MB 25.5 MB/s eta 0:00:00
+Collecting nvidia-cusparse==12.9.4.2 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 151))
+  Downloading nvidia_cusparse-12.9.4.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (230.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 230.4/230.4 MB 15.7 MB/s eta 0:00:00
+Collecting nvidia-nccl-cu13==2.32.6 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 159))
+  Downloading nvidia_nccl_cu13-2.32.6-py3-none-manylinux_2_27_x86_64.whl (206.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 MB 20.6 MB/s eta 0:00:00
+Collecting nvidia-nvjitlink==13.5.37 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 163))
+  Using cached nvidia_nvjitlink-13.5.37-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (46.6 MB)
+Collecting packaging==26.3 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 175))
+  Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Collecting rapids-logger==0.3.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 179))
+  Downloading rapids_logger-0.3.0-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (274 kB)
+Collecting setuptools==70.2.0 (from -r config/requirements-ann-linux-amd64-gpu.lock (line 186))
+  Downloading setuptools-70.2.0-py3-none-any.whl (930 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 930.8/930.8 kB 109.3 MB/s eta 0:00:00
+Installing collected packages: cuda-toolkit, setuptools, rapids-logger, packaging, nvidia-nvjitlink, nvidia-nccl-cu13, nvidia-curand, nvidia-cufile, nvidia-cuda-runtime, nvidia-cuda-nvrtc, numpy, cuda-pathfinder, nvidia-cusparse, nvidia-cublas, librmm-cu13, nvidia-cusolver, libkvikio-cu13, libraft-cu13, libcuvs-cu13, faiss-gpu-cuvs
+Successfully installed cuda-pathfinder-1.8.6 cuda-toolkit-13.5.0 faiss-gpu-cuvs-1.16.0 libcuvs-cu13-26.10.0 libkvikio-cu13-26.10.0 libraft-cu13-26.10.0 librmm-cu13-26.10.0 numpy-2.5.4 nvidia-cublas-13.10.0.20 nvidia-cuda-nvrtc-13.5.37 nvidia-cuda-runtime-13.5.37 nvidia-cufile-1.20.0.107 nvidia-curand-10.4.5.25 nvidia-cusolver-12.4.1.2 nvidia-cusparse-12.9.4.2 nvidia-nccl-cu13-2.32.6 nvidia-nvjitlink-13.5.37 packaging-26.3 rapids-logger-0.3.0 setuptools-70.2.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: /root/mlops-search-retrieval/var/venv-ann/bin/python -m pip install --upgrade pip
+Obtaining file:///root/mlops-search-retrieval
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: mlops-search-retrieval
+  Building editable for mlops-search-retrieval (pyproject.toml): started
+  Building editable for mlops-search-retrieval (pyproject.toml): finished with status 'done'
+  Created wheel for mlops-search-retrieval: filename=mlops_search_retrieval-0.1.0-0.editable-py3-none-any.whl size=11754 sha256=aac2762d1e1965a16bfe0765b732d84f377d63e4d57446392ad7805229840dde
+  Stored in directory: /tmp/pip-ephem-wheel-cache-r6eib_l_/wheels/bd/b3/da/e19b6e5793d6c39621d9d30f18f0a08161b5d57b63a091d97a
+Successfully built mlops-search-retrieval
+Installing collected packages: mlops-search-retrieval
+Successfully installed mlops-search-retrieval-0.1.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: /root/mlops-search-retrieval/var/venv-ann/bin/python -m pip install --upgrade pip
+faiss 1.16.0 GPUs 1
+CPU threads: 23
+               total        used        free      shared  buff/cache   available
+Mem:              49           0           2           0          46          48
+== oracle scifact-embeddinggemma-300m-fp32
+{"cohort_permille": 1000, "directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-1000", "oracle": "50b034aa60dc10b66fa2acf455a44a3fb8bac753316c7241bc2e44e6b51c4b88", "eligible": 5183, "states": {"complete": 0, "certified": 1109, "full-scan": 0}, "observed_max_error": 1.050630765608851e-06, "epsilon": 4.5778472486453026e-05}
+{"cohort_permille": 500, "directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0500", "oracle": "75b41a3f3a6f3e9f23ab06437e509354cde26a3df086df1c3e8e73a9c6547dc8", "eligible": 2611, "states": {"complete": 0, "certified": 1109, "full-scan": 0}, "observed_max_error": 1.050630765608851e-06, "epsilon": 4.5778472486453026e-05}
+{"cohort_permille": 100, "directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0100", "oracle": "8f7eb022bb7304083d68b5d39e27162cdb7751e002937decd356042ff38d1625", "eligible": 553, "states": {"complete": 0, "certified": 1109, "full-scan": 0}, "observed_max_error": 1.6003707681289114e-07, "epsilon": 4.57784717885672e-05}
+{"cohort_permille": 10, "directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0010", "oracle": "7122084c491a9973a50e9930ca22b72bee68eccbda5fa7fb9f1d77df16371327", "eligible": 54, "states": {"complete": 1109, "certified": 0, "full-scan": 0}, "observed_max_error": 7.326577933230993e-08, "epsilon": 4.5778471252188085e-05}
+{"cohort_permille": 1, "directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0001", "oracle": "d28656e077903ad115f56a03b506bb0aad4941346f04a333a58af5582462dc0c", "eligible": 5, "states": {"complete": 1109, "certified": 0, "full-scan": 0}, "observed_max_error": 1.0310207726460519e-07, "epsilon": 4.5778471252188085e-05}
+{"documents": "f2f6bf5f1c8235fdd0e987e9cde70a4dfb9371c13082087067b1ec5daaff5601", "oracles": {"1": {"directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0001", "eligible": 5, "epsilon": 4.5778471252188085e-05, "observed_max_error": 1.0310207726460519e-07, "oracle": "d28656e077903ad115f56a03b506bb0aad4941346f04a333a58af5582462dc0c", "states": {"certified": 0, "complete": 1109, "full-scan": 0}}, "10": {"directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0010", "eligible": 54, "epsilon": 4.5778471252188085e-05, "observed_max_error": 7.326577933230993e-08, "oracle": "7122084c491a9973a50e9930ca22b72bee68eccbda5fa7fb9f1d77df16371327", "states": {"certified": 0, "complete": 1109, "full-scan": 0}}, "100": {"directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0100", "eligible": 553, "epsilon": 4.57784717885672e-05, "observed_max_error": 1.6003707681289114e-07, "oracle": "8f7eb022bb7304083d68b5d39e27162cdb7751e002937decd356042ff38d1625", "states": {"certified": 1109, "complete": 0, "full-scan": 0}}, "500": {"directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-0500", "eligible": 2611, "epsilon": 4.5778472486453026e-05, "observed_max_error": 1.050630765608851e-06, "oracle": "75b41a3f3a6f3e9f23ab06437e509354cde26a3df086df1c3e8e73a9c6547dc8", "states": {"certified": 1109, "complete": 0, "full-scan": 0}}, "1000": {"directory": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/oracle/cohort-1000", "eligible": 5183, "epsilon": 4.5778472486453026e-05, "observed_max_error": 1.050630765608851e-06, "oracle": "50b034aa60dc10b66fa2acf455a44a3fb8bac753316c7241bc2e44e6b51c4b88", "states": {"certified": 1109, "complete": 0, "full-scan": 0}}}, "queries": "b5c217f102b54d53eb78d12846cf2b997ecec7c5b109dda69f32181852170fe3"}
+== sweep scifact-embeddinggemma-300m-fp32
+build hnsw-reference-efc200-m16-s11
+{"builds": 1, "points": 3, "sweep": "/root/mlops-search-retrieval/var/ann/f2f6bf5f1c8235fd-b5c217f102b54d53/sweep-57f983b12396c908-2b8ead53f40302a4"}
+== oracle litsearch-embeddinggemma-300m-fp32
+{"cohort_permille": 1000, "directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-1000", "oracle": "690d9cea9d06b4a554318770239e207a9266ac6d189fc0953c4f53cad6a02126", "eligible": 64183, "states": {"complete": 0, "certified": 300, "full-scan": 0}, "observed_max_error": 9.684959577649366e-07, "epsilon": 4.5778471774428295e-05}
+{"cohort_permille": 500, "directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0500", "oracle": "270db03e475c8fab564029c5aa46eb7fbe6131ac1f858c262f9080e9a7b15426", "eligible": 32060, "states": {"complete": 0, "certified": 300, "full-scan": 0}, "observed_max_error": 3.421488321553312e-07, "epsilon": 4.5778471616913594e-05}
+{"cohort_permille": 100, "directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0100", "oracle": "c71a984d55dc6c4961d43ee68df07d8c1875c8a20e15cf1aa9aef33652667c8f", "eligible": 6357, "states": {"complete": 0, "certified": 300, "full-scan": 0}, "observed_max_error": 9.639454110477175e-07, "epsilon": 4.57784714601502e-05}
+{"cohort_permille": 10, "directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0010", "oracle": "bcf92fae9ced5b79cc5accea560aaf08956a5d09d79425bdb478d32453df86ae", "eligible": 689, "states": {"complete": 0, "certified": 300, "full-scan": 0}, "observed_max_error": 2.1291160290370925e-07, "epsilon": 4.5778470939315296e-05}
+{"cohort_permille": 1, "directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0001", "oracle": "88a89129a02a2ae0940e5f958cc293d6ca5f7500aaa58a9b18a012dfe66069d8", "eligible": 59, "states": {"complete": 300, "certified": 0, "full-scan": 0}, "observed_max_error": 8.204957624435849e-08, "epsilon": 4.577847056407348e-05}
+{"documents": "d558169b240597ef32ade87e713325d6b04e51433cb1ccab1b5766d0354079d7", "oracles": {"1": {"directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0001", "eligible": 59, "epsilon": 4.577847056407348e-05, "observed_max_error": 8.204957624435849e-08, "oracle": "88a89129a02a2ae0940e5f958cc293d6ca5f7500aaa58a9b18a012dfe66069d8", "states": {"certified": 0, "complete": 300, "full-scan": 0}}, "10": {"directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0010", "eligible": 689, "epsilon": 4.5778470939315296e-05, "observed_max_error": 2.1291160290370925e-07, "oracle": "bcf92fae9ced5b79cc5accea560aaf08956a5d09d79425bdb478d32453df86ae", "states": {"certified": 300, "complete": 0, "full-scan": 0}}, "100": {"directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0100", "eligible": 6357, "epsilon": 4.57784714601502e-05, "observed_max_error": 9.639454110477175e-07, "oracle": "c71a984d55dc6c4961d43ee68df07d8c1875c8a20e15cf1aa9aef33652667c8f", "states": {"certified": 300, "complete": 0, "full-scan": 0}}, "500": {"directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-0500", "eligible": 32060, "epsilon": 4.5778471616913594e-05, "observed_max_error": 3.421488321553312e-07, "oracle": "270db03e475c8fab564029c5aa46eb7fbe6131ac1f858c262f9080e9a7b15426", "states": {"certified": 300, "complete": 0, "full-scan": 0}}, "1000": {"directory": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/oracle/cohort-1000", "eligible": 64183, "epsilon": 4.5778471774428295e-05, "observed_max_error": 9.684959577649366e-07, "oracle": "690d9cea9d06b4a554318770239e207a9266ac6d189fc0953c4f53cad6a02126", "states": {"certified": 300, "complete": 0, "full-scan": 0}}}, "queries": "6fa6ce4303b1951170fac3bd67ce12e0a091e3cbd0aad64c4120b263a059d0bb"}
+== sweep litsearch-embeddinggemma-300m-fp32
+build hnsw-reference-efc200-m16-s11
+build hnsw-reference-efc200-m16-s29
+build hnsw-reference-efc200-m16-s47
+{"builds": 3, "points": 90, "sweep": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/sweep-96189f9bb76391f2-2b8ead53f40302a4"}
+== oracle msmarco-embeddinggemma-300m-fp32
+RuntimeError: Error in virtual void* faiss::gpu::StandardGpuResourcesImpl::allocMemory(const faiss::gpu::AllocRequest&) at /project/faiss/gpu/StandardGpuResources.cpp:554: CUDA memory allocation error

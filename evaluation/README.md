@@ -1,6 +1,6 @@
 # Evaluation
 
-Use [the run manifest template](run.example.toml) to identify corpus, queries, qrels, code, configuration and evaluator. Keep local runs in `evaluation/runs/` and publish verified artifacts with their checksums.
+Declare a run as a hashed configuration under `config/runs/` and execute it with [the runner](bench.py). Its keys, splits and outputs follow the [experiment identity contract](../docs/contracts/experiment-identity.md). The earlier [run manifest template](run.example.toml) remains for the archived evidence. Keep local runs in `evaluation/runs/` and publish verified artifacts with their checksums.
 
 Calibrate the evaluator using [synthetic fixtures](fixtures/README.md). Preserve both branch lists, candidate depth and fused ranking for hybrid experiments. [Evidence index](evidence/README.md)
 

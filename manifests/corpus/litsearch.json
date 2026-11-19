@@ -1,0 +1,15 @@
+{
+  "kind": "corpus",
+  "schema_version": 1,
+  "body": {
+    "name": "princeton-nlp/LitSearch",
+    "format": "prepared-jsonl",
+    "documents": 64183,
+    "directory": "litsearch",
+    "corpus_file": "corpus.jsonl",
+    "documents_sha256": "61722555377b13b8eb7f11024b96eea1f0a3fd9a89f0270cdd5f95edfc83395c",
+    "source": "https://huggingface.co/datasets/princeton-nlp/LitSearch at revision 9573fb284a1026c998df47024b888a163f0f0e25, prepared by evaluation/prepare_litsearch.py",
+    "license": "No license identifier in dataset card at pinned revision"
+  },
+  "sha256": "6522240841e8a16dd1455a8f6d093c1e4d338284a9d0c5313839823103d5350f"
+}

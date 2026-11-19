@@ -1,0 +1,15 @@
+{
+  "kind": "corpus",
+  "schema_version": 1,
+  "body": {
+    "name": "beir/scifact",
+    "format": "beir-zip",
+    "archive": "scifact.zip",
+    "archive_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+    "corpus_member": "scifact/corpus.jsonl",
+    "documents": 5183,
+    "source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+    "license": "https://github.com/allenai/scifact/blob/master/LICENSE.md"
+  },
+  "sha256": "27e7e64f87525b7105c12b36fe7753503d4f3889b055a27f01369bc5cc0403a6"
+}

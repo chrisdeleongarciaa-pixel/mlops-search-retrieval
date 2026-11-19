@@ -1,0 +1,29 @@
+# Anserini BM25 with its default parameters on MS MARCO passage dev.
+[run]
+id = "msmarco-dev.anserini-bm25-default"
+code_commit = "b03e9dcc2ac85debcbdb3845798718c6cc02ceb6"
+split = "dev"
+
+[corpus]
+manifest = "manifests/corpus/msmarco-v1-passage.json"
+
+[transform]
+manifest = "manifests/transform/passage-identity-v1.json"
+
+[index]
+engine = "anserini"
+schema_revision = "lucene-inverted.msmarco-v1-passage.20221004.252b5e"
+lexical = { k1 = 0.9, b = 0.4 }
+
+[ranking]
+profile = "anserini-bm25"
+target_hits = 1000
+fusion = { kind = "none" }
+
+[queries]
+set = "msmarco-passage/dev/small"
+judgments = "human"
+manifest = "manifests/queries/msmarco-passage-dev-small.json"
+
+[runtime]
+manifest = "manifests/runtime/bench-anserini-win64.json"

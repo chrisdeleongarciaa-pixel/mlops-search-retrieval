@@ -1,0 +1,23 @@
+{
+  "kind": "vespa-projection",
+  "schema_version": 1,
+  "body": {
+    "collection": "princeton-nlp-litsearch-81c97f4004c23c31",
+    "documents": 64183,
+    "vector_set": "1f446ec5914c94941c1228b3174877843dc46fcbc9bb422bd4c0b28c28ea938c",
+    "corpus": "6522240841e8a16dd1455a8f6d093c1e4d338284a9d0c5313839823103d5350f",
+    "text_transform": "fe6b511ac5113517def6f5dd8e8bc7819929f5fb3f240686f1a61e01a333f27e",
+    "application": "eba8bd9a6c1a572e11184fb520695d5583fb30746cc38085814f1990721cb76a",
+    "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd",
+    "sample": {
+      "sampled": 219,
+      "mismatches": [],
+      "mismatch_count": 0
+    },
+    "acl_tokens": [
+      "public"
+    ],
+    "code_commit": "1f8af906af5019b19ff1c03858d2b3e457a48309"
+  },
+  "sha256": "3cc0a6f70cf7dfd8da8647617d95d8f488511083fa013a87abd210a86401741c"
+}

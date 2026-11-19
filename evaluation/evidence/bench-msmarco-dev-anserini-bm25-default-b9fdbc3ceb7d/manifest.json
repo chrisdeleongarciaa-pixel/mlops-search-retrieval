@@ -1,0 +1,95 @@
+{
+  "command": "run",
+  "configuration": {
+    "path": "config/runs/msmarco-dev.anserini-bm25-default.toml",
+    "values": {
+      "corpus": {
+        "manifest": "manifests/corpus/msmarco-v1-passage.json"
+      },
+      "index": {
+        "engine": "anserini",
+        "lexical": {
+          "b": 0.4,
+          "k1": 0.9
+        },
+        "schema_revision": "lucene-inverted.msmarco-v1-passage.20221004.252b5e"
+      },
+      "queries": {
+        "judgments": "human",
+        "manifest": "manifests/queries/msmarco-passage-dev-small.json",
+        "set": "msmarco-passage/dev/small"
+      },
+      "ranking": {
+        "fusion": {
+          "kind": "none"
+        },
+        "profile": "anserini-bm25",
+        "target_hits": 1000
+      },
+      "run": {
+        "code_commit": "382b632d8b5b7f264c28e9cbd79a8cb2e5ceec5e",
+        "id": "msmarco-dev.anserini-bm25-default",
+        "split": "dev"
+      },
+      "runtime": {
+        "manifest": "manifests/runtime/bench-anserini-win64.json"
+      },
+      "transform": {
+        "manifest": "manifests/transform/passage-identity-v1.json"
+      }
+    }
+  },
+  "environment": {
+    "packages": {
+      "certifi": "2026.10.23",
+      "charset-normalizer": "3.5.2",
+      "colorama": "0.4.6",
+      "idna": "3.20",
+      "ir-datasets": "0.6.3",
+      "ir-measures": "0.4.3",
+      "lxml": "6.1.3",
+      "lz4": "4.4.5",
+      "numpy": "2.5.4",
+      "pytrec-eval-terrier": "0.5.10",
+      "pyyaml": "6.0.3",
+      "requests": "2.34.2",
+      "scipy": "1.18.1",
+      "tqdm": "4.67.1",
+      "urllib3": "2.8.0"
+    },
+    "platform": "win_amd64",
+    "python": "3.12.10",
+    "tools": {
+      "anserini_jar_sha256": "375848a9bb0a7514d2a8fe13df20086961570991bf20343abf0e5312af977def",
+      "java": "21.0.13"
+    }
+  },
+  "keys": {
+    "corpus": "b297a98ba74bfb9dc5de5a7f4d5469d6174718dad38653c04fa040910ddb80d8",
+    "frozen": "c9ad9aef945f1ff39eff236ae8d79f63cdf08e3500ee7649561150803596e1f6",
+    "generation": "9167ba85cf9889f9e08748d709ee0c04f4ca607893fff109729575bda02095ca",
+    "query_set": "6683521ac00d777149fa71b081c51751bf3920ae18b164a0bcfd106731ecf837",
+    "run": "b9fdbc3ceb7d2525f6d90b8260bbeef11c4dc659106c45eefbf51aa41ea487ba",
+    "runtime": "a1dd1fb5d5f59c3f901214bf3e3c6ff0c47c867c85dee07c9b4b0eb7e53bf46a",
+    "spaces": {},
+    "transform": "53d39794cc824f2ae0cac70891184a0e206de423fbdb3776d7b69effee6bc1cf"
+  },
+  "legacy_space_ids": {},
+  "metrics": {
+    "Judged@10": 0.039441260744985676,
+    "R@10": 0.378689111747851,
+    "R@100": 0.6578438395415472,
+    "R@1000": 0.8526146131805158,
+    "RR@10": 0.18398616227770956,
+    "nDCG@10": 0.228371020822125
+  },
+  "observations": "timings.json",
+  "outputs": {
+    "per-query.jsonl": "628bea7a74fd261a291411531c3ac0ac5ff895d784f4759d524b75eb255598f1",
+    "run.trec": "56911a784ee1bb7775b0dd090f37c1fe8be08822288f46e21f2e0e945d108e64"
+  },
+  "queries": 6980,
+  "run_id": "msmarco-dev.anserini-bm25-default",
+  "schema_version": 1,
+  "split": "dev"
+}

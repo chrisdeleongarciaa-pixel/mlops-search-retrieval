@@ -1,0 +1,16 @@
+{
+  "kind": "corpus",
+  "schema_version": 1,
+  "body": {
+    "name": "msmarco-v1-passage",
+    "format": "anserini-lucene-index",
+    "documents": 8841823,
+    "source": "https://huggingface.co/datasets/castorini/prebuilt-indexes-msmarco-v1/resolve/main/passage/original/lucene-inverted/tf/lucene-inverted.msmarco-v1-passage.20221004.252b5e.tar.gz",
+    "license": "MS MARCO terms of use, https://microsoft.github.io/msmarco/",
+    "archive": "lucene-inverted.msmarco-v1-passage.20221004.252b5e.tar.gz",
+    "archive_sha256": "404e92fb690d304f2c613e539d83f0ad84b4ad0ea597c613570caaa6ac76fed5",
+    "index_directory": "lucene-inverted.msmarco-v1-passage.20221004.252b5e",
+    "index_sha256": "6457a449560b6c5211223d41289331911fbc217b9584ce33dffad1c39b64a0c5"
+  },
+  "sha256": "b297a98ba74bfb9dc5de5a7f4d5469d6174718dad38653c04fa040910ddb80d8"
+}

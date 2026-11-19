@@ -60,3 +60,39 @@ def exact_cosine(
         score = fsum((x / norm) * (y / other) for x, y in zip(query, vector))
         hits.append(Ranked(item, score))
     return tuple(sorted(hits, key=lambda hit: (-hit.score, hit.id))[:k])
+
+
+def _branch(hits: Sequence[Ranked], depth: int) -> tuple[Ranked, ...]:
+    seen = set()
+    for hit in hits:
+        if not hit.id or hit.id in seen or not isfinite(hit.score):
+            raise ValueError("Invalid or duplicate branch result")
+        seen.add(hit.id)
+    return tuple(sorted(hits, key=lambda hit: (-hit.score, hit.id))[:depth])
+
+
+def min_max(hits: Sequence[Ranked]) -> dict[str, float]:
+    """Scores scaled to [0, 1] within one query's list. A list of equal scores maps to 1."""
+    if not hits:
+        return {}
+    low, high = min(hit.score for hit in hits), max(hit.score for hit in hits)
+    span = high - low
+    return {hit.id: (hit.score - low) / span if span > 0 else 1.0 for hit in hits}
+
+
+def convex(lexical: Sequence[Ranked], dense: Sequence[Ranked], *, alpha: float, depth: int = 1000) -> HybridRun:
+    """alpha * dense + (1 - alpha) * lexical over min-max scaled scores (Bruch, Gai and Ingber, TOIS 2023).
+
+    A document missing from one branch takes 0, the bottom of that branch's scaled range.
+    Ties are broken by ID.
+    """
+    if not 0.0 <= alpha <= 1.0 or depth <= 0:
+        raise ValueError("alpha must lie in [0, 1] and depth must be positive")
+    lexical_branch, dense_branch = _branch(lexical, depth), _branch(dense, depth)
+    lexical_scaled, dense_scaled = min_max(lexical_branch), min_max(dense_branch)
+    fused = sorted(
+        (Ranked(item, alpha * dense_scaled.get(item, 0.0) + (1 - alpha) * lexical_scaled.get(item, 0.0))
+         for item in lexical_scaled.keys() | dense_scaled.keys()),
+        key=lambda hit: (-hit.score, hit.id),
+    )
+    return HybridRun(lexical_branch, dense_branch, tuple(fused))

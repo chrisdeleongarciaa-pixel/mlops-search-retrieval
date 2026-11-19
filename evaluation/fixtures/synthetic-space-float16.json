@@ -1,0 +1,21 @@
+{
+  "kind": "space",
+  "schema_version": 1,
+  "body": {
+    "encoder": "synthetic/hash",
+    "revision": "1",
+    "files": {
+      "none": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "query_template": "query: {text}",
+    "doc_template": "title: {title or none} | text: {text}",
+    "pooling": "none",
+    "normalize": true,
+    "max_tokens": 256,
+    "dim": 64,
+    "adapter": "synthetic-hash",
+    "source": "evaluation/embed.py SyntheticEncoder; pipeline tests only",
+    "dtype": "float16"
+  },
+  "sha256": "f0d6940bf8428aa0ee396d9f567edfa69d4d2e7b4da30e3e23491379a45d4caf"
+}

@@ -1,0 +1,52 @@
+# Serving stack on one GPU host: PostgreSQL (authority), Vespa (engine) and TEI (query encoder).
+# The retrieval service and the load generator run from the repository's Python environment.
+#
+#   RETRIEVAL_LAB_PASSWORD=... TEI_IMAGE=... MODEL_DIR=... docker compose -f infra/deploy/compose.yaml up -d
+#
+# TEI_IMAGE is chosen by infra/gpu/run-all.sh from the GPU's compute capability. MODEL_DIR is the
+# EmbeddingGemma snapshot verified by evaluation/fetch_model.py; TEI reads it read-only.
+services:
+  postgres:
+    image: postgres@sha256:996e9dc583ba9f0265a2c75547a9c95fb22c251e394749cab205a0a00e1856a1
+    command: ["postgres", "-c", "fsync=on", "-c", "synchronous_commit=on", "-c", "full_page_writes=on"]
+    environment:
+      POSTGRES_DB: retrieval_lab
+      POSTGRES_PASSWORD: "${RETRIEVAL_LAB_PASSWORD:?Set RETRIEVAL_LAB_PASSWORD}"
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d retrieval_lab"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+
+  vespa:
+    image: vespaengine/vespa@sha256:aa9e7347e8fb7e06bae439a99febdf5c30fe220f150205572dab0d00deaf3f20
+    hostname: retrieval-vespa
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:19071:19071"
+    volumes:
+      - vespa_data:/opt/vespa/var
+
+  tei:
+    image: "${TEI_IMAGE:?Set TEI_IMAGE}"
+    profiles: ["tei"]
+    command: ["--model-id", "/model", "--dtype", "float32", "--port", "80", "--max-client-batch-size", "64"]
+    ports:
+      - "127.0.0.1:8081:80"
+    volumes:
+      - "${MODEL_DIR:?Set MODEL_DIR}:/model:ro"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  postgres_data:
+  vespa_data:

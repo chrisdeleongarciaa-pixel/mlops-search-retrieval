@@ -1,0 +1,29 @@
+# Reference runs executed by `python evaluation/bench.py regress`.
+# A check passes when |observed - expected| <= tolerance. `fast` checks run in minutes on a laptop.
+
+[[check]]
+name = "scifact-bm25-reference"
+config = "config/runs/scifact-regression.bm25-reference.toml"
+measure = "nDCG@10"
+expected = 0.66168
+tolerance = 0.000005
+fast = true
+source = "evaluation/evidence/scifact-bm25-v1/manifest.json, BEIR evaluator rounded to five decimals"
+
+[[check]]
+name = "msmarco-dev-anserini-bm25-tuned"
+config = "config/runs/msmarco-dev.anserini-bm25-tuned.toml"
+measure = "RR@10"
+expected = 0.187
+tolerance = 0.001
+fast = false
+source = "Pyserini docs/experiments-msmarco-passage.md: MRR@10 0.18741227770955546 with k1=0.82, b=0.68 on 6,980 dev queries"
+
+[[check]]
+name = "msmarco-dev-anserini-bm25-default"
+config = "config/runs/msmarco-dev.anserini-bm25-default.toml"
+measure = "RR@10"
+expected = 0.184
+tolerance = 0.001
+fast = false
+source = "Anserini docs/installation-fatjar.md: recip_rank 0.1840 with default BM25 on the prebuilt msmarco-v1-passage index"

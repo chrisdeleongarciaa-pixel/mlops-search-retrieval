@@ -1,0 +1,36 @@
+# Step 4 of the workbench in its reduced scope: exact oracle and ANN sweeps over MS MARCO passage
+# (8,841,823 documents) with EmbeddingGemma in float32, and the 6,980 dev queries.
+#
+# Oracle: FAISS flat on GPU in blocks of rows, certified in float64, for five selectivity cohorts.
+# Sweep: FAISS HNSW on CPU with M = 16 and efConstruction = 200, the setting the engine uses,
+# with three insertion orders over all cohorts: the gate of step 4.
+#
+# The search depth is 100, so ef_search starts at 100.
+
+[inputs]
+space = "manifests/space/embeddinggemma-300m-fp32.json"
+corpus = "manifests/corpus/msmarco-v1-passage-text.json"
+transform = "manifests/transform/passage-identity-v1.json"
+queries = "manifests/queries/msmarco-passage-dev-small.json"
+
+[oracle]
+k = 100
+initial_candidates = 200
+query_batch = 1024
+cohorts_permille = [1000, 500, 100, 10, 1]
+
+[measure]
+recall_at = [10, 100]
+search_threads = 0
+build_threads = 0
+timing_repeats = 3
+warmup = 1
+add_batch = 65536
+
+[[hnsw]]
+name = "orders"
+m = [16]
+ef_construction = [200]
+insertion_seeds = [11, 29, 47]
+ef_search = [100, 128, 192, 256, 384, 512, 768, 1024]
+cohorts_permille = [1000, 500, 100, 10, 1]

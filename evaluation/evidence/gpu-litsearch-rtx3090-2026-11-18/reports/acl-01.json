@@ -1,0 +1,5457 @@
+{
+  "report": {
+    "collection": "beir-scifact-23c78f80b25a054c",
+    "revocations": 683,
+    "skipped": 317,
+    "leaks": 0,
+    "limit_s": 1.0,
+    "delivery_exclusion_s": {
+      "n": 683,
+      "mean": 0.00664975721668864,
+      "max": 0.012279635000140843,
+      "p50": {
+        "value": 0.0066233249999640975,
+        "rank": 342,
+        "low": 0.006511877999855642,
+        "high": 0.006740152000020316,
+        "ranks": [
+          316,
+          368
+        ],
+        "bounded": true
+      },
+      "p95": {
+        "value": 0.008249370999919847,
+        "rank": 649,
+        "low": 0.00805255499994928,
+        "high": 0.008461089000093125,
+        "ranks": [
+          637,
+          661
+        ],
+        "bounded": true
+      },
+      "p99": {
+        "value": 0.009108185000059166,
+        "rank": 677,
+        "low": 0.00864906499987228,
+        "high": 0.010656826999820623,
+        "ranks": [
+          671,
+          682
+        ],
+        "bounded": true
+      }
+    },
+    "delivery_never_excluded": 0,
+    "engine_exclusion_s": {
+      "n": 683,
+      "mean": 0.012221508204975659,
+      "max": 0.017325625000012224,
+      "p50": {
+        "value": 0.012244667000004483,
+        "rank": 342,
+        "low": 0.01214097899992339,
+        "high": 0.012361636999912662,
+        "ranks": [
+          316,
+          368
+        ],
+        "bounded": true
+      },
+      "p95": {
+        "value": 0.014545882999982496,
+        "rank": 649,
+        "low": 0.014320511000050828,
+        "high": 0.014744745999905717,
+        "ranks": [
+          637,
+          661
+        ],
+        "bounded": true
+      },
+      "p99": {
+        "value": 0.01564206199986984,
+        "rank": 677,
+        "low": 0.015030444999865722,
+        "high": 0.017116424999812807,
+        "ranks": [
+          671,
+          682
+        ],
+        "bounded": true
+      }
+    },
+    "engine_never_excluded": 0,
+    "passed": false,
+    "scope": "search and delivery through the retrieval service; no generation context is served"
+  },
+  "revocations": [
+    {
+      "doc_id": "10009203",
+      "leaks": 0,
+      "delivery_s": 0.007869103999837535,
+      "engine_s": 0.014087873999869771
+    },
+    {
+      "doc_id": "10010651",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10012166",
+      "leaks": 0,
+      "delivery_s": 0.006592103999992105,
+      "engine_s": 0.012237072000061744
+    },
+    {
+      "doc_id": "10015292",
+      "leaks": 0,
+      "delivery_s": 0.007731118000037895,
+      "engine_s": 0.01227341300000262
+    },
+    {
+      "doc_id": "10017612",
+      "leaks": 0,
+      "delivery_s": 0.006460798000034629,
+      "engine_s": 0.01326856100013174
+    },
+    {
+      "doc_id": "10024681",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10029891",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10029970",
+      "leaks": 0,
+      "delivery_s": 0.007184135999978025,
+      "engine_s": 0.012695688999883714
+    },
+    {
+      "doc_id": "10039688",
+      "leaks": 0,
+      "delivery_s": 0.006416567000087525,
+      "engine_s": 0.01295862799997849
+    },
+    {
+      "doc_id": "1006165",
+      "leaks": 0,
+      "delivery_s": 0.0064137479998862545,
+      "engine_s": 0.013360225000042192
+    },
+    {
+      "doc_id": "10068634",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10071552",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10071590",
+      "leaks": 0,
+      "delivery_s": 0.006495711999832565,
+      "engine_s": 0.013979098999925554
+    },
+    {
+      "doc_id": "10072941",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10074251",
+      "leaks": 0,
+      "delivery_s": 0.0065236110001478664,
+      "engine_s": 0.012214541000048484
+    },
+    {
+      "doc_id": "10078024",
+      "leaks": 0,
+      "delivery_s": 0.0062818930000503315,
+      "engine_s": 0.012043704000006983
+    },
+    {
+      "doc_id": "10086360",
+      "leaks": 0,
+      "delivery_s": 0.006660366999994949,
+      "engine_s": 0.011987022999846886
+    },
+    {
+      "doc_id": "10128893",
+      "leaks": 0,
+      "delivery_s": 0.005471861000160061,
+      "engine_s": 0.01296754999998484
+    },
+    {
+      "doc_id": "10145528",
+      "leaks": 0,
+      "delivery_s": 0.006984669000075883,
+      "engine_s": 0.012610966000011103
+    },
+    {
+      "doc_id": "10162553",
+      "leaks": 0,
+      "delivery_s": 0.006797822000180531,
+      "engine_s": 0.012110376000009637
+    },
+    {
+      "doc_id": "10165258",
+      "leaks": 0,
+      "delivery_s": 0.006405148000112604,
+      "engine_s": 0.01200587300013467
+    },
+    {
+      "doc_id": "10165723",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10169908",
+      "leaks": 0,
+      "delivery_s": 0.0065505019999818614,
+      "engine_s": 0.012060653999924398
+    },
+    {
+      "doc_id": "10189634",
+      "leaks": 0,
+      "delivery_s": 0.007103573999984292,
+      "engine_s": 0.012647367999989001
+    },
+    {
+      "doc_id": "10190462",
+      "leaks": 0,
+      "delivery_s": 0.006468068000003768,
+      "engine_s": 0.012262900999985504
+    },
+    {
+      "doc_id": "10190778",
+      "leaks": 0,
+      "delivery_s": 0.0068028319999484665,
+      "engine_s": 0.013917837000008149
+    },
+    {
+      "doc_id": "10207180",
+      "leaks": 0,
+      "delivery_s": 0.006238810000013473,
+      "engine_s": 0.011090747000025658
+    },
+    {
+      "doc_id": "10209731",
+      "leaks": 0,
+      "delivery_s": 0.005958529000054114,
+      "engine_s": 0.01132737700004327
+    },
+    {
+      "doc_id": "10212612",
+      "leaks": 0,
+      "delivery_s": 0.005593696000005366,
+      "engine_s": 0.01214097899992339
+    },
+    {
+      "doc_id": "10218447",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1022115",
+      "leaks": 0,
+      "delivery_s": 0.005401238000104058,
+      "engine_s": 0.012393277000001035
+    },
+    {
+      "doc_id": "10247282",
+      "leaks": 0,
+      "delivery_s": 0.005256941999959963,
+      "engine_s": 0.011615067999855455
+    },
+    {
+      "doc_id": "10247314",
+      "leaks": 0,
+      "delivery_s": 0.006293422999988252,
+      "engine_s": 0.01114185999995243
+    },
+    {
+      "doc_id": "102662",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10273147",
+      "leaks": 0,
+      "delivery_s": 0.005749442000023919,
+      "engine_s": 0.0117423819999658
+    },
+    {
+      "doc_id": "10279084",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10284593",
+      "leaks": 0,
+      "delivery_s": 0.006450577999885354,
+      "engine_s": 0.012520221999920977
+    },
+    {
+      "doc_id": "10300000",
+      "leaks": 0,
+      "delivery_s": 0.006478810000089652,
+      "engine_s": 0.0123257539999031
+    },
+    {
+      "doc_id": "103007",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10300888",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10314816",
+      "leaks": 0,
+      "delivery_s": 0.0063998769999216165,
+      "engine_s": 0.012737409999999727
+    },
+    {
+      "doc_id": "1031534",
+      "leaks": 0,
+      "delivery_s": 0.00625295100007861,
+      "engine_s": 0.012834783000016614
+    },
+    {
+      "doc_id": "1032372",
+      "leaks": 0,
+      "delivery_s": 0.006923226000026261,
+      "engine_s": 0.012153836999914347
+    },
+    {
+      "doc_id": "10326242",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10335603",
+      "leaks": 0,
+      "delivery_s": 0.0061191749998670275,
+      "engine_s": 0.013235538999879282
+    },
+    {
+      "doc_id": "10342807",
+      "leaks": 0,
+      "delivery_s": 0.006508130999918649,
+      "engine_s": 0.015479795999908674
+    },
+    {
+      "doc_id": "10354110",
+      "leaks": 0,
+      "delivery_s": 0.006588503000102719,
+      "engine_s": 0.0132126190001145
+    },
+    {
+      "doc_id": "10359591",
+      "leaks": 0,
+      "delivery_s": 0.006050804000096832,
+      "engine_s": 0.013074723000045196
+    },
+    {
+      "doc_id": "10365749",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10365787",
+      "leaks": 0,
+      "delivery_s": 0.006695618000094328,
+      "engine_s": 0.014136304000203381
+    },
+    {
+      "doc_id": "10374686",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10408324",
+      "leaks": 0,
+      "delivery_s": 0.006423756999993202,
+      "engine_s": 0.012395236999964254
+    },
+    {
+      "doc_id": "104130",
+      "leaks": 0,
+      "delivery_s": 0.007664185999828987,
+      "engine_s": 0.013141945999905147
+    },
+    {
+      "doc_id": "104143831",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10423989",
+      "leaks": 0,
+      "delivery_s": 0.006737268000051699,
+      "engine_s": 0.015211095000040586
+    },
+    {
+      "doc_id": "10430148",
+      "leaks": 0,
+      "delivery_s": 0.007355473999950846,
+      "engine_s": 0.014227337999955125
+    },
+    {
+      "doc_id": "10443642",
+      "leaks": 0,
+      "delivery_s": 0.008037100000137798,
+      "engine_s": 0.01460087200007365
+    },
+    {
+      "doc_id": "1044552",
+      "leaks": 0,
+      "delivery_s": 0.007706295999923896,
+      "engine_s": 0.013868753999986438
+    },
+    {
+      "doc_id": "10450300",
+      "leaks": 0,
+      "delivery_s": 0.008303690000047936,
+      "engine_s": 0.013517939999928785
+    },
+    {
+      "doc_id": "10450725",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10463997",
+      "leaks": 0,
+      "delivery_s": 0.007972197000071901,
+      "engine_s": 0.01450142900011997
+    },
+    {
+      "doc_id": "10474873",
+      "leaks": 0,
+      "delivery_s": 0.007686665999926845,
+      "engine_s": 0.014611362999858102
+    },
+    {
+      "doc_id": "10482574",
+      "leaks": 0,
+      "delivery_s": 0.007685115999947811,
+      "engine_s": 0.014282839000088643
+    },
+    {
+      "doc_id": "10485142",
+      "leaks": 0,
+      "delivery_s": 0.008721475999891481,
+      "engine_s": 0.014688316000047053
+    },
+    {
+      "doc_id": "10486817",
+      "leaks": 0,
+      "delivery_s": 0.007219817000077455,
+      "engine_s": 0.014707134999980553
+    },
+    {
+      "doc_id": "10491220",
+      "leaks": 0,
+      "delivery_s": 0.008285679000209711,
+      "engine_s": 0.014442587000075946
+    },
+    {
+      "doc_id": "10494012",
+      "leaks": 0,
+      "delivery_s": 0.008495456999980888,
+      "engine_s": 0.0147318560000258
+    },
+    {
+      "doc_id": "1049501",
+      "leaks": 0,
+      "delivery_s": 0.007825509999975111,
+      "engine_s": 0.013856383000074857
+    },
+    {
+      "doc_id": "10504681",
+      "leaks": 0,
+      "delivery_s": 0.007639073000063945,
+      "engine_s": 0.014280518000077791
+    },
+    {
+      "doc_id": "10509344",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10518721",
+      "leaks": 0,
+      "delivery_s": 0.008512258000109796,
+      "engine_s": 0.013824752000118679
+    },
+    {
+      "doc_id": "10526279",
+      "leaks": 0,
+      "delivery_s": 0.007713747000025251,
+      "engine_s": 0.014369493000003786
+    },
+    {
+      "doc_id": "10530014",
+      "leaks": 0,
+      "delivery_s": 0.007298459999901752,
+      "engine_s": 0.01275510999994367
+    },
+    {
+      "doc_id": "10534299",
+      "leaks": 0,
+      "delivery_s": 0.00633430299990323,
+      "engine_s": 0.012700578000021778
+    },
+    {
+      "doc_id": "10536636",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10538985",
+      "leaks": 0,
+      "delivery_s": 0.00639452599989454,
+      "engine_s": 0.013709047000020291
+    },
+    {
+      "doc_id": "10542877",
+      "leaks": 0,
+      "delivery_s": 0.00627467100002832,
+      "engine_s": 0.013309891000062635
+    },
+    {
+      "doc_id": "10546779",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10548391",
+      "leaks": 0,
+      "delivery_s": 0.006806043000096906,
+      "engine_s": 0.013772320000043692
+    },
+    {
+      "doc_id": "10555591",
+      "leaks": 0,
+      "delivery_s": 0.008433014000047478,
+      "engine_s": 0.013877203999982157
+    },
+    {
+      "doc_id": "10557471",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10559501",
+      "leaks": 0,
+      "delivery_s": 0.0073558540000249195,
+      "engine_s": 0.01411034199986716
+    },
+    {
+      "doc_id": "10562341",
+      "leaks": 0,
+      "delivery_s": 0.007256057999939003,
+      "engine_s": 0.013607553000156258
+    },
+    {
+      "doc_id": "10574949",
+      "leaks": 0,
+      "delivery_s": 0.006279131999917809,
+      "engine_s": 0.013695287000018652
+    },
+    {
+      "doc_id": "10576136",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10577574",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10582939",
+      "leaks": 0,
+      "delivery_s": 0.007214748000023974,
+      "engine_s": 0.01521187599996665
+    },
+    {
+      "doc_id": "10605189",
+      "leaks": 0,
+      "delivery_s": 0.0066233249999640975,
+      "engine_s": 0.012524292000080095
+    },
+    {
+      "doc_id": "10607877",
+      "leaks": 0,
+      "delivery_s": 0.006413316000134728,
+      "engine_s": 0.014282819000072777
+    },
+    {
+      "doc_id": "10608397",
+      "leaks": 0,
+      "delivery_s": 0.006619815000021845,
+      "engine_s": 0.012022243000046728
+    },
+    {
+      "doc_id": "10608822",
+      "leaks": 0,
+      "delivery_s": 0.005836004000002504,
+      "engine_s": 0.011952210000117702
+    },
+    {
+      "doc_id": "10617916",
+      "leaks": 0,
+      "delivery_s": 0.005591304999825297,
+      "engine_s": 0.010478762999809987
+    },
+    {
+      "doc_id": "10624000",
+      "leaks": 0,
+      "delivery_s": 0.00533416500002204,
+      "engine_s": 0.010250263999978415
+    },
+    {
+      "doc_id": "10627801",
+      "leaks": 0,
+      "delivery_s": 0.00798875800001042,
+      "engine_s": 0.012738330000047426
+    },
+    {
+      "doc_id": "10628767",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "106301",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10641162",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10641715",
+      "leaks": 0,
+      "delivery_s": 0.004785314999935508,
+      "engine_s": 0.011493600999983755
+    },
+    {
+      "doc_id": "10648422",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10650521",
+      "leaks": 0,
+      "delivery_s": 0.006629224999869621,
+      "engine_s": 0.01107329599994955
+    },
+    {
+      "doc_id": "1065627",
+      "leaks": 0,
+      "delivery_s": 0.007724826999947254,
+      "engine_s": 0.013154044999964754
+    },
+    {
+      "doc_id": "10660080",
+      "leaks": 0,
+      "delivery_s": 0.006376775000035195,
+      "engine_s": 0.010932099000001472
+    },
+    {
+      "doc_id": "10666475",
+      "leaks": 0,
+      "delivery_s": 0.006419617999881666,
+      "engine_s": 0.01045647299997654
+    },
+    {
+      "doc_id": "10669582",
+      "leaks": 0,
+      "delivery_s": 0.006307902000116883,
+      "engine_s": 0.01023965300009877
+    },
+    {
+      "doc_id": "10669939",
+      "leaks": 0,
+      "delivery_s": 0.004992413000081797,
+      "engine_s": 0.010146909000013693
+    },
+    {
+      "doc_id": "10670430",
+      "leaks": 0,
+      "delivery_s": 0.005851403999940885,
+      "engine_s": 0.010173640999937561
+    },
+    {
+      "doc_id": "10675756",
+      "leaks": 0,
+      "delivery_s": 0.004672669000001406,
+      "engine_s": 0.010168750000048021
+    },
+    {
+      "doc_id": "1067605",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1068106",
+      "leaks": 0,
+      "delivery_s": 0.005346415000076377,
+      "engine_s": 0.009494434000089313
+    },
+    {
+      "doc_id": "10692412",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10692948",
+      "leaks": 0,
+      "delivery_s": 0.007938684999999168,
+      "engine_s": 0.012729459000183851
+    },
+    {
+      "doc_id": "10697096",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10698739",
+      "leaks": 0,
+      "delivery_s": 0.008064548999982435,
+      "engine_s": 0.013727355999890278
+    },
+    {
+      "doc_id": "10699587",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10703001",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10704438",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1070920",
+      "leaks": 0,
+      "delivery_s": 0.007074132999832727,
+      "engine_s": 0.012608844999931534
+    },
+    {
+      "doc_id": "1071991",
+      "leaks": 0,
+      "delivery_s": 0.006969177999962994,
+      "engine_s": 0.013309163000030821
+    },
+    {
+      "doc_id": "10743131",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10749308",
+      "leaks": 0,
+      "delivery_s": 0.007301230999928521,
+      "engine_s": 0.012988038999992568
+    },
+    {
+      "doc_id": "10761515",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10765888",
+      "leaks": 0,
+      "delivery_s": 0.007617032999860385,
+      "engine_s": 0.01415958400002637
+    },
+    {
+      "doc_id": "10766688",
+      "leaks": 0,
+      "delivery_s": 0.007639362999952937,
+      "engine_s": 0.012827313000116192
+    },
+    {
+      "doc_id": "10786948",
+      "leaks": 0,
+      "delivery_s": 0.00666475699995317,
+      "engine_s": 0.012240751000035743
+    },
+    {
+      "doc_id": "10790846",
+      "leaks": 0,
+      "delivery_s": 0.006791612000142777,
+      "engine_s": 0.012956739000173911
+    },
+    {
+      "doc_id": "10795063",
+      "leaks": 0,
+      "delivery_s": 0.007114762999890445,
+      "engine_s": 0.012341273999936675
+    },
+    {
+      "doc_id": "10795340",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10812605",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10827901",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10831818",
+      "leaks": 0,
+      "delivery_s": 0.007784579999906782,
+      "engine_s": 0.012679696999839507
+    },
+    {
+      "doc_id": "1084062",
+      "leaks": 0,
+      "delivery_s": 0.006511239000019486,
+      "engine_s": 0.012946257000066907
+    },
+    {
+      "doc_id": "1084345",
+      "leaks": 0,
+      "delivery_s": 0.00701530899982572,
+      "engine_s": 0.012992368999903192
+    },
+    {
+      "doc_id": "10846815",
+      "leaks": 0,
+      "delivery_s": 0.00692185499997322,
+      "engine_s": 0.014286029000004419
+    },
+    {
+      "doc_id": "10852047",
+      "leaks": 0,
+      "delivery_s": 0.006255140000121173,
+      "engine_s": 0.011881615999982387
+    },
+    {
+      "doc_id": "10854174",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10874408",
+      "leaks": 0,
+      "delivery_s": 0.007346542000050249,
+      "engine_s": 0.012784110999973564
+    },
+    {
+      "doc_id": "10883736",
+      "leaks": 0,
+      "delivery_s": 0.007858340999973734,
+      "engine_s": 0.012931664999996428
+    },
+    {
+      "doc_id": "108886332",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10889845",
+      "leaks": 0,
+      "delivery_s": 0.005538711999861334,
+      "engine_s": 0.012127435999900626
+    },
+    {
+      "doc_id": "10893238",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10906636",
+      "leaks": 0,
+      "delivery_s": 0.007185965999951804,
+      "engine_s": 0.012607634999994843
+    },
+    {
+      "doc_id": "10931595",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10937190",
+      "leaks": 0,
+      "delivery_s": 0.007450147000099605,
+      "engine_s": 0.012345744999947783
+    },
+    {
+      "doc_id": "10944947",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10958594",
+      "leaks": 0,
+      "delivery_s": 0.006012281000039366,
+      "engine_s": 0.010381547999941176
+    },
+    {
+      "doc_id": "10976596",
+      "leaks": 0,
+      "delivery_s": 0.006837031000031857,
+      "engine_s": 0.012590863000013996
+    },
+    {
+      "doc_id": "109795294",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "10982689",
+      "leaks": 0,
+      "delivery_s": 0.007953765999900497,
+      "engine_s": 0.013518938999823149
+    },
+    {
+      "doc_id": "10984005",
+      "leaks": 0,
+      "delivery_s": 0.007951925000043047,
+      "engine_s": 0.013778219000187164
+    },
+    {
+      "doc_id": "10991183",
+      "leaks": 0,
+      "delivery_s": 0.007608712000092055,
+      "engine_s": 0.013568241000029957
+    },
+    {
+      "doc_id": "10993232",
+      "leaks": 0,
+      "delivery_s": 0.006809003000171288,
+      "engine_s": 0.012005782000187537
+    },
+    {
+      "doc_id": "109946221",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11011905",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11016410",
+      "leaks": 0,
+      "delivery_s": 0.008135930999969787,
+      "engine_s": 0.01366985399999976
+    },
+    {
+      "doc_id": "11016788",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11020556",
+      "leaks": 0,
+      "delivery_s": 0.00836359100003392,
+      "engine_s": 0.013913153999965289
+    },
+    {
+      "doc_id": "11020675",
+      "leaks": 0,
+      "delivery_s": 0.006635044999939055,
+      "engine_s": 0.012007600000060847
+    },
+    {
+      "doc_id": "1102268",
+      "leaks": 0,
+      "delivery_s": 0.007210846999896603,
+      "engine_s": 0.01266322600008607
+    },
+    {
+      "doc_id": "11026600",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1103795",
+      "leaks": 0,
+      "delivery_s": 0.006586092999896209,
+      "engine_s": 0.012593543999855683
+    },
+    {
+      "doc_id": "11041152",
+      "leaks": 0,
+      "delivery_s": 0.006691455999998652,
+      "engine_s": 0.01128528300000653
+    },
+    {
+      "doc_id": "11043831",
+      "leaks": 0,
+      "delivery_s": 0.006561381999972582,
+      "engine_s": 0.011510370999985753
+    },
+    {
+      "doc_id": "11048759",
+      "leaks": 0,
+      "delivery_s": 0.006692896999993536,
+      "engine_s": 0.010911287999988417
+    },
+    {
+      "doc_id": "11071351",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11083121",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11090688",
+      "leaks": 0,
+      "delivery_s": 0.0074331559999336605,
+      "engine_s": 0.01399433599999611
+    },
+    {
+      "doc_id": "11109043",
+      "leaks": 0,
+      "delivery_s": 0.008447833999980503,
+      "engine_s": 0.014852048999955514
+    },
+    {
+      "doc_id": "11117498",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11117679",
+      "leaks": 0,
+      "delivery_s": 0.00753021900004569,
+      "engine_s": 0.013137264000079085
+    },
+    {
+      "doc_id": "11141995",
+      "leaks": 0,
+      "delivery_s": 0.006327922000082253,
+      "engine_s": 0.01344168500008891
+    },
+    {
+      "doc_id": "11156883",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11172205",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11181416",
+      "leaks": 0,
+      "delivery_s": 0.007930892999866046,
+      "engine_s": 0.013254626999923858
+    },
+    {
+      "doc_id": "11195653",
+      "leaks": 0,
+      "delivery_s": 0.00860779000004186,
+      "engine_s": 0.014645432000179426
+    },
+    {
+      "doc_id": "11200685",
+      "leaks": 0,
+      "delivery_s": 0.008495746000107829,
+      "engine_s": 0.014475064000180282
+    },
+    {
+      "doc_id": "11201004",
+      "leaks": 0,
+      "delivery_s": 0.0064838289999897825,
+      "engine_s": 0.014133431999880486
+    },
+    {
+      "doc_id": "1122198",
+      "leaks": 0,
+      "delivery_s": 0.0074552549999680195,
+      "engine_s": 0.013695124999912878
+    },
+    {
+      "doc_id": "1122279",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11230569",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11233339",
+      "leaks": 0,
+      "delivery_s": 0.006977608000170221,
+      "engine_s": 0.012669397000081517
+    },
+    {
+      "doc_id": "11238784",
+      "leaks": 0,
+      "delivery_s": 0.005477428999938638,
+      "engine_s": 0.01281235999999808
+    },
+    {
+      "doc_id": "11238951",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11244195",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11246427",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11250124",
+      "leaks": 0,
+      "delivery_s": 0.006717058000049292,
+      "engine_s": 0.01185294500010059
+    },
+    {
+      "doc_id": "11253758",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11254040",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11254556",
+      "leaks": 0,
+      "delivery_s": 0.005586844999925233,
+      "engine_s": 0.01186629499989067
+    },
+    {
+      "doc_id": "11255504",
+      "leaks": 0,
+      "delivery_s": 0.0065360609999061126,
+      "engine_s": 0.011739590999923166
+    },
+    {
+      "doc_id": "11256632",
+      "leaks": 0,
+      "delivery_s": 0.007228498000131367,
+      "engine_s": 0.0114470490000258
+    },
+    {
+      "doc_id": "11271123",
+      "leaks": 0,
+      "delivery_s": 0.006603953999956502,
+      "engine_s": 0.014407932000040091
+    },
+    {
+      "doc_id": "1127562",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11280569",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11288846",
+      "leaks": 0,
+      "delivery_s": 0.007359621999967203,
+      "engine_s": 0.012657846000138306
+    },
+    {
+      "doc_id": "11289247",
+      "leaks": 0,
+      "delivery_s": 0.006865023000045767,
+      "engine_s": 0.011749080000072354
+    },
+    {
+      "doc_id": "11291348",
+      "leaks": 0,
+      "delivery_s": 0.006872183000041332,
+      "engine_s": 0.01198351899984118
+    },
+    {
+      "doc_id": "11328820",
+      "leaks": 0,
+      "delivery_s": 0.0075511700001698046,
+      "engine_s": 0.012909555000078399
+    },
+    {
+      "doc_id": "11335781",
+      "leaks": 0,
+      "delivery_s": 0.006305979999979172,
+      "engine_s": 0.011687497000139047
+    },
+    {
+      "doc_id": "11335860",
+      "leaks": 0,
+      "delivery_s": 0.0061093039998922904,
+      "engine_s": 0.012152465999861306
+    },
+    {
+      "doc_id": "11336632",
+      "leaks": 0,
+      "delivery_s": 0.004986351000070499,
+      "engine_s": 0.010244742999930168
+    },
+    {
+      "doc_id": "11344428",
+      "leaks": 0,
+      "delivery_s": 0.004669899999953486,
+      "engine_s": 0.010059344999945097
+    },
+    {
+      "doc_id": "11349166",
+      "leaks": 0,
+      "delivery_s": 0.005445729000030042,
+      "engine_s": 0.009488133000104426
+    },
+    {
+      "doc_id": "11359243",
+      "leaks": 0,
+      "delivery_s": 0.004645646999961173,
+      "engine_s": 0.010402616999954262
+    },
+    {
+      "doc_id": "11360430",
+      "leaks": 0,
+      "delivery_s": 0.0057150699999510834,
+      "engine_s": 0.010439500999837037
+    },
+    {
+      "doc_id": "11360768",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11369420",
+      "leaks": 0,
+      "delivery_s": 0.005849884000099337,
+      "engine_s": 0.01133340399996996
+    },
+    {
+      "doc_id": "11390393",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11401602",
+      "leaks": 0,
+      "delivery_s": 0.006360272999927474,
+      "engine_s": 0.011105584999995699
+    },
+    {
+      "doc_id": "11411060",
+      "leaks": 0,
+      "delivery_s": 0.005149877000121705,
+      "engine_s": 0.012384263000058127
+    },
+    {
+      "doc_id": "11414664",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11415809",
+      "leaks": 0,
+      "delivery_s": 0.006067633000157002,
+      "engine_s": 0.012457617000109167
+    },
+    {
+      "doc_id": "11419230",
+      "leaks": 0,
+      "delivery_s": 0.006042010999863123,
+      "engine_s": 0.011196358999995937
+    },
+    {
+      "doc_id": "11420613",
+      "leaks": 0,
+      "delivery_s": 0.007992876000116667,
+      "engine_s": 0.012224116999959733
+    },
+    {
+      "doc_id": "11428884",
+      "leaks": 0,
+      "delivery_s": 0.006025859999908789,
+      "engine_s": 0.01230014099996879
+    },
+    {
+      "doc_id": "11441172",
+      "leaks": 0,
+      "delivery_s": 0.006133883999837053,
+      "engine_s": 0.01143326800001887
+    },
+    {
+      "doc_id": "1145473",
+      "leaks": 0,
+      "delivery_s": 0.006180396999980076,
+      "engine_s": 0.01358685099989998
+    },
+    {
+      "doc_id": "11457219",
+      "leaks": 0,
+      "delivery_s": 0.006628573999932996,
+      "engine_s": 0.011699227999997674
+    },
+    {
+      "doc_id": "11459139",
+      "leaks": 0,
+      "delivery_s": 0.007885431999966386,
+      "engine_s": 0.013909572999864395
+    },
+    {
+      "doc_id": "11469078",
+      "leaks": 0,
+      "delivery_s": 0.008456063000039649,
+      "engine_s": 0.015477162000024691
+    },
+    {
+      "doc_id": "11475379",
+      "leaks": 0,
+      "delivery_s": 0.008198565000157032,
+      "engine_s": 0.01437687099996765
+    },
+    {
+      "doc_id": "1148122",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11481946",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11484808",
+      "leaks": 0,
+      "delivery_s": 0.006079522999925757,
+      "engine_s": 0.011394596999934947
+    },
+    {
+      "doc_id": "11498670",
+      "leaks": 0,
+      "delivery_s": 0.007278969000026336,
+      "engine_s": 0.013036530000135826
+    },
+    {
+      "doc_id": "11527199",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11527822",
+      "leaks": 0,
+      "delivery_s": 0.006977517999985139,
+      "engine_s": 0.014499866000051043
+    },
+    {
+      "doc_id": "11532028",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11532659",
+      "leaks": 0,
+      "delivery_s": 0.007707545999892318,
+      "engine_s": 0.012355222999985926
+    },
+    {
+      "doc_id": "11535539",
+      "leaks": 0,
+      "delivery_s": 0.0064234260000830545,
+      "engine_s": 0.01228663000006236
+    },
+    {
+      "doc_id": "1153655",
+      "leaks": 0,
+      "delivery_s": 0.006940985999790428,
+      "engine_s": 0.012327941999956238
+    },
+    {
+      "doc_id": "11557602",
+      "leaks": 0,
+      "delivery_s": 0.006657406000158517,
+      "engine_s": 0.012480689000085476
+    },
+    {
+      "doc_id": "1156322",
+      "leaks": 0,
+      "delivery_s": 0.00635991300009664,
+      "engine_s": 0.012141125999960423
+    },
+    {
+      "doc_id": "11565780",
+      "leaks": 0,
+      "delivery_s": 0.005846604999987903,
+      "engine_s": 0.012010020999923654
+    },
+    {
+      "doc_id": "11568270",
+      "leaks": 0,
+      "delivery_s": 0.0065658420001000195,
+      "engine_s": 0.012326873000120031
+    },
+    {
+      "doc_id": "11569583",
+      "leaks": 0,
+      "delivery_s": 0.006460328000002846,
+      "engine_s": 0.013830740000003061
+    },
+    {
+      "doc_id": "11578459",
+      "leaks": 0,
+      "delivery_s": 0.006074232000173652,
+      "engine_s": 0.013503786999990552
+    },
+    {
+      "doc_id": "11581157",
+      "leaks": 0,
+      "delivery_s": 0.006573143000196069,
+      "engine_s": 0.011370115000090664
+    },
+    {
+      "doc_id": "11603066",
+      "leaks": 0,
+      "delivery_s": 0.005750510000098075,
+      "engine_s": 0.011328522999974666
+    },
+    {
+      "doc_id": "116075383",
+      "leaks": 0,
+      "delivery_s": 0.006784418999814079,
+      "engine_s": 0.012216007999995782
+    },
+    {
+      "doc_id": "11614737",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11615242",
+      "leaks": 0,
+      "delivery_s": 0.00606528100001924,
+      "engine_s": 0.011812012000063987
+    },
+    {
+      "doc_id": "11615422",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11616424",
+      "leaks": 0,
+      "delivery_s": 0.0062560080000366725,
+      "engine_s": 0.011573842999951012
+    },
+    {
+      "doc_id": "11624482",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11630388",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "116556376",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11659421",
+      "leaks": 0,
+      "delivery_s": 0.005740469000102166,
+      "engine_s": 0.011273140999946918
+    },
+    {
+      "doc_id": "11661377",
+      "leaks": 0,
+      "delivery_s": 0.005876046000139468,
+      "engine_s": 0.011748360000183311
+    },
+    {
+      "doc_id": "11666252",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11674288",
+      "leaks": 0,
+      "delivery_s": 0.005056993999914994,
+      "engine_s": 0.011952406999853338
+    },
+    {
+      "doc_id": "11674596",
+      "leaks": 0,
+      "delivery_s": 0.0061564459999772225,
+      "engine_s": 0.011648165999986304
+    },
+    {
+      "doc_id": "116792",
+      "leaks": 0,
+      "delivery_s": 0.006295622999914485,
+      "engine_s": 0.012550932000067405
+    },
+    {
+      "doc_id": "11705328",
+      "leaks": 0,
+      "delivery_s": 0.005603004000022338,
+      "engine_s": 0.01138246599998638
+    },
+    {
+      "doc_id": "11710511",
+      "leaks": 0,
+      "delivery_s": 0.005363644999988537,
+      "engine_s": 0.011325854000006075
+    },
+    {
+      "doc_id": "1171121",
+      "leaks": 0,
+      "delivery_s": 0.005330363999973997,
+      "engine_s": 0.01071522899997035
+    },
+    {
+      "doc_id": "11716783",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11718220",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11721286",
+      "leaks": 0,
+      "delivery_s": 0.006288020000056349,
+      "engine_s": 0.013997556000049372
+    },
+    {
+      "doc_id": "11721676",
+      "leaks": 0,
+      "delivery_s": 0.006091313000069931,
+      "engine_s": 0.01208801100005985
+    },
+    {
+      "doc_id": "11728637",
+      "leaks": 0,
+      "delivery_s": 0.005964588999859188,
+      "engine_s": 0.012092562999896472
+    },
+    {
+      "doc_id": "1173667",
+      "leaks": 0,
+      "delivery_s": 0.005641906000164454,
+      "engine_s": 0.012873923000142895
+    },
+    {
+      "doc_id": "11738716",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11742219",
+      "leaks": 0,
+      "delivery_s": 0.005977819999998246,
+      "engine_s": 0.010547244000008504
+    },
+    {
+      "doc_id": "11748341",
+      "leaks": 0,
+      "delivery_s": 0.005646276000106809,
+      "engine_s": 0.010557952999988629
+    },
+    {
+      "doc_id": "11771811",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11774598",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11784947",
+      "leaks": 0,
+      "delivery_s": 0.005298482999933185,
+      "engine_s": 0.010007523000012952
+    },
+    {
+      "doc_id": "117907685",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1180972",
+      "leaks": 0,
+      "delivery_s": 0.005042212000034851,
+      "engine_s": 0.010196650000125373
+    },
+    {
+      "doc_id": "118215171",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11822354",
+      "leaks": 0,
+      "delivery_s": 0.004915486999834684,
+      "engine_s": 0.010869916000046942
+    },
+    {
+      "doc_id": "11831598",
+      "leaks": 0,
+      "delivery_s": 0.004976120000037554,
+      "engine_s": 0.00992814999995062
+    },
+    {
+      "doc_id": "11837657",
+      "leaks": 0,
+      "delivery_s": 0.004887336000138021,
+      "engine_s": 0.010235671000145885
+    },
+    {
+      "doc_id": "11840194",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11844791",
+      "leaks": 0,
+      "delivery_s": 0.005124525999917751,
+      "engine_s": 0.00993200999982946
+    },
+    {
+      "doc_id": "11844826",
+      "leaks": 0,
+      "delivery_s": 0.005736999999953696,
+      "engine_s": 0.01093827800013969
+    },
+    {
+      "doc_id": "118568",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11861374",
+      "leaks": 0,
+      "delivery_s": 0.005650205999927493,
+      "engine_s": 0.01036679699996057
+    },
+    {
+      "doc_id": "11862753",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11868606",
+      "leaks": 0,
+      "delivery_s": 0.005012182999962533,
+      "engine_s": 0.0114261170001555
+    },
+    {
+      "doc_id": "11880289",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11884292",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11884867",
+      "leaks": 0,
+      "delivery_s": 0.0053405539999857865,
+      "engine_s": 0.010499941000034596
+    },
+    {
+      "doc_id": "11886686",
+      "leaks": 0,
+      "delivery_s": 0.004693729999871721,
+      "engine_s": 0.009315605999972831
+    },
+    {
+      "doc_id": "11887584",
+      "leaks": 0,
+      "delivery_s": 0.005108576000111498,
+      "engine_s": 0.0105002020000029
+    },
+    {
+      "doc_id": "11899391",
+      "leaks": 0,
+      "delivery_s": 0.004954830000087895,
+      "engine_s": 0.008956193000130952
+    },
+    {
+      "doc_id": "11900630",
+      "leaks": 0,
+      "delivery_s": 0.00505024299991419,
+      "engine_s": 0.009751872999913758
+    },
+    {
+      "doc_id": "11902109",
+      "leaks": 0,
+      "delivery_s": 0.005202488999884736,
+      "engine_s": 0.009739421999938713
+    },
+    {
+      "doc_id": "11903247",
+      "leaks": 0,
+      "delivery_s": 0.005454338999925312,
+      "engine_s": 0.009520285000007789
+    },
+    {
+      "doc_id": "11913139",
+      "leaks": 0,
+      "delivery_s": 0.004877696999983527,
+      "engine_s": 0.009357037999961904
+    },
+    {
+      "doc_id": "11915280",
+      "leaks": 0,
+      "delivery_s": 0.005025762000059331,
+      "engine_s": 0.010606395999957385
+    },
+    {
+      "doc_id": "1191830",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11921405",
+      "leaks": 0,
+      "delivery_s": 0.005506950999915716,
+      "engine_s": 0.009780864999811456
+    },
+    {
+      "doc_id": "11922370",
+      "leaks": 0,
+      "delivery_s": 0.005593534000126965,
+      "engine_s": 0.011292621000166037
+    },
+    {
+      "doc_id": "1192458",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11933721",
+      "leaks": 0,
+      "delivery_s": 0.005446559000120033,
+      "engine_s": 0.010630987000013192
+    },
+    {
+      "doc_id": "11935250",
+      "leaks": 0,
+      "delivery_s": 0.006462656999929095,
+      "engine_s": 0.011802871000099913
+    },
+    {
+      "doc_id": "11936877",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11939159",
+      "leaks": 0,
+      "delivery_s": 0.006244229000003543,
+      "engine_s": 0.010972799000001032
+    },
+    {
+      "doc_id": "11943989",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11951999",
+      "leaks": 0,
+      "delivery_s": 0.010656826999820623,
+      "engine_s": 0.017116424999812807
+    },
+    {
+      "doc_id": "11953232",
+      "leaks": 0,
+      "delivery_s": 0.006292779999967024,
+      "engine_s": 0.011364584999910221
+    },
+    {
+      "doc_id": "1196631",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "11968641",
+      "leaks": 0,
+      "delivery_s": 0.00588232500012964,
+      "engine_s": 0.01087995700004285
+    },
+    {
+      "doc_id": "11983390",
+      "leaks": 0,
+      "delivery_s": 0.0062838489998284786,
+      "engine_s": 0.012345660999926622
+    },
+    {
+      "doc_id": "11992632",
+      "leaks": 0,
+      "delivery_s": 0.005678937999846312,
+      "engine_s": 0.011452697999857264
+    },
+    {
+      "doc_id": "12009265",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12014458",
+      "leaks": 0,
+      "delivery_s": 0.005726417999994737,
+      "engine_s": 0.011249898999949437
+    },
+    {
+      "doc_id": "12030318",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1203035",
+      "leaks": 0,
+      "delivery_s": 0.005399736000072153,
+      "engine_s": 0.011381825000171375
+    },
+    {
+      "doc_id": "12030680",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12030735",
+      "leaks": 0,
+      "delivery_s": 0.005812662999915119,
+      "engine_s": 0.012120133000053102
+    },
+    {
+      "doc_id": "120385993",
+      "leaks": 0,
+      "delivery_s": 0.007228406000194809,
+      "engine_s": 0.013275578000047972
+    },
+    {
+      "doc_id": "12039953",
+      "leaks": 0,
+      "delivery_s": 0.007849118999956772,
+      "engine_s": 0.013646081000160848
+    },
+    {
+      "doc_id": "12040627",
+      "leaks": 0,
+      "delivery_s": 0.007428794000134076,
+      "engine_s": 0.012573341000006621
+    },
+    {
+      "doc_id": "12058271",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "120626",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12074066",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12086599",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12086818",
+      "leaks": 0,
+      "delivery_s": 0.0066865559999769175,
+      "engine_s": 0.013014597999926991
+    },
+    {
+      "doc_id": "12087063",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "121001457",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12100854",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12100963",
+      "leaks": 0,
+      "delivery_s": 0.006394194999984393,
+      "engine_s": 0.013411712999868541
+    },
+    {
+      "doc_id": "12102963",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12122482",
+      "leaks": 0,
+      "delivery_s": 0.007074369999827468,
+      "engine_s": 0.013572927999803142
+    },
+    {
+      "doc_id": "12130067",
+      "leaks": 0,
+      "delivery_s": 0.00744613599999866,
+      "engine_s": 0.013920513000130086
+    },
+    {
+      "doc_id": "12130200",
+      "leaks": 0,
+      "delivery_s": 0.006666244999905757,
+      "engine_s": 0.01224573799981954
+    },
+    {
+      "doc_id": "12130690",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12145359",
+      "leaks": 0,
+      "delivery_s": 0.006052430999943681,
+      "engine_s": 0.012727906999998595
+    },
+    {
+      "doc_id": "12149169",
+      "leaks": 0,
+      "delivery_s": 0.007009569000047122,
+      "engine_s": 0.013124002000040491
+    },
+    {
+      "doc_id": "1215116",
+      "leaks": 0,
+      "delivery_s": 0.007697234000033859,
+      "engine_s": 0.013239566000038394
+    },
+    {
+      "doc_id": "12152977",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12156187",
+      "leaks": 0,
+      "delivery_s": 0.006370592999928704,
+      "engine_s": 0.013209774999950241
+    },
+    {
+      "doc_id": "121581019",
+      "leaks": 0,
+      "delivery_s": 0.006611561999989135,
+      "engine_s": 0.011884952999935194
+    },
+    {
+      "doc_id": "12172346",
+      "leaks": 0,
+      "delivery_s": 0.005792221999854519,
+      "engine_s": 0.010337174999904164
+    },
+    {
+      "doc_id": "12197393",
+      "leaks": 0,
+      "delivery_s": 0.0067805789999511035,
+      "engine_s": 0.012802258999954574
+    },
+    {
+      "doc_id": "1220287",
+      "leaks": 0,
+      "delivery_s": 0.007254385999885926,
+      "engine_s": 0.013087738999956855
+    },
+    {
+      "doc_id": "12205576",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12206390",
+      "leaks": 0,
+      "delivery_s": 0.006097891999843341,
+      "engine_s": 0.011564012000008006
+    },
+    {
+      "doc_id": "12207167",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12207340",
+      "leaks": 0,
+      "delivery_s": 0.006061002000024018,
+      "engine_s": 0.011794920000056663
+    },
+    {
+      "doc_id": "12209494",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12217662",
+      "leaks": 0,
+      "delivery_s": 0.005882523999844125,
+      "engine_s": 0.012253247999979067
+    },
+    {
+      "doc_id": "12224536",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12225214",
+      "leaks": 0,
+      "delivery_s": 0.006710596000175428,
+      "engine_s": 0.012149063000151727
+    },
+    {
+      "doc_id": "12232678",
+      "leaks": 0,
+      "delivery_s": 0.00551978099997541,
+      "engine_s": 0.009772573999953238
+    },
+    {
+      "doc_id": "12236208",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12240507",
+      "leaks": 0,
+      "delivery_s": 0.005287620999979481,
+      "engine_s": 0.011358823000136908
+    },
+    {
+      "doc_id": "1225513",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12258338",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1226452",
+      "leaks": 0,
+      "delivery_s": 0.005388074999927994,
+      "engine_s": 0.010976948999996239
+    },
+    {
+      "doc_id": "12265561",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12271486",
+      "leaks": 0,
+      "delivery_s": 0.005056502999877921,
+      "engine_s": 0.010544313000082184
+    },
+    {
+      "doc_id": "1227277",
+      "leaks": 0,
+      "delivery_s": 0.00634754099996826,
+      "engine_s": 0.009843424999871786
+    },
+    {
+      "doc_id": "12280462",
+      "leaks": 0,
+      "delivery_s": 0.00527571100019486,
+      "engine_s": 0.01043454900013785
+    },
+    {
+      "doc_id": "12315072",
+      "leaks": 0,
+      "delivery_s": 0.00555174100009026,
+      "engine_s": 0.009544483999889053
+    },
+    {
+      "doc_id": "12324049",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12337611",
+      "leaks": 0,
+      "delivery_s": 0.005633836000015435,
+      "engine_s": 0.01012506699998994
+    },
+    {
+      "doc_id": "1234098",
+      "leaks": 0,
+      "delivery_s": 0.005848582999988139,
+      "engine_s": 0.010579363999795532
+    },
+    {
+      "doc_id": "12358173",
+      "leaks": 0,
+      "delivery_s": 0.0052292590000888595,
+      "engine_s": 0.0111075830000118
+    },
+    {
+      "doc_id": "12364109",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12370190",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12370881",
+      "leaks": 0,
+      "delivery_s": 0.005649924999943323,
+      "engine_s": 0.01229260900004192
+    },
+    {
+      "doc_id": "12383365",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "123859",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12409683",
+      "leaks": 0,
+      "delivery_s": 0.004999721000103818,
+      "engine_s": 0.010133967000001576
+    },
+    {
+      "doc_id": "1241113",
+      "leaks": 0,
+      "delivery_s": 0.005462708999857568,
+      "engine_s": 0.009834495999939463
+    },
+    {
+      "doc_id": "12411274",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12428137",
+      "leaks": 0,
+      "delivery_s": 0.006438075000005483,
+      "engine_s": 0.013378469999906883
+    },
+    {
+      "doc_id": "12428497",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12428814",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1243475",
+      "leaks": 0,
+      "delivery_s": 0.006955585000014253,
+      "engine_s": 0.01316891300007228
+    },
+    {
+      "doc_id": "12438901",
+      "leaks": 0,
+      "delivery_s": 0.006805088999954023,
+      "engine_s": 0.013797667000062575
+    },
+    {
+      "doc_id": "12440953",
+      "leaks": 0,
+      "delivery_s": 0.006648874000120486,
+      "engine_s": 0.012129003999916677
+    },
+    {
+      "doc_id": "12442311",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12443371",
+      "leaks": 0,
+      "delivery_s": 0.007775257000048441,
+      "engine_s": 0.013397822000115411
+    },
+    {
+      "doc_id": "12451492",
+      "leaks": 0,
+      "delivery_s": 0.006648644000051718,
+      "engine_s": 0.01196508799989715
+    },
+    {
+      "doc_id": "12462961",
+      "leaks": 0,
+      "delivery_s": 0.006371882999928857,
+      "engine_s": 0.012045080000007147
+    },
+    {
+      "doc_id": "12470783",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12471115",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12486491",
+      "leaks": 0,
+      "delivery_s": 0.0073013390001506195,
+      "engine_s": 0.012431873999958043
+    },
+    {
+      "doc_id": "12489130",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12489688",
+      "leaks": 0,
+      "delivery_s": 0.006785418999925241,
+      "engine_s": 0.01156952199994521
+    },
+    {
+      "doc_id": "12513042",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12513972",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12549585",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12552297",
+      "leaks": 0,
+      "delivery_s": 0.006304100000079416,
+      "engine_s": 0.013143630000058693
+    },
+    {
+      "doc_id": "12561083",
+      "leaks": 0,
+      "delivery_s": 0.006484758000169677,
+      "engine_s": 0.012273287000198252
+    },
+    {
+      "doc_id": "1256116",
+      "leaks": 0,
+      "delivery_s": 0.006523028999936287,
+      "engine_s": 0.013034207999908176
+    },
+    {
+      "doc_id": "12580014",
+      "leaks": 0,
+      "delivery_s": 0.007548718000180088,
+      "engine_s": 0.013171232000104283
+    },
+    {
+      "doc_id": "12582729",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12584053",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12588500",
+      "leaks": 0,
+      "delivery_s": 0.0055019110000102955,
+      "engine_s": 0.011936455000068236
+    },
+    {
+      "doc_id": "1259280",
+      "leaks": 0,
+      "delivery_s": 0.006736869000178558,
+      "engine_s": 0.011922936000019035
+    },
+    {
+      "doc_id": "1259359",
+      "leaks": 0,
+      "delivery_s": 0.006323212000097556,
+      "engine_s": 0.011655125000061162
+    },
+    {
+      "doc_id": "12622860",
+      "leaks": 0,
+      "delivery_s": 0.006962445999988631,
+      "engine_s": 0.011569770999813045
+    },
+    {
+      "doc_id": "12631182",
+      "leaks": 0,
+      "delivery_s": 0.006511877999855642,
+      "engine_s": 0.010933036999858814
+    },
+    {
+      "doc_id": "12631697",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1263446",
+      "leaks": 0,
+      "delivery_s": 0.006254177000073469,
+      "engine_s": 0.01306875799991758
+    },
+    {
+      "doc_id": "12640810",
+      "leaks": 0,
+      "delivery_s": 0.006326981000029264,
+      "engine_s": 0.011407044000179667
+    },
+    {
+      "doc_id": "12641252",
+      "leaks": 0,
+      "delivery_s": 0.00683846100014307,
+      "engine_s": 0.012376552000205265
+    },
+    {
+      "doc_id": "12642224",
+      "leaks": 0,
+      "delivery_s": 0.0052623699998548545,
+      "engine_s": 0.010604703999888443
+    },
+    {
+      "doc_id": "12643937",
+      "leaks": 0,
+      "delivery_s": 0.004669118000037997,
+      "engine_s": 0.011272599999983868
+    },
+    {
+      "doc_id": "12650610",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12652963",
+      "leaks": 0,
+      "delivery_s": 0.0064535259998592664,
+      "engine_s": 0.01296545399986826
+    },
+    {
+      "doc_id": "126549848",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12658073",
+      "leaks": 0,
+      "delivery_s": 0.006786297999951785,
+      "engine_s": 0.011094123000020772
+    },
+    {
+      "doc_id": "1265945",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12662435",
+      "leaks": 0,
+      "delivery_s": 0.005305823000071541,
+      "engine_s": 0.010417857999982516
+    },
+    {
+      "doc_id": "12667988",
+      "leaks": 0,
+      "delivery_s": 0.006010077999917485,
+      "engine_s": 0.011285448999842629
+    },
+    {
+      "doc_id": "12669325",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12670680",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12672066",
+      "leaks": 0,
+      "delivery_s": 0.005615743999896949,
+      "engine_s": 0.011095952999994552
+    },
+    {
+      "doc_id": "12685434",
+      "leaks": 0,
+      "delivery_s": 0.005345523999949364,
+      "engine_s": 0.011721226999952705
+    },
+    {
+      "doc_id": "12691537",
+      "leaks": 0,
+      "delivery_s": 0.00619972599997709,
+      "engine_s": 0.012244667000004483
+    },
+    {
+      "doc_id": "12705056",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12709184",
+      "leaks": 0,
+      "delivery_s": 0.006058871000050203,
+      "engine_s": 0.011526359000072262
+    },
+    {
+      "doc_id": "12737132",
+      "leaks": 0,
+      "delivery_s": 0.005697798000028342,
+      "engine_s": 0.011029720999886194
+    },
+    {
+      "doc_id": "12742164",
+      "leaks": 0,
+      "delivery_s": 0.005346213999928295,
+      "engine_s": 0.010775930999898264
+    },
+    {
+      "doc_id": "1275505",
+      "leaks": 0,
+      "delivery_s": 0.0057010979999176925,
+      "engine_s": 0.011889102999930401
+    },
+    {
+      "doc_id": "12762485",
+      "leaks": 0,
+      "delivery_s": 0.006583371000033367,
+      "engine_s": 0.011102863999894907
+    },
+    {
+      "doc_id": "12770738",
+      "leaks": 0,
+      "delivery_s": 0.006488556000022072,
+      "engine_s": 0.011276168999984293
+    },
+    {
+      "doc_id": "12779444",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12785130",
+      "leaks": 0,
+      "delivery_s": 0.00628009000001839,
+      "engine_s": 0.010626335000097242
+    },
+    {
+      "doc_id": "12787125",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12789595",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12794099",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12800122",
+      "leaks": 0,
+      "delivery_s": 0.005437668000013218,
+      "engine_s": 0.010576994000075501
+    },
+    {
+      "doc_id": "12801438",
+      "leaks": 0,
+      "delivery_s": 0.005390376999912405,
+      "engine_s": 0.01020141899994087
+    },
+    {
+      "doc_id": "12804937",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12805683",
+      "leaks": 0,
+      "delivery_s": 0.005586713999946369,
+      "engine_s": 0.010812241999929029
+    },
+    {
+      "doc_id": "12810152",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1281769",
+      "leaks": 0,
+      "delivery_s": 0.005710808000003453,
+      "engine_s": 0.011884452000003876
+    },
+    {
+      "doc_id": "12821938",
+      "leaks": 0,
+      "delivery_s": 0.006155263999971794,
+      "engine_s": 0.010741328999984034
+    },
+    {
+      "doc_id": "12824568",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12827098",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1283401",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12839939",
+      "leaks": 0,
+      "delivery_s": 0.005812352000020837,
+      "engine_s": 0.011717666999857101
+    },
+    {
+      "doc_id": "1285713",
+      "leaks": 0,
+      "delivery_s": 0.0053405039998324355,
+      "engine_s": 0.009754180999834716
+    },
+    {
+      "doc_id": "1286352",
+      "leaks": 0,
+      "delivery_s": 0.005539472000009482,
+      "engine_s": 0.01017545800004882
+    },
+    {
+      "doc_id": "12866641",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12869200",
+      "leaks": 0,
+      "delivery_s": 0.00607297200008361,
+      "engine_s": 0.010347215000138021
+    },
+    {
+      "doc_id": "12871002",
+      "leaks": 0,
+      "delivery_s": 0.005131744999971488,
+      "engine_s": 0.01115158499987956
+    },
+    {
+      "doc_id": "12871281",
+      "leaks": 0,
+      "delivery_s": 0.00502601100015454,
+      "engine_s": 0.01039715700017041
+    },
+    {
+      "doc_id": "1287809",
+      "leaks": 0,
+      "delivery_s": 0.005562712000028114,
+      "engine_s": 0.011051301999941643
+    },
+    {
+      "doc_id": "12880573",
+      "leaks": 0,
+      "delivery_s": 0.005150326000148198,
+      "engine_s": 0.010562522000100216
+    },
+    {
+      "doc_id": "12881593",
+      "leaks": 0,
+      "delivery_s": 0.004729620000034629,
+      "engine_s": 0.010607693000110885
+    },
+    {
+      "doc_id": "12885341",
+      "leaks": 0,
+      "delivery_s": 0.005434587000081592,
+      "engine_s": 0.011913002000028428
+    },
+    {
+      "doc_id": "12887068",
+      "leaks": 0,
+      "delivery_s": 0.0056214550002096075,
+      "engine_s": 0.010472668000147678
+    },
+    {
+      "doc_id": "12892137",
+      "leaks": 0,
+      "delivery_s": 0.005974886999865703,
+      "engine_s": 0.010252529999888793
+    },
+    {
+      "doc_id": "12899460",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12899612",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12903921",
+      "leaks": 0,
+      "delivery_s": 0.0051148549998742965,
+      "engine_s": 0.00993466999989323
+    },
+    {
+      "doc_id": "12909503",
+      "leaks": 0,
+      "delivery_s": 0.005426575999990746,
+      "engine_s": 0.010911736000025485
+    },
+    {
+      "doc_id": "129199129",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "12922760",
+      "leaks": 0,
+      "delivery_s": 0.005255789999864646,
+      "engine_s": 0.01029051199998321
+    },
+    {
+      "doc_id": "1292369",
+      "leaks": 0,
+      "delivery_s": 0.0062391980000029434,
+      "engine_s": 0.01056933199993182
+    },
+    {
+      "doc_id": "12932176",
+      "leaks": 0,
+      "delivery_s": 0.006533738999905836,
+      "engine_s": 0.011446775999957026
+    },
+    {
+      "doc_id": "12943966",
+      "leaks": 0,
+      "delivery_s": 0.005521030999943832,
+      "engine_s": 0.011207968000007895
+    },
+    {
+      "doc_id": "12948892",
+      "leaks": 0,
+      "delivery_s": 0.0053319529999953374,
+      "engine_s": 0.011143444000026648
+    },
+    {
+      "doc_id": "12956194",
+      "leaks": 0,
+      "delivery_s": 0.006188676000192572,
+      "engine_s": 0.010664947000122993
+    },
+    {
+      "doc_id": "12966719",
+      "leaks": 0,
+      "delivery_s": 0.005420556999979453,
+      "engine_s": 0.010314843000060137
+    },
+    {
+      "doc_id": "12991445",
+      "leaks": 0,
+      "delivery_s": 0.004981030000180908,
+      "engine_s": 0.01078848200018001
+    },
+    {
+      "doc_id": "12994780",
+      "leaks": 0,
+      "delivery_s": 0.0053882760000760754,
+      "engine_s": 0.01098159699995449
+    },
+    {
+      "doc_id": "13000926",
+      "leaks": 0,
+      "delivery_s": 0.0056541649998962384,
+      "engine_s": 0.01114032500004214
+    },
+    {
+      "doc_id": "13001323",
+      "leaks": 0,
+      "delivery_s": 0.005247420999921815,
+      "engine_s": 0.01002746299991486
+    },
+    {
+      "doc_id": "13002003",
+      "leaks": 0,
+      "delivery_s": 0.005607454000028156,
+      "engine_s": 0.010263340999927095
+    },
+    {
+      "doc_id": "13007205",
+      "leaks": 0,
+      "delivery_s": 0.00597030799985987,
+      "engine_s": 0.010861992999934955
+    },
+    {
+      "doc_id": "13011249",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13023410",
+      "leaks": 0,
+      "delivery_s": 0.005406326999946032,
+      "engine_s": 0.009945880000032048
+    },
+    {
+      "doc_id": "13025574",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13027590",
+      "leaks": 0,
+      "delivery_s": 0.005630784999993921,
+      "engine_s": 0.010213289999910558
+    },
+    {
+      "doc_id": "13030852",
+      "leaks": 0,
+      "delivery_s": 0.005409317000157898,
+      "engine_s": 0.010688717999983055
+    },
+    {
+      "doc_id": "13031967",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13036442",
+      "leaks": 0,
+      "delivery_s": 0.005451806999872133,
+      "engine_s": 0.009922918000029313
+    },
+    {
+      "doc_id": "13042119",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13048272",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13069283",
+      "leaks": 0,
+      "delivery_s": 0.006159535000051619,
+      "engine_s": 0.010491559999991296
+    },
+    {
+      "doc_id": "13070316",
+      "leaks": 0,
+      "delivery_s": 0.005217018999928769,
+      "engine_s": 0.010012020999965898
+    },
+    {
+      "doc_id": "13071728",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13072112",
+      "leaks": 0,
+      "delivery_s": 0.005270801000051506,
+      "engine_s": 0.010115843999983554
+    },
+    {
+      "doc_id": "13072113",
+      "leaks": 0,
+      "delivery_s": 0.005838531999870611,
+      "engine_s": 0.011645792999843252
+    },
+    {
+      "doc_id": "13083189",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13097856",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13106686",
+      "leaks": 0,
+      "delivery_s": 0.0057294289999845205,
+      "engine_s": 0.0104337380000743
+    },
+    {
+      "doc_id": "13108582",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13116880",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13123189",
+      "leaks": 0,
+      "delivery_s": 0.006352801000048203,
+      "engine_s": 0.010288071000104537
+    },
+    {
+      "doc_id": "13135544",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13162391",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13172737",
+      "leaks": 0,
+      "delivery_s": 0.006297049999830051,
+      "engine_s": 0.010543700999960492
+    },
+    {
+      "doc_id": "13179318",
+      "leaks": 0,
+      "delivery_s": 0.005998169000122289,
+      "engine_s": 0.01061735400003272
+    },
+    {
+      "doc_id": "13189693",
+      "leaks": 0,
+      "delivery_s": 0.0053201620000891126,
+      "engine_s": 0.009990670000206592
+    },
+    {
+      "doc_id": "1320137",
+      "leaks": 0,
+      "delivery_s": 0.006116643000041222,
+      "engine_s": 0.010663455999974758
+    },
+    {
+      "doc_id": "13205096",
+      "leaks": 0,
+      "delivery_s": 0.006084202000010919,
+      "engine_s": 0.010209149000047546
+    },
+    {
+      "doc_id": "13205803",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13221399",
+      "leaks": 0,
+      "delivery_s": 0.005421004999789147,
+      "engine_s": 0.009964738000007856
+    },
+    {
+      "doc_id": "13223806",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13223957",
+      "leaks": 0,
+      "delivery_s": 0.006840999999894848,
+      "engine_s": 0.011551029999964157
+    },
+    {
+      "doc_id": "1322614",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13230773",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13231899",
+      "leaks": 0,
+      "delivery_s": 0.005974508000008427,
+      "engine_s": 0.011600321999821972
+    },
+    {
+      "doc_id": "13235609",
+      "leaks": 0,
+      "delivery_s": 0.005992397999989407,
+      "engine_s": 0.010719477999828086
+    },
+    {
+      "doc_id": "13242763",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13244602",
+      "leaks": 0,
+      "delivery_s": 0.005813370000169016,
+      "engine_s": 0.010617283000101452
+    },
+    {
+      "doc_id": "13245542",
+      "leaks": 0,
+      "delivery_s": 0.005450336999956562,
+      "engine_s": 0.010783800999888626
+    },
+    {
+      "doc_id": "13256155",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13277039",
+      "leaks": 0,
+      "delivery_s": 0.005114646000038192,
+      "engine_s": 0.009211391999997431
+    },
+    {
+      "doc_id": "13277118",
+      "leaks": 0,
+      "delivery_s": 0.005201037999995606,
+      "engine_s": 0.01050955999994585
+    },
+    {
+      "doc_id": "13277623",
+      "leaks": 0,
+      "delivery_s": 0.0059042149998731475,
+      "engine_s": 0.010181277999890881
+    },
+    {
+      "doc_id": "13282296",
+      "leaks": 0,
+      "delivery_s": 0.006443675000127769,
+      "engine_s": 0.010766369000066334
+    },
+    {
+      "doc_id": "13283919",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13290521",
+      "leaks": 0,
+      "delivery_s": 0.004998700999976791,
+      "engine_s": 0.010384195000142427
+    },
+    {
+      "doc_id": "13293033",
+      "leaks": 0,
+      "delivery_s": 0.005187786999840682,
+      "engine_s": 0.010711698000022807
+    },
+    {
+      "doc_id": "13296399",
+      "leaks": 0,
+      "delivery_s": 0.005028020999816363,
+      "engine_s": 0.009710178999966956
+    },
+    {
+      "doc_id": "13312471",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1332250",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13322804",
+      "leaks": 0,
+      "delivery_s": 0.004896006000080888,
+      "engine_s": 0.010407306000161043
+    },
+    {
+      "doc_id": "13329980",
+      "leaks": 0,
+      "delivery_s": 0.005928354999923613,
+      "engine_s": 0.010972956999921735
+    },
+    {
+      "doc_id": "1333643",
+      "leaks": 0,
+      "delivery_s": 0.004989008999928046,
+      "engine_s": 0.01048345899994274
+    },
+    {
+      "doc_id": "13338820",
+      "leaks": 0,
+      "delivery_s": 0.005284029999984341,
+      "engine_s": 0.0106924069998513
+    },
+    {
+      "doc_id": "13350374",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1336292",
+      "leaks": 0,
+      "delivery_s": 0.005342403999975431,
+      "engine_s": 0.010409357000071395
+    },
+    {
+      "doc_id": "13368032",
+      "leaks": 0,
+      "delivery_s": 0.005412395000121251,
+      "engine_s": 0.009712919000094189
+    },
+    {
+      "doc_id": "13373629",
+      "leaks": 0,
+      "delivery_s": 0.007036517999949865,
+      "engine_s": 0.011813491000111753
+    },
+    {
+      "doc_id": "13380011",
+      "leaks": 0,
+      "delivery_s": 0.005603513000096427,
+      "engine_s": 0.011284759000091071
+    },
+    {
+      "doc_id": "13380980",
+      "leaks": 0,
+      "delivery_s": 0.005924665000065943,
+      "engine_s": 0.010739098000158265
+    },
+    {
+      "doc_id": "1338283",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13384318",
+      "leaks": 0,
+      "delivery_s": 0.0056617650000134745,
+      "engine_s": 0.010354903999996168
+    },
+    {
+      "doc_id": "13398997",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13400643",
+      "leaks": 0,
+      "delivery_s": 0.005710396000040419,
+      "engine_s": 0.00984130400001959
+    },
+    {
+      "doc_id": "13411519",
+      "leaks": 0,
+      "delivery_s": 0.005624223000040729,
+      "engine_s": 0.011641712000027837
+    },
+    {
+      "doc_id": "13439128",
+      "leaks": 0,
+      "delivery_s": 0.005550041999867972,
+      "engine_s": 0.010587862999955178
+    },
+    {
+      "doc_id": "13441037",
+      "leaks": 0,
+      "delivery_s": 0.005770270999846616,
+      "engine_s": 0.010266061000038462
+    },
+    {
+      "doc_id": "13441537",
+      "leaks": 0,
+      "delivery_s": 0.00535163399990779,
+      "engine_s": 0.009175099000003684
+    },
+    {
+      "doc_id": "1344498",
+      "leaks": 0,
+      "delivery_s": 0.0053496629998335266,
+      "engine_s": 0.009921966999854703
+    },
+    {
+      "doc_id": "13445579",
+      "leaks": 0,
+      "delivery_s": 0.005149354999957723,
+      "engine_s": 0.009841942999855746
+    },
+    {
+      "doc_id": "13448422",
+      "leaks": 0,
+      "delivery_s": 0.005362725000168211,
+      "engine_s": 0.010435077000011006
+    },
+    {
+      "doc_id": "13450938",
+      "leaks": 0,
+      "delivery_s": 0.004985149000049205,
+      "engine_s": 0.009875856000007843
+    },
+    {
+      "doc_id": "13458119",
+      "leaks": 0,
+      "delivery_s": 0.004853703999970094,
+      "engine_s": 0.010475847999941834
+    },
+    {
+      "doc_id": "13464392",
+      "leaks": 0,
+      "delivery_s": 0.004998860999876342,
+      "engine_s": 0.009592605000079857
+    },
+    {
+      "doc_id": "13466517",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13466622",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1346695",
+      "leaks": 0,
+      "delivery_s": 0.0050800439998965885,
+      "engine_s": 0.010128534999921612
+    },
+    {
+      "doc_id": "13469921",
+      "leaks": 0,
+      "delivery_s": 0.005515938999906211,
+      "engine_s": 0.01036593300000277
+    },
+    {
+      "doc_id": "13481731",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13481880",
+      "leaks": 0,
+      "delivery_s": 0.00531955199994627,
+      "engine_s": 0.011322700999926383
+    },
+    {
+      "doc_id": "1349033",
+      "leaks": 0,
+      "delivery_s": 0.005645764000064446,
+      "engine_s": 0.01051115900008881
+    },
+    {
+      "doc_id": "13492264",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13494853",
+      "leaks": 0,
+      "delivery_s": 0.0055010889998357015,
+      "engine_s": 0.011079501000040182
+    },
+    {
+      "doc_id": "13496853",
+      "leaks": 0,
+      "delivery_s": 0.005262181000034616,
+      "engine_s": 0.009761731000025975
+    },
+    {
+      "doc_id": "13497630",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13509809",
+      "leaks": 0,
+      "delivery_s": 0.00525899100011884,
+      "engine_s": 0.010730648000162546
+    },
+    {
+      "doc_id": "13513790",
+      "leaks": 0,
+      "delivery_s": 0.005939735000083601,
+      "engine_s": 0.010101222999992387
+    },
+    {
+      "doc_id": "13514898",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13515165",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13519661",
+      "leaks": 0,
+      "delivery_s": 0.005047671000056653,
+      "engine_s": 0.010520409000037034
+    },
+    {
+      "doc_id": "1354567",
+      "leaks": 0,
+      "delivery_s": 0.004864345999976649,
+      "engine_s": 0.009467420999953902
+    },
+    {
+      "doc_id": "13552682",
+      "leaks": 0,
+      "delivery_s": 0.005465966999963712,
+      "engine_s": 0.010257840999884138
+    },
+    {
+      "doc_id": "13573143",
+      "leaks": 0,
+      "delivery_s": 0.005125626000108241,
+      "engine_s": 0.01084851400014486
+    },
+    {
+      "doc_id": "13578199",
+      "leaks": 0,
+      "delivery_s": 0.005017862000158857,
+      "engine_s": 0.009909635999974853
+    },
+    {
+      "doc_id": "13580614",
+      "leaks": 0,
+      "delivery_s": 0.006102420999923197,
+      "engine_s": 0.011738514999933614
+    },
+    {
+      "doc_id": "13583521",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13583615",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1358909",
+      "leaks": 0,
+      "delivery_s": 0.006029699000009714,
+      "engine_s": 0.010888653999927556
+    },
+    {
+      "doc_id": "13592721",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1360607",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13613916",
+      "leaks": 0,
+      "delivery_s": 0.005984527999999045,
+      "engine_s": 0.011588041000095473
+    },
+    {
+      "doc_id": "13614794",
+      "leaks": 0,
+      "delivery_s": 0.007347119000087332,
+      "engine_s": 0.01295911200008959
+    },
+    {
+      "doc_id": "13618987",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13619127",
+      "leaks": 0,
+      "delivery_s": 0.007509706000064398,
+      "engine_s": 0.012147602000140978
+    },
+    {
+      "doc_id": "13621186",
+      "leaks": 0,
+      "delivery_s": 0.005393525000044974,
+      "engine_s": 0.01047531699987303
+    },
+    {
+      "doc_id": "13624704",
+      "leaks": 0,
+      "delivery_s": 0.005479948000129298,
+      "engine_s": 0.010431626000126926
+    },
+    {
+      "doc_id": "13625993",
+      "leaks": 0,
+      "delivery_s": 0.005802150999898004,
+      "engine_s": 0.012381982000079006
+    },
+    {
+      "doc_id": "13636631",
+      "leaks": 0,
+      "delivery_s": 0.006659783000031894,
+      "engine_s": 0.011306410000088363
+    },
+    {
+      "doc_id": "13639330",
+      "leaks": 0,
+      "delivery_s": 0.0061621940001259645,
+      "engine_s": 0.011403452999957153
+    },
+    {
+      "doc_id": "13651792",
+      "leaks": 0,
+      "delivery_s": 0.00598941799989916,
+      "engine_s": 0.012985183999944638
+    },
+    {
+      "doc_id": "1365188",
+      "leaks": 0,
+      "delivery_s": 0.0058337410000603995,
+      "engine_s": 0.011404232999893793
+    },
+    {
+      "doc_id": "13702924",
+      "leaks": 0,
+      "delivery_s": 0.006616559999883975,
+      "engine_s": 0.011154811999858794
+    },
+    {
+      "doc_id": "13714201",
+      "leaks": 0,
+      "delivery_s": 0.005390275999843652,
+      "engine_s": 0.011319389999925988
+    },
+    {
+      "doc_id": "1371440",
+      "leaks": 0,
+      "delivery_s": 0.007170231999907628,
+      "engine_s": 0.011938841999835859
+    },
+    {
+      "doc_id": "13717103",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13726379",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13732033",
+      "leaks": 0,
+      "delivery_s": 0.0065184160000626434,
+      "engine_s": 0.01091955400011102
+    },
+    {
+      "doc_id": "1373287",
+      "leaks": 0,
+      "delivery_s": 0.005587822000052256,
+      "engine_s": 0.010965446999989581
+    },
+    {
+      "doc_id": "13734012",
+      "leaks": 0,
+      "delivery_s": 0.005434596999975838,
+      "engine_s": 0.011200445999975273
+    },
+    {
+      "doc_id": "13757347",
+      "leaks": 0,
+      "delivery_s": 0.005602834000001167,
+      "engine_s": 0.01072554899997158
+    },
+    {
+      "doc_id": "13759726",
+      "leaks": 0,
+      "delivery_s": 0.005850000999998883,
+      "engine_s": 0.010852420999981405
+    },
+    {
+      "doc_id": "13760557",
+      "leaks": 0,
+      "delivery_s": 0.005847082999935083,
+      "engine_s": 0.010624233999806165
+    },
+    {
+      "doc_id": "13763195",
+      "leaks": 0,
+      "delivery_s": 0.006205045000115206,
+      "engine_s": 0.011083730000109426
+    },
+    {
+      "doc_id": "13764090",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13765757",
+      "leaks": 0,
+      "delivery_s": 0.005117504000054396,
+      "engine_s": 0.010609342999941873
+    },
+    {
+      "doc_id": "13768432",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13770184",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13771184",
+      "leaks": 0,
+      "delivery_s": 0.005364414000041506,
+      "engine_s": 0.012399671000139278
+    },
+    {
+      "doc_id": "13774178",
+      "leaks": 0,
+      "delivery_s": 0.006480194999994637,
+      "engine_s": 0.012296367000089958
+    },
+    {
+      "doc_id": "13777138",
+      "leaks": 0,
+      "delivery_s": 0.006363782999869727,
+      "engine_s": 0.012118971000063539
+    },
+    {
+      "doc_id": "13777706",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13778710",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13779605",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13780287",
+      "leaks": 0,
+      "delivery_s": 0.0071692540000185545,
+      "engine_s": 0.013203542000155721
+    },
+    {
+      "doc_id": "13782317",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13790144",
+      "leaks": 0,
+      "delivery_s": 0.005673396000020148,
+      "engine_s": 0.01242366199994649
+    },
+    {
+      "doc_id": "13791044",
+      "leaks": 0,
+      "delivery_s": 0.0056115530001079605,
+      "engine_s": 0.011886622000019997
+    },
+    {
+      "doc_id": "13791206",
+      "leaks": 0,
+      "delivery_s": 0.006818779000013819,
+      "engine_s": 0.011657923000029768
+    },
+    {
+      "doc_id": "1379127",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13791788",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13794374",
+      "leaks": 0,
+      "delivery_s": 0.005517028999975082,
+      "engine_s": 0.010297500999968179
+    },
+    {
+      "doc_id": "13798951",
+      "leaks": 0,
+      "delivery_s": 0.005773729000111416,
+      "engine_s": 0.010743438000190508
+    },
+    {
+      "doc_id": "13801259",
+      "leaks": 0,
+      "delivery_s": 0.005638313999952516,
+      "engine_s": 0.011414452999815694
+    },
+    {
+      "doc_id": "13814480",
+      "leaks": 0,
+      "delivery_s": 0.005551721000074394,
+      "engine_s": 0.011138753000068391
+    },
+    {
+      "doc_id": "1381673",
+      "leaks": 0,
+      "delivery_s": 0.005466057999910845,
+      "engine_s": 0.011041060000025027
+    },
+    {
+      "doc_id": "13823200",
+      "leaks": 0,
+      "delivery_s": 0.006400814000016908,
+      "engine_s": 0.010909315999924729
+    },
+    {
+      "doc_id": "13831558",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13831842",
+      "leaks": 0,
+      "delivery_s": 0.006387332000031165,
+      "engine_s": 0.011422613000149795
+    },
+    {
+      "doc_id": "1383826",
+      "leaks": 0,
+      "delivery_s": 0.006733875999998418,
+      "engine_s": 0.011366971999905218
+    },
+    {
+      "doc_id": "13843341",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13857083",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1386103",
+      "leaks": 0,
+      "delivery_s": 0.006531128000005992,
+      "engine_s": 0.012563517999979013
+    },
+    {
+      "doc_id": "13867350",
+      "leaks": 0,
+      "delivery_s": 0.0064792059999945195,
+      "engine_s": 0.01245210400020369
+    },
+    {
+      "doc_id": "13868795",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13870943",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1387104",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1387654",
+      "leaks": 0,
+      "delivery_s": 0.005562690000033399,
+      "engine_s": 0.011166433999960645
+    },
+    {
+      "doc_id": "13878124",
+      "leaks": 0,
+      "delivery_s": 0.005609611999943809,
+      "engine_s": 0.0130552450000323
+    },
+    {
+      "doc_id": "13878643",
+      "leaks": 0,
+      "delivery_s": 0.006692724999993516,
+      "engine_s": 0.011050309999973251
+    },
+    {
+      "doc_id": "13882658",
+      "leaks": 0,
+      "delivery_s": 0.0062879689999135735,
+      "engine_s": 0.010731968000072811
+    },
+    {
+      "doc_id": "13883546",
+      "leaks": 0,
+      "delivery_s": 0.006834259000015663,
+      "engine_s": 0.011832316999971226
+    },
+    {
+      "doc_id": "1388704",
+      "leaks": 0,
+      "delivery_s": 0.00634119100004682,
+      "engine_s": 0.010845909999943615
+    },
+    {
+      "doc_id": "13889430",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13889962",
+      "leaks": 0,
+      "delivery_s": 0.005926265999960378,
+      "engine_s": 0.01158566999993127
+    },
+    {
+      "doc_id": "1389264",
+      "leaks": 0,
+      "delivery_s": 0.005710015999966345,
+      "engine_s": 0.01053592900007061
+    },
+    {
+      "doc_id": "13899137",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13900610",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13901073",
+      "leaks": 0,
+      "delivery_s": 0.006603670999993483,
+      "engine_s": 0.011690903000044273
+    },
+    {
+      "doc_id": "13902570",
+      "leaks": 0,
+      "delivery_s": 0.00626175799993689,
+      "engine_s": 0.012951060999967012
+    },
+    {
+      "doc_id": "13903052",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13905670",
+      "leaks": 0,
+      "delivery_s": 0.006115770999940651,
+      "engine_s": 0.011209454999971058
+    },
+    {
+      "doc_id": "13906581",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13906892",
+      "leaks": 0,
+      "delivery_s": 0.006505047000018749,
+      "engine_s": 0.011489706000020306
+    },
+    {
+      "doc_id": "13907427",
+      "leaks": 0,
+      "delivery_s": 0.007128000999955475,
+      "engine_s": 0.0118247479999809
+    },
+    {
+      "doc_id": "13907928",
+      "leaks": 0,
+      "delivery_s": 0.005628793000141741,
+      "engine_s": 0.011583399000073769
+    },
+    {
+      "doc_id": "13910150",
+      "leaks": 0,
+      "delivery_s": 0.006028749000051903,
+      "engine_s": 0.01135670000007849
+    },
+    {
+      "doc_id": "1391126",
+      "leaks": 0,
+      "delivery_s": 0.005992937999963033,
+      "engine_s": 0.011554048000107286
+    },
+    {
+      "doc_id": "13912224",
+      "leaks": 0,
+      "delivery_s": 0.007157460999906107,
+      "engine_s": 0.01270939100004398
+    },
+    {
+      "doc_id": "13914198",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13914633",
+      "leaks": 0,
+      "delivery_s": 0.006210506000115856,
+      "engine_s": 0.010718047000182196
+    },
+    {
+      "doc_id": "13915464",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13916484",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13916951",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13921526",
+      "leaks": 0,
+      "delivery_s": 0.007309638000151608,
+      "engine_s": 0.01425603100005901
+    },
+    {
+      "doc_id": "13921783",
+      "leaks": 0,
+      "delivery_s": 0.007001476000141338,
+      "engine_s": 0.012543186000129936
+    },
+    {
+      "doc_id": "13923069",
+      "leaks": 0,
+      "delivery_s": 0.007077028999901813,
+      "engine_s": 0.011514787999885812
+    },
+    {
+      "doc_id": "13923140",
+      "leaks": 0,
+      "delivery_s": 0.006741703999978199,
+      "engine_s": 0.012397148999980345
+    },
+    {
+      "doc_id": "13931771",
+      "leaks": 0,
+      "delivery_s": 0.006818808999923931,
+      "engine_s": 0.011631591999957891
+    },
+    {
+      "doc_id": "13933299",
+      "leaks": 0,
+      "delivery_s": 0.006370351999976265,
+      "engine_s": 0.012254335000079664
+    },
+    {
+      "doc_id": "13934676",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13936152",
+      "leaks": 0,
+      "delivery_s": 0.006059978999928717,
+      "engine_s": 0.012900440000066737
+    },
+    {
+      "doc_id": "13938878",
+      "leaks": 0,
+      "delivery_s": 0.006571570000005522,
+      "engine_s": 0.014545882999982496
+    },
+    {
+      "doc_id": "13940200",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13944805",
+      "leaks": 0,
+      "delivery_s": 0.006920302000025913,
+      "engine_s": 0.011955383999975311
+    },
+    {
+      "doc_id": "13948920",
+      "leaks": 0,
+      "delivery_s": 0.007459062999942034,
+      "engine_s": 0.012333428999909302
+    },
+    {
+      "doc_id": "13949015",
+      "leaks": 0,
+      "delivery_s": 0.0060826510000424605,
+      "engine_s": 0.011969283999860636
+    },
+    {
+      "doc_id": "13952658",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13953762",
+      "leaks": 0,
+      "delivery_s": 0.007566115999907197,
+      "engine_s": 0.013644267000017862
+    },
+    {
+      "doc_id": "13955536",
+      "leaks": 0,
+      "delivery_s": 0.007429520999949091,
+      "engine_s": 0.01244794100011859
+    },
+    {
+      "doc_id": "13956305",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13958154",
+      "leaks": 0,
+      "delivery_s": 0.006582538999964527,
+      "engine_s": 0.012165550999952757
+    },
+    {
+      "doc_id": "13959707",
+      "leaks": 0,
+      "delivery_s": 0.007561876999943706,
+      "engine_s": 0.01390316700008043
+    },
+    {
+      "doc_id": "13963620",
+      "leaks": 0,
+      "delivery_s": 0.007744972999944366,
+      "engine_s": 0.01401997199991456
+    },
+    {
+      "doc_id": "13964633",
+      "leaks": 0,
+      "delivery_s": 0.007596687999921414,
+      "engine_s": 0.013317704999963098
+    },
+    {
+      "doc_id": "13965483",
+      "leaks": 0,
+      "delivery_s": 0.0069783650001227215,
+      "engine_s": 0.012465023000004294
+    },
+    {
+      "doc_id": "13966946",
+      "leaks": 0,
+      "delivery_s": 0.007088328999998339,
+      "engine_s": 0.011782116999938808
+    },
+    {
+      "doc_id": "13969173",
+      "leaks": 0,
+      "delivery_s": 0.00737172900016958,
+      "engine_s": 0.012430382000047757
+    },
+    {
+      "doc_id": "1398021",
+      "leaks": 0,
+      "delivery_s": 0.007584466000025714,
+      "engine_s": 0.012812204000056227
+    },
+    {
+      "doc_id": "13980338",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "13989491",
+      "leaks": 0,
+      "delivery_s": 0.00697288500009563,
+      "engine_s": 0.01223063399993407
+    },
+    {
+      "doc_id": "13992047",
+      "leaks": 0,
+      "delivery_s": 0.007187531999989005,
+      "engine_s": 0.012382749999915177
+    },
+    {
+      "doc_id": "140098548",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14019636",
+      "leaks": 0,
+      "delivery_s": 0.006082959999957893,
+      "engine_s": 0.01152722699998776
+    },
+    {
+      "doc_id": "14021596",
+      "leaks": 0,
+      "delivery_s": 0.006550617999891983,
+      "engine_s": 0.012333206999983304
+    },
+    {
+      "doc_id": "14050257",
+      "leaks": 0,
+      "delivery_s": 0.00679307800010065,
+      "engine_s": 0.011918562000118982
+    },
+    {
+      "doc_id": "14060030",
+      "leaks": 0,
+      "delivery_s": 0.006315520000043762,
+      "engine_s": 0.011542228000053001
+    },
+    {
+      "doc_id": "14075252",
+      "leaks": 0,
+      "delivery_s": 0.0062061450000783225,
+      "engine_s": 0.010904202999881818
+    },
+    {
+      "doc_id": "14079881",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14082855",
+      "leaks": 0,
+      "delivery_s": 0.007315427000094132,
+      "engine_s": 0.012818025000115085
+    },
+    {
+      "doc_id": "14083283",
+      "leaks": 0,
+      "delivery_s": 0.006481355999994776,
+      "engine_s": 0.013254021999955512
+    },
+    {
+      "doc_id": "140874",
+      "leaks": 0,
+      "delivery_s": 0.006333419999918988,
+      "engine_s": 0.012875996999810013
+    },
+    {
+      "doc_id": "140907540",
+      "leaks": 0,
+      "delivery_s": 0.007046135999871694,
+      "engine_s": 0.012444190999985949
+    },
+    {
+      "doc_id": "14092737",
+      "leaks": 0,
+      "delivery_s": 0.007222132999913811,
+      "engine_s": 0.012642239000115296
+    },
+    {
+      "doc_id": "1410197",
+      "leaks": 0,
+      "delivery_s": 0.006060128999934022,
+      "engine_s": 0.012291595999840865
+    },
+    {
+      "doc_id": "14103509",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14105446",
+      "leaks": 0,
+      "delivery_s": 0.007135719999951107,
+      "engine_s": 0.011889051000025574
+    },
+    {
+      "doc_id": "14116046",
+      "leaks": 0,
+      "delivery_s": 0.007280637000121715,
+      "engine_s": 0.01580385900001602
+    },
+    {
+      "doc_id": "14118484",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14119470",
+      "leaks": 0,
+      "delivery_s": 0.007689571999890177,
+      "engine_s": 0.013543703999857826
+    },
+    {
+      "doc_id": "1412089",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14121786",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14128314",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14131683",
+      "leaks": 0,
+      "delivery_s": 0.007982291999951485,
+      "engine_s": 0.01391493599999194
+    },
+    {
+      "doc_id": "14145440",
+      "leaks": 0,
+      "delivery_s": 0.008336566000025414,
+      "engine_s": 0.013826494000113598
+    },
+    {
+      "doc_id": "14149065",
+      "leaks": 0,
+      "delivery_s": 0.006965174000015395,
+      "engine_s": 0.011762845000021116
+    },
+    {
+      "doc_id": "14155726",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14171859",
+      "leaks": 0,
+      "delivery_s": 0.005691634999948292,
+      "engine_s": 0.010874721999925896
+    },
+    {
+      "doc_id": "14174055",
+      "leaks": 0,
+      "delivery_s": 0.007592628999873341,
+      "engine_s": 0.012397439999858761
+    },
+    {
+      "doc_id": "14178995",
+      "leaks": 0,
+      "delivery_s": 0.006755505999990419,
+      "engine_s": 0.011255097000002934
+    },
+    {
+      "doc_id": "14180217",
+      "leaks": 0,
+      "delivery_s": 0.00641792299984445,
+      "engine_s": 0.011670081999909598
+    },
+    {
+      "doc_id": "14180565",
+      "leaks": 0,
+      "delivery_s": 0.006668813000032969,
+      "engine_s": 0.012142400000129783
+    },
+    {
+      "doc_id": "14185503",
+      "leaks": 0,
+      "delivery_s": 0.0061419329999807815,
+      "engine_s": 0.011704453999982434
+    },
+    {
+      "doc_id": "14188138",
+      "leaks": 0,
+      "delivery_s": 0.007046427999966909,
+      "engine_s": 0.012594566999950985
+    },
+    {
+      "doc_id": "14191255",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14192687",
+      "leaks": 0,
+      "delivery_s": 0.0078121750000264,
+      "engine_s": 0.012218461999964347
+    },
+    {
+      "doc_id": "14195528",
+      "leaks": 0,
+      "delivery_s": 0.007546024000021134,
+      "engine_s": 0.012999452000030942
+    },
+    {
+      "doc_id": "14198646",
+      "leaks": 0,
+      "delivery_s": 0.006783636000136539,
+      "engine_s": 0.01222677200007638
+    },
+    {
+      "doc_id": "14205246",
+      "leaks": 0,
+      "delivery_s": 0.006759724999938044,
+      "engine_s": 0.012603125999930853
+    },
+    {
+      "doc_id": "14225271",
+      "leaks": 0,
+      "delivery_s": 0.0066460420000566955,
+      "engine_s": 0.012115289000121265
+    },
+    {
+      "doc_id": "14240343",
+      "leaks": 0,
+      "delivery_s": 0.007410169999957361,
+      "engine_s": 0.011742224000045098
+    },
+    {
+      "doc_id": "14241418",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14252892",
+      "leaks": 0,
+      "delivery_s": 0.005651902999943559,
+      "engine_s": 0.011482033999982377
+    },
+    {
+      "doc_id": "142559798",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "142562844",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14260013",
+      "leaks": 0,
+      "delivery_s": 0.007919989999891186,
+      "engine_s": 0.014594672999919567
+    },
+    {
+      "doc_id": "14275671",
+      "leaks": 0,
+      "delivery_s": 0.008717899999965084,
+      "engine_s": 0.014801439999928334
+    },
+    {
+      "doc_id": "1428830",
+      "leaks": 0,
+      "delivery_s": 0.009108185000059166,
+      "engine_s": 0.01482120099990425
+    },
+    {
+      "doc_id": "1428840",
+      "leaks": 0,
+      "delivery_s": 0.00840274799998042,
+      "engine_s": 0.014573371999858864
+    },
+    {
+      "doc_id": "14290854",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14296612",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14300799",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14308244",
+      "leaks": 0,
+      "delivery_s": 0.008211462000190295,
+      "engine_s": 0.013456630000064251
+    },
+    {
+      "doc_id": "14311986",
+      "leaks": 0,
+      "delivery_s": 0.007711972000151945,
+      "engine_s": 0.01361069600011433
+    },
+    {
+      "doc_id": "14315749",
+      "leaks": 0,
+      "delivery_s": 0.007304796999960672,
+      "engine_s": 0.011919720999912897
+    },
+    {
+      "doc_id": "14319754",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "143251",
+      "leaks": 0,
+      "delivery_s": 0.007748131999960606,
+      "engine_s": 0.014656073999958608
+    },
+    {
+      "doc_id": "14328288",
+      "leaks": 0,
+      "delivery_s": 0.00789252899994608,
+      "engine_s": 0.012734642999930657
+    },
+    {
+      "doc_id": "14332945",
+      "leaks": 0,
+      "delivery_s": 0.007249814000033439,
+      "engine_s": 0.012918439000031867
+    },
+    {
+      "doc_id": "14333540",
+      "leaks": 0,
+      "delivery_s": 0.008163069999909567,
+      "engine_s": 0.013067804999991495
+    },
+    {
+      "doc_id": "14337960",
+      "leaks": 0,
+      "delivery_s": 0.006370020999838744,
+      "engine_s": 0.012637308999956076
+    },
+    {
+      "doc_id": "143381103",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14338915",
+      "leaks": 0,
+      "delivery_s": 0.007301145999917935,
+      "engine_s": 0.011840337999956319
+    },
+    {
+      "doc_id": "14340571",
+      "leaks": 0,
+      "delivery_s": 0.0075988569999481115,
+      "engine_s": 0.01212574900000618
+    },
+    {
+      "doc_id": "14361849",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14362678",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14362780",
+      "leaks": 0,
+      "delivery_s": 0.006772926999929041,
+      "engine_s": 0.01251485399984631
+    },
+    {
+      "doc_id": "14367469",
+      "leaks": 0,
+      "delivery_s": 0.007081416999881185,
+      "engine_s": 0.01182263700002295
+    },
+    {
+      "doc_id": "14376683",
+      "leaks": 0,
+      "delivery_s": 0.007677121000142506,
+      "engine_s": 0.01219735200015748
+    },
+    {
+      "doc_id": "143796742",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14380875",
+      "leaks": 0,
+      "delivery_s": 0.007120078999832913,
+      "engine_s": 0.013480940999897939
+    },
+    {
+      "doc_id": "14386505",
+      "leaks": 0,
+      "delivery_s": 0.007064187999958449,
+      "engine_s": 0.011687712999901123
+    },
+    {
+      "doc_id": "143868995",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14390137",
+      "leaks": 0,
+      "delivery_s": 0.00683800899992093,
+      "engine_s": 0.012850135999997292
+    },
+    {
+      "doc_id": "14395738",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14402338",
+      "leaks": 0,
+      "delivery_s": 0.008498210999960065,
+      "engine_s": 0.014399394999827564
+    },
+    {
+      "doc_id": "14405193",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14407673",
+      "leaks": 0,
+      "delivery_s": 0.007937250999930257,
+      "engine_s": 0.013590375999910975
+    },
+    {
+      "doc_id": "14408200",
+      "leaks": 0,
+      "delivery_s": 0.0076805310000054305,
+      "engine_s": 0.013152707000017472
+    },
+    {
+      "doc_id": "14419116",
+      "leaks": 0,
+      "delivery_s": 0.007461852999995244,
+      "engine_s": 0.013429407999865361
+    },
+    {
+      "doc_id": "14434123",
+      "leaks": 0,
+      "delivery_s": 0.006122571000105381,
+      "engine_s": 0.012410338000108823
+    },
+    {
+      "doc_id": "14437255",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14446279",
+      "leaks": 0,
+      "delivery_s": 0.006262905999847135,
+      "engine_s": 0.014744745999905717
+    },
+    {
+      "doc_id": "144555102",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14460402",
+      "leaks": 0,
+      "delivery_s": 0.006926622000037241,
+      "engine_s": 0.012220632999969894
+    },
+    {
+      "doc_id": "14461101",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14464451",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14471161",
+      "leaks": 0,
+      "delivery_s": 0.006956633999834594,
+      "engine_s": 0.012217813000006572
+    },
+    {
+      "doc_id": "14474178",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14475235",
+      "leaks": 0,
+      "delivery_s": 0.007101928000111002,
+      "engine_s": 0.01288733699993827
+    },
+    {
+      "doc_id": "14479433",
+      "leaks": 0,
+      "delivery_s": 0.006409921999875223,
+      "engine_s": 0.012553183999898465
+    },
+    {
+      "doc_id": "1447990",
+      "leaks": 0,
+      "delivery_s": 0.007518013999970208,
+      "engine_s": 0.014074272000016208
+    },
+    {
+      "doc_id": "144801076",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14482051",
+      "leaks": 0,
+      "delivery_s": 0.007441000999961034,
+      "engine_s": 0.014269898999828001
+    },
+    {
+      "doc_id": "14492339",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14492964",
+      "leaks": 0,
+      "delivery_s": 0.007452082000099836,
+      "engine_s": 0.01284120500008612
+    },
+    {
+      "doc_id": "14496749",
+      "leaks": 0,
+      "delivery_s": 0.007554276000064419,
+      "engine_s": 0.012809213000082309
+    },
+    {
+      "doc_id": "1449692",
+      "leaks": 0,
+      "delivery_s": 0.009326622999878964,
+      "engine_s": 0.015196024999795554
+    },
+    {
+      "doc_id": "14500725",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14501880",
+      "leaks": 0,
+      "delivery_s": 0.006799727000043276,
+      "engine_s": 0.013735629999928278
+    },
+    {
+      "doc_id": "14530534",
+      "leaks": 0,
+      "delivery_s": 0.006397912000011274,
+      "engine_s": 0.012121628999921086
+    },
+    {
+      "doc_id": "145335387",
+      "leaks": 0,
+      "delivery_s": 0.007570945999987089,
+      "engine_s": 0.013013752000006207
+    },
+    {
+      "doc_id": "14535322",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "145383432",
+      "leaks": 0,
+      "delivery_s": 0.007816305999995166,
+      "engine_s": 0.013022242000033657
+    },
+    {
+      "doc_id": "145416918",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14541844",
+      "leaks": 0,
+      "delivery_s": 0.0072011019999536074,
+      "engine_s": 0.013223570000036489
+    },
+    {
+      "doc_id": "14544564",
+      "leaks": 0,
+      "delivery_s": 0.007304787000066426,
+      "engine_s": 0.012135509000017919
+    },
+    {
+      "doc_id": "1454773",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14550841",
+      "leaks": 0,
+      "delivery_s": 0.00782398599994849,
+      "engine_s": 0.01345628800004306
+    },
+    {
+      "doc_id": "14555750",
+      "leaks": 0,
+      "delivery_s": 0.007041877000119712,
+      "engine_s": 0.01226385399991159
+    },
+    {
+      "doc_id": "1456068",
+      "leaks": 0,
+      "delivery_s": 0.0070931479999671865,
+      "engine_s": 0.012263442999937979
+    },
+    {
+      "doc_id": "14566771",
+      "leaks": 0,
+      "delivery_s": 0.006829047999872273,
+      "engine_s": 0.012233131999892066
+    },
+    {
+      "doc_id": "145716849",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14581009",
+      "leaks": 0,
+      "delivery_s": 0.007009635000031267,
+      "engine_s": 0.01158513799987304
+    },
+    {
+      "doc_id": "14584755",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14591894",
+      "leaks": 0,
+      "delivery_s": 0.007986350999999559,
+      "engine_s": 0.014050851000092734
+    },
+    {
+      "doc_id": "14606752",
+      "leaks": 0,
+      "delivery_s": 0.00750815300011709,
+      "engine_s": 0.013191488000074969
+    },
+    {
+      "doc_id": "14610165",
+      "leaks": 0,
+      "delivery_s": 0.007421120999879349,
+      "engine_s": 0.012799435000033554
+    },
+    {
+      "doc_id": "14615911",
+      "leaks": 0,
+      "delivery_s": 0.007949159999952826,
+      "engine_s": 0.013813513000059174
+    },
+    {
+      "doc_id": "14626540",
+      "leaks": 0,
+      "delivery_s": 0.00732330699997874,
+      "engine_s": 0.014182156999822837
+    },
+    {
+      "doc_id": "14637235",
+      "leaks": 0,
+      "delivery_s": 0.008253701000057845,
+      "engine_s": 0.013983397999936642
+    },
+    {
+      "doc_id": "14644164",
+      "leaks": 0,
+      "delivery_s": 0.0076396689999000955,
+      "engine_s": 0.01564206199986984
+    },
+    {
+      "doc_id": "14647747",
+      "leaks": 0,
+      "delivery_s": 0.00794295100013187,
+      "engine_s": 0.014320511000050828
+    },
+    {
+      "doc_id": "14652521",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14657344",
+      "leaks": 0,
+      "delivery_s": 0.0072125819999655505,
+      "engine_s": 0.014051000000108615
+    },
+    {
+      "doc_id": "14658685",
+      "leaks": 0,
+      "delivery_s": 0.007620776999829104,
+      "engine_s": 0.013938575999873137
+    },
+    {
+      "doc_id": "14663842",
+      "leaks": 0,
+      "delivery_s": 0.008023113000035664,
+      "engine_s": 0.014520999000069423
+    },
+    {
+      "doc_id": "14664424",
+      "leaks": 0,
+      "delivery_s": 0.007371788999989803,
+      "engine_s": 0.013810942999953113
+    },
+    {
+      "doc_id": "146653163",
+      "leaks": 0,
+      "delivery_s": 0.008082665999836536,
+      "engine_s": 0.01418237500001851
+    },
+    {
+      "doc_id": "14672919",
+      "leaks": 0,
+      "delivery_s": 0.007205903999874863,
+      "engine_s": 0.013051554999947257
+    },
+    {
+      "doc_id": "14682243",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14692646",
+      "leaks": 0,
+      "delivery_s": 0.007928988999992725,
+      "engine_s": 0.013675766999995176
+    },
+    {
+      "doc_id": "1469751",
+      "leaks": 0,
+      "delivery_s": 0.007686259000138307,
+      "engine_s": 0.012718120000045019
+    },
+    {
+      "doc_id": "14700857",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14706752",
+      "leaks": 0,
+      "delivery_s": 0.0091725760000827,
+      "engine_s": 0.014795418999938192
+    },
+    {
+      "doc_id": "1471041",
+      "leaks": 0,
+      "delivery_s": 0.008112457000152062,
+      "engine_s": 0.013126256000077774
+    },
+    {
+      "doc_id": "147107523",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14711483",
+      "leaks": 0,
+      "delivery_s": 0.00671981299979052,
+      "engine_s": 0.012241191999919465
+    },
+    {
+      "doc_id": "14717213",
+      "leaks": 0,
+      "delivery_s": 0.007577315999924394,
+      "engine_s": 0.013712058000010074
+    },
+    {
+      "doc_id": "14717500",
+      "leaks": 0,
+      "delivery_s": 0.007565295999938826,
+      "engine_s": 0.012361636999912662
+    },
+    {
+      "doc_id": "14719322",
+      "leaks": 0,
+      "delivery_s": 0.008929798000053779,
+      "engine_s": 0.014767569000014191
+    },
+    {
+      "doc_id": "14724693",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14726759",
+      "leaks": 0,
+      "delivery_s": 0.008027502999993885,
+      "engine_s": 0.013540461000047799
+    },
+    {
+      "doc_id": "1472815",
+      "leaks": 0,
+      "delivery_s": 0.007700161999991906,
+      "engine_s": 0.013165337999907933
+    },
+    {
+      "doc_id": "14729253",
+      "leaks": 0,
+      "delivery_s": 0.007238104999942152,
+      "engine_s": 0.013263881000057154
+    },
+    {
+      "doc_id": "14753395",
+      "leaks": 0,
+      "delivery_s": 0.007451390999904106,
+      "engine_s": 0.01348254899994572
+    },
+    {
+      "doc_id": "14767844",
+      "leaks": 0,
+      "delivery_s": 0.008607904999962557,
+      "engine_s": 0.013729777999969883
+    },
+    {
+      "doc_id": "14768471",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14782049",
+      "leaks": 0,
+      "delivery_s": 0.008516161999978067,
+      "engine_s": 0.014410224999892307
+    },
+    {
+      "doc_id": "14797520",
+      "leaks": 0,
+      "delivery_s": 0.00760453700013386,
+      "engine_s": 0.013004442000010386
+    },
+    {
+      "doc_id": "14803797",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14806256",
+      "leaks": 0,
+      "delivery_s": 0.007815965999952823,
+      "engine_s": 0.013175836999835155
+    },
+    {
+      "doc_id": "14819804",
+      "leaks": 0,
+      "delivery_s": 0.00795683100000133,
+      "engine_s": 0.014271169000039663
+    },
+    {
+      "doc_id": "14823313",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14827874",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14831629",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14834714",
+      "leaks": 0,
+      "delivery_s": 0.00789187899999888,
+      "engine_s": 0.013407327000095393
+    },
+    {
+      "doc_id": "14835068",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14843502",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14848619",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14853989",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14863011",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14864285",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14865329",
+      "leaks": 0,
+      "delivery_s": 0.007889549000083207,
+      "engine_s": 0.013757530000020779
+    },
+    {
+      "doc_id": "14874811",
+      "leaks": 0,
+      "delivery_s": 0.007627426999988529,
+      "engine_s": 0.014285248000078354
+    },
+    {
+      "doc_id": "14893425",
+      "leaks": 0,
+      "delivery_s": 0.008395447000111744,
+      "engine_s": 0.014000549000002138
+    },
+    {
+      "doc_id": "14893428",
+      "leaks": 0,
+      "delivery_s": 0.007663858999876538,
+      "engine_s": 0.013300891999961095
+    },
+    {
+      "doc_id": "14915566",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14920021",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14923462",
+      "leaks": 0,
+      "delivery_s": 0.009850871000026018,
+      "engine_s": 0.01679112300007546
+    },
+    {
+      "doc_id": "14924526",
+      "leaks": 0,
+      "delivery_s": 0.008137497000006988,
+      "engine_s": 0.013427886000044964
+    },
+    {
+      "doc_id": "14926162",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14934137",
+      "leaks": 0,
+      "delivery_s": 0.0073228660000950185,
+      "engine_s": 0.01275602999999137
+    },
+    {
+      "doc_id": "14938990",
+      "leaks": 0,
+      "delivery_s": 0.00813154599995869,
+      "engine_s": 0.014228415999923527
+    },
+    {
+      "doc_id": "1495563",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14965508",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "14972169",
+      "leaks": 0,
+      "delivery_s": 0.008007532000192441,
+      "engine_s": 0.013752579000083642
+    },
+    {
+      "doc_id": "14973286",
+      "leaks": 0,
+      "delivery_s": 0.007617578000008507,
+      "engine_s": 0.013463859000012235
+    },
+    {
+      "doc_id": "1499964",
+      "leaks": 0,
+      "delivery_s": 0.007625256999972407,
+      "engine_s": 0.015011945999958698
+    },
+    {
+      "doc_id": "15040589",
+      "leaks": 0,
+      "delivery_s": 0.007282954999936919,
+      "engine_s": 0.013007770999820423
+    },
+    {
+      "doc_id": "15041758",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15048300",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15058155",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1507222",
+      "leaks": 0,
+      "delivery_s": 0.008844513999974879,
+      "engine_s": 0.014496916000098281
+    },
+    {
+      "doc_id": "15077696",
+      "leaks": 0,
+      "delivery_s": 0.008984307999980956,
+      "engine_s": 0.014687233999893579
+    },
+    {
+      "doc_id": "15081770",
+      "leaks": 0,
+      "delivery_s": 0.007023265000043466,
+      "engine_s": 0.012557442999877821
+    },
+    {
+      "doc_id": "15113221",
+      "leaks": 0,
+      "delivery_s": 0.012279635000140843,
+      "engine_s": 0.017325625000012224
+    },
+    {
+      "doc_id": "15121114",
+      "leaks": 0,
+      "delivery_s": 0.006898599999885846,
+      "engine_s": 0.013003620999825216
+    },
+    {
+      "doc_id": "15128866",
+      "leaks": 0,
+      "delivery_s": 0.00713355900006718,
+      "engine_s": 0.013399406000189629
+    },
+    {
+      "doc_id": "15129362",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15135001",
+      "leaks": 0,
+      "delivery_s": 0.007802063999861275,
+      "engine_s": 0.012913686999809215
+    },
+    {
+      "doc_id": "15153602",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15155862",
+      "leaks": 0,
+      "delivery_s": 0.007848707999983162,
+      "engine_s": 0.013193328999932419
+    },
+    {
+      "doc_id": "15176526",
+      "leaks": 0,
+      "delivery_s": 0.007362108000052103,
+      "engine_s": 0.012514922000036677
+    },
+    {
+      "doc_id": "15194125",
+      "leaks": 0,
+      "delivery_s": 0.007075456999928065,
+      "engine_s": 0.012152238999988185
+    },
+    {
+      "doc_id": "15215393",
+      "leaks": 0,
+      "delivery_s": 0.007200472000022273,
+      "engine_s": 0.012906267000062144
+    },
+    {
+      "doc_id": "1522336",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "152245",
+      "leaks": 0,
+      "delivery_s": 0.008090354999922056,
+      "engine_s": 0.013585482000053162
+    },
+    {
+      "doc_id": "1522647",
+      "leaks": 0,
+      "delivery_s": 0.008591813000066395,
+      "engine_s": 0.014621721000139587
+    },
+    {
+      "doc_id": "15237660",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15248287",
+      "leaks": 0,
+      "delivery_s": 0.00805255499994928,
+      "engine_s": 0.013929426999993666
+    },
+    {
+      "doc_id": "15274349",
+      "leaks": 0,
+      "delivery_s": 0.008325064000018756,
+      "engine_s": 0.01380647099995258
+    },
+    {
+      "doc_id": "15282056",
+      "leaks": 0,
+      "delivery_s": 0.008093723999991198,
+      "engine_s": 0.013103144000069733
+    },
+    {
+      "doc_id": "15286783",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15305881",
+      "leaks": 0,
+      "delivery_s": 0.00743298100019274,
+      "engine_s": 0.013081643000077747
+    },
+    {
+      "doc_id": "15319019",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15322518",
+      "leaks": 0,
+      "delivery_s": 0.006771705000119255,
+      "engine_s": 0.012493101000018214
+    },
+    {
+      "doc_id": "15327601",
+      "leaks": 0,
+      "delivery_s": 0.0071523090000482625,
+      "engine_s": 0.013519828999960737
+    },
+    {
+      "doc_id": "15335331",
+      "leaks": 0,
+      "delivery_s": 0.006740152000020316,
+      "engine_s": 0.012454828000045381
+    },
+    {
+      "doc_id": "15337254",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15347087",
+      "leaks": 0,
+      "delivery_s": 0.006373949999897377,
+      "engine_s": 0.012222769999880256
+    },
+    {
+      "doc_id": "15360986",
+      "leaks": 0,
+      "delivery_s": 0.006837157000063598,
+      "engine_s": 0.011476624000124502
+    },
+    {
+      "doc_id": "15365719",
+      "leaks": 0,
+      "delivery_s": 0.0076451280001492705,
+      "engine_s": 0.012902235999945333
+    },
+    {
+      "doc_id": "153744",
+      "leaks": 0,
+      "delivery_s": 0.007298914999864792,
+      "engine_s": 0.01311628300004486
+    },
+    {
+      "doc_id": "153755807",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1538080",
+      "leaks": 0,
+      "delivery_s": 0.007019835000164676,
+      "engine_s": 0.012090636000039012
+    },
+    {
+      "doc_id": "15381976",
+      "leaks": 0,
+      "delivery_s": 0.0077232810001532926,
+      "engine_s": 0.013311901000179205
+    },
+    {
+      "doc_id": "1539159",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "154050141",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15405204",
+      "leaks": 0,
+      "delivery_s": 0.008249370999919847,
+      "engine_s": 0.012587854000003063
+    },
+    {
+      "doc_id": "15414628",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15419873",
+      "leaks": 0,
+      "delivery_s": 0.007571306000045297,
+      "engine_s": 0.01292101800004275
+    },
+    {
+      "doc_id": "154243324",
+      "leaks": 0,
+      "delivery_s": 0.007301614999960293,
+      "engine_s": 0.013569450999966648
+    },
+    {
+      "doc_id": "1542437",
+      "leaks": 0,
+      "delivery_s": 0.007722201999968092,
+      "engine_s": 0.012595735000104469
+    },
+    {
+      "doc_id": "15425958",
+      "leaks": 0,
+      "delivery_s": 0.0076002860000699,
+      "engine_s": 0.012842844000033438
+    },
+    {
+      "doc_id": "15426878",
+      "leaks": 0,
+      "delivery_s": 0.007926698000119359,
+      "engine_s": 0.013575661000004402
+    },
+    {
+      "doc_id": "15435343",
+      "leaks": 0,
+      "delivery_s": 0.007852047000142193,
+      "engine_s": 0.012623265999991418
+    },
+    {
+      "doc_id": "1544804",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "154549459",
+      "leaks": 0,
+      "delivery_s": 0.007452329999978247,
+      "engine_s": 0.012884835000022576
+    },
+    {
+      "doc_id": "15462523",
+      "leaks": 0,
+      "delivery_s": 0.006302428000026339,
+      "engine_s": 0.012192909000077634
+    },
+    {
+      "doc_id": "1546650",
+      "leaks": 0,
+      "delivery_s": 0.007359208000025319,
+      "engine_s": 0.012882845999911297
+    },
+    {
+      "doc_id": "15472716",
+      "leaks": 0,
+      "delivery_s": 0.007103578999931415,
+      "engine_s": 0.012786572000095475
+    },
+    {
+      "doc_id": "15473205",
+      "leaks": 0,
+      "delivery_s": 0.006934110999964105,
+      "engine_s": 0.012316024000028847
+    },
+    {
+      "doc_id": "154763124",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15476777",
+      "leaks": 0,
+      "delivery_s": 0.007340765999970245,
+      "engine_s": 0.012802760999875318
+    },
+    {
+      "doc_id": "15478227",
+      "leaks": 0,
+      "delivery_s": 0.006895619999795599,
+      "engine_s": 0.012254570999857606
+    },
+    {
+      "doc_id": "154796494",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15482274",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15488881",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15491308",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15491404",
+      "leaks": 0,
+      "delivery_s": 0.006884829999989961,
+      "engine_s": 0.012753509999811286
+    },
+    {
+      "doc_id": "15493354",
+      "leaks": 0,
+      "delivery_s": 0.007356167000125424,
+      "engine_s": 0.012442949000160297
+    },
+    {
+      "doc_id": "1550937",
+      "leaks": 0,
+      "delivery_s": 0.0073997499998768035,
+      "engine_s": 0.01267570799996065
+    },
+    {
+      "doc_id": "15512462",
+      "leaks": 0,
+      "delivery_s": 0.007351236999966204,
+      "engine_s": 0.012061614000003829
+    },
+    {
+      "doc_id": "155200372",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15521377",
+      "leaks": 0,
+      "delivery_s": 0.006554067000024588,
+      "engine_s": 0.011539984999899389
+    },
+    {
+      "doc_id": "15535511",
+      "leaks": 0,
+      "delivery_s": 0.006784014999993815,
+      "engine_s": 0.012966237000000547
+    },
+    {
+      "doc_id": "15541119",
+      "leaks": 0,
+      "delivery_s": 0.006745382999952199,
+      "engine_s": 0.012848523000002388
+    },
+    {
+      "doc_id": "1554348",
+      "leaks": 0,
+      "delivery_s": 0.006849398999975165,
+      "engine_s": 0.013972247000083371
+    },
+    {
+      "doc_id": "15548965",
+      "leaks": 0,
+      "delivery_s": 0.007147347999989506,
+      "engine_s": 0.01273057899993546
+    },
+    {
+      "doc_id": "15551129",
+      "leaks": 0,
+      "delivery_s": 0.0059515130001273064,
+      "engine_s": 0.010739794000073744
+    },
+    {
+      "doc_id": "15559582",
+      "leaks": 0,
+      "delivery_s": 0.007009143999994194,
+      "engine_s": 0.01309642299997904
+    },
+    {
+      "doc_id": "15561961",
+      "leaks": 0,
+      "delivery_s": 0.0074555899998358655,
+      "engine_s": 0.01261732399984794
+    },
+    {
+      "doc_id": "15563864",
+      "leaks": 0,
+      "delivery_s": 0.00751169199998003,
+      "engine_s": 0.012456537999923967
+    },
+    {
+      "doc_id": "15570691",
+      "leaks": 0,
+      "delivery_s": 0.0066902819999086205,
+      "engine_s": 0.011558994999859351
+    },
+    {
+      "doc_id": "15570962",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15578265",
+      "leaks": 0,
+      "delivery_s": 0.006257245000142575,
+      "engine_s": 0.012038382000127967
+    },
+    {
+      "doc_id": "15588516",
+      "leaks": 0,
+      "delivery_s": 0.00743109099994399,
+      "engine_s": 0.012156737999930556
+    },
+    {
+      "doc_id": "15590539",
+      "leaks": 0,
+      "delivery_s": 0.0071781899998768495,
+      "engine_s": 0.012490630000002056
+    },
+    {
+      "doc_id": "15593561",
+      "leaks": 0,
+      "delivery_s": 0.007427668999980597,
+      "engine_s": 0.012734337999972922
+    },
+    {
+      "doc_id": "15600979",
+      "leaks": 0,
+      "delivery_s": 0.007087925999940126,
+      "engine_s": 0.011795823000056771
+    },
+    {
+      "doc_id": "15615957",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15617300",
+      "leaks": 0,
+      "delivery_s": 0.0070514760000151,
+      "engine_s": 0.011906779000128154
+    },
+    {
+      "doc_id": "15617866",
+      "leaks": 0,
+      "delivery_s": 0.007750841000188302,
+      "engine_s": 0.01331970100000035
+    },
+    {
+      "doc_id": "15635366",
+      "leaks": 0,
+      "delivery_s": 0.006479423999962819,
+      "engine_s": 0.011452091000137443
+    },
+    {
+      "doc_id": "15648443",
+      "leaks": 0,
+      "delivery_s": 0.005947182999989309,
+      "engine_s": 0.010790305999989869
+    },
+    {
+      "doc_id": "15655418",
+      "leaks": 0,
+      "delivery_s": 0.00721162199988612,
+      "engine_s": 0.012184237999917968
+    },
+    {
+      "doc_id": "15657779",
+      "leaks": 0,
+      "delivery_s": 0.006857568999976138,
+      "engine_s": 0.01244905899989135
+    },
+    {
+      "doc_id": "15659108",
+      "leaks": 0,
+      "delivery_s": 0.007530093000013949,
+      "engine_s": 0.01246764899997288
+    },
+    {
+      "doc_id": "15663829",
+      "leaks": 0,
+      "delivery_s": 0.006797005000180434,
+      "engine_s": 0.01125507300002937
+    },
+    {
+      "doc_id": "15669393",
+      "leaks": 0,
+      "delivery_s": 0.00660863000007339,
+      "engine_s": 0.011991432000058921
+    },
+    {
+      "doc_id": "15670968",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15678772",
+      "leaks": 0,
+      "delivery_s": 0.00658555800009708,
+      "engine_s": 0.011542675000100644
+    },
+    {
+      "doc_id": "15685921",
+      "leaks": 0,
+      "delivery_s": 0.006824518000030366,
+      "engine_s": 0.011979802000041673
+    },
+    {
+      "doc_id": "1568684",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1569031",
+      "leaks": 0,
+      "delivery_s": 0.006888548999995692,
+      "engine_s": 0.011043204999850786
+    },
+    {
+      "doc_id": "15692098",
+      "leaks": 0,
+      "delivery_s": 0.007194189999836453,
+      "engine_s": 0.012360974999864993
+    },
+    {
+      "doc_id": "15707049",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15716328",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15721252",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15727984",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15728433",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1574014",
+      "leaks": 0,
+      "delivery_s": 0.007173860000193599,
+      "engine_s": 0.012464569000030679
+    },
+    {
+      "doc_id": "1576955",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15778034",
+      "leaks": 0,
+      "delivery_s": 0.006711932999905912,
+      "engine_s": 0.012583763000066028
+    },
+    {
+      "doc_id": "15780826",
+      "leaks": 0,
+      "delivery_s": 0.007762642999978198,
+      "engine_s": 0.012589234000188299
+    },
+    {
+      "doc_id": "15790930",
+      "leaks": 0,
+      "delivery_s": 0.0069417509998856985,
+      "engine_s": 0.015030444999865722
+    },
+    {
+      "doc_id": "15795880",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15803282",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15816729",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15830352",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "1583041",
+      "leaks": 0,
+      "delivery_s": 0.007514242999832277,
+      "engine_s": 0.01273651999986214
+    },
+    {
+      "doc_id": "1583134",
+      "leaks": 0,
+      "delivery_s": 0.007317514000078518,
+      "engine_s": 0.012937876000023607
+    },
+    {
+      "doc_id": "15832146",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15833835",
+      "leaks": 0,
+      "delivery_s": 0.0074925910000729345,
+      "engine_s": 0.012473177999936524
+    },
+    {
+      "doc_id": "15836115",
+      "leaks": 0,
+      "delivery_s": 0.007371506000026784,
+      "engine_s": 0.012979977999975745
+    },
+    {
+      "doc_id": "15856466",
+      "leaks": 0,
+      "delivery_s": 0.007493141999930231,
+      "engine_s": 0.01569589099995028
+    },
+    {
+      "doc_id": "15868816",
+      "leaks": 0,
+      "delivery_s": 0.007556354999906034,
+      "engine_s": 0.013666303999798401
+    },
+    {
+      "doc_id": "15879544",
+      "leaks": 0,
+      "delivery_s": 0.007458592000148201,
+      "engine_s": 0.013176196000131313
+    },
+    {
+      "doc_id": "15879931",
+      "leaks": 0,
+      "delivery_s": 0.008043801999974676,
+      "engine_s": 0.013916421999965678
+    },
+    {
+      "doc_id": "15889329",
+      "leaks": 0,
+      "delivery_s": 0.007849526000200058,
+      "engine_s": 0.013371653000149308
+    },
+    {
+      "doc_id": "15893330",
+      "leaks": 0,
+      "delivery_s": 0.007471071000054508,
+      "engine_s": 0.013042141000141783
+    },
+    {
+      "doc_id": "1590744",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15907458",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15913433",
+      "leaks": 0,
+      "delivery_s": 0.007640246999926603,
+      "engine_s": 0.013390393000008771
+    },
+    {
+      "doc_id": "15925931",
+      "leaks": 0,
+      "delivery_s": 0.006747163999989425,
+      "engine_s": 0.012856194000050891
+    },
+    {
+      "doc_id": "15926408",
+      "leaks": 0,
+      "delivery_s": 0.007424159000038344,
+      "engine_s": 0.012658135000037873
+    },
+    {
+      "doc_id": "15928989",
+      "leaks": 0,
+      "delivery_s": 0.007687169000064387,
+      "engine_s": 0.013139593999994759
+    },
+    {
+      "doc_id": "15945975",
+      "leaks": 0,
+      "delivery_s": 0.007449101000020164,
+      "engine_s": 0.013287049999917144
+    },
+    {
+      "doc_id": "15946643",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "159469",
+      "leaks": 0,
+      "delivery_s": 0.0077518609998605825,
+      "engine_s": 0.013291648999938843
+    },
+    {
+      "doc_id": "15948830",
+      "leaks": 0,
+      "delivery_s": 0.008051122000097166,
+      "engine_s": 0.014853488999960973
+    },
+    {
+      "doc_id": "15953181",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15955172",
+      "leaks": 0,
+      "delivery_s": 0.007243822999953409,
+      "engine_s": 0.012508060000072874
+    },
+    {
+      "doc_id": "1595617",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15960670",
+      "leaks": 0,
+      "delivery_s": 0.008580893000043943,
+      "engine_s": 0.014247205999936341
+    },
+    {
+      "doc_id": "15966318",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15968271",
+      "leaks": 0,
+      "delivery_s": 0.00757096500001353,
+      "engine_s": 0.01341677499999605
+    },
+    {
+      "doc_id": "15969637",
+      "skipped": "the principal does not retrieve the document first"
+    },
+    {
+      "doc_id": "15972906",
+      "leaks": 0,
+      "delivery_s": 0.00864906499987228,
+      "engine_s": 0.014866988999983732
+    },
+    {
+      "doc_id": "15975146",
+      "leaks": 0,
+      "delivery_s": 0.0076302160000523145,
+      "engine_s": 0.01357043000007252
+    },
+    {
+      "doc_id": "15981174",
+      "leaks": 0,
+      "delivery_s": 0.008461089000093125,
+      "engine_s": 0.017073852000066836
+    },
+    {
+      "doc_id": "15983148",
+      "leaks": 0,
+      "delivery_s": 0.009185255000147663,
+      "engine_s": 0.014794305000123131
+    }
+  ]
+}

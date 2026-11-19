@@ -1,0 +1,12 @@
+{
+  "kind": "runtime",
+  "schema_version": 1,
+  "body": {
+    "python": "3.12.10",
+    "platform": "linux_x86_64",
+    "locks": {
+      "config/requirements-embed-linux-amd64-gpu.lock": "f8cda7e3121922688d532f942a21df13ab8743f78690954bee1398f3474f3e99"
+    }
+  },
+  "sha256": "09263ab54ddaaca00d015c3bef3a9f2758636acb82435331e0158d5982b26157"
+}

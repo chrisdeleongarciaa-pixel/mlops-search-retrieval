@@ -1,0 +1,23 @@
+{
+  "kind": "exact-oracle",
+  "schema_version": 1,
+  "body": {
+    "documents": "b4a52fadb8d97e4d750090ead94c16ecaf0cdbc4e2a985b48a68fa63d08a39a5",
+    "queries": "11ddecaff6f349ff968aa0dc34056a1a936ad1db7e873e2167976374a77584d8",
+    "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd",
+    "k": 100,
+    "queries_count": 1109,
+    "cohort": {
+      "permille": 1000,
+      "rule": "sha256(b'cohort' + b'\\x00' + utf8(id)), first 8 bytes big-endian, mod 1000 < permille",
+      "eligible": 5183,
+      "eligible_rows_sha256": "a4101ae616124b42411a7fbaa5812e9da27ebc9cb5e2ac38eec01be030beeea0"
+    },
+    "score": "float64 sum of products of canonical rows, reduced over the dimension axis",
+    "tie_break": "document ID, code point order",
+    "implementation_sha256": "b1d5c687f9a3b3e36bcfc1f10b4369f8deeb903b466d209e08638dd86874695b",
+    "rows_sha256": "cb9106d6f991f6a04931a6361f2627cfd503f89749d6237b0334fc7bcc82f2fa",
+    "scores_sha256": "e06f94ec2c884e9453febf64ee88735f561121520903b3a7c320fc1da74926c8"
+  },
+  "sha256": "26aa8901c4fec56474688ed7f2af09940c10f587c1024fa29666f9ed4c3e18da"
+}

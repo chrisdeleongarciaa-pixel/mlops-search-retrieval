@@ -1,0 +1,15 @@
+{
+  "kind": "query-set",
+  "schema_version": 1,
+  "body": {
+    "name": "beir/scifact/train",
+    "split": "dev",
+    "judgments": "human",
+    "queries": 809,
+    "queries_member": "scifact/queries.jsonl",
+    "queries_sha256": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+    "qrels_member": "scifact/qrels/train.tsv",
+    "qrels_sha256": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d"
+  },
+  "sha256": "879c47d5a1d5a326eb715126a18f0d241ce7a20203f06357665454b651ad47d8"
+}

@@ -1,0 +1,4 @@
+build hnsw-reference-efc200-m16-s11
+build hnsw-reference-efc200-m16-s29
+build hnsw-reference-efc200-m16-s47
+{"builds": 3, "points": 90, "sweep": "/root/mlops-search-retrieval/var/ann/1f446ec5914c9494-a5f58554f3aaab97/sweep-96189f9bb76391f2-2b8ead53f40302a4"}

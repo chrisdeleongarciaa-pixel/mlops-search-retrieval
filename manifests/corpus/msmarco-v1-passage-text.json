@@ -1,0 +1,14 @@
+{
+  "kind": "corpus",
+  "schema_version": 1,
+  "body": {
+    "name": "msmarco-v1-passage",
+    "format": "ir-datasets-docs",
+    "documents": 8841823,
+    "ir_datasets": "msmarco-passage",
+    "documents_sha256": "db248beb8fd99883adbecae67352787f2b60a1ade4c2d78d639d8cdfade73be9",
+    "source": "https://msmarco.z22.web.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
+    "license": "MS MARCO terms of use, https://microsoft.github.io/msmarco/"
+  },
+  "sha256": "45abc51b6cc232de4fddb7877e77901795dee7f29910886f42865f106e327a09"
+}

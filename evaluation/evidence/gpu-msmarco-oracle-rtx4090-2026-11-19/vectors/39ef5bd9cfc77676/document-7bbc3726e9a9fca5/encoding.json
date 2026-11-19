@@ -1,0 +1,21 @@
+{
+  "batch_size": 64,
+  "code_commit": "bdb8cef536108d6c02e3f044287f864f06ea5b3e",
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "encode_seconds": 7565.098950913996,
+  "encoded_rows": 8841823,
+  "packages": {
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0",
+    "sentence-transformers": "6.2.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.0",
+    "transformers": "5.20.2"
+  },
+  "peak_gpu_memory_bytes": 1757845504,
+  "platform": "Linux-5.15.0-1067-kvm-x86_64-with-glibc2.35",
+  "python": "3.12.10",
+  "resumed_from_rows": 0,
+  "rows_per_second": 1168.7650164749998
+}

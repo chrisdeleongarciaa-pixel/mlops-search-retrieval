@@ -1,0 +1,21 @@
+{"cohort_permille": 1000, "exact": {"queries": 300, "agree": 300, "max_score_gap": 2.0973553715997184e-07, "failures": [], "oracle": "053de4d747b64d71a18c24d83eb08ce642198ad411f7ba9fbea198f9622fffe2"}}
+{"1000:0": {"queries": 300, "excluded": 0, "mean": 0.9826666666666667, "q00": 0.6, "q01": 0.799, "q05": 0.9, "q10": 0.9, "q50": 1.0, "below_0.95": 0.13, "below_0.99": 0.13}, "strategies": {"hnsw": 300}}
+{"1000:100": {"queries": 300, "excluded": 0, "mean": 0.9929999999999999, "q00": 0.7, "q01": 0.9, "q05": 0.9, "q10": 1.0, "q50": 1.0, "below_0.95": 0.06333333333333334, "below_0.99": 0.06333333333333334}, "strategies": {"hnsw": 300}}
+{"1000:300": {"queries": 300, "excluded": 0, "mean": 0.9979999999999999, "q00": 0.9, "q01": 0.9, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.02, "below_0.99": 0.02}, "strategies": {"hnsw": 300}}
+{"cohort_permille": 500, "exact": {"queries": 300, "agree": 300, "max_score_gap": 2.0042299486711102e-07, "failures": [], "oracle": "b3f370b4c78d43568a76b2270da8bc448d7793b72aac70c3a9ce6e95d4a34bca"}}
+{"500:0": {"queries": 300, "excluded": 0, "mean": 0.9906666666666666, "q00": 0.7, "q01": 0.899, "q05": 0.9, "q10": 1.0, "q50": 1.0, "below_0.95": 0.07666666666666666, "below_0.99": 0.07666666666666666}, "strategies": {"hnsw": 300}}
+{"500:100": {"queries": 300, "excluded": 0, "mean": 0.9986666666666667, "q00": 0.8, "q01": 0.999, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.01, "below_0.99": 0.01}, "strategies": {"hnsw": 300}}
+{"500:300": {"queries": 300, "excluded": 0, "mean": 0.9986666666666667, "q00": 0.8, "q01": 0.999, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.01, "below_0.99": 0.01}, "strategies": {"hnsw": 300}}
+{"cohort_permille": 100, "exact": {"queries": 300, "agree": 300, "max_score_gap": 1.9458436917307864e-07, "failures": [], "oracle": "1b00b666393302f8d713fbd0c821b64bea29819509187100c625fa8eb8922fb9"}}
+{"100:0": {"queries": 300, "excluded": 0, "mean": 0.9876666666666667, "q00": 0.8, "q01": 0.899, "q05": 0.9, "q10": 0.9, "q50": 1.0, "below_0.95": 0.11333333333333333, "below_0.99": 0.11333333333333333}, "strategies": {"hnsw": 300}}
+{"100:100": {"queries": 300, "excluded": 0, "mean": 0.996, "q00": 0.8, "q01": 0.9, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.03666666666666667, "below_0.99": 0.03666666666666667}, "strategies": {"hnsw": 300}}
+{"100:300": {"queries": 300, "excluded": 0, "mean": 0.9990000000000001, "q00": 0.9, "q01": 0.999, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.01, "below_0.99": 0.01}, "strategies": {"hnsw": 300}}
+{"cohort_permille": 10, "exact": {"queries": 300, "agree": 300, "max_score_gap": 1.9458436917307864e-07, "failures": [], "oracle": "108d59b35927333fb766cf48c136e886cb18d7d44e8bdf40ca4e417185c1c243"}}
+{"10:0": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"10:100": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"10:300": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"cohort_permille": 1, "exact": {"queries": 300, "agree": 300, "max_score_gap": 1.549341980267016e-07, "failures": [], "oracle": "cbc04ddfa8e2db7f52b8c04bc146ddcbcbef41ff94933475ec73cf58767ffd7b"}}
+{"1:0": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"1:100": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"1:300": {"queries": 300, "excluded": 0, "mean": 1.0, "q00": 1.0, "q01": 1.0, "q05": 1.0, "q10": 1.0, "q50": 1.0, "below_0.95": 0.0, "below_0.99": 0.0}, "strategies": {"exact_by_selectivity": 300}}
+{"report": "/root/mlops-search-retrieval/var/ann/d558169b240597ef-6fa6ce4303b19511/engine-princeton-nlp-litsearch-47aa8f9feb63d989/report.json", "exact_parity": true}

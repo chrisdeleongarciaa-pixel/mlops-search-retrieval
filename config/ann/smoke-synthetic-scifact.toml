@@ -1,0 +1,42 @@
+# Pipeline exercise on the synthetic float16 space over SciFact (5,183 documents).
+# It checks the oracle, the sweeps and their records. It measures nothing about ANN quality:
+# at this size the exact search is cheap and the graph is almost trivial.
+
+[inputs]
+space = "evaluation/fixtures/synthetic-space-float16.json"
+corpus = "manifests/corpus/beir-scifact.json"
+transform = "manifests/transform/beir-title-text-fields-v1.json"
+queries = "manifests/queries/beir-scifact-test.json"
+
+[oracle]
+k = 100
+initial_candidates = 200
+query_batch = 1024
+cohorts_permille = [1000, 100, 10, 1]
+
+[measure]
+recall_at = [10, 100]
+search_threads = 0
+build_threads = 0
+timing_repeats = 3
+warmup = 1
+add_batch = 1024
+
+[[hnsw]]
+name = "orders"
+m = [8, 16]
+ef_construction = [40]
+insertion_seeds = [11, 29, 47]
+ef_search = [100, 200, 400]
+cohorts_permille = [1000, 100, 10, 1]
+
+[[ivfpq]]
+name = "lowmem"
+nlist = [32]
+pq_m = [8]
+nbits = 6
+train_size = 2600
+train_seed = 11
+insertion_seeds = [11]
+nprobe = [1, 4, 16, 32]
+cohorts_permille = [1000]

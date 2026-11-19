@@ -1,0 +1,12 @@
+{
+  "kind": "runtime",
+  "schema_version": 1,
+  "body": {
+    "python": "3.12.10",
+    "platform": "win_amd64",
+    "locks": {
+      "config/requirements-bench-win64.lock": "c4b9ae929fa440d02f7c3d877167e65880cb67bd1dbd3ab290d6407bf808eec7"
+    }
+  },
+  "sha256": "244871ec1cc88fa88c2cb2f3011b6054b412f9b2df174fc3560ccf1b145048e4"
+}

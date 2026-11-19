@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380" role="img" aria-labelledby="t d">
+  <title id="t">Hybrid scientific literature retrieval</title>
+  <desc id="d">A literature question goes to a BM25 branch and an EmbeddingGemma vector branch in Vespa; the two ranked lists are fused, revalidated against the access authority and returned as ranked papers.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1b2d"/>
+      <stop offset="1" stop-color="#14263d"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7f9bbf"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="380" rx="22" fill="url(#bg)"/>
+  <g fill="none" stroke="#24405f" stroke-width="1">
+    <path d="M0 95 H1200 M0 190 H1200 M0 285 H1200"/>
+  </g>
+
+  <!-- Question -->
+  <rect x="40" y="152" width="250" height="76" rx="14" fill="#1b3150" stroke="#3d6694"/>
+  <text x="62" y="182" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#9fb6d4" letter-spacing="1.2">LITERATURE QUESTION</text>
+  <text x="62" y="208" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#e8f0fb">consistency of summaries?</text>
+
+  <!-- Branches -->
+  <path d="M290 175 C 340 175, 340 105, 392 105" stroke="#7f9bbf" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M290 205 C 340 205, 340 275, 392 275" stroke="#7f9bbf" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="395" y="70" width="270" height="70" rx="14" fill="#18324a" stroke="#4b8fd1"/>
+  <text x="417" y="98" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#8fc0f0" letter-spacing="1.2">LEXICAL · VESPA BM25</text>
+  <g fill="#4b8fd1"><rect x="417" y="110" width="120" height="8" rx="4"/><rect x="545" y="110" width="70" height="8" rx="4" opacity="0.6"/><rect x="623" y="110" width="28" height="8" rx="4" opacity="0.35"/></g>
+
+  <rect x="395" y="240" width="270" height="70" rx="14" fill="#1d2f46" stroke="#e3a74f"/>
+  <text x="417" y="268" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#f0c88e" letter-spacing="1.2">DENSE · EMBEDDINGGEMMA HNSW</text>
+  <g fill="#e3a74f"><rect x="417" y="280" width="140" height="8" rx="4"/><rect x="565" y="280" width="54" height="8" rx="4" opacity="0.6"/><rect x="627" y="280" width="24" height="8" rx="4" opacity="0.35"/></g>
+
+  <!-- Fusion -->
+  <path d="M665 105 C 715 105, 715 175, 762 182" stroke="#7f9bbf" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M665 275 C 715 275, 715 205, 762 198" stroke="#7f9bbf" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <circle cx="800" cy="190" r="36" fill="#203a58" stroke="#9ad1c2" stroke-width="2"/>
+  <text x="800" y="186" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#c7efe4">fuse</text>
+  <text x="800" y="203" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#c7efe4">α 0.55</text>
+
+  <!-- ACL and results -->
+  <path d="M836 190 H 880" stroke="#7f9bbf" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="884" y="120" width="276" height="140" rx="14" fill="#18324a" stroke="#9ad1c2"/>
+  <text x="906" y="148" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#9ad1c2" letter-spacing="1.2">RANKED PAPERS · ACL CHECKED</text>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#e8f0fb">
+    <text x="906" y="178">1  target paper</text>
+    <text x="906" y="204">2  related work</text>
+    <text x="906" y="230" fill="#7f9bbf">3  revoked · removed</text>
+  </g>
+  <path d="M1112 216 h18 v18 h-18 z M1115 216 v-6 a6 6 0 0 1 12 0 v6" fill="none" stroke="#9ad1c2" stroke-width="2"/>
+
+  <text x="40" y="350" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#9fb6d4">certified exact oracle · Vespa parity · open-loop latency with exact percentile intervals · ACL revocation at delivery</text>
+</svg>

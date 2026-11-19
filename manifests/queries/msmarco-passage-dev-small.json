@@ -1,0 +1,14 @@
+{
+  "kind": "query-set",
+  "schema_version": 1,
+  "body": {
+    "name": "msmarco-passage/dev/small",
+    "split": "dev",
+    "judgments": "human",
+    "queries": 6980,
+    "ir_datasets": "msmarco-passage/dev/small",
+    "queries_sha256": "f4f71fa87b6be4fb968cca2b8f8554c4ebd003e6c3488af3ac1cc5629c3de189",
+    "qrels_sha256": "ddc607dbe7b748d7168e8675a242f0811d47febaa2e69d3af09d7ab249c68d7e"
+  },
+  "sha256": "1b108543b26cf74a88bfdfb3790eb33e2f2f46852321eee0006f14ade0e60180"
+}

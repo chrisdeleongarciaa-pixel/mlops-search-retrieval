@@ -1,0 +1,16 @@
+{
+  "kind": "runtime",
+  "schema_version": 1,
+  "body": {
+    "python": "3.12.10",
+    "platform": "win_amd64",
+    "locks": {
+      "config/requirements-bench-win64.lock": "c4b9ae929fa440d02f7c3d877167e65880cb67bd1dbd3ab290d6407bf808eec7"
+    },
+    "tools": {
+      "java": "21.0.13",
+      "anserini_jar_sha256": "375848a9bb0a7514d2a8fe13df20086961570991bf20343abf0e5312af977def"
+    }
+  },
+  "sha256": "a1dd1fb5d5f59c3f901214bf3e3c6ff0c47c867c85dee07c9b4b0eb7e53bf46a"
+}

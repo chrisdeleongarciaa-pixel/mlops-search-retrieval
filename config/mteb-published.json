@@ -1,0 +1,23 @@
+{
+  "source": {
+    "repository": "https://github.com/embeddings-benchmark/results",
+    "commit": "f8fa68f43a0d3868334c764cec9d21ce39c7ecbc",
+    "read": "2026-11-12",
+    "note": "Scores are fractions as stored in the result files. The tolerance is in points (hundredths)."
+  },
+  "tolerance_points": 0.5,
+  "checks": [
+    {
+      "name": "embeddinggemma-300m",
+      "space": "manifests/space/mteb-embeddinggemma-300m.json",
+      "task": "SciFact",
+      "split": "test",
+      "measure": "ndcg_at_10",
+      "published": 0.78675,
+      "published_path": "results/google__embeddinggemma-300m/64614b0b8b64f0c6c1e52b07e4e9a4e8fe4d2da2/SciFact.json",
+      "published_model_revision": "64614b0b8b64f0c6c1e52b07e4e9a4e8fe4d2da2",
+      "published_mteb_version": "2.27.1",
+      "difference_from_published": "The space pins model revision 57c266a740f537b4dc058e1b0cda161fd15afa75. The document prompt 'title: none | text: ' is inferred from the model's Sentence Transformers prompts, which MTEB's wrapper applies."
+    }
+  ]
+}
