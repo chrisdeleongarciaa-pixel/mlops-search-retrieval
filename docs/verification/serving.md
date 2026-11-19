@@ -41,7 +41,7 @@ Phase B without the engine at commit `51d6a25`, 2026-11-19, on an RTX 4090 VM (2
 | Check | Status |
 | --- | --- |
 | MS MARCO projection, engine parity and runs; Vespa BM25 against Anserini | Not executed. |
-| MS MARCO oracle and HNSW sweeps | Not executed. The first attempt stopped on a GPU memory error, now corrected (see the oracle verification). |
+| MS MARCO HNSW sweeps | Not executed. The MS MARCO oracle ran and certified all 6,980 queries in its five cohorts (see the [oracle verification](exact-oracle-ann.md#executed-on-a-gpu)). |
 | PostgreSQL integration tests | Not executed locally; the authority ran in ACL-01 on the GPU host. |
 
 ## Corrections made during verification

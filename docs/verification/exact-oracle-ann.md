@@ -57,19 +57,27 @@ QPS on this laptop varied by up to a factor of two between runs of the same sett
 
 - **Short results.** The first version counted empty positions up to the search depth, including those a cohort smaller than the depth cannot fill. Now only positions within min(depth, eligible) count. FAISS was checked alone: with 5 of 800 documents eligible and efSearch 400 it leaves 3 eligible positions empty.
 - **Stale reuse.** Finished builds were reused by configuration hash alone; a change of metric definition would have kept old results. Sweeps and oracles are now keyed by a digest of the measurement code as well.
-- **GPU memory of a block (found on the GPU, 2026-11-19).** The MS MARCO oracle stopped with a CUDA memory allocation error on an RTX 4090 (24 GB) with blocks of 4 M rows (12.3 GB). FAISS v1.16.0 `FlatIndex::add` appends each call with "reserve exactly" (`faiss/gpu/impl/FlatIndex.cu`), so chunked adds briefly hold the old and the new storage. Each block now reaches the GPU in one add. Not yet re-run on a GPU.
+- **GPU memory of a block (found on the GPU, 2026-11-19).** The MS MARCO oracle stopped with a CUDA memory allocation error on an RTX 4090 (24 GB) with blocks of 4 M rows (12.3 GB). FAISS v1.16.0 `FlatIndex::add` appends each call with "reserve exactly" (`faiss/gpu/impl/FlatIndex.cu`), so chunked adds briefly hold the old and the new storage. Each block now reaches the GPU in one add; the MS MARCO oracle below ran with it.
 
-On the GPU (2026-11-18, RTX 3090 and RTX 4090 VMs): the SciFact and LitSearch oracles were certified for every query of every cohort, with an observed maximum error of 1.2e-6 against ε = 4.6e-5 for LitSearch.
+## Executed on a GPU
+
+FAISS 1.16.0 (`faiss-gpu-cuvs`, from the Linux lock), `GpuIndexFlatIP` in float32 with `use_cuvs = false`, `NVIDIA_TF32_OVERRIDE` unset.
+
+| Oracle | Host | Eligible rows | Queries certified | Full scans | Observed max error | ε |
+| --- | --- | --- | --- | --- | --- | --- |
+| SciFact, 5 cohorts | RTX 3090, RTX 4090 | 5,183 to 5 | all | 0 | — | — |
+| LitSearch, 5 cohorts | RTX 3090, RTX 4090 | 64,183 to 64 | 300 of 300 in each | 0 | 1.2e-6 | 4.6e-5 |
+| MS MARCO passage, cohort 1000 ‰ | RTX 4090, 2026-11-19 | 8,841,823 | 6,980 of 6,980 | 0 | 1.30e-6 | 4.58e-5 |
+| MS MARCO passage, cohort 500 ‰ | RTX 4090 | 4,422,964 | 6,980 of 6,980 | 0 | 1.23e-6 | 4.58e-5 |
+| MS MARCO passage, cohort 100 ‰ | RTX 4090 | 884,222 | 6,980 of 6,980 | 0 | 1.22e-6 | 4.58e-5 |
+| MS MARCO passage, cohort 10 ‰ | RTX 4090 | 88,253 | 6,980 of 6,980 | 0 | 9.5e-7 | 4.58e-5 |
+| MS MARCO passage, cohort 1 ‰ | RTX 4090 | 8,773 | 6,980 of 6,980 | 0 | 6.5e-7 | 4.58e-5 |
+
+The MS MARCO oracle used blocks of 4,000,000 rows and took about 3 minutes for the five cohorts after the vectors were encoded (commit `bdb8cef`, the guard replaced at `6b4176a`). Its manifests and observations are in the [evidence](../../evaluation/evidence/gpu-msmarco-oracle-rtx4090-2026-11-19/ann); the `rows.npy` and `scores.npy` arrays were copied with the run's archive and are not in the repository. LitSearch and SciFact HNSW sweeps ran on the GPU hosts as well (three insertion orders each, [summaries](../../evaluation/evidence/gpu-litsearch-rtx3090-2026-11-18/reports/sweeps)).
 
 ## Not executed
 
-Run after step 3 on a Linux GPU host. [`infra/gpu/run-all.sh`](../../infra/gpu/run-all.sh) runs every step ([procedure](../../infra/gpu/README.md)); [`infra/gpu/step4-ann.sh`](../../infra/gpu/step4-ann.sh) runs step 4 alone. [Decision 0007](../../engineering/decisions/0007-reduced-workbench-scope.md) removed the HNSW grid, IVF-PQ and the float16 space.
-
 | Check | Status |
 | --- | --- |
-| GPU flat searcher (`GpuIndexFlatIP`, float32, `use_cuvs = false`) | Not executed. Written against the FAISS 1.16.0 headers; faiss-cpu has no GPU classes. The observed-error check is the guard if the precision assumption is wrong. |
-| Blocked oracle over 8,841,823 MS MARCO passages, five cohorts | Not executed. The block merge is tested on CPU with blocks of 7, 30 and 101 rows. |
-| HNSW M 16 / efConstruction 200, three insertion orders on MS MARCO: the step 4 gate | Not executed. |
-| SciFact and LitSearch EmbeddingGemma oracles | Not executed: they need the step 3 vectors. |
-| Linux lock with faiss-gpu-cuvs 1.16.0 | Resolved for `x86_64-manylinux_2_28` with hashes; never installed. It pins the CUDA 13.5 runtime. |
-| Host memory and run time for MS MARCO | Not measured. Estimated from the index layout: 27.2 GB of float32 rows, indexed on the GPU in blocks of 4,000,000 rows (12.3 GB), and about 32 GB of host memory per HNSW build. |
+| HNSW M 16 / efConstruction 200, three insertion orders on MS MARCO: the step 4 gate | Not executed. The MS MARCO vectors and oracle are kept on a stopped instance for it. |
+| Host memory of an HNSW build over MS MARCO | Not measured. Estimated from the index layout at about 31 GB. |

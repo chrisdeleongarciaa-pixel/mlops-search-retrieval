@@ -1,0 +1,23 @@
+{
+  "kind": "vector-set",
+  "schema_version": 1,
+  "body": {
+    "identity": {
+      "space": "39ef5bd9cfc77676a47c18e8128749e5f364be958130de92c2884ce255e2c3cd",
+      "role": "query",
+      "collection": {
+        "queries": "f4f71fa87b6be4fb968cca2b8f8554c4ebd003e6c3488af3ac1cc5629c3de189"
+      },
+      "dtype": "float32",
+      "width": 768
+    },
+    "rows": 6980,
+    "shards": 1,
+    "ids_sha256": "cca759f9a007b154384bf4ffd825c0753c8ed54756a844d01b7eefb93b427abb",
+    "rows_sha256": "e00028551ec54c51c0009354644b95d75495dfaae196e115c6d8e81066b4a012",
+    "truncated": 0,
+    "parity_every": null,
+    "derived_from": null
+  },
+  "sha256": "795156b6e5e1b8aba750bb506a7c6b25a1091c7d9935392d6f990ce52bd1676b"
+}

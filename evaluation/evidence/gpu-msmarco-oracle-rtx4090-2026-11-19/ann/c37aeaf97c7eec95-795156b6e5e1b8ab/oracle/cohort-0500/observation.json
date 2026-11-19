@@ -1,0 +1,30 @@
+{
+  "block_rows": 4000000,
+  "candidates": {
+    "max": 200,
+    "min": 200
+  },
+  "code_commit": "bdb8cef536108d6c02e3f044287f864f06ea5b3e",
+  "cpu_count": 26,
+  "device": "cuda",
+  "epsilon": 4.577847287124024e-05,
+  "initial_candidates": 200,
+  "observed_max_error": 1.233898286323587e-06,
+  "packages": {
+    "faiss-gpu-cuvs": "1.16.0",
+    "numpy": "2.5.4"
+  },
+  "platform": "Linux-5.15.0-1067-kvm-x86_64-with-glibc2.35",
+  "processor": "x86_64",
+  "python": "3.12.10",
+  "searcher": "BlockedSearcher",
+  "seconds": {
+    "index": 12.85180643700005,
+    "total": 35.161990328000684
+  },
+  "states": {
+    "certified": 6980,
+    "complete": 0,
+    "full-scan": 0
+  }
+}
