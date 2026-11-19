@@ -78,8 +78,15 @@ class FlatSearcher:
             self.index, self.max_k = faiss.GpuIndexFlatIP(self.resources, d, config), GPU_MAX_K
         else:
             raise ValueError(f"Unknown device {device}")
-        for _, values in documents.chunks(eligible):
-            self.index.add(values)
+        if device == "cpu":
+            for _, values in documents.chunks(eligible):
+                self.index.add(values)
+        else:
+            # One add per index on the GPU: FlatIndex::add appends each call with "reserve exactly"
+            # (faiss/gpu/impl/FlatIndex.cu, v1.16.0), so the old and the new storage coexist and the
+            # last append of a 4 M-row block needed about twice its 12.3 GB on a 24 GB GPU
+            # (CUDA memory allocation error, instance 61340737). A single add allocates once.
+            self.index.add(np.concatenate([values for _, values in documents.chunks(eligible)]))
         if self.index.ntotal != eligible.size:
             raise OracleError("The flat index does not hold every eligible row")
 

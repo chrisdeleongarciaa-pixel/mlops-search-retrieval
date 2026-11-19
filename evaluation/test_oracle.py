@@ -172,6 +172,34 @@ class OracleTests(unittest.TestCase):
         for query, expected in enumerate(reference(queries, documents, eligible, 5)):
             self.assertEqual(limited.rows[query].tolist(), [position for position, _ in expected])
 
+    def test_gpu_index_receives_each_block_in_one_add(self):
+        # FAISS GpuIndexFlat reallocates exactly on every add, so the old and new storage coexist;
+        # chunked adds of a 4 M-row block ran out of a 24 GB GPU (instance 61340737).
+        from unittest import mock
+        import faiss
+
+        class Index:
+            def __init__(self):
+                self.adds, self.ntotal = [], 0
+
+            def add(self, values):
+                self.adds.append(values.shape)
+                self.ntotal += values.shape[0]
+
+        class Rows:
+            dimensions, dtype = 4, "float32"
+
+            def chunks(self, eligible):
+                for start in range(0, eligible.size, 3):
+                    yield None, np.ones((min(3, eligible.size - start), 4), np.float32)
+
+        index = Index()
+        with mock.patch.object(faiss, "StandardGpuResources", create=True), \
+                mock.patch.object(faiss, "GpuIndexFlatConfig", create=True), \
+                mock.patch.object(faiss, "GpuIndexFlatIP", create=True, return_value=index):
+            FlatSearcher(Rows(), np.arange(10), "cuda")
+        self.assertEqual(index.adds, [(10, 4)])
+
     def test_blocked_candidates_give_the_same_oracle(self):
         eligible = np.arange(101)
         whole = exact_top_k(self.queries, self.documents, eligible, 10, FlatSearcher(self.documents, eligible),

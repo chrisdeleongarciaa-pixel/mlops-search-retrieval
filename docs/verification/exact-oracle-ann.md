@@ -57,6 +57,9 @@ QPS on this laptop varied by up to a factor of two between runs of the same sett
 
 - **Short results.** The first version counted empty positions up to the search depth, including those a cohort smaller than the depth cannot fill. Now only positions within min(depth, eligible) count. FAISS was checked alone: with 5 of 800 documents eligible and efSearch 400 it leaves 3 eligible positions empty.
 - **Stale reuse.** Finished builds were reused by configuration hash alone; a change of metric definition would have kept old results. Sweeps and oracles are now keyed by a digest of the measurement code as well.
+- **GPU memory of a block (found on the GPU, 2026-11-19).** The MS MARCO oracle stopped with a CUDA memory allocation error on an RTX 4090 (24 GB) with blocks of 4 M rows (12.3 GB). FAISS v1.16.0 `FlatIndex::add` appends each call with "reserve exactly" (`faiss/gpu/impl/FlatIndex.cu`), so chunked adds briefly hold the old and the new storage. Each block now reaches the GPU in one add. Not yet re-run on a GPU.
+
+On the GPU (2026-11-18, RTX 3090 and RTX 4090 VMs): the SciFact and LitSearch oracles were certified for every query of every cohort, with an observed maximum error of 1.2e-6 against ε = 4.6e-5 for LitSearch.
 
 ## Not executed
 
