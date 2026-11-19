@@ -201,7 +201,7 @@ phase_a() {
     stage acl-01 sh -c "'$P' evaluation/acl_revocation.py config/ann/scifact-embeddinggemma-300m-fp32.toml \
         --collection '$(label scifact)' --vectors-dir '$WORK/vectors' --projections-dir '$WORK/projections' \
         --vespa-url $VESPA --postgres-dsn '$DSN' --out '$WORK/reports/acl-01.json' || true"
-    stage srv-01 serve_and_load "$lit" "$hybrid" parallel srv-01 bm25 dense hybrid
+    stage srv-01 serve_and_load "$lit" "$hybrid" parallel srv-01 ${SRV_ROUTES:-bm25 dense hybrid}
     # The hybrid route with its branches one after the other, on the same host: the baseline of
     # the parallel branches above.
     stage srv-01-sequential serve_and_load "$lit" "$hybrid" sequential srv-01-sequential hybrid
